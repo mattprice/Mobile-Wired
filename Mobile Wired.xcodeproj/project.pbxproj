@@ -11,13 +11,18 @@
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
 		34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */; };
 		34EBE3C913594F7B00A24C01 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C813594F7B00A24C01 /* CoreData.framework */; };
-		34EBE3CF13594F7B00A24C01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3CD13594F7B00A24C01 /* InfoPlist.strings */; };
 		34EBE3D213594F7B00A24C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3D113594F7B00A24C01 /* main.m */; };
-		34EBE3D513594F7B00A24C01 /* Mobile_WiredAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3D413594F7B00A24C01 /* Mobile_WiredAppDelegate.m */; };
-		34EBE3D813594F7B00A24C01 /* Mobile_Wired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3D613594F7B00A24C01 /* Mobile_Wired.xcdatamodeld */; };
-		34EBE3DB13594F7B00A24C01 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3D913594F7B00A24C01 /* MainWindow.xib */; };
-		34EBE3DE13594F7B00A24C01 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3DD13594F7B00A24C01 /* RootViewController.m */; };
-		34EBE3E113594F7B00A24C01 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3DF13594F7B00A24C01 /* RootViewController.xib */; };
+		34EBE402135951A700A24C01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3FC135951A700A24C01 /* InfoPlist.strings */; };
+		34EBE403135951A700A24C01 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3FE135951A700A24C01 /* MainWindow.xib */; };
+		34EBE408135951C100A24C01 /* MobileWired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE406135951C100A24C01 /* MobileWired.xcdatamodeld */; };
+		34EBE4121359528700A24C01 /* Chat Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE4101359528700A24C01 /* Chat Icon.png */; };
+		34EBE4131359528700A24C01 /* User Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE4111359528700A24C01 /* User Icon.png */; };
+		34EBE4211359565100A24C01 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41B1359565100A24C01 /* FirstView.xib */; };
+		34EBE4221359565100A24C01 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41D1359565100A24C01 /* MainWindow.xib */; };
+		34EBE4231359565100A24C01 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41F1359565100A24C01 /* SecondView.xib */; };
+		34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4251359569B00A24C01 /* AppDelegate.m */; };
+		34EBE42B1359569B00A24C01 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4271359569B00A24C01 /* FirstViewController.m */; };
+		34EBE42C1359569B00A24C01 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4291359569B00A24C01 /* SecondViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,17 +31,22 @@
 		34EBE3C413594F7B00A24C01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		34EBE3C813594F7B00A24C01 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		34EBE3CC13594F7B00A24C01 /* Mobile Wired-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mobile Wired-Info.plist"; sourceTree = "<group>"; };
-		34EBE3CE13594F7B00A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		34EBE3D013594F7B00A24C01 /* Mobile Wired-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mobile Wired-Prefix.pch"; sourceTree = "<group>"; };
 		34EBE3D113594F7B00A24C01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		34EBE3D313594F7B00A24C01 /* Mobile_WiredAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mobile_WiredAppDelegate.h; sourceTree = "<group>"; };
-		34EBE3D413594F7B00A24C01 /* Mobile_WiredAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mobile_WiredAppDelegate.m; sourceTree = "<group>"; };
-		34EBE3D713594F7B00A24C01 /* Mobile_Wired.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Wired.xcdatamodel; sourceTree = "<group>"; };
-		34EBE3DA13594F7B00A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		34EBE3DC13594F7B00A24C01 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		34EBE3DD13594F7B00A24C01 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		34EBE3E013594F7B00A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+		34EBE3F61359515F00A24C01 /* MobileWired-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MobileWired-Info.plist"; sourceTree = "<group>"; };
+		34EBE3F71359515F00A24C01 /* MobileWired-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MobileWired-Prefix.pch"; sourceTree = "<group>"; };
+		34EBE3FD135951A700A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		34EBE407135951C100A24C01 /* Mobile_Wired.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Wired.xcdatamodel; sourceTree = "<group>"; };
+		34EBE4101359528700A24C01 /* Chat Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chat Icon.png"; sourceTree = "<group>"; };
+		34EBE4111359528700A24C01 /* User Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User Icon.png"; sourceTree = "<group>"; };
+		34EBE41C1359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FirstView.xib; sourceTree = "<group>"; };
+		34EBE41E1359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = MainWindow.xib; sourceTree = "<group>"; };
+		34EBE4201359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SecondView.xib; sourceTree = "<group>"; };
+		34EBE4241359569B00A24C01 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
+		34EBE4251359569B00A24C01 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
+		34EBE4261359569B00A24C01 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstViewController.h; path = Classes/FirstViewController.h; sourceTree = "<group>"; };
+		34EBE4271359569B00A24C01 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstViewController.m; path = Classes/FirstViewController.m; sourceTree = "<group>"; };
+		34EBE4281359569B00A24C01 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = Classes/SecondViewController.h; sourceTree = "<group>"; };
+		34EBE4291359569B00A24C01 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = Classes/SecondViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +67,9 @@
 		34EBE3B313594F7A00A24C01 = {
 			isa = PBXGroup;
 			children = (
-				34EBE3CA13594F7B00A24C01 /* Mobile Wired */,
+				34EBE405135951C100A24C01 /* Models */,
+				34EBE3CA13594F7B00A24C01 /* Main Classes */,
+				34EBE3CB13594F7B00A24C01 /* Supporting Files */,
 				34EBE3C113594F7B00A24C01 /* Frameworks */,
 				34EBE3BF13594F7B00A24C01 /* Products */,
 			);
@@ -82,30 +94,62 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		34EBE3CA13594F7B00A24C01 /* Mobile Wired */ = {
+		34EBE3CA13594F7B00A24C01 /* Main Classes */ = {
 			isa = PBXGroup;
 			children = (
-				34EBE3D313594F7B00A24C01 /* Mobile_WiredAppDelegate.h */,
-				34EBE3D413594F7B00A24C01 /* Mobile_WiredAppDelegate.m */,
-				34EBE3D913594F7B00A24C01 /* MainWindow.xib */,
-				34EBE3DC13594F7B00A24C01 /* RootViewController.h */,
-				34EBE3DD13594F7B00A24C01 /* RootViewController.m */,
-				34EBE3DF13594F7B00A24C01 /* RootViewController.xib */,
-				34EBE3D613594F7B00A24C01 /* Mobile_Wired.xcdatamodeld */,
-				34EBE3CB13594F7B00A24C01 /* Supporting Files */,
+				34EBE4241359569B00A24C01 /* AppDelegate.h */,
+				34EBE4251359569B00A24C01 /* AppDelegate.m */,
+				34EBE4261359569B00A24C01 /* FirstViewController.h */,
+				34EBE4271359569B00A24C01 /* FirstViewController.m */,
+				34EBE4281359569B00A24C01 /* SecondViewController.h */,
+				34EBE4291359569B00A24C01 /* SecondViewController.m */,
 			);
+			name = "Main Classes";
 			path = "Mobile Wired";
 			sourceTree = "<group>";
 		};
 		34EBE3CB13594F7B00A24C01 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				34EBE3CC13594F7B00A24C01 /* Mobile Wired-Info.plist */,
-				34EBE3CD13594F7B00A24C01 /* InfoPlist.strings */,
-				34EBE3D013594F7B00A24C01 /* Mobile Wired-Prefix.pch */,
+				34EBE40F1359528700A24C01 /* Images */,
+				34EBE3FB135951A700A24C01 /* Interface Builder */,
+				34EBE3F61359515F00A24C01 /* MobileWired-Info.plist */,
+				34EBE3F71359515F00A24C01 /* MobileWired-Prefix.pch */,
 				34EBE3D113594F7B00A24C01 /* main.m */,
 			);
 			name = "Supporting Files";
+			path = "Mobile Wired";
+			sourceTree = "<group>";
+		};
+		34EBE3FB135951A700A24C01 /* Interface Builder */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE41B1359565100A24C01 /* FirstView.xib */,
+				34EBE41D1359565100A24C01 /* MainWindow.xib */,
+				34EBE41F1359565100A24C01 /* SecondView.xib */,
+				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
+			);
+			name = "Interface Builder";
+			path = Resources/en.lproj;
+			sourceTree = "<group>";
+		};
+		34EBE405135951C100A24C01 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE406135951C100A24C01 /* MobileWired.xcdatamodeld */,
+			);
+			name = Models;
+			path = "Mobile Wired/Models";
+			sourceTree = "<group>";
+		};
+		34EBE40F1359528700A24C01 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE4101359528700A24C01 /* Chat Icon.png */,
+				34EBE4111359528700A24C01 /* User Icon.png */,
+			);
+			name = Images;
+			path = Resources/images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,9 +199,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34EBE3CF13594F7B00A24C01 /* InfoPlist.strings in Resources */,
-				34EBE3DB13594F7B00A24C01 /* MainWindow.xib in Resources */,
-				34EBE3E113594F7B00A24C01 /* RootViewController.xib in Resources */,
+				34EBE402135951A700A24C01 /* InfoPlist.strings in Resources */,
+				34EBE403135951A700A24C01 /* MainWindow.xib in Resources */,
+				34EBE4121359528700A24C01 /* Chat Icon.png in Resources */,
+				34EBE4131359528700A24C01 /* User Icon.png in Resources */,
+				34EBE4211359565100A24C01 /* FirstView.xib in Resources */,
+				34EBE4221359565100A24C01 /* MainWindow.xib in Resources */,
+				34EBE4231359565100A24C01 /* SecondView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,37 +217,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
-				34EBE3D513594F7B00A24C01 /* Mobile_WiredAppDelegate.m in Sources */,
-				34EBE3D813594F7B00A24C01 /* Mobile_Wired.xcdatamodeld in Sources */,
-				34EBE3DE13594F7B00A24C01 /* RootViewController.m in Sources */,
+				34EBE408135951C100A24C01 /* MobileWired.xcdatamodeld in Sources */,
+				34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */,
+				34EBE42B1359569B00A24C01 /* FirstViewController.m in Sources */,
+				34EBE42C1359569B00A24C01 /* SecondViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		34EBE3CD13594F7B00A24C01 /* InfoPlist.strings */ = {
+		34EBE3FC135951A700A24C01 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				34EBE3CE13594F7B00A24C01 /* en */,
+				34EBE3FD135951A700A24C01 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		34EBE3D913594F7B00A24C01 /* MainWindow.xib */ = {
+		34EBE3FE135951A700A24C01 /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				34EBE3DA13594F7B00A24C01 /* en */,
+			);
+			name = MainWindow.xib;
+			path = "/Users/matthew/Dropbox/Projects/Mobile Wired/Mobile Wired/Resources/en.lproj";
+			sourceTree = "<absolute>";
+		};
+		34EBE41B1359565100A24C01 /* FirstView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34EBE41C1359565100A24C01 /* en */,
+			);
+			name = FirstView.xib;
+			sourceTree = "<group>";
+		};
+		34EBE41D1359565100A24C01 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34EBE41E1359565100A24C01 /* en */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		34EBE3DF13594F7B00A24C01 /* RootViewController.xib */ = {
+		34EBE41F1359565100A24C01 /* SecondView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				34EBE3E013594F7B00A24C01 /* en */,
+				34EBE4201359565100A24C01 /* en */,
 			);
-			name = RootViewController.xib;
+			name = SecondView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -218,6 +283,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -233,6 +299,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -244,8 +311,9 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Mobile Wired/Mobile Wired-Prefix.pch";
-				INFOPLIST_FILE = "Mobile Wired/Mobile Wired-Info.plist";
+				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
+				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -257,8 +325,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Mobile Wired/Mobile Wired-Prefix.pch";
-				INFOPLIST_FILE = "Mobile Wired/Mobile Wired-Info.plist";
+				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
+				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -284,16 +353,18 @@
 				34EBE3E613594F7B00A24C01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		34EBE3D613594F7B00A24C01 /* Mobile_Wired.xcdatamodeld */ = {
+		34EBE406135951C100A24C01 /* MobileWired.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				34EBE3D713594F7B00A24C01 /* Mobile_Wired.xcdatamodel */,
+				34EBE407135951C100A24C01 /* Mobile_Wired.xcdatamodel */,
 			);
-			currentVersion = 34EBE3D713594F7B00A24C01 /* Mobile_Wired.xcdatamodel */;
+			currentVersion = 34EBE407135951C100A24C01 /* Mobile_Wired.xcdatamodel */;
+			name = MobileWired.xcdatamodeld;
 			path = Mobile_Wired.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
