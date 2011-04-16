@@ -1,0 +1,304 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
+		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
+		34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */; };
+		34EBE3C913594F7B00A24C01 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C813594F7B00A24C01 /* CoreData.framework */; };
+		34EBE3CF13594F7B00A24C01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3CD13594F7B00A24C01 /* InfoPlist.strings */; };
+		34EBE3D213594F7B00A24C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3D113594F7B00A24C01 /* main.m */; };
+		34EBE3D513594F7B00A24C01 /* Mobile_WiredAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3D413594F7B00A24C01 /* Mobile_WiredAppDelegate.m */; };
+		34EBE3D813594F7B00A24C01 /* Mobile_Wired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3D613594F7B00A24C01 /* Mobile_Wired.xcdatamodeld */; };
+		34EBE3DB13594F7B00A24C01 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3D913594F7B00A24C01 /* MainWindow.xib */; };
+		34EBE3DE13594F7B00A24C01 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3DD13594F7B00A24C01 /* RootViewController.m */; };
+		34EBE3E113594F7B00A24C01 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3DF13594F7B00A24C01 /* RootViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34EBE3C213594F7B00A24C01 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		34EBE3C413594F7B00A24C01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		34EBE3C813594F7B00A24C01 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		34EBE3CC13594F7B00A24C01 /* Mobile Wired-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mobile Wired-Info.plist"; sourceTree = "<group>"; };
+		34EBE3CE13594F7B00A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		34EBE3D013594F7B00A24C01 /* Mobile Wired-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mobile Wired-Prefix.pch"; sourceTree = "<group>"; };
+		34EBE3D113594F7B00A24C01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		34EBE3D313594F7B00A24C01 /* Mobile_WiredAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mobile_WiredAppDelegate.h; sourceTree = "<group>"; };
+		34EBE3D413594F7B00A24C01 /* Mobile_WiredAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mobile_WiredAppDelegate.m; sourceTree = "<group>"; };
+		34EBE3D713594F7B00A24C01 /* Mobile_Wired.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Wired.xcdatamodel; sourceTree = "<group>"; };
+		34EBE3DA13594F7B00A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		34EBE3DC13594F7B00A24C01 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		34EBE3DD13594F7B00A24C01 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		34EBE3E013594F7B00A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		34EBE3BB13594F7A00A24C01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */,
+				34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */,
+				34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */,
+				34EBE3C913594F7B00A24C01 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34EBE3B313594F7A00A24C01 = {
+			isa = PBXGroup;
+			children = (
+				34EBE3CA13594F7B00A24C01 /* Mobile Wired */,
+				34EBE3C113594F7B00A24C01 /* Frameworks */,
+				34EBE3BF13594F7B00A24C01 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		34EBE3BF13594F7B00A24C01 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		34EBE3C113594F7B00A24C01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE3C213594F7B00A24C01 /* UIKit.framework */,
+				34EBE3C413594F7B00A24C01 /* Foundation.framework */,
+				34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */,
+				34EBE3C813594F7B00A24C01 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		34EBE3CA13594F7B00A24C01 /* Mobile Wired */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE3D313594F7B00A24C01 /* Mobile_WiredAppDelegate.h */,
+				34EBE3D413594F7B00A24C01 /* Mobile_WiredAppDelegate.m */,
+				34EBE3D913594F7B00A24C01 /* MainWindow.xib */,
+				34EBE3DC13594F7B00A24C01 /* RootViewController.h */,
+				34EBE3DD13594F7B00A24C01 /* RootViewController.m */,
+				34EBE3DF13594F7B00A24C01 /* RootViewController.xib */,
+				34EBE3D613594F7B00A24C01 /* Mobile_Wired.xcdatamodeld */,
+				34EBE3CB13594F7B00A24C01 /* Supporting Files */,
+			);
+			path = "Mobile Wired";
+			sourceTree = "<group>";
+		};
+		34EBE3CB13594F7B00A24C01 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE3CC13594F7B00A24C01 /* Mobile Wired-Info.plist */,
+				34EBE3CD13594F7B00A24C01 /* InfoPlist.strings */,
+				34EBE3D013594F7B00A24C01 /* Mobile Wired-Prefix.pch */,
+				34EBE3D113594F7B00A24C01 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		34EBE3BD13594F7A00A24C01 /* Mobile Wired */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34EBE3E413594F7B00A24C01 /* Build configuration list for PBXNativeTarget "Mobile Wired" */;
+			buildPhases = (
+				34EBE3BA13594F7A00A24C01 /* Sources */,
+				34EBE3BB13594F7A00A24C01 /* Frameworks */,
+				34EBE3BC13594F7A00A24C01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mobile Wired";
+			productName = "Mobile Wired";
+			productReference = 34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		34EBE3B513594F7A00A24C01 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 34EBE3B813594F7A00A24C01 /* Build configuration list for PBXProject "Mobile Wired" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 34EBE3B313594F7A00A24C01;
+			productRefGroup = 34EBE3BF13594F7B00A24C01 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				34EBE3BD13594F7A00A24C01 /* Mobile Wired */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		34EBE3BC13594F7A00A24C01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34EBE3CF13594F7B00A24C01 /* InfoPlist.strings in Resources */,
+				34EBE3DB13594F7B00A24C01 /* MainWindow.xib in Resources */,
+				34EBE3E113594F7B00A24C01 /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34EBE3BA13594F7A00A24C01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
+				34EBE3D513594F7B00A24C01 /* Mobile_WiredAppDelegate.m in Sources */,
+				34EBE3D813594F7B00A24C01 /* Mobile_Wired.xcdatamodeld in Sources */,
+				34EBE3DE13594F7B00A24C01 /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		34EBE3CD13594F7B00A24C01 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34EBE3CE13594F7B00A24C01 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		34EBE3D913594F7B00A24C01 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34EBE3DA13594F7B00A24C01 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		34EBE3DF13594F7B00A24C01 /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34EBE3E013594F7B00A24C01 /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		34EBE3E213594F7B00A24C01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		34EBE3E313594F7B00A24C01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		34EBE3E513594F7B00A24C01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mobile Wired/Mobile Wired-Prefix.pch";
+				INFOPLIST_FILE = "Mobile Wired/Mobile Wired-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		34EBE3E613594F7B00A24C01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mobile Wired/Mobile Wired-Prefix.pch";
+				INFOPLIST_FILE = "Mobile Wired/Mobile Wired-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		34EBE3B813594F7A00A24C01 /* Build configuration list for PBXProject "Mobile Wired" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34EBE3E213594F7B00A24C01 /* Debug */,
+				34EBE3E313594F7B00A24C01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34EBE3E413594F7B00A24C01 /* Build configuration list for PBXNativeTarget "Mobile Wired" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34EBE3E513594F7B00A24C01 /* Debug */,
+				34EBE3E613594F7B00A24C01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		34EBE3D613594F7B00A24C01 /* Mobile_Wired.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				34EBE3D713594F7B00A24C01 /* Mobile_Wired.xcdatamodel */,
+			);
+			currentVersion = 34EBE3D713594F7B00A24C01 /* Mobile_Wired.xcdatamodel */;
+			path = Mobile_Wired.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 34EBE3B513594F7A00A24C01 /* Project object */;
+}
