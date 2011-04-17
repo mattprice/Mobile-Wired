@@ -7,18 +7,25 @@
 //
 
 #import "ChatViewController.h"
+#import "WiredConnection.h"
 
 
 @implementation ChatViewController
 
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Create a new WiredConnection.
+    WiredConnection *connection = [[WiredConnection alloc] init];
+    [connection connectToServer:@"chat.embercode.com" onPort:2359];
+    
+    // Set the server name.
+    [serverTitle setTitle:@"Code Monkey"];
 }
-*/
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -38,6 +45,8 @@
 
 - (void)viewDidUnload
 {
+    [serverTitle release];
+    serverTitle = nil;
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -47,6 +56,7 @@
 
 - (void)dealloc
 {
+    [serverTitle release];
     [super dealloc];
 }
 

@@ -11,6 +11,7 @@
 
 @interface ChatViewController : UIViewController {
 
+    IBOutlet UINavigationItem *serverTitle;
 }
 
 @end

@@ -1,0 +1,244 @@
+SENT:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message name="p7.handshake.client_handshake" xmlns:p7="http://www.zankasoftware.com/P7/Message">
+  <p7:field name="p7.handshake.version">1.0</p7:field>
+  <p7:field name="p7.handshake.protocol.name">Wired</p7:field>
+  <p7:field name="p7.handshake.protocol.version">2.0</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="p7.handshake.server_handshake">
+  <p7:field name="p7.handshake.version">1.0</p7:field>
+  <p7:field name="p7.handshake.protocol.name">Wired</p7:field>
+  <p7:field name="p7.handshake.protocol.version">2.0b51</p7:field>
+  <p7:field name="p7.handshake.compatibility_check">1</p7:field>
+</p7:message>
+
+SENT:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message name="p7.handshake.acknowledge" xmlns:p7="http://www.zankasoftware.com/P7/Message">
+</p7:message>
+
+SENT:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message name="p7.compatibility_check.specification" xmlns:p7="http://www.zankasoftware.com/P7/Message">
+  <p7:field name="p7.compatibility_check.specification">[[FULL XML OF SPEC]]</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="p7.compatibility_check.status">
+  <p7:field name="p7.compatibility_check.status">1</p7:field>
+</p7:message>
+
+SENT:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message name="wired.client_info" xmlns:p7="http://www.zankasoftware.com/P7/Message">
+  <p7:field name="wired.info.application.name">Mobile Wired</p7:field>
+  <p7:field name="wired.info.application.version">0.1</p7:field>
+  <p7:field name="wired.info.application.build">3</p7:field>
+  <p7:field name="wired.info.os.name">Darwin</p7:field>
+  <p7:field name="wired.info.os.version">10.7.0</p7:field>
+  <p7:field name="wired.info.arch">i386</p7:field>
+  <p7:field name="wired.info.supports_rsrc">false</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.server_info">
+  <p7:field name="wired.info.application.name">Wired</p7:field>
+  <p7:field name="wired.info.application.version">2.0</p7:field>
+  <p7:field name="wired.info.application.build">0</p7:field>
+  <p7:field name="wired.info.os.name">Linux</p7:field>
+  <p7:field name="wired.info.os.version">2.6.18.8-linode22</p7:field>
+  <p7:field name="wired.info.arch">i686</p7:field>
+  <p7:field name="wired.info.supports_rsrc">0</p7:field>
+  <p7:field name="wired.info.name">Code Monkey</p7:field>
+  <p7:field name="wired.info.description">Fwooosh!</p7:field>
+  <p7:field name="wired.info.start_time">1302407855.470682</p7:field>
+  <p7:field name="wired.info.files.count">1</p7:field>
+  <p7:field name="wired.info.files.size">104857600</p7:field>
+  <p7:field name="wired.info.banner">[[BASE64 BANNER]]</p7:field>
+  <p7:field name="wired.info.downloads">10</p7:field>
+  <p7:field name="wired.info.uploads">10</p7:field>
+  <p7:field name="wired.info.download_speed">0</p7:field>
+  <p7:field name="wired.info.upload_speed">0</p7:field>
+</p7:message>
+
+SENT:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message name="wired.send_login" xmlns:p7="http://www.zankasoftware.com/P7/Message">
+  <p7:field name="wired.user.login">omega</p7:field>
+  <p7:field name="wired.user.password">[[SHA1 OF PASSWORD]]</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.login">
+  <p7:field name="wired.user.id">880</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.account.privileges">
+  <p7:field name="wired.account.board.delete_own_posts">1</p7:field>
+  <p7:field name="wired.account.transfer.download_files">1</p7:field>
+  <p7:field name="wired.account.account.delete_users">1</p7:field>
+  <p7:field name="wired.account.account.create_users">1</p7:field>
+  <p7:field name="wired.account.board.edit_all_posts">1</p7:field>
+  <p7:field name="wired.account.transfer.upload_files">1</p7:field>
+  <p7:field name="wired.account.message.broadcast">1</p7:field>
+  <p7:field name="wired.account.file.search_files">1</p7:field>
+  <p7:field name="wired.account.account.edit_users">1</p7:field>
+  <p7:field name="wired.account.board.add_threads">1</p7:field>
+  <p7:field name="wired.account.account.raise_account_privileges">1</p7:field>
+  <p7:field name="wired.account.file.set_comment">1</p7:field>
+  <p7:field name="wired.account.name">omega</p7:field>
+  <p7:field name="wired.account.message.send_messages">1</p7:field>
+  <p7:field name="wired.account.file.access_all_dropboxes">1</p7:field>
+  <p7:field name="wired.account.board.add_posts">1</p7:field>
+  <p7:field name="wired.account.transfer.upload_directories">1</p7:field>
+  <p7:field name="wired.account.board.delete_threads">1</p7:field>
+  <p7:field name="wired.account.file.delete_files">1</p7:field>
+  <p7:field name="wired.account.user.disconnect_users">1</p7:field>
+  <p7:field name="wired.account.transfer.upload_speed_limit">0</p7:field>
+  <p7:field name="wired.account.file.recursive_list_depth_limit">0</p7:field>
+  <p7:field name="wired.account.board.move_boards">1</p7:field>
+  <p7:field name="wired.account.file.create_directories">1</p7:field>
+  <p7:field name="wired.account.tracker.list_servers">1</p7:field>
+  <p7:field name="wired.account.file.set_executable">1</p7:field>
+  <p7:field name="wired.account.banlist.delete_bans">1</p7:field>
+  <p7:field name="wired.account.board.delete_boards">1</p7:field>
+  <p7:field name="wired.account.board.rename_boards">1</p7:field>
+  <p7:field name="wired.account.log.view_log">1</p7:field>
+  <p7:field name="wired.account.transfer.download_speed_limit">0</p7:field>
+  <p7:field name="wired.account.chat.create_chats">1</p7:field>
+  <p7:field name="wired.account.chat.kick_users">1</p7:field>
+  <p7:field name="wired.account.groups"/>
+  <p7:field name="wired.account.transfer.download_limit">0</p7:field>
+  <p7:field name="wired.account.file.set_label">1</p7:field>
+  <p7:field name="wired.account.board.delete_all_posts">1</p7:field>
+  <p7:field name="wired.account.account.delete_groups">1</p7:field>
+  <p7:field name="wired.account.account.edit_groups">1</p7:field>
+  <p7:field name="wired.account.account.create_groups">1</p7:field>
+  <p7:field name="wired.account.user.get_info">1</p7:field>
+  <p7:field name="wired.account.file.get_info">1</p7:field>
+  <p7:field name="wired.account.tracker.register_servers">1</p7:field>
+  <p7:field name="wired.account.board.move_threads">1</p7:field>
+  <p7:field name="wired.account.banlist.add_bans">1</p7:field>
+  <p7:field name="wired.account.board.add_boards">1</p7:field>
+  <p7:field name="wired.account.file.create_links">1</p7:field>
+  <p7:field name="wired.account.group">Member</p7:field>
+  <p7:field name="wired.account.banlist.get_bans">1</p7:field>
+  <p7:field name="wired.account.board.set_permissions">1</p7:field>
+  <p7:field name="wired.account.file.list_files">1</p7:field>
+  <p7:field name="wired.account.chat.set_topic">1</p7:field>
+  <p7:field name="wired.account.events.view_events">1</p7:field>
+  <p7:field name="wired.account.file.set_type">1</p7:field>
+  <p7:field name="wired.account.transfer.upload_limit">0</p7:field>
+  <p7:field name="wired.account.transfer.upload_anywhere">1</p7:field>
+  <p7:field name="wired.account.account.read_accounts">1</p7:field>
+  <p7:field name="wired.account.account.list_accounts">1</p7:field>
+  <p7:field name="wired.account.settings.set_settings">1</p7:field>
+  <p7:field name="wired.account.settings.get_settings">1</p7:field>
+  <p7:field name="wired.account.account.change_password">1</p7:field>
+  <p7:field name="wired.account.user.ban_users">1</p7:field>
+  <p7:field name="wired.account.user.get_users">1</p7:field>
+  <p7:field name="wired.account.file.set_permissions">1</p7:field>
+  <p7:field name="wired.account.user.cannot_set_nick">0</p7:field>
+  <p7:field name="wired.account.file.rename_files">1</p7:field>
+  <p7:field name="wired.account.user.cannot_be_disconnected">1</p7:field>
+  <p7:field name="wired.account.board.read_boards">1</p7:field>
+  <p7:field name="wired.account.board.edit_own_posts">1</p7:field>
+  <p7:field name="wired.account.file.move_files">1</p7:field>
+</p7:message>
+
+SENT:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message name="wired.user.set_nick" xmlns:p7="http://www.zankasoftware.com/P7/Message">
+  <p7:field name="wired.user.nick">Mobile</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.okay"/>
+
+SENT:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message name="wired.chat.join_chat" xmlns:p7="http://www.zankasoftware.com/P7/Message">
+  <p7:field name="wired.chat.id">1</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.user_list">
+  <p7:field name="wired.chat.id">1</p7:field>
+  <p7:field name="wired.user.id">875</p7:field>
+  <p7:field name="wired.user.idle">0</p7:field>
+  <p7:field name="wired.user.nick">Flombear</p7:field>
+  <p7:field name="wired.user.status">Blazing</p7:field>
+  <p7:field name="wired.user.icon">[[BASE64 OF ICON]]</p7:field>
+  <p7:field name="wired.user.idle_time">1302988491.380885</p7:field>
+  <p7:field name="wired.account.color">wired.account.color.orange</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.user_list">
+  <p7:field name="wired.chat.id">1</p7:field>
+  <p7:field name="wired.user.id">878</p7:field>
+  <p7:field name="wired.user.idle">0</p7:field>
+  <p7:field name="wired.user.nick">Omeagle</p7:field>
+  <p7:field name="wired.user.status"></p7:field>
+  <p7:field name="wired.user.icon">[[BASE64 OF ICON]]</p7:field>
+  <p7:field name="wired.user.idle_time">1302988552.839733</p7:field>
+  <p7:field name="wired.account.color">wired.account.color.orange</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.user_list">
+  <p7:field name="wired.chat.id">1</p7:field>
+  <p7:field name="wired.user.id">880</p7:field>
+  <p7:field name="wired.user.idle">0</p7:field>
+  <p7:field name="wired.user.nick">Mobile</p7:field>
+  <p7:field name="wired.user.status"></p7:field>
+  <p7:field name="wired.user.icon"></p7:field>
+  <p7:field name="wired.user.idle_time">1302988635.403507</p7:field>
+  <p7:field name="wired.account.color">wired.account.color.orange</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.user_list.done">
+  <p7:field name="wired.chat.id">1</p7:field>
+</p7:message>
+
+SENT:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message name="wired.chat.send_say" xmlns:p7="http://www.zankasoftware.com/P7/Message">
+  <p7:field name="wired.chat.id">1</p7:field>
+  <p7:field name="wired.chat.say">Trying to sniff out the XML format for message sending...</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.topic">
+  <p7:field name="wired.chat.id">1</p7:field>
+  <p7:field name="wired.user.nick">Omeagle</p7:field>
+  <p7:field name="wired.chat.topic.topic">http://www.pieceable.com/viewer</p7:field>
+  <p7:field name="wired.chat.topic.time">1302580204.127425</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.say">
+  <p7:field name="wired.chat.say">Trying to sniff out the XML format for message sending...</p7:field>
+  <p7:field name="wired.chat.id">1</p7:field>
+  <p7:field name="wired.user.id">880</p7:field>
+</p7:message>
+
+SENT (?):
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.okay"/>
