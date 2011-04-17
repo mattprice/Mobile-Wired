@@ -6,10 +6,11 @@
 //  Copyright 2011 Ember Code. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "ChatViewController.h"
 
 
-@implementation FirstViewController
+@implementation ChatViewController
+
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

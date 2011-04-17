@@ -17,11 +17,11 @@
 		34EBE408135951C100A24C01 /* MobileWired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE406135951C100A24C01 /* MobileWired.xcdatamodeld */; };
 		34EBE4121359528700A24C01 /* Chat Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE4101359528700A24C01 /* Chat Icon.png */; };
 		34EBE4131359528700A24C01 /* User Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE4111359528700A24C01 /* User Icon.png */; };
-		34EBE4211359565100A24C01 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41B1359565100A24C01 /* FirstView.xib */; };
+		34EBE4211359565100A24C01 /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41B1359565100A24C01 /* ChatView.xib */; };
 		34EBE4221359565100A24C01 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41D1359565100A24C01 /* MainWindow.xib */; };
 		34EBE4231359565100A24C01 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41F1359565100A24C01 /* SecondView.xib */; };
 		34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4251359569B00A24C01 /* AppDelegate.m */; };
-		34EBE42B1359569B00A24C01 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4271359569B00A24C01 /* FirstViewController.m */; };
+		34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4271359569B00A24C01 /* ChatViewController.m */; };
 		34EBE42C1359569B00A24C01 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4291359569B00A24C01 /* SecondViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -38,13 +38,13 @@
 		34EBE407135951C100A24C01 /* Mobile_Wired.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Wired.xcdatamodel; sourceTree = "<group>"; };
 		34EBE4101359528700A24C01 /* Chat Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chat Icon.png"; sourceTree = "<group>"; };
 		34EBE4111359528700A24C01 /* User Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User Icon.png"; sourceTree = "<group>"; };
-		34EBE41C1359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FirstView.xib; sourceTree = "<group>"; };
+		34EBE41C1359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ChatView.xib; sourceTree = "<group>"; };
 		34EBE41E1359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = MainWindow.xib; sourceTree = "<group>"; };
 		34EBE4201359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SecondView.xib; sourceTree = "<group>"; };
 		34EBE4241359569B00A24C01 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		34EBE4251359569B00A24C01 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
-		34EBE4261359569B00A24C01 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstViewController.h; path = Classes/FirstViewController.h; sourceTree = "<group>"; };
-		34EBE4271359569B00A24C01 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstViewController.m; path = Classes/FirstViewController.m; sourceTree = "<group>"; };
+		34EBE4261359569B00A24C01 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = Classes/ChatViewController.h; sourceTree = "<group>"; };
+		34EBE4271359569B00A24C01 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = Classes/ChatViewController.m; sourceTree = "<group>"; };
 		34EBE4281359569B00A24C01 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = Classes/SecondViewController.h; sourceTree = "<group>"; };
 		34EBE4291359569B00A24C01 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = Classes/SecondViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,7 +68,8 @@
 			isa = PBXGroup;
 			children = (
 				34EBE405135951C100A24C01 /* Models */,
-				34EBE3CA13594F7B00A24C01 /* Main Classes */,
+				34EBE3CA13594F7B00A24C01 /* Wired Classes */,
+				34EBE4331359677600A24C01 /* External Classes */,
 				34EBE3CB13594F7B00A24C01 /* Supporting Files */,
 				34EBE3C113594F7B00A24C01 /* Frameworks */,
 				34EBE3BF13594F7B00A24C01 /* Products */,
@@ -94,17 +95,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		34EBE3CA13594F7B00A24C01 /* Main Classes */ = {
+		34EBE3CA13594F7B00A24C01 /* Wired Classes */ = {
 			isa = PBXGroup;
 			children = (
+				34EBE43E135969A100A24C01 /* View Controllers */,
 				34EBE4241359569B00A24C01 /* AppDelegate.h */,
 				34EBE4251359569B00A24C01 /* AppDelegate.m */,
-				34EBE4261359569B00A24C01 /* FirstViewController.h */,
-				34EBE4271359569B00A24C01 /* FirstViewController.m */,
-				34EBE4281359569B00A24C01 /* SecondViewController.h */,
-				34EBE4291359569B00A24C01 /* SecondViewController.m */,
 			);
-			name = "Main Classes";
+			name = "Wired Classes";
 			path = "Mobile Wired";
 			sourceTree = "<group>";
 		};
@@ -124,7 +122,7 @@
 		34EBE3FB135951A700A24C01 /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
-				34EBE41B1359565100A24C01 /* FirstView.xib */,
+				34EBE41B1359565100A24C01 /* ChatView.xib */,
 				34EBE41D1359565100A24C01 /* MainWindow.xib */,
 				34EBE41F1359565100A24C01 /* SecondView.xib */,
 				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
@@ -150,6 +148,17 @@
 			);
 			name = Images;
 			path = Resources/images;
+			sourceTree = "<group>";
+		};
+		34EBE43E135969A100A24C01 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE4261359569B00A24C01 /* ChatViewController.h */,
+				34EBE4271359569B00A24C01 /* ChatViewController.m */,
+				34EBE4281359569B00A24C01 /* SecondViewController.h */,
+				34EBE4291359569B00A24C01 /* SecondViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +212,7 @@
 				34EBE403135951A700A24C01 /* MainWindow.xib in Resources */,
 				34EBE4121359528700A24C01 /* Chat Icon.png in Resources */,
 				34EBE4131359528700A24C01 /* User Icon.png in Resources */,
-				34EBE4211359565100A24C01 /* FirstView.xib in Resources */,
+				34EBE4211359565100A24C01 /* ChatView.xib in Resources */,
 				34EBE4221359565100A24C01 /* MainWindow.xib in Resources */,
 				34EBE4231359565100A24C01 /* SecondView.xib in Resources */,
 			);
@@ -219,7 +228,7 @@
 				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
 				34EBE408135951C100A24C01 /* MobileWired.xcdatamodeld in Sources */,
 				34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */,
-				34EBE42B1359569B00A24C01 /* FirstViewController.m in Sources */,
+				34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */,
 				34EBE42C1359569B00A24C01 /* SecondViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,12 +252,12 @@
 			path = "/Users/matthew/Dropbox/Projects/Mobile Wired/Mobile Wired/Resources/en.lproj";
 			sourceTree = "<absolute>";
 		};
-		34EBE41B1359565100A24C01 /* FirstView.xib */ = {
+		34EBE41B1359565100A24C01 /* ChatView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				34EBE41C1359565100A24C01 /* en */,
 			);
-			name = FirstView.xib;
+			name = ChatView.xib;
 			sourceTree = "<group>";
 		};
 		34EBE41D1359565100A24C01 /* MainWindow.xib */ = {
