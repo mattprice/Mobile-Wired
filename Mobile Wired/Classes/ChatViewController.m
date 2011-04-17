@@ -1,5 +1,5 @@
 //
-//  FirstViewController.m
+//  ChatViewController.m
 //  Mobile Wired
 //
 //  Created by Matthew Price on 4/11/11.
@@ -7,10 +7,11 @@
 //
 
 #import "ChatViewController.h"
-#import "WiredConnection.h"
 
 
 @implementation ChatViewController
+
+@synthesize connection;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -19,7 +20,7 @@
     [super viewDidLoad];
     
     // Create a new WiredConnection.
-    WiredConnection *connection = [[WiredConnection alloc] init];
+    connection = [[WiredConnection alloc] init];
     [connection connectToServer:@"chat.embercode.com" onPort:2359];
     
     // Set the server name.
@@ -57,6 +58,8 @@
 - (void)dealloc
 {
     [serverTitle release];
+    [connection release];
+    
     [super dealloc];
 }
 

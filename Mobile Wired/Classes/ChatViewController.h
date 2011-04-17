@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  ChatViewController.h
 //  Mobile Wired
 //
 //  Created by Matthew Price on 4/11/11.
@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WiredConnection.h"
 
 
 @interface ChatViewController : UIViewController {
 
     IBOutlet UINavigationItem *serverTitle;
 }
+
+@property (nonatomic, retain) WiredConnection *connection;
 
 @end
