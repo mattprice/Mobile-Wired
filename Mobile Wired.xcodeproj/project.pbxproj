@@ -60,6 +60,7 @@
 		34EBE4301359676E00A24C01 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		34EBE43C1359690000A24C01 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MobileWired_Spec.xml; path = Resources/MobileWired_Spec.xml; sourceTree = "<group>"; };
+		34FC5C80135B493D0049C737 /* Connection Dump.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Connection Dump.xml"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +140,7 @@
 				34EBE40F1359528700A24C01 /* Images */,
 				34EBE3FB135951A700A24C01 /* Interface Builder */,
 				34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */,
+				34FC5C80135B493D0049C737 /* Connection Dump.xml */,
 				34EBE3F61359515F00A24C01 /* MobileWired-Info.plist */,
 				34EBE3F71359515F00A24C01 /* MobileWired-Prefix.pch */,
 				34EBE3D113594F7B00A24C01 /* main.m */,
