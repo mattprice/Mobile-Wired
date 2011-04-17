@@ -23,6 +23,7 @@
 		34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4251359569B00A24C01 /* AppDelegate.m */; };
 		34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4271359569B00A24C01 /* ChatViewController.m */; };
 		34EBE42C1359569B00A24C01 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4291359569B00A24C01 /* SecondViewController.m */; };
+		34FC5C7E135B458A0049C737 /* MobileWired_Spec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		34EBE4271359569B00A24C01 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = Classes/ChatViewController.m; sourceTree = "<group>"; };
 		34EBE4281359569B00A24C01 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = Classes/SecondViewController.h; sourceTree = "<group>"; };
 		34EBE4291359569B00A24C01 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = Classes/SecondViewController.m; sourceTree = "<group>"; };
+		34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MobileWired_Spec.xml; path = Resources/MobileWired_Spec.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				34EBE40F1359528700A24C01 /* Images */,
 				34EBE3FB135951A700A24C01 /* Interface Builder */,
+				34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */,
 				34EBE3F61359515F00A24C01 /* MobileWired-Info.plist */,
 				34EBE3F71359515F00A24C01 /* MobileWired-Prefix.pch */,
 				34EBE3D113594F7B00A24C01 /* main.m */,
@@ -215,6 +218,7 @@
 				34EBE4211359565100A24C01 /* ChatView.xib in Resources */,
 				34EBE4221359565100A24C01 /* MainWindow.xib in Resources */,
 				34EBE4231359565100A24C01 /* SecondView.xib in Resources */,
+				34FC5C7E135B458A0049C737 /* MobileWired_Spec.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
