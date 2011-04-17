@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
+		34DA5FB6135A4EF100A4CD61 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DA5FB5135A4EF100A4CD61 /* GDataXMLNode.m */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
 		34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */; };
@@ -32,6 +33,8 @@
 /* Begin PBXFileReference section */
 		3477029D135A026100F91A8B /* WiredConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WiredConnection.h; path = Classes/WiredConnection.h; sourceTree = "<group>"; };
 		3477029E135A026200F91A8B /* WiredConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WiredConnection.m; path = Classes/WiredConnection.m; sourceTree = "<group>"; };
+		34DA5FB4135A4EF100A4CD61 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		34DA5FB5135A4EF100A4CD61 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34EBE3C213594F7B00A24C01 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		34EBE3C413594F7B00A24C01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,6 +78,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34DA5FB3135A4EF100A4CD61 /* GDataXMLNode */ = {
+			isa = PBXGroup;
+			children = (
+				34DA5FB4135A4EF100A4CD61 /* GDataXMLNode.h */,
+				34DA5FB5135A4EF100A4CD61 /* GDataXMLNode.m */,
+			);
+			name = GDataXMLNode;
+			path = Classes/GDataXMLNode;
+			sourceTree = "<group>";
+		};
 		34EBE3B313594F7A00A24C01 = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +191,7 @@
 		34EBE4331359677600A24C01 /* External Classes */ = {
 			isa = PBXGroup;
 			children = (
+				34DA5FB3135A4EF100A4CD61 /* GDataXMLNode */,
 				34EBE42D1359676E00A24C01 /* GCDAsyncSocket */,
 			);
 			name = "External Classes";
@@ -267,6 +281,7 @@
 				34EBE42C1359569B00A24C01 /* SecondViewController.m in Sources */,
 				34EBE4321359676E00A24C01 /* GCDAsyncSocket.m in Sources */,
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
+				34DA5FB6135A4EF100A4CD61 /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,8 +373,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -372,8 +389,10 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
