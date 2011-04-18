@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
-		34DA5FB6135A4EF100A4CD61 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DA5FB5135A4EF100A4CD61 /* GDataXMLNode.m */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
 		34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */; };
@@ -28,13 +27,14 @@
 		34EBE4321359676E00A24C01 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4301359676E00A24C01 /* GCDAsyncSocket.m */; };
 		34EBE43D1359690000A24C01 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE43C1359690000A24C01 /* CFNetwork.framework */; };
 		34FC5C7E135B458A0049C737 /* MobileWired_Spec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */; };
+		34FC5C8A135BB2A30049C737 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FC5C87135BB2A30049C737 /* NSDataAdditions.m */; };
+		34FC5C8B135BB2A30049C737 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FC5C89135BB2A30049C737 /* TBXML.m */; };
+		34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FC5C8C135BB3430049C737 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3477029D135A026100F91A8B /* WiredConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WiredConnection.h; path = Classes/WiredConnection.h; sourceTree = "<group>"; };
 		3477029E135A026200F91A8B /* WiredConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WiredConnection.m; path = Classes/WiredConnection.m; sourceTree = "<group>"; };
-		34DA5FB4135A4EF100A4CD61 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		34DA5FB5135A4EF100A4CD61 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34EBE3C213594F7B00A24C01 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		34EBE3C413594F7B00A24C01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,7 +61,12 @@
 		34EBE43C1359690000A24C01 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MobileWired_Spec.xml; path = Resources/MobileWired_Spec.xml; sourceTree = "<group>"; };
 		34FC5C80135B493D0049C737 /* Connection Dump.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Connection Dump.xml"; sourceTree = SOURCE_ROOT; };
-		34FC5C82135B4D150049C737 /* P7 Specification.xml */ = {isa = PBXFileReference; fileEncoding = 4; path = "P7 Specification.xml"; sourceTree = SOURCE_ROOT; };
+		34FC5C82135B4D150049C737 /* P7 Specification.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "P7 Specification.xml"; sourceTree = SOURCE_ROOT; };
+		34FC5C86135BB2A30049C737 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
+		34FC5C87135BB2A30049C737 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
+		34FC5C88135BB2A30049C737 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		34FC5C89135BB2A30049C737 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		34FC5C8C135BB3430049C737 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */,
 				34EBE43D1359690000A24C01 /* CFNetwork.framework in Frameworks */,
 				34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */,
 				34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */,
@@ -80,16 +86,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		34DA5FB3135A4EF100A4CD61 /* GDataXMLNode */ = {
-			isa = PBXGroup;
-			children = (
-				34DA5FB4135A4EF100A4CD61 /* GDataXMLNode.h */,
-				34DA5FB5135A4EF100A4CD61 /* GDataXMLNode.m */,
-			);
-			name = GDataXMLNode;
-			path = Classes/GDataXMLNode;
-			sourceTree = "<group>";
-		};
 		34EBE3B313594F7A00A24C01 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +109,7 @@
 		34EBE3C113594F7B00A24C01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34FC5C8C135BB3430049C737 /* libz.dylib */,
 				34EBE3C213594F7B00A24C01 /* UIKit.framework */,
 				34EBE3C413594F7B00A24C01 /* Foundation.framework */,
 				34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */,
@@ -193,7 +190,7 @@
 		34EBE4331359677600A24C01 /* External Classes */ = {
 			isa = PBXGroup;
 			children = (
-				34DA5FB3135A4EF100A4CD61 /* GDataXMLNode */,
+				34FC5C85135BB2A30049C737 /* TBXML */,
 				34EBE42D1359676E00A24C01 /* GCDAsyncSocket */,
 			);
 			name = "External Classes";
@@ -219,6 +216,18 @@
 				34FC5C80135B493D0049C737 /* Connection Dump.xml */,
 			);
 			name = "Wired Specs";
+			sourceTree = "<group>";
+		};
+		34FC5C85135BB2A30049C737 /* TBXML */ = {
+			isa = PBXGroup;
+			children = (
+				34FC5C86135BB2A30049C737 /* NSDataAdditions.h */,
+				34FC5C87135BB2A30049C737 /* NSDataAdditions.m */,
+				34FC5C88135BB2A30049C737 /* TBXML.h */,
+				34FC5C89135BB2A30049C737 /* TBXML.m */,
+			);
+			name = TBXML;
+			path = Classes/TBXML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,7 +302,8 @@
 				34EBE42C1359569B00A24C01 /* SecondViewController.m in Sources */,
 				34EBE4321359676E00A24C01 /* GCDAsyncSocket.m in Sources */,
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
-				34DA5FB6135A4EF100A4CD61 /* GDataXMLNode.m in Sources */,
+				34FC5C8A135BB2A30049C737 /* NSDataAdditions.m in Sources */,
+				34FC5C8B135BB2A30049C737 /* TBXML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,10 +395,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-lxml2";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -401,10 +411,10 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-lxml2";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

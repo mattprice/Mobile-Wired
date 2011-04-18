@@ -3,7 +3,7 @@
 //  Mobile Wired
 //
 //  Created by Matthew Price on 4/11/11.
-//  Copyright 2011 Ember Code. All rights reserved.
+//  Copyright 2011 Ember Code and Magic Lime Software. All rights reserved.
 //
 
 #import "ChatViewController.h"
@@ -22,6 +22,10 @@
     // Create a new WiredConnection.
     connection = [[WiredConnection alloc] init];
     [connection connectToServer:@"chat.embercode.com" onPort:2359];
+//    [connection sendLogin:@"guest" withPassword:@"guest"];
+//    [connection setNick:@"Mobile"];
+//    [connection joinChannel:@"1"];
+//    [connection sendChatMessage:@"This is a test message. Please say it works." toChannel:@"1"];
     
     // Set the server name.
     [serverTitle setTitle:@"Code Monkey"];
