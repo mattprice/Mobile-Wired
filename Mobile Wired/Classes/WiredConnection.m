@@ -15,7 +15,7 @@
 
 @implementation WiredConnection
 
-@synthesize socket;
+@synthesize socket, delegate;
 
 /*
  * Initiates a socket connection object.
@@ -152,7 +152,7 @@
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 @"Mobile Wired",  @"wired.info.application.name",
                                 @"0.1",           @"wired.info.application.version",
-                                @"9",             @"wired.info.application.build",
+                                @"10",             @"wired.info.application.build",
                                 [[UIDevice currentDevice] systemName],    @"wired.info.os.name",
                                 [[UIDevice currentDevice] systemVersion], @"wired.info.os.version",
                                 [[UIDevice currentDevice] model],         @"wired.info.arch",
@@ -231,6 +231,8 @@
     
     // Extract the root element and its name.
     rootElement = doc.rootXMLElement;
+    if (!doc.rootXMLElement) { [doc release]; return; }
+    
     rootName = [TBXML valueOfAttributeNamed:@"name" forElement:rootElement];
     childElement = doc.rootXMLElement->firstChild;
     
@@ -273,13 +275,7 @@
     
     else if ([rootName isEqualToString:@"wired.server_info"]) {
         NSLog(@"Received server info.");
-        
-        // TODO: These need to be in the ViewController instead, but they work for testing right now.
-        [self sendLogin:@"guest" withPassword:@"guest"];
-        [self setNick:@"Mobile"];
-        [self joinChannel:@"1"];
-        [self sendChatMessage:@"This is a test message. Please say it works." toChannel:@"1"];
-        [self readData];
+        [self.delegate wiredConnectionDidFinish];
     }
     
     else if ([rootName isEqualToString:@"wired.login"]) {

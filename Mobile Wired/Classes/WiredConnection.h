@@ -10,11 +10,13 @@
 #import "GCDAsyncSocket.h"
 
 
+@protocol WiredConnectionDelegate;
 @interface WiredConnection : NSObject {
-    
+    id <WiredConnectionDelegate> delegate;
 }
 
 @property (nonatomic, retain) GCDAsyncSocket *socket;
+@property (nonatomic, assign) id <WiredConnectionDelegate> delegate;
 
 - (id)init;
 
@@ -36,5 +38,10 @@
 - (void)sendTransaction:(NSString *)transaction withParameters:(NSDictionary *)parameters;
 - (void)sendTransaction:(NSString *)transaction;
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag;
+
+@end
+
+@protocol WiredConnectionDelegate <NSObject>
+- (void)wiredConnectionDidFinish;
 
 @end

@@ -19,25 +19,30 @@
 {
     [super viewDidLoad];
     
-    // Create a new WiredConnection.
-    connection = [[WiredConnection alloc] init];
-    [connection connectToServer:@"chat.embercode.com" onPort:2359];
-//    [connection sendLogin:@"guest" withPassword:@"guest"];
-//    [connection setNick:@"Mobile"];
-//    [connection joinChannel:@"1"];
-//    [connection sendChatMessage:@"This is a test message. Please say it works." toChannel:@"1"];
-    
     // Set the server name.
     [serverTitle setTitle:@"Code Monkey"];
+    
+    // Create a new WiredConnection.
+    connection = [[WiredConnection alloc] init];
+    connection.delegate = self;
+    [connection connectToServer:@"chat.embercode.com" onPort:2359];
 }
 
+- (void)wiredConnectionDidFinish
+{
+    // TODO: None of these check to make sure it was successful.
+    [connection sendLogin:@"guest" withPassword:@"guest"];
+    [connection setNick:@"Mobile"];
+    [connection joinChannel:@"1"];
+    [connection sendChatMessage:@"Testing the delegate code." toChannel:@"1"];
+    [connection readData];   
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -46,7 +51,6 @@
     
     // Release any cached data, images, etc. that aren't in use.
 }
-
 
 - (void)viewDidUnload
 {
@@ -57,7 +61,6 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
 
 - (void)dealloc
 {
