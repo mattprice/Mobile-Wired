@@ -42,6 +42,9 @@
 @end
 
 @protocol WiredConnectionDelegate <NSObject>
-- (void)wiredConnectionDidFinish;
+- (void)didReceiveServerInfo;
+- (void)didLoginSuccessfully;
+- (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel;
+- (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
 
 @end

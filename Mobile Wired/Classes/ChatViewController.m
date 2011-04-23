@@ -28,14 +28,26 @@
     [connection connectToServer:@"chat.embercode.com" onPort:2359];
 }
 
-- (void)wiredConnectionDidFinish
+- (void)didReceiveServerInfo
 {
-    // TODO: None of these check to make sure it was successful.
     [connection sendLogin:@"guest" withPassword:@"guest"];
+}
+
+- (void)didLoginSuccessfully
+{
     [connection setNick:@"Mobile"];
     [connection joinChannel:@"1"];
-    [connection sendChatMessage:@"Testing the delegate code." toChannel:@"1"];
-    [connection readData];   
+    [connection sendChatMessage:@"Test..." toChannel:@"1"];
+}
+
+- (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
+{
+    NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
+}
+
+- (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+{
+    NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

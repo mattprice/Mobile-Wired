@@ -11,7 +11,8 @@
 #import "ChatViewController.h"
 #import <CommonCrypto/CommonHMAC.h>
 
-#define TIMEOUT 15.0
+#define TIMEOUT     15.0
+#define DATA_END    @"</p7:message>"
 
 @implementation WiredConnection
 
@@ -60,7 +61,7 @@
                   @"2.0",   @"p7.handshake.protocol.version",
                   nil];
     [self sendTransaction:@"p7.handshake.client_handshake" withParameters:parameters];
-    [socket readDataWithTimeout:TIMEOUT tag:0];
+    [self readData];
 }
 
 /*
@@ -93,6 +94,7 @@
                                 password, @"wired.user.password",
                                 nil];
     [self sendTransaction:@"wired.send_login" withParameters:parameters];
+    [self readData];
 }
 
 - (void)setNick:(NSString *)nick
@@ -102,6 +104,7 @@
     // TODO: Check to make sure the nick was accepted.
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:nick forKey:@"wired.user.nick"];
     [self sendTransaction:@"wired.user.set_nick" withParameters:parameters];
+    [self readData];
 }
 
 - (void)joinChannel:(NSString *)channel
@@ -111,6 +114,7 @@
     // TODO: Check to make sure the channel was joined successfully.
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:channel forKey:@"wired.chat.id"];
     [self sendTransaction:@"wired.chat.join_chat" withParameters:parameters];
+    [self readData];
 }
 
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel
@@ -122,6 +126,7 @@
                                 message, @"wired.chat.say",
                                 nil];
     [self sendTransaction:@"wired.chat.send_say" withParameters:parameters];
+    [self readData];
 }
 
 #pragma mark Connection Helpers
@@ -176,7 +181,7 @@
 
 - (void)readData
 {
-    [socket readDataWithTimeout:TIMEOUT tag:0];
+    [socket readDataToData:[DATA_END dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
 }
 
 #pragma mark GCDAsyncSocket Wrappers
@@ -230,11 +235,11 @@
     TBXML *doc = [[TBXML tbxmlWithXMLData:data] retain];
     
     // Extract the root element and its name.
-    rootElement = doc.rootXMLElement;
     if (!doc.rootXMLElement) { [doc release]; return; }
+    rootElement = doc.rootXMLElement;
     
     rootName = [TBXML valueOfAttributeNamed:@"name" forElement:rootElement];
-    childElement = doc.rootXMLElement->firstChild;
+    childElement = rootElement->firstChild;
     
     if ([rootName isEqualToString:@"p7.handshake.server_handshake"]) {
         NSLog(@"Received handshake.");
@@ -275,11 +280,12 @@
     
     else if ([rootName isEqualToString:@"wired.server_info"]) {
         NSLog(@"Received server info.");
-        [self.delegate wiredConnectionDidFinish];
+        [delegate didReceiveServerInfo];
     }
     
     else if ([rootName isEqualToString:@"wired.login"]) {
         NSLog(@"Login was successful.");
+        [delegate didLoginSuccessfully];
     }
     
     else if ([rootName isEqualToString:@"wired.account.privileges"]) {
@@ -300,14 +306,53 @@
     
     else if ([rootName isEqualToString:@"wired.chat.topic"]) {
         NSLog(@"Received channel topic.");
+        NSString *topic = @"", *nick = @"Unknown", *channel = @"1";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.chat.id"]) {
+                channel = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.nick"]) {
+                nick = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.chat.topic.topic"]) {
+                topic = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        [delegate didReceiveTopic:topic fromNick:nick forChannel:channel];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.say"]) {
-        // Can be your own message, so check for it not being from you.
+        // TODO: Can be your own message, so check for it not being from you.
         NSLog(@"Received a chat message.");
+        NSString *message = @"", *userID = @"0", *nick = @"Unknown", *channel = @"1";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.chat.id"]) {
+                channel = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.id"]) {
+                userID = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.chat.say"]) {
+                message = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        [delegate didReceiveMessage:message fromNick:nick withID:userID forChannel:channel];
         [self sendOkay];
     }
     
+    [socket readDataToData:[DATA_END dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
     [doc release];
 
 }

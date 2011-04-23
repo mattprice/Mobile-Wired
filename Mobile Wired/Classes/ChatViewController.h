@@ -17,6 +17,4 @@
 
 @property (nonatomic, retain) WiredConnection *connection;
 
-- (void)wiredConnectionDidFinish;
-
 @end
