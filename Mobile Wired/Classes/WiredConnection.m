@@ -11,7 +11,7 @@
 #import "ChatViewController.h"
 #import <CommonCrypto/CommonHMAC.h>
 
-#define TIMEOUT     15.0
+#define TIMEOUT     -1
 #define DATA_END    @"</p7:message>"
 
 @implementation WiredConnection
@@ -47,7 +47,7 @@
     
     // Attempt a socket connection to the server.
     NSLog(@"Beginning socket connection...");
-    if (![socket connectToHost:server onPort:port withTimeout:TIMEOUT error:&error]) {
+    if (![socket connectToHost:server onPort:port withTimeout:15 error:&error]) {
         // Connection failed.
         NSLog(@"Connection error: %@",error);
     }
@@ -356,7 +356,7 @@
         [self sendOkay];
     }
     
-    [socket readDataToData:[DATA_END dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
+    [socket readDataToData:[DATA_END dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
     [doc release];
 
 }
