@@ -105,6 +105,33 @@
     [self readData];
 }
 
+- (void)setStatus:(NSString *)status
+{
+    NSLog(@"Attempting to change status to: %@...", status);
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:status forKey:@"wired.user.status"];
+    [self sendTransaction:@"wired.user.set_status" withParameters:parameters];
+    [self readData];
+}
+
+- (void)setIdle
+{
+    NSLog(@"Attempting to set user idle...");
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:@"true" forKey:@"wired.user.idle"];
+    [self sendTransaction:@"wired.user.set_idle" withParameters:parameters];
+    [self readData];
+}
+
+- (void)setIcon:(NSString *)icon
+{
+    NSLog(@"Attempting to set user icon...");
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:icon forKey:@"wired.user.icon"];
+    [self sendTransaction:@"wired.user.set_icon" withParameters:parameters];
+    [self readData];
+}
+
 - (void)joinChannel:(NSString *)channel
 {
     NSLog(@"Attempting to join channel %@...",channel);
@@ -112,6 +139,15 @@
     // TODO: Check to make sure the channel was joined successfully.
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:channel forKey:@"wired.chat.id"];
     [self sendTransaction:@"wired.chat.join_chat" withParameters:parameters];
+    [self readData];
+}
+
+- (void)leaveChannel:(NSString *)channel
+{
+    NSLog(@"Attempting to join channel %@...",channel);
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:channel forKey:@"wired.chat.id"];
+    [self sendTransaction:@"wired.chat.leave_chat" withParameters:parameters];
     [self readData];
 }
 
@@ -124,6 +160,18 @@
                                 message, @"wired.chat.say",
                                 nil];
     [self sendTransaction:@"wired.chat.send_say" withParameters:parameters];
+    [self readData];
+}
+
+- (void)sendChatEmote:(NSString *)message toChannel:(NSString *)channel
+{
+    NSLog(@"Attempting to send emote...");
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                channel,  @"wired.chat.id",
+                                message, @"wired.chat.me",
+                                nil];
+    [self sendTransaction:@"wired.chat.send_me" withParameters:parameters];
     [self readData];
 }
 
@@ -182,6 +230,22 @@
 {
     NSLog(@"Sending okay...");
     [self sendTransaction:@"wired.okay"];
+}
+
+- (void)sendPingRequest
+{
+    NSLog(@"Attempting to send ping...");
+    
+    [self sendTransaction:@"wired.send_ping"];
+    [self readData];
+}
+
+- (void)sendPingReply
+{
+    NSLog(@"Attempting to send ping reply...");
+    
+    [self sendTransaction:@"wired.ping"];
+    [self readData];
 }
 
 - (void)readData
@@ -301,6 +365,38 @@
         NSLog(@"The last command was successful.");
     }
     
+    else if ([rootName isEqualToString:@"wired.send_ping"]) {
+        NSLog(@"Received ping request.");
+        [self sendPingReply];
+    }
+    
+    else if ([rootName isEqualToString:@"wired.ping"]) {
+        NSLog(@"Received ping reply.");
+    }
+    
+    else if ([rootName isEqualToString:@"wired.error"]) {
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.error"]) {
+                childValue = [TBXML textForElement:childElement];
+                
+                if ([childValue isEqualToString:@"wired.error.login_failed"]) {
+                   NSLog(@"Login failed: username or password is wrong."); 
+                }
+                
+                else if ([childValue isEqualToString:@"wired.banned"]) {
+                    NSLog(@"Login failed: user is banned.");
+                }
+                
+                else {
+                    NSLog(@"%@",[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+                }
+            }
+        } while ((childElement = childElement->nextSibling));
+    }
+    
     else if ([rootName isEqualToString:@"wired.chat.user_list"]) {
         NSLog(@"Received info about a user in the channel.");
     }
@@ -353,7 +449,37 @@
         } while ((childElement = childElement->nextSibling));
         
         [delegate didReceiveMessage:message fromNick:nick withID:userID forChannel:channel];
-        [self sendOkay];
+    }
+    
+    else if ([rootName isEqualToString:@"wired.chat.me"]) {
+        NSLog(@"Received an emote.");
+        NSString *message = @"", *userID = @"0", *nick = @"Unknown", *channel = @"1";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.chat.id"]) {
+                channel = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.id"]) {
+                userID = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.chat.me"]) {
+                message = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        [delegate didReceiveEmote:message fromNick:nick withID:userID forChannel:channel];
+    }
+    
+    else if ([rootName isEqualToString:@"wired.chat.user_status"]) {
+        NSLog(@"A user's status has changed.");
+    }
+    
+    else {
+        NSLog(@"%@",[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
     }
     
     [socket readDataToData:[DATA_END dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];

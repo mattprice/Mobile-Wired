@@ -24,14 +24,21 @@
 - (void)connectToServer:(NSString *)server onPort:(UInt16)port;
 - (void)sendLogin:(NSString *)user withPassword:(NSString *)password;
 - (void)setNick:(NSString *)nick;
+- (void)setStatus:(NSString *)status;
+- (void)setIcon:(NSString *)icon;
+- (void)setIdle;
 - (void)joinChannel:(NSString *)channel;
+- (void)leaveChannel:(NSString *)channel;
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel;
+- (void)sendChatEmote:(NSString *)message toChannel:(NSString *)channel;
 
 #pragma mark Connection Helpers
 - (void)sendCompatibilityCheck;
 - (void)sendClientInformation;
 - (void)sendAcknowledgement;
 - (void)sendOkay;
+- (void)sendPingReply;
+- (void)sendPingRequest;
 - (void)readData;
 
 #pragma mark GCDAsyncSocket Wrappers
@@ -46,5 +53,6 @@
 - (void)didLoginSuccessfully;
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel;
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
+- (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
 
 @end

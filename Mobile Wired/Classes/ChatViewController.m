@@ -30,14 +30,21 @@
 
 - (void)didReceiveServerInfo
 {
-    [connection sendLogin:@"guest" withPassword:@"guest"];
+    // Server expects a login, nick, status, or icon after sending you its life story.
+    // The specs suggest sending the last three before your login info.
+    [connection setNick:@"Mobile"];
+    [connection setStatus:@"Testing Mobile Wired"];
+    //    [connection setIcon:nil];
+    [connection sendLogin:@"guest" withPassword:@""];
 }
 
 - (void)didLoginSuccessfully
 {
-    [connection setNick:@"Mobile"];
+    // Server does not expect anything next, so do anything you want:
+    // Joining channel could fail.
     [connection joinChannel:@"1"];
     [connection sendChatMessage:@"Test..." toChannel:@"1"];
+    [connection sendChatEmote:@"is having fun!" toChannel:@"1"];
 }
 
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
@@ -50,6 +57,12 @@
 {
     // Message could be from anyone, including yourself.
     NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
+}
+
+- (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+{
+    // Emote could be from anyone, including yourself.
+    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
