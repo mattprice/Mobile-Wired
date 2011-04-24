@@ -42,11 +42,13 @@
 
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
 {
+    // Occurs on first joining a channel and each time the topic is changed thereafter.
     NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
 }
 
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
+    // Message could be from anyone, including yourself.
     NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
 }
 

@@ -37,8 +37,7 @@
 /*
  * Connects to the given server and port specified.
  *
- * This method also handles sending the initial Wired connection requirements,
- * such as sending the handshake, compatibility check, and sending the client info.
+ * This method also handles sending the handshake.
  *
  */
 - (void)connectToServer:(NSString *)server onPort:(UInt16)port
@@ -101,7 +100,6 @@
 {
     NSLog(@"Attempting to change nick to: %@...", nick);
     
-    // TODO: Check to make sure the nick was accepted.
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:nick forKey:@"wired.user.nick"];
     [self sendTransaction:@"wired.user.set_nick" withParameters:parameters];
     [self readData];
@@ -131,6 +129,14 @@
 
 #pragma mark Connection Helpers
 
+/*
+ * Sends a compatibility check to the server.
+ *
+ * Reads in MobileWired_Spec.xml and sends it to the server. Wired requires that
+ * certain characters be encoded before sending. To save processing time, it
+ * is now pre-encoded. The orginal code is left in only for reference.
+ *
+ */
 - (void)sendCompatibilityCheck
 {
     // TODO: Check server response to make sure it's required.
@@ -139,12 +145,11 @@
                                                    encoding:NSUTF8StringEncoding error:nil];
     
     // Escape the XML document.
-    // TODO: This should be pre-done to save processing time.
-    contents = [[[[[contents stringByReplacingOccurrencesOfString: @"&" withString: @"&amp;amp;"]
-                   stringByReplacingOccurrencesOfString: @"\"" withString: @"&quot;"]
-                  stringByReplacingOccurrencesOfString: @"'" withString: @"&#39;"]
-                 stringByReplacingOccurrencesOfString: @">" withString: @"&gt;"]
-                stringByReplacingOccurrencesOfString: @"<" withString: @"&lt;"];
+//    contents = [[[[[contents stringByReplacingOccurrencesOfString: @"&" withString: @"&amp;"]
+//                   stringByReplacingOccurrencesOfString: @"\"" withString: @"&quot;"]
+//                  stringByReplacingOccurrencesOfString: @"'" withString: @"&#39;"]
+//                 stringByReplacingOccurrencesOfString: @">" withString: @"&gt;"]
+//                stringByReplacingOccurrencesOfString: @"<" withString: @"&lt;"];
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:contents forKey:@"p7.compatibility_check.specification"];
     [self sendTransaction:@"p7.compatibility_check.specification" withParameters:parameters];
@@ -328,7 +333,6 @@
     }
     
     else if ([rootName isEqualToString:@"wired.chat.say"]) {
-        // TODO: Can be your own message, so check for it not being from you.
         NSLog(@"Received a chat message.");
         NSString *message = @"", *userID = @"0", *nick = @"Unknown", *channel = @"1";
         

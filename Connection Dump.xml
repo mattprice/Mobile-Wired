@@ -242,3 +242,15 @@ RECEIVED:
 SENT (?):
 <?xml version="1.0" encoding="UTF-8"?>
 <p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.okay"/>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.user_status">
+    <p7:field name="wired.chat.id">1</p7:field>
+    <p7:field name="wired.user.id">878</p7:field>
+    <p7:field name="wired.user.idle">0</p7:field>
+    <p7:field name="wired.user.nick">Omeagle</p7:field>
+    <p7:field name="wired.user.status"></p7:field>
+    <p7:field name="wired.account.color">wired.account.color.orange</p7:field>
+    <p7:field name="wired.user.idle_time">1303677812.372823</p7:field>
+</p7:message>
