@@ -28,6 +28,9 @@
         // Create a new socket connection using the main dispatch queue.
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+        
+        // Send a ping request every 30 seconds, to keep the connection alive.
+        [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(sendPingRequest) userInfo:nil repeats:YES];
     }
     
     return self;
@@ -210,7 +213,7 @@
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 @"Mobile Wired",  @"wired.info.application.name",
                                 @"0.1",           @"wired.info.application.version",
-                                @"10",             @"wired.info.application.build",
+                                @"17",             @"wired.info.application.build",
                                 [[UIDevice currentDevice] systemName],    @"wired.info.os.name",
                                 [[UIDevice currentDevice] systemVersion], @"wired.info.os.version",
                                 [[UIDevice currentDevice] model],         @"wired.info.arch",
