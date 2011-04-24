@@ -352,13 +352,13 @@
         [delegate didReceiveServerInfo];
     }
     
-    else if ([rootName isEqualToString:@"wired.login"]) {
-        NSLog(@"Login was successful.");
-        [delegate didLoginSuccessfully];
-    }
+//    else if ([rootName isEqualToString:@"wired.login"]) {
+//        NSLog(@"Login was successful.");
+//    }
     
     else if ([rootName isEqualToString:@"wired.account.privileges"]) {
         NSLog(@"Received account priviledges.");
+        [delegate didLoginSuccessfully];
     }
     
     else if ([rootName isEqualToString:@"wired.okay"]) {
