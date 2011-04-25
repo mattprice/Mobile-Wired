@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CCFE136611B00046955F /* MobileWired@2x.png */; };
+		3440CD03136611EE0046955F /* MobileWired.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD02136611EE0046955F /* MobileWired.png */; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3440CCFE136611B00046955F /* MobileWired@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MobileWired@2x.png"; path = "Mobile Wired/Resources/Images/MobileWired@2x.png"; sourceTree = SOURCE_ROOT; };
+		3440CD02136611EE0046955F /* MobileWired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MobileWired.png; path = "Mobile Wired/Resources/Images/MobileWired.png"; sourceTree = SOURCE_ROOT; };
 		3477029D135A026100F91A8B /* WiredConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WiredConnection.h; path = Classes/WiredConnection.h; sourceTree = "<group>"; };
 		3477029E135A026200F91A8B /* WiredConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WiredConnection.m; path = Classes/WiredConnection.m; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +176,8 @@
 			children = (
 				34EBE4101359528700A24C01 /* Chat Icon.png */,
 				34EBE4111359528700A24C01 /* User Icon.png */,
+				3440CD02136611EE0046955F /* MobileWired.png */,
+				3440CCFE136611B00046955F /* MobileWired@2x.png */,
 			);
 			name = Images;
 			path = Resources/images;
@@ -286,6 +292,8 @@
 				34EBE4221359565100A24C01 /* MainWindow.xib in Resources */,
 				34EBE4231359565100A24C01 /* SecondView.xib in Resources */,
 				34FC5C7E135B458A0049C737 /* MobileWired_Spec.xml in Resources */,
+				3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */,
+				3440CD03136611EE0046955F /* MobileWired.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
