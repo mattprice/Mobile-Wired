@@ -10,6 +10,7 @@
 		3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CCFE136611B00046955F /* MobileWired@2x.png */; };
 		3440CD03136611EE0046955F /* MobileWired.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD02136611EE0046955F /* MobileWired.png */; };
 		3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD04136613EF0046955F /* DefaultUserIcon.png */; };
+		3440CD09136619320046955F /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3440CD08136619320046955F /* NSString+Base64.m */; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
@@ -39,6 +40,8 @@
 		3440CCFE136611B00046955F /* MobileWired@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MobileWired@2x.png"; path = "Mobile Wired/Resources/Images/MobileWired@2x.png"; sourceTree = SOURCE_ROOT; };
 		3440CD02136611EE0046955F /* MobileWired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MobileWired.png; path = "Mobile Wired/Resources/Images/MobileWired.png"; sourceTree = SOURCE_ROOT; };
 		3440CD04136613EF0046955F /* DefaultUserIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DefaultUserIcon.png; path = "Mobile Wired/Resources/Images/DefaultUserIcon.png"; sourceTree = SOURCE_ROOT; };
+		3440CD07136619320046955F /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Mobile Wired/Classes/NSString+Base64.h"; sourceTree = "<group>"; };
+		3440CD08136619320046955F /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Mobile Wired/Classes/NSString+Base64.m"; sourceTree = "<group>"; };
 		3477029D135A026100F91A8B /* WiredConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WiredConnection.h; path = Classes/WiredConnection.h; sourceTree = "<group>"; };
 		3477029E135A026200F91A8B /* WiredConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WiredConnection.m; path = Classes/WiredConnection.m; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,11 +95,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3440CD061366188E0046955F /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				3440CD07136619320046955F /* NSString+Base64.h */,
+				3440CD08136619320046955F /* NSString+Base64.m */,
+			);
+			name = Subclasses;
+			sourceTree = "<group>";
+		};
 		34EBE3B313594F7A00A24C01 = {
 			isa = PBXGroup;
 			children = (
 				34EBE405135951C100A24C01 /* Models */,
 				34EBE3CA13594F7B00A24C01 /* Wired Classes */,
+				3440CD061366188E0046955F /* Subclasses */,
 				34EBE4331359677600A24C01 /* External Classes */,
 				34EBE3CB13594F7B00A24C01 /* Supporting Files */,
 				34EBE3C113594F7B00A24C01 /* Frameworks */,
@@ -334,6 +347,7 @@
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
 				34FC5C8A135BB2A30049C737 /* NSDataAdditions.m in Sources */,
 				34FC5C8B135BB2A30049C737 /* TBXML.m in Sources */,
+				3440CD09136619320046955F /* NSString+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
