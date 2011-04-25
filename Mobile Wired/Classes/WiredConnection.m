@@ -210,10 +210,12 @@
 - (void)sendClientInformation
 {
     NSLog(@"Sending client information...");
+    NSString *CFBundleVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    NSString *CFBundleBuild = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 @"Mobile Wired",  @"wired.info.application.name",
-                                @"0.1",           @"wired.info.application.version",
-                                @"17",             @"wired.info.application.build",
+                                CFBundleVersion,  @"wired.info.application.version",
+                                CFBundleBuild,    @"wired.info.application.build",
                                 [[UIDevice currentDevice] systemName],    @"wired.info.os.name",
                                 [[UIDevice currentDevice] systemVersion], @"wired.info.os.version",
                                 [[UIDevice currentDevice] model],         @"wired.info.arch",

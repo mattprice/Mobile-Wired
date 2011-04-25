@@ -240,6 +240,7 @@
 				34EBE3BA13594F7A00A24C01 /* Sources */,
 				34EBE3BB13594F7A00A24C01 /* Frameworks */,
 				34EBE3BC13594F7A00A24C01 /* Resources */,
+				34202D7E1364F357002F1B3B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -289,6 +290,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34202D7E1364F357002F1B3B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "GIT=/usr/local/git/bin/git\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion `$GIT log --pretty=format:'' | wc -l | egrep '[0-9]{1,}' -o`\" ${TARGET_BUILD_DIR}/Mobile\\ Wired.app/Info.plist";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		34EBE3BA13594F7A00A24C01 /* Sources */ = {
