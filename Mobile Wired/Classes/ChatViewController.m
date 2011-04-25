@@ -33,7 +33,7 @@
     // Server expects a login, nick, status, or icon after sending you its life story.
     // The specs suggest sending the last three before your login info.
     [connection setNick:@"Mobile"];
-    [connection setStatus:@"Testing Mobile Wired"];
+    [connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
     //    [connection setIcon:nil];
     [connection sendLogin:@"guest" withPassword:@""];
 }
