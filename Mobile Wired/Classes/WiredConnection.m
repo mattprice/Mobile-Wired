@@ -11,8 +11,9 @@
 #import "ChatViewController.h"
 #import <CommonCrypto/CommonHMAC.h>
 
-#define TIMEOUT     -1
-#define DATA_END    @"</p7:message>"
+#define TIMEOUT       -1
+#define DATA_END      @"</p7:message>"
+#define STEALTH_MODE  FALSE
 
 @implementation WiredConnection
 
@@ -90,7 +91,6 @@
     password = [password lowercaseString];
     
     // Send the user login information to the Wired server.
-    // TODO: Check to make sure the password/user was accepted.
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 user,     @"wired.user.login",
                                 password, @"wired.user.password",
@@ -184,13 +184,12 @@
  * Sends a compatibility check to the server.
  *
  * Reads in MobileWired_Spec.xml and sends it to the server. Wired requires that
- * certain characters be encoded before sending. To save processing time, it
+ * certain characters be encoded before sending. To save processing time the XML
  * is now pre-encoded. The orginal code is left in only for reference.
  *
  */
 - (void)sendCompatibilityCheck
 {
-    // TODO: Check server response to make sure it's required.
     NSLog(@"Sending compatibility check...");
     NSString *contents = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MobileWired_Spec" ofType:@"xml"]
                                                    encoding:NSUTF8StringEncoding error:nil];
@@ -207,20 +206,41 @@
     [self readData];
 }
 
+/*
+ * Sends information about the wired client to the server.
+ *
+ * If the STEALTH_MODE macro is set to TRUE then the client lies and reports
+ * information about the newest known Mac build that is available.
+ *
+ */
 - (void)sendClientInformation
 {
     NSLog(@"Sending client information...");
-    NSString *CFBundleVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-    NSString *CFBundleBuild = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"Mobile Wired",  @"wired.info.application.name",
-                                CFBundleVersion,  @"wired.info.application.version",
-                                CFBundleBuild,    @"wired.info.application.build",
-                                [[UIDevice currentDevice] systemName],    @"wired.info.os.name",
-                                [[UIDevice currentDevice] systemVersion], @"wired.info.os.version",
-                                [[UIDevice currentDevice] model],         @"wired.info.arch",
-                                @"false",         @"wired.info.supports_rsrc",
-                                nil];
+    
+    #if STEALTH_MODE
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"Wired Client",  @"wired.info.application.name",
+                                    @"2.0",           @"wired.info.application.version",
+                                    @"8182",          @"wired.info.application.build",
+                                    @"Mac OS X",      @"wired.info.os.name",
+                                    @"10.6.7",        @"wired.info.os.version",
+                                    @"i386",          @"wired.info.arch",
+                                    @"false",         @"wired.info.supports_rsrc",
+                                    nil];
+    #else
+        NSString *CFBundleVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+        NSString *CFBundleBuild = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"Mobile Wired",  @"wired.info.application.name",
+                                    CFBundleVersion,  @"wired.info.application.version",
+                                    CFBundleBuild,    @"wired.info.application.build",
+                                    [[UIDevice currentDevice] systemName],    @"wired.info.os.name",
+                                    [[UIDevice currentDevice] systemVersion], @"wired.info.os.version",
+                                    [[UIDevice currentDevice] model],         @"wired.info.arch",
+                                    @"false",         @"wired.info.supports_rsrc",
+                                    nil];
+    #endif
+    
     [self sendTransaction:@"wired.client_info" withParameters:parameters];
     [self readData];
 }
@@ -300,6 +320,16 @@
     [self sendTransaction:transaction withParameters:nil];
 }
 
+/*
+ * Reads and parses all data sent back from the Wired server.
+ *
+ * This handles every single response sent back from the server so there's
+ * a huge amount of if-statements throughout the whole method. If something
+ * is going wrong with receiving data then this is probably where to look.
+ *
+ * Wherever possible, offload actions you need to perform to other methods.
+ *
+ */
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     TBXMLElement *rootElement, *childElement;
