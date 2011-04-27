@@ -215,20 +215,20 @@ RECEIVED:
   <p7:field name="wired.chat.id">1</p7:field>
 </p7:message>
 
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.topic">
+    <p7:field name="wired.chat.id">1</p7:field>
+    <p7:field name="wired.user.nick">Omeagle</p7:field>
+    <p7:field name="wired.chat.topic.topic">http://www.pieceable.com/viewer</p7:field>
+    <p7:field name="wired.chat.topic.time">1302580204.127425</p7:field>
+</p7:message>
+
 SENT:
 <?xml version="1.0" encoding="UTF-8"?>
 <p7:message name="wired.chat.send_say" xmlns:p7="http://www.zankasoftware.com/P7/Message">
   <p7:field name="wired.chat.id">1</p7:field>
   <p7:field name="wired.chat.say">Trying to sniff out the XML format for message sending...</p7:field>
-</p7:message>
-
-RECEIVED:
-<?xml version="1.0" encoding="UTF-8"?>
-<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.topic">
-  <p7:field name="wired.chat.id">1</p7:field>
-  <p7:field name="wired.user.nick">Omeagle</p7:field>
-  <p7:field name="wired.chat.topic.topic">http://www.pieceable.com/viewer</p7:field>
-  <p7:field name="wired.chat.topic.time">1302580204.127425</p7:field>
 </p7:message>
 
 RECEIVED:
@@ -239,7 +239,7 @@ RECEIVED:
   <p7:field name="wired.user.id">880</p7:field>
 </p7:message>
 
-SENT (?):
+RECEIVED:
 <?xml version="1.0" encoding="UTF-8"?>
 <p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.okay"/>
 

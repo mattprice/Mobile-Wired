@@ -177,16 +177,30 @@
     [self readData];
 }
 
+/*
+ * Sends a chat message to the specified channel.
+ *
+ * This method parses the message before sending it onto the channel. If the
+ * message is equal to a known /command then we'll execute the command
+ * instead of sending it as a literal message.
+ *
+ */
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel
 {
-    NSLog(@"Attempting to send chat message...");
+    if ([message isEqualToString:@"/afk"]) {
+        [self setIdle];
+    }
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                channel,  @"wired.chat.id",
-                                message, @"wired.chat.say",
-                                nil];
-    [self sendTransaction:@"wired.chat.send_say" withParameters:parameters];
-    [self readData];
+    else {
+        NSLog(@"Attempting to send chat message...");
+        
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    channel,  @"wired.chat.id",
+                                    message, @"wired.chat.say",
+                                    nil];
+        [self sendTransaction:@"wired.chat.send_say" withParameters:parameters];
+        [self readData];
+    }
 }
 
 - (void)sendChatEmote:(NSString *)message toChannel:(NSString *)channel

@@ -41,7 +41,7 @@
     // Set up the DefaultUserIcon if the user hasn't selected one of their one.
     NSData *userIcon = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DefaultUserIcon" ofType:@"png"]];
 
-    [connection setNick:@"Mobile"];
+    [connection setNick:@"Melman"];
     [connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
     [connection setIcon:userIcon];
     [connection sendLogin:@"guest" withPassword:@""];
@@ -59,6 +59,7 @@
     [connection joinChannel:@"1"];
 //    [connection sendChatMessage:@"Test..." toChannel:@"1"];
 //    [connection sendChatEmote:@"is having fun!" toChannel:@"1"];
+//    [connection sendChatMessage:@"/afk" toChannel:@"1"];
     [connection setIdle];
 }
 
