@@ -27,9 +27,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NSString (Base64) {
-    
-}
+@interface NSString (Base64)
 
 + (NSString *)encodeBase64WithData:(NSData *)objData;
 + (NSData *)decodeBase64WithString:(NSString *)strBase64;
