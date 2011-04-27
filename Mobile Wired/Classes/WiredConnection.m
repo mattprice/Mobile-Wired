@@ -68,6 +68,26 @@
 }
 
 /*
+ * Runs anything that needs to be done post-connection.
+ *
+ * For now, this only attempts to enable background support.
+ * In the future it's possible that we may want to run other commands as well.
+ *
+ */
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
+{
+#if !TARGET_IPHONE_SIMULATOR
+    // Backgrounding doesn't seem to be supported on the simulator yet
+    [sock performBlock:^{
+        if ([sock enableBackgroundingOnSocket])
+            NSLog(@"Enabling backgrounding...");
+        else
+            NSLog(@"Failed to enable backgrounding.");
+    }];
+#endif
+}
+
+/*
  * Sends a users login information to the Wired server.
  *
  * The password must be converted to a SHA1 digest before sending it
@@ -217,29 +237,29 @@
 {
     NSLog(@"Sending client information...");
     
-    #if STEALTH_MODE
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    @"Wired Client",  @"wired.info.application.name",
-                                    @"2.0",           @"wired.info.application.version",
-                                    @"8182",          @"wired.info.application.build",
-                                    @"Mac OS X",      @"wired.info.os.name",
-                                    @"10.6.7",        @"wired.info.os.version",
-                                    @"i386",          @"wired.info.arch",
-                                    @"false",         @"wired.info.supports_rsrc",
-                                    nil];
-    #else
-        NSString *CFBundleVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-        NSString *CFBundleBuild = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    @"Mobile Wired",  @"wired.info.application.name",
-                                    CFBundleVersion,  @"wired.info.application.version",
-                                    CFBundleBuild,    @"wired.info.application.build",
-                                    [[UIDevice currentDevice] systemName],    @"wired.info.os.name",
-                                    [[UIDevice currentDevice] systemVersion], @"wired.info.os.version",
-                                    [[UIDevice currentDevice] model],         @"wired.info.arch",
-                                    @"false",         @"wired.info.supports_rsrc",
-                                    nil];
-    #endif
+#if STEALTH_MODE
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"Wired Client",  @"wired.info.application.name",
+                                @"2.0",           @"wired.info.application.version",
+                                @"8182",          @"wired.info.application.build",
+                                @"Mac OS X",      @"wired.info.os.name",
+                                @"10.6.7",        @"wired.info.os.version",
+                                @"i386",          @"wired.info.arch",
+                                @"false",         @"wired.info.supports_rsrc",
+                                nil];
+#else
+    NSString *CFBundleVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    NSString *CFBundleBuild = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"Mobile Wired",  @"wired.info.application.name",
+                                CFBundleVersion,  @"wired.info.application.version",
+                                CFBundleBuild,    @"wired.info.application.build",
+                                [[UIDevice currentDevice] systemName],    @"wired.info.os.name",
+                                [[UIDevice currentDevice] systemVersion], @"wired.info.os.version",
+                                [[UIDevice currentDevice] model],         @"wired.info.arch",
+                                @"false",         @"wired.info.supports_rsrc",
+                                nil];
+#endif
     
     [self sendTransaction:@"wired.client_info" withParameters:parameters];
     [self readData];
