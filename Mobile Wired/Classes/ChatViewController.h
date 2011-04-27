@@ -13,6 +13,7 @@
 @interface ChatViewController : UIViewController <WiredConnectionDelegate> {
 
     IBOutlet UINavigationItem *serverTitle;
+    IBOutlet UITextView *serverTopic;
 }
 
 @property (nonatomic, retain) WiredConnection *connection;

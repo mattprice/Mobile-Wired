@@ -63,10 +63,26 @@
     [connection setIdle];
 }
 
+/*
+ * Received channel topic from server.
+ *
+ * Occurs on first joining the channel and on each time the topic is changed thereafter.
+ * Only the subsequent changes should notify the user that the topic has changed.
+ *
+ */
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
 {
-    // Occurs on first joining a channel and each time the topic is changed thereafter.
-    NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
+    // Initial connection.
+    if (serverTopic == nil) {
+        NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
+    }
+    
+    // Subsequent topic changes, so we should notify the user.
+    else {
+        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
+    }
+    
+    [serverTopic setText:topic];
 }
 
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
@@ -97,8 +113,8 @@
 
 - (void)viewDidUnload
 {
-    [serverTitle release];
-    serverTitle = nil;
+    [serverTitle release], serverTitle = nil;
+    [serverTopic release], serverTopic = nil;
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -108,6 +124,7 @@
 - (void)dealloc
 {
     [serverTitle release];
+    [serverTopic release];
     [connection release];
     
     [super dealloc];
