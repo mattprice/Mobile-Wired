@@ -141,7 +141,7 @@
 {
     NSLog(@"Attempting to set user idle...");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:@"true" forKey:@"wired.user.idle"];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:@"YES" forKey:@"wired.user.idle"];
     [self sendTransaction:@"wired.user.set_idle" withParameters:parameters];
     [self readData];
 }

@@ -47,13 +47,19 @@
     [connection sendLogin:@"guest" withPassword:@""];
 }
 
+/*
+ * Login to the server was successful.
+ *
+ * The server doesn't actually require us to send anything next, so we can really do
+ * anything that we want. Download a file, join a channel, play with ourselves...
+ *
+ */
 - (void)didLoginSuccessfully
 {
-    // Server does not expect anything next, so do anything you want:
-    // Joining channel could fail.
     [connection joinChannel:@"1"];
-    [connection sendChatMessage:@"Test..." toChannel:@"1"];
-    [connection sendChatEmote:@"is having fun!" toChannel:@"1"];
+//    [connection sendChatMessage:@"Test..." toChannel:@"1"];
+//    [connection sendChatEmote:@"is having fun!" toChannel:@"1"];
+    [connection setIdle];
 }
 
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
