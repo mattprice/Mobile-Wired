@@ -25,7 +25,7 @@
 - (void)sendLogin:(NSString *)user withPassword:(NSString *)password;
 - (void)setNick:(NSString *)nick;
 - (void)setStatus:(NSString *)status;
-- (void)setIcon:(NSString *)icon;
+- (void)setIcon:(NSData *)icon;
 - (void)setIdle;
 - (void)joinChannel:(NSString *)channel;
 - (void)leaveChannel:(NSString *)channel;

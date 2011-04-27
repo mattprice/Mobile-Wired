@@ -28,13 +28,22 @@
     [connection connectToServer:@"chat.embercode.com" onPort:2359];
 }
 
+/*
+ * Connection to server was successful.
+ *
+ * The server requires a login, nick, status, or icon after sending us its life story.
+ * The specs suggest sending the nick/status/icon before sending the login info, but
+ * any order we want would technically work.
+ *
+ */
 - (void)didReceiveServerInfo
 {
-    // Server expects a login, nick, status, or icon after sending you its life story.
-    // The specs suggest sending the last three before your login info.
+    // Set up the DefaultUserIcon if the user hasn't selected one of their one.
+    NSData *userIcon = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DefaultUserIcon" ofType:@"png"]];
+
     [connection setNick:@"Mobile"];
     [connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
-    //    [connection setIcon:nil];
+    [connection setIcon:userIcon];
     [connection sendLogin:@"guest" withPassword:@""];
 }
 

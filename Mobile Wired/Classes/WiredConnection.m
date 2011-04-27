@@ -7,8 +7,8 @@
 //
 
 #import "WiredConnection.h"
+#import "NSString+Base64.h"
 #import "TBXML.h"
-#import "ChatViewController.h"
 #import <CommonCrypto/CommonHMAC.h>
 
 #define TIMEOUT       -1
@@ -146,11 +146,14 @@
     [self readData];
 }
 
-- (void)setIcon:(NSString *)icon
+- (void)setIcon:(NSData *)icon
 {
     NSLog(@"Attempting to set user icon...");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:icon forKey:@"wired.user.icon"];
+    // Create a base64 representation of the image.
+    NSString *base64 = [NSString encodeBase64WithData:icon];
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:base64 forKey:@"wired.user.icon"];
     [self sendTransaction:@"wired.user.set_icon" withParameters:parameters];
     [self readData];
 }
