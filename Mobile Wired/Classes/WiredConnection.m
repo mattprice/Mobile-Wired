@@ -30,8 +30,8 @@
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
         
-        // Send a ping request every 30 seconds, to keep the connection alive.
-        [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(sendPingRequest) userInfo:nil repeats:YES];
+        // Send a ping request every 60 seconds, to keep the connection alive.
+        [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(sendPingRequest) userInfo:nil repeats:YES];
     }
     
     return self;
