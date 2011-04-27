@@ -11,8 +11,6 @@
 #import "TBXML.h"
 #import <CommonCrypto/CommonHMAC.h>
 
-#define TIMEOUT       -1
-#define DATA_END      @"</p7:message>"
 #define STEALTH_MODE  FALSE
 
 @implementation WiredConnection
@@ -29,9 +27,6 @@
         // Create a new socket connection using the main dispatch queue.
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-        
-        // Send a ping request every 60 seconds, to keep the connection alive.
-        [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(sendPingRequest) userInfo:nil repeats:YES];
     }
     
     return self;
@@ -312,7 +307,7 @@
 
 - (void)readData
 {
-    [socket readDataToData:[DATA_END dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+    [socket readDataToData:[GCDAsyncSocket CRLFData] withTimeout:-1 tag:0];
 }
 
 #pragma mark GCDAsyncSocket Wrappers
@@ -349,7 +344,7 @@
     [generatedXML appendString:CRLF];
     
     // Write the data to the socket.
-    [socket writeData:[generatedXML dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+    [socket writeData:[generatedXML dataUsingEncoding:NSUTF8StringEncoding] withTimeout:15 tag:0];
 }
 
 - (void)sendTransaction:(NSString *)transaction
@@ -424,13 +419,13 @@
         [delegate didReceiveServerInfo];
     }
     
-//    else if ([rootName isEqualToString:@"wired.login"]) {
-//        NSLog(@"Login was successful.");
-//    }
+    else if ([rootName isEqualToString:@"wired.login"]) {
+        NSLog(@"Login was successful.");
+        [delegate didLoginSuccessfully];
+    }
     
     else if ([rootName isEqualToString:@"wired.account.privileges"]) {
         NSLog(@"Received account priviledges.");
-        [delegate didLoginSuccessfully];
     }
     
     else if ([rootName isEqualToString:@"wired.okay"]) {
@@ -554,7 +549,7 @@
         NSLog(@"%@",[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
     }
     
-    [socket readDataToData:[DATA_END dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+    [self readData];
     [doc release];
 
 }
