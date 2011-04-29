@@ -58,9 +58,12 @@
 {
     [connection joinChannel:@"1"];
 //    [connection sendChatMessage:@"Test..." toChannel:@"1"];
+    
 //    [connection sendChatEmote:@"is having fun!" toChannel:@"1"];
+//    [connection sendChatMessage:@"/me is testing slash commands!" toChannel:@"1"];
+    
 //    [connection sendChatMessage:@"/afk" toChannel:@"1"];
-    [connection setIdle];
+//    [connection setIdle];
 }
 
 /*
