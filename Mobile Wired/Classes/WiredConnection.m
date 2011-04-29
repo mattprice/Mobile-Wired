@@ -153,6 +153,8 @@
     [self readData];
 }
 
+#pragma mark Channel Commands
+
 - (void)joinChannel:(NSString *)channel
 {
     NSLog(@"Attempting to join channel %@...",channel);
@@ -169,6 +171,19 @@
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:channel forKey:@"wired.chat.id"];
     [self sendTransaction:@"wired.chat.leave_chat" withParameters:parameters];
+    [self readData];
+}
+
+- (void)setTopic:(NSString *)topic forChannel:(NSString *)channel
+{
+    // TODO: I'm sure we should check for errors.
+    NSLog(@"Attempting to set topic for channel %@...",channel);
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                channel, @"wired.chat.id",
+                                topic,   @"wired.chat.topic.topic",
+                                nil];
+    [self sendTransaction:@"wired.chat.set_topic" withParameters:parameters];
     [self readData];
 }
 
@@ -190,7 +205,7 @@
         NSLog(@"Attempting to send chat message...");
         
         NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    channel,  @"wired.chat.id",
+                                    channel, @"wired.chat.id",
                                     message, @"wired.chat.say",
                                     nil];
         [self sendTransaction:@"wired.chat.send_say" withParameters:parameters];
@@ -203,7 +218,7 @@
     NSLog(@"Attempting to send emote...");
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                channel,  @"wired.chat.id",
+                                channel, @"wired.chat.id",
                                 message, @"wired.chat.me",
                                 nil];
     [self sendTransaction:@"wired.chat.send_me" withParameters:parameters];

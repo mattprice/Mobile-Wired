@@ -27,10 +27,13 @@
 - (void)setStatus:(NSString *)status;
 - (void)setIcon:(NSData *)icon;
 - (void)setIdle;
+
+#pragma mark Channel Commands
 - (void)joinChannel:(NSString *)channel;
 - (void)leaveChannel:(NSString *)channel;
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel;
 - (void)sendChatEmote:(NSString *)message toChannel:(NSString *)channel;
+- (void)setTopic:(NSString *)topic forChannel:(NSString *)channel;
 
 #pragma mark Connection Helpers
 - (void)sendCompatibilityCheck;
