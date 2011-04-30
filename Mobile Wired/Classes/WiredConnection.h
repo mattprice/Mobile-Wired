@@ -12,11 +12,14 @@
 
 @protocol WiredConnectionDelegate;
 @interface WiredConnection : NSObject {
+    GCDAsyncSocket *socket;
     id <WiredConnectionDelegate> delegate;
+    NSMutableDictionary *userList;
 }
 
 @property (nonatomic, retain) GCDAsyncSocket *socket;
 @property (nonatomic, assign) id <WiredConnectionDelegate> delegate;
+@property (copy) NSMutableDictionary *userList;
 
 - (id)init;
 

@@ -16,6 +16,7 @@
 @implementation WiredConnection
 
 @synthesize socket, delegate;
+@synthesize userList;
 
 /*
  * Initiates a socket connection object.
@@ -36,7 +37,7 @@
 /*
  * Connects to the given server and port specified.
  *
- * This method also handles sending the handshake.
+ * This method also handles sending the handshake, and creating an empty user list.
  *
  */
 - (void)connectToServer:(NSString *)server onPort:(UInt16)port
@@ -60,6 +61,10 @@
                   nil];
     [self sendTransaction:@"p7.handshake.client_handshake" withParameters:parameters];
     [self readData];
+    
+    // Create an empty user list.
+    userList = [[NSMutableDictionary alloc] init];
+
 }
 
 /*
@@ -501,6 +506,41 @@
     
     else if ([rootName isEqualToString:@"wired.chat.user_list"]) {
         NSLog(@"Received info about a user in the channel.");
+        
+        NSString *channel = @"", *userID = @"";
+        NSMutableDictionary *channelInfo, *userInfo = [NSMutableDictionary dictionary];
+        
+        // TODO: User icon should be returned as NSData.
+        // TODO: Return NSColor for user color (?).
+        // TODO: Return BOOL for idle (?).
+        // TODO: Return NSDate for idle time (?).
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.chat.id"]) {
+                channel = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.id"]) {
+                userID = [TBXML textForElement:childElement];
+                [userInfo setValue:userID forKey:@"wired.user.id"];
+            }
+            
+            else {
+                childValue = [TBXML textForElement:childElement];
+                [userInfo setValue:childValue forKey:childName];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        // If we have existing data saved, be sure not to overwrite it.
+        channelInfo = [userList objectForKey:channel];
+        if (channelInfo == NULL) {
+            channelInfo = [NSMutableDictionary dictionary];
+        }
+        
+        // Now save the new channel info and user info into the user list.
+        [channelInfo setValue:userInfo forKey:userID];
+        [userList setValue:channelInfo forKey:channel];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.user_list.done"]) {
@@ -550,6 +590,8 @@
             }
         } while ((childElement = childElement->nextSibling));
         
+        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        
         [delegate didReceiveMessage:message fromNick:nick withID:userID forChannel:channel];
     }
     
@@ -573,6 +615,8 @@
             }
         } while ((childElement = childElement->nextSibling));
         
+        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        
         [delegate didReceiveEmote:message fromNick:nick withID:userID forChannel:channel];
     }
     
@@ -594,7 +638,9 @@
     // Disconnect the socket and then release.
     [socket setDelegate:nil];
     [socket disconnectAfterWriting];
-    [socket release];
+    
+    [socket release], socket = nil;
+    [userList release], userList = nil;
     
     [super dealloc];
     [GCDAsyncSocket dealloc];
