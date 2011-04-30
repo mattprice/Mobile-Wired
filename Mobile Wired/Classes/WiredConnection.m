@@ -197,16 +197,28 @@
  */
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel
 {
-    // We need a NSMutableString so that we can remove any /command prefixes.
-    NSMutableString *string = [NSMutableString stringWithString:message];
-    
     if ([message isEqualToString:@"/afk"]) {
         [self setIdle];
     }
     
-    if ([message hasPrefix:@"/me"]) {
-        [string replaceOccurrencesOfString:@"/me " withString:@"" options:NSCaseInsensitiveSearch range:(NSRange){0,[string length]}];
-        [self sendChatEmote:string toChannel:channel];
+    else if ([message hasPrefix:@"/me"]) {
+        message = [message stringByReplacingOccurrencesOfString:@"/me " withString:@""];
+        [self sendChatEmote:message toChannel:channel];
+    }
+    
+    else if ([message hasPrefix:@"/status"]) {
+        message = [message stringByReplacingOccurrencesOfString:@"/status " withString:@""];
+        [self setStatus:message];
+    }
+    
+    else if ([message hasPrefix:@"/nick"]) {
+        message = [message stringByReplacingOccurrencesOfString:@"/nick " withString:@""];
+        [self setNick:message];
+    }
+    
+    else if ([message hasPrefix:@"/topic"]) {
+        message = [message stringByReplacingOccurrencesOfString:@"/topic " withString:@""];
+        [self setTopic:message forChannel:channel];
     }
     
     else {
