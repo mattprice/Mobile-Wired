@@ -20,11 +20,13 @@
 @property (nonatomic, retain) GCDAsyncSocket *socket;
 @property (nonatomic, assign) id <WiredConnectionDelegate> delegate;
 @property (copy) NSMutableDictionary *userList;
+@property (nonatomic, assign) NSString *_userID;
 
 - (id)init;
 
 #pragma mark User Commands
 - (void)connectToServer:(NSString *)server onPort:(UInt16)port;
+- (void)disconnect;
 - (void)sendLogin:(NSString *)user withPassword:(NSString *)password;
 - (void)setNick:(NSString *)nick;
 - (void)setStatus:(NSString *)status;

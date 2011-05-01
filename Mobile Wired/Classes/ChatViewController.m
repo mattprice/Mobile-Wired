@@ -64,6 +64,7 @@
     
 //    [connection sendChatMessage:@"/afk" toChannel:@"1"];
 //    [connection setIdle];
+//    [connection disconnect];
 }
 
 /*

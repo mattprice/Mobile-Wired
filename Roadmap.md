@@ -1,6 +1,5 @@
 # Version 1 Progression
-* (38) Kick & Ban commands
-* (39) Proper disconnects
+* (39) Kick & Ban commands
 * (40) Interface
 * (41) Reconnect if disconnected
   * Should eventually be an option

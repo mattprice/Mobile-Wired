@@ -16,7 +16,7 @@
 @implementation WiredConnection
 
 @synthesize socket, delegate;
-@synthesize userList;
+@synthesize userList, _userID;
 
 /*
  * Initiates a socket connection object.
@@ -85,6 +85,23 @@
             NSLog(@"Failed to enable backgrounding.");
     }];
 #endif
+}
+
+- (void)disconnect
+{
+    NSLog(@"Attempting to disconnect from server...");
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                _userID, @"wired.user.id",
+                                @"",     @"wired.user.disconnect_message",
+                                nil];
+    [self sendTransaction:@"wired.user.disconnect_user" withParameters:parameters];
+    
+    // Disconnect the socket and then release.
+    [socket setDelegate:nil];
+    [socket disconnectAfterWriting];
+    [socket release], socket = nil;
+    [userList release], userList = nil;
 }
 
 /*
@@ -225,6 +242,8 @@
         message = [message stringByReplacingOccurrencesOfString:@"/topic " withString:@""];
         [self setTopic:message forChannel:channel];
     }
+    
+    // /clear, /broadcast, /ping
     
     else {
         NSLog(@"Attempting to send chat message...");
@@ -461,6 +480,11 @@
     
     else if ([rootName isEqualToString:@"wired.login"]) {
         NSLog(@"Login was successful.");
+        
+        // Only one child is returned, so no need for a do{} loop.
+        childValue = [TBXML textForElement:childElement];
+        _userID = childValue;
+        
         [delegate didLoginSuccessfully];
     }
     
@@ -635,13 +659,7 @@
 
 - (void)dealloc
 {
-    // Disconnect the socket and then release.
-    [socket setDelegate:nil];
-    [socket disconnectAfterWriting];
-    
-    [socket release], socket = nil;
-    [userList release], userList = nil;
-    
+    [self disconnect];
     [super dealloc];
     [GCDAsyncSocket dealloc];
 }
