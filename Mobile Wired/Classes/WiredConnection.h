@@ -66,5 +66,6 @@
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID;
 - (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID;
+- (void)didReceiveLeaveFromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
 
 @end

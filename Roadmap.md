@@ -5,7 +5,6 @@
   * Add a lastActivity timeout to recognize server-side disconnect.
 * (41) Reconnect if kicked
   * Should eventually be an option
-* Add delegate for when users leave the channel.
 * Add delegate for when users are kicked.
 
 # Version 1.1

@@ -115,6 +115,11 @@
     NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
 }
 
+- (void)didReceiveLeaveFromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+{
+    NSLog(@"%@ | <<< %@ has left. >>>",channel,nick);
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations

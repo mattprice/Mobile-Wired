@@ -219,6 +219,7 @@
  */
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel
 {
+    // TODO: Clear and Ping commands.
     if ([message isEqualToString:@"/afk"]) {
         [self setIdle];
     }
@@ -247,8 +248,6 @@
         message = [message stringByReplacingOccurrencesOfString:@"/broadcast " withString:@""];
         [self sendBroadcast:message];
     }
-    
-    // /clear, /broadcast, /ping
     
     else {
         NSLog(@"Attempting to send chat message...");
@@ -711,6 +710,27 @@
         nick = [[[userList objectForKey:@"1"] objectForKey:userID] objectForKey:@"wired.user.nick"];
         
         [delegate didReceiveBroadcast:message fromNick:nick withID:userID];
+    }
+    
+    else if ([rootName isEqualToString:@"wired.chat.user_leave"]) {
+        NSLog(@"User has left the channel.");
+        NSString *userID = @"0", *nick = @"Unknown", *channel = @"1";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.chat.id"]) {
+                channel = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.id"]) {
+                userID = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        
+        [delegate didReceiveLeaveFromNick:nick withID:userID forChannel:channel];
     }
     
     else {
