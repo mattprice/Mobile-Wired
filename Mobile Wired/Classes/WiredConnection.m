@@ -736,6 +736,9 @@
         
         nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
         
+        // Remove the user from the user list.
+        [[userList objectForKey:channel] removeObjectForKey:userID];
+        
         [delegate didReceiveLeaveFromNick:nick withID:userID forChannel:channel];
     }
     
