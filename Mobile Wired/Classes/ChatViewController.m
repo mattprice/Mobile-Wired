@@ -89,7 +89,7 @@
     [serverTopic setText:topic];
 }
 
-- (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+- (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
     // Message could be from anyone, including yourself.
     NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);

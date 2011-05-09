@@ -1,13 +1,12 @@
 # Version 1 Progression
 * (39) Kick & Ban commands
-* (40) Interface
 * (41) Reconnect if disconnected
-  * Should eventually be an option
+  * Should eventually be an option.
+  * Add a lastActivity timeout to recognize server-side disconnect.
 * (41) Reconnect if kicked
   * Should eventually be an option
 * (42) Send messages; receive messages
 * (43) Send broadcast; receive broadcasts
-* (44) Save server information/preferences using Core Data.
 
 # Version 1.1
 * Upload camera image to chat (CloudApp?)

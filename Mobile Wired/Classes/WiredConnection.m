@@ -617,7 +617,7 @@
         
         nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
         
-        [delegate didReceiveMessage:message fromNick:nick withID:userID forChannel:channel];
+        [delegate didReceiveChatMessage:message fromNick:nick withID:userID forChannel:channel];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.me"]) {
