@@ -115,9 +115,14 @@
     NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
 }
 
+- (void)didReceiveJoinFromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+{
+    NSLog(@"%@ | <<< %@ has joined >>>",channel,nick);
+}
+
 - (void)didReceiveLeaveFromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
-    NSLog(@"%@ | <<< %@ has left. >>>",channel,nick);
+    NSLog(@"%@ | <<< %@ has left >>>",channel,nick);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

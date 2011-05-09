@@ -554,7 +554,8 @@
     }
     
     else if ([rootName isEqualToString:@"wired.chat.user_list"] ||
-             [rootName isEqualToString:@"wired.chat.user_status"]) {
+             [rootName isEqualToString:@"wired.chat.user_status"] ||
+             [rootName isEqualToString:@"wired.chat.user_join"]) {
         NSLog(@"Received info about a user in the channel.");
         
         NSString *channel = @"", *userID = @"";
@@ -582,13 +583,18 @@
             }
         } while ((childElement = childElement->nextSibling));
         
-        // If we have existing data saved, be sure not to overwrite it.
+        // If we have existing channel data saved, be sure not to overwrite it.
         channelInfo = [userList objectForKey:channel];
-        if (channelInfo == NULL) {
+        if (channelInfo == nil) {
             channelInfo = [NSMutableDictionary dictionary];
         }
         
-        // Now save the new channel info and user info into the user list.
+        // If we don't have data for the user already then they've just joined.
+        if ([channelInfo objectForKey:userID] == nil) {
+            [delegate didReceiveJoinFromNick:[userInfo objectForKey:@"wired.user.nick"] withID:userID forChannel:channel];
+        }
+        
+        // Save the new channel info and user info into the user list.
         [channelInfo setValue:userInfo forKey:userID];
         [userList setValue:channelInfo forKey:channel];
     }
