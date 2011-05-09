@@ -39,6 +39,7 @@
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel;
 - (void)sendChatEmote:(NSString *)message toChannel:(NSString *)channel;
 - (void)setTopic:(NSString *)topic forChannel:(NSString *)channel;
+- (void)sendMessage:(NSString *)message toID:(NSString *)userID;
 - (void)sendBroadcast:(NSString *)message;
 
 #pragma mark Connection Helpers

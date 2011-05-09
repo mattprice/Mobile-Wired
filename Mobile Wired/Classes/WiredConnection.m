@@ -274,6 +274,18 @@
     [self readData];
 }
 
+- (void)sendMessage:(NSString *)message toID:(NSString *)userID
+{
+    NSLog(@"Attempting to message...");
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                userID,  @"wired.user.id",
+                                message, @"wired.message.message",
+                                nil];
+    [self sendTransaction:@"wired.message.send_message" withParameters:parameters];
+    [self readData];
+}
+
 - (void)sendBroadcast:(NSString *)message
 {
     NSLog(@"Attempting to send broadcast...");
