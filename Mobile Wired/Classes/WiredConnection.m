@@ -528,7 +528,8 @@
         } while ((childElement = childElement->nextSibling));
     }
     
-    else if ([rootName isEqualToString:@"wired.chat.user_list"]) {
+    else if ([rootName isEqualToString:@"wired.chat.user_list"] ||
+             [rootName isEqualToString:@"wired.chat.user_status"]) {
         NSLog(@"Received info about a user in the channel.");
         
         NSString *channel = @"", *userID = @"";
@@ -642,10 +643,6 @@
         nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
         
         [delegate didReceiveEmote:message fromNick:nick withID:userID forChannel:channel];
-    }
-    
-    else if ([rootName isEqualToString:@"wired.chat.user_status"]) {
-        NSLog(@"A user's status has changed.");
     }
     
     else {
