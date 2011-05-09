@@ -645,6 +645,48 @@
         [delegate didReceiveEmote:message fromNick:nick withID:userID forChannel:channel];
     }
     
+    else if ([rootName isEqualToString:@"wired.message.message"]) {
+        NSLog(@"Received a message.");
+        NSString *message = @"", *userID = @"0", *nick = @"Unknown";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.user.id"]) {
+                userID = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.message.message"]) {
+                message = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        nick = [[[userList objectForKey:@"1"] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        
+        [delegate didReceiveMessage:message fromNick:nick withID:userID];
+    }
+    
+    else if ([rootName isEqualToString:@"wired.message.broadcast"]) {
+        NSLog(@"Received a broadcast.");
+        NSString *message = @"", *userID = @"0", *nick = @"Unknown";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.user.id"]) {
+                userID = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.message.broadcast"]) {
+                message = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        nick = [[[userList objectForKey:@"1"] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        
+        [delegate didReceiveBroadcast:message fromNick:nick withID:userID];
+    }
+    
     else {
         NSLog(@"%@",[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
     }

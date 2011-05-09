@@ -95,6 +95,18 @@
     NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
 }
 
+- (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
+{
+    // Message could be from anyone, including yourself.
+    NSLog(@"%@ (%@) : %@",nick,userID,message);
+}
+
+- (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
+{
+    // Message could be from anyone, including yourself.
+    NSLog(@"%@ (%@) : %@",nick,userID,message);
+}
+
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
     // Emote could be from anyone, including yourself.

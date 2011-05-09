@@ -254,3 +254,17 @@ RECEIVED:
     <p7:field name="wired.account.color">wired.account.color.orange</p7:field>
     <p7:field name="wired.user.idle_time">1303677812.372823</p7:field>
 </p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.message.broadcast">
+    <p7:field name="wired.user.id">194</p7:field>
+    <p7:field name="wired.message.broadcast">Sorry Flame...</p7:field>
+</p7:message>
+
+RECEIVED:
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.message.message">
+    <p7:field name="wired.user.id">194</p7:field>
+    <p7:field name="wired.message.message">Ding dong!</p7:field>
+</p7:message>
