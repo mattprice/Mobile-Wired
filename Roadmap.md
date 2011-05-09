@@ -5,8 +5,7 @@
   * Add a lastActivity timeout to recognize server-side disconnect.
 * (41) Reconnect if kicked
   * Should eventually be an option
-* (42) Send messages; receive messages
-* (43) Send broadcast; receive broadcasts
+* (42) Send messages.
 
 # Version 1.1
 * Upload camera image to chat (CloudApp?)

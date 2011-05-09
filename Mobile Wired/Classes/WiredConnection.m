@@ -243,6 +243,11 @@
         [self setTopic:message forChannel:channel];
     }
     
+    else if ([message hasPrefix:@"/broadcast"]) {
+        message = [message stringByReplacingOccurrencesOfString:@"/broadcast " withString:@""];
+        [self sendBroadcast:message];
+    }
+    
     // /clear, /broadcast, /ping
     
     else {
@@ -266,6 +271,15 @@
                                 message, @"wired.chat.me",
                                 nil];
     [self sendTransaction:@"wired.chat.send_me" withParameters:parameters];
+    [self readData];
+}
+
+- (void)sendBroadcast:(NSString *)message
+{
+    NSLog(@"Attempting to send broadcast...");
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:message forKey:@"wired.message.broadcast"];
+    [self sendTransaction:@"wired.message.send_broadcast" withParameters:parameters];
     [self readData];
 }
 
