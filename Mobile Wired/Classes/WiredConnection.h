@@ -64,9 +64,12 @@
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel;
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
+- (void)didFailLoginWithReason:(NSString *)reason;
+- (void)updateConnectionProcessWithString:(NSString *)process;
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID;
 - (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID;
-- (void)didReceiveJoinFromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
-- (void)didReceiveLeaveFromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
+- (void)userJoined:(NSString *)nick withID:(NSString *)userID;
+- (void)userLeft:(NSString *)nick withID:(NSString *)userID;
+- (void)setUserList:(NSDictionary *)userList;
 
 @end

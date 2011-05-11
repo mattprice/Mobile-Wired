@@ -189,7 +189,7 @@
 
 - (void)leaveChannel:(NSString *)channel
 {
-    NSLog(@"Attempting to join channel %@...",channel);
+    NSLog(@"Attempting to leave channel %@...",channel);
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:channel forKey:@"wired.chat.id"];
     [self sendTransaction:@"wired.chat.leave_chat" withParameters:parameters];
@@ -463,6 +463,8 @@
     
     if ([rootName isEqualToString:@"p7.handshake.server_handshake"]) {
         NSLog(@"Received handshake.");
+        
+        [delegate updateConnectionProcessWithString:@"Received handshake"];
         [self sendAcknowledgement];
         
         do {
@@ -482,6 +484,8 @@
     
     else if ([rootName isEqualToString:@"p7.compatibility_check.status"]) {
         NSLog(@"Received compatibility status.");
+        
+        [delegate updateConnectionProcessWithString:@"Received compatibility status"];
         
         do {
             childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
@@ -539,11 +543,13 @@
                 childValue = [TBXML textForElement:childElement];
                 
                 if ([childValue isEqualToString:@"wired.error.login_failed"]) {
-                   NSLog(@"Login failed: username or password is wrong."); 
+                    NSLog(@"Login failed: username or password is wrong.");
+                    [delegate didFailLoginWithReason:@"Login failed: username or password is wrong."];
                 }
                 
                 else if ([childValue isEqualToString:@"wired.banned"]) {
                     NSLog(@"Login failed: user is banned.");
+                    [delegate didFailLoginWithReason:@"Login failed: user is banned."];
                 }
                 
                 else {
@@ -558,7 +564,7 @@
              [rootName isEqualToString:@"wired.chat.user_join"]) {
         NSLog(@"Received info about a user in the channel.");
         
-        NSString *channel = @"", *userID = @"";
+        NSString *userID = @"", *channel = @"1";
         NSMutableDictionary *channelInfo, *userInfo = [NSMutableDictionary dictionary];
         
         // TODO: User icon should be returned as NSData.
@@ -591,7 +597,7 @@
         
         // If we don't have data for the user already then they've just joined.
         if ([channelInfo objectForKey:userID] == nil) {
-            [delegate didReceiveJoinFromNick:[userInfo objectForKey:@"wired.user.nick"] withID:userID forChannel:channel];
+            [delegate userJoined:[userInfo objectForKey:@"wired.user.nick"] withID:userID];
         }
         
         // Save the new channel info and user info into the user list.
@@ -599,8 +605,33 @@
         [userList setValue:channelInfo forKey:channel];
     }
     
+    else if ([rootName isEqualToString:@"wired.chat.user_leave"]) {
+        NSLog(@"User has left the channel.");
+        NSString *userID = @"0", *nick = @"Unknown", *channel = @"1";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.chat.id"]) {
+                channel = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.id"]) {
+                userID = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        
+        // Remove the user from the user list.
+        [[userList objectForKey:channel] removeObjectForKey:userID];
+        
+        [delegate userLeft:nick withID:userID];
+    }
+    
     else if ([rootName isEqualToString:@"wired.chat.user_list.done"]) {
         NSLog(@"Finished receiving a list of users in the channel.");
+        [delegate setUserList:userList];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.topic"]) {
@@ -716,30 +747,6 @@
         nick = [[[userList objectForKey:@"1"] objectForKey:userID] objectForKey:@"wired.user.nick"];
         
         [delegate didReceiveBroadcast:message fromNick:nick withID:userID];
-    }
-    
-    else if ([rootName isEqualToString:@"wired.chat.user_leave"]) {
-        NSLog(@"User has left the channel.");
-        NSString *userID = @"0", *nick = @"Unknown", *channel = @"1";
-        
-        do {
-            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
-            
-            if ([childName isEqualToString:@"wired.chat.id"]) {
-                channel = [TBXML textForElement:childElement];
-            }
-            
-            else if ([childName isEqualToString:@"wired.user.id"]) {
-                userID = [TBXML textForElement:childElement];
-            }
-        } while ((childElement = childElement->nextSibling));
-        
-        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
-        
-        // Remove the user from the user list.
-        [[userList objectForKey:channel] removeObjectForKey:userID];
-        
-        [delegate didReceiveLeaveFromNick:nick withID:userID forChannel:channel];
     }
     
     else {
