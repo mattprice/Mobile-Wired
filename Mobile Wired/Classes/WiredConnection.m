@@ -564,12 +564,11 @@
         NSLog(@"Received info about a user in the channel.");
         
         NSString *userID = @"", *channel = @"1";
+        NSData *userIcon;
+        NSDate *idleTime;
+        UIColor *userColor;
         NSMutableDictionary *channelInfo, *userInfo = [NSMutableDictionary dictionary];
         
-        // TODO: User icon should be returned as NSData.
-        // TODO: Return NSColor for user color (?).
-        // TODO: Return BOOL for idle (?).
-        // TODO: Return NSDate for idle time (?).
         do {
             childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
             
@@ -580,6 +579,46 @@
             else if ([childName isEqualToString:@"wired.user.id"]) {
                 userID = [TBXML textForElement:childElement];
                 [userInfo setValue:userID forKey:@"wired.user.id"];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.icon"]) {
+                userIcon = [NSString decodeBase64WithString:[TBXML textForElement:childElement]];
+                [userInfo setValue:userIcon forKey:@"wired.user.icon"];
+            }
+            
+            else if ([childName isEqualToString:@"wired.account.color"]) {
+                childValue = [TBXML textForElement:childElement];
+                
+                if ([childValue isEqualToString:@"wired.account.color.red"]) {
+                    userColor = [UIColor redColor];
+                }
+                        
+                else if ([childValue isEqualToString:@"wired.account.color.orange"]) {
+                    userColor = [UIColor orangeColor];
+                }
+                        
+                else if ([childValue isEqualToString:@"wired.account.color.green"]) {
+                    userColor = [UIColor colorWithRed:0.0 green:0.8 blue:0.0 alpha:1.0];
+                }
+                        
+                else if ([childValue isEqualToString:@"wired.account.color.blue"]) {
+                    userColor = [UIColor blueColor];
+                }
+                
+                else if ([childValue isEqualToString:@"wired.account.color.purple"]) {
+                    userColor = [UIColor purpleColor];
+                }
+                
+                else {
+                    userColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:1.0];
+                }
+                
+                [userInfo setValue:userColor forKey:@"wired.account.color"];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.idle_time"]) {
+                idleTime = [NSDate dateWithTimeIntervalSince1970:[[TBXML textForElement:childElement] intValue]];
+                [userInfo setValue:idleTime forKey:@"wired.user.idle_time"];
             }
             
             else {
@@ -603,6 +642,28 @@
         // Save the new channel info and user info into the user list.
         [channelInfo setValue:userInfo forKey:userID];
         [userList setValue:channelInfo forKey:channel];
+    }
+    
+    else if ([rootName isEqualToString:@"wired.chat.user_icon"]) {
+        NSLog(@"Received new icon for user.");
+        NSString *userID = @"0", *channel = @"1";
+        NSData *userIcon = [NSData data];
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.user.id"]) {
+                userID = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.icon"]) {
+                userIcon = [NSString decodeBase64WithString:[TBXML textForElement:childElement]];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        // Update the user's icon.
+        [[userList objectForKey:channel] setObject:userIcon forKey:userID];
+        [delegate setUserList:userList];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.user_leave"]) {

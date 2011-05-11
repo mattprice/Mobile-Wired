@@ -1,5 +1,4 @@
 # Version 1 Progression
-* Add delegate for nick changes.
 * Kick & Ban commands
   * Add delegate for when users are kicked.
 * Reconnect if disconnected
@@ -13,5 +12,3 @@
 
 # Version 2
 * Boards
-* Private chats (?)
-* Push notifications (?)
