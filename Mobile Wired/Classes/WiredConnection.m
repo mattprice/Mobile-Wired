@@ -16,7 +16,7 @@
 @implementation WiredConnection
 
 @synthesize socket, delegate;
-@synthesize userList, _userID;
+@synthesize userList, myUserID;
 
 /*
  * Initiates a socket connection object.
@@ -92,8 +92,8 @@
     NSLog(@"Attempting to disconnect from server...");
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                _userID, @"wired.user.id",
-                                @"",     @"wired.user.disconnect_message",
+                                myUserID, @"wired.user.id",
+                                @"",      @"wired.user.disconnect_message",
                                 nil];
     [self sendTransaction:@"wired.user.disconnect_user" withParameters:parameters];
     
@@ -154,15 +154,6 @@
     [self readData];
 }
 
-- (void)setIdle
-{
-    NSLog(@"Attempting to set user idle...");
-    
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:@"YES" forKey:@"wired.user.idle"];
-    [self sendTransaction:@"wired.user.set_idle" withParameters:parameters];
-    [self readData];
-}
-
 - (void)setIcon:(NSData *)icon
 {
     NSLog(@"Attempting to set user icon...");
@@ -173,6 +164,21 @@
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:base64 forKey:@"wired.user.icon"];
     [self sendTransaction:@"wired.user.set_icon" withParameters:parameters];
     [self readData];
+}
+
+- (void)setIdle
+{
+    NSLog(@"Attempting to set user idle...");
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:@"YES" forKey:@"wired.user.idle"];
+    [self sendTransaction:@"wired.user.set_idle" withParameters:parameters];
+    [self readData];
+}
+
+- (NSDictionary *)getMyUserInfo
+{
+    // User list heirarchy is Channel -> User Info.
+    return [[userList objectForKey:@"1"] objectForKey:myUserID];
 }
 
 #pragma mark Channel Commands
@@ -512,7 +518,7 @@
         
         // Only one child is returned, so no need for a do{} loop.
         childValue = [TBXML textForElement:childElement];
-        _userID = childValue;
+        myUserID = childValue;
         
         [delegate didLoginSuccessfully];
     }
@@ -598,6 +604,7 @@
         // If we don't have data for the user already then they've just joined.
         if ([channelInfo objectForKey:userID] == nil) {
             [delegate userJoined:[userInfo objectForKey:@"wired.user.nick"] withID:userID];
+            [delegate setUserList:userList];
         }
         
         // Save the new channel info and user info into the user list.
@@ -627,6 +634,7 @@
         [[userList objectForKey:channel] removeObjectForKey:userID];
         
         [delegate userLeft:nick withID:userID];
+        [delegate setUserList:userList];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.user_list.done"]) {

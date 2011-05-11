@@ -20,7 +20,7 @@
 @property (nonatomic, retain) GCDAsyncSocket *socket;
 @property (nonatomic, assign) id <WiredConnectionDelegate> delegate;
 @property (copy) NSMutableDictionary *userList;
-@property (nonatomic, assign) NSString *_userID;
+@property (nonatomic, assign) NSString *myUserID;
 
 - (id)init;
 
@@ -32,6 +32,7 @@
 - (void)setStatus:(NSString *)status;
 - (void)setIcon:(NSData *)icon;
 - (void)setIdle;
+- (NSDictionary *)getMyUserInfo;
 
 #pragma mark Channel Commands
 - (void)joinChannel:(NSString *)channel;
