@@ -32,6 +32,7 @@
 		34EBE42C1359569B00A24C01 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4291359569B00A24C01 /* SecondViewController.m */; };
 		34EBE4321359676E00A24C01 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4301359676E00A24C01 /* GCDAsyncSocket.m */; };
 		34EBE43D1359690000A24C01 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE43C1359690000A24C01 /* CFNetwork.framework */; };
+		34FBA6ED137A1CF7000C74F4 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FBA6EC137A1CF7000C74F4 /* NSString+Hashes.m */; };
 		34FC5C7E135B458A0049C737 /* MobileWired_Spec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */; };
 		34FC5C8A135BB2A30049C737 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FC5C87135BB2A30049C737 /* NSDataAdditions.m */; };
 		34FC5C8B135BB2A30049C737 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FC5C89135BB2A30049C737 /* TBXML.m */; };
@@ -39,7 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3431FF5F136C93ED00EDB8D8 /* Roadmap.md */ = {isa = PBXFileReference; path = Roadmap.md; sourceTree = "<group>"; };
+		3431FF5F136C93ED00EDB8D8 /* Roadmap.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Roadmap.md; sourceTree = "<group>"; };
 		3440CCFE136611B00046955F /* MobileWired@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MobileWired@2x.png"; path = "Mobile Wired/Resources/Images/MobileWired@2x.png"; sourceTree = SOURCE_ROOT; };
 		3440CD02136611EE0046955F /* MobileWired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MobileWired.png; path = "Mobile Wired/Resources/Images/MobileWired.png"; sourceTree = SOURCE_ROOT; };
 		3440CD04136613EF0046955F /* DefaultUserIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DefaultUserIcon.png; path = "Mobile Wired/Resources/Images/DefaultUserIcon.png"; sourceTree = SOURCE_ROOT; };
@@ -73,6 +74,8 @@
 		34EBE42F1359676E00A24C01 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		34EBE4301359676E00A24C01 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		34EBE43C1359690000A24C01 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		34FBA6EB137A1CF7000C74F4 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; name = "NSString+Hashes.h"; path = "Mobile Wired/Classes/NSString+Hashes.h"; sourceTree = "<group>"; };
+		34FBA6EC137A1CF7000C74F4 /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Hashes.m"; path = "Mobile Wired/Classes/NSString+Hashes.m"; sourceTree = "<group>"; };
 		34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MobileWired_Spec.xml; path = Resources/MobileWired_Spec.xml; sourceTree = "<group>"; };
 		34FC5C80135B493D0049C737 /* Connection Dump.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Connection Dump.xml"; sourceTree = SOURCE_ROOT; };
 		34FC5C82135B4D150049C737 /* P7 Specification.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "P7 Specification.xml"; sourceTree = SOURCE_ROOT; };
@@ -103,6 +106,8 @@
 		3440CD061366188E0046955F /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				34FBA6EB137A1CF7000C74F4 /* NSString+Hashes.h */,
+				34FBA6EC137A1CF7000C74F4 /* NSString+Hashes.m */,
 				3440CD07136619320046955F /* NSString+Base64.h */,
 				3440CD08136619320046955F /* NSString+Base64.m */,
 			);
@@ -358,6 +363,7 @@
 				34FC5C8A135BB2A30049C737 /* NSDataAdditions.m in Sources */,
 				34FC5C8B135BB2A30049C737 /* TBXML.m in Sources */,
 				3440CD09136619320046955F /* NSString+Base64.m in Sources */,
+				34FBA6ED137A1CF7000C74F4 /* NSString+Hashes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

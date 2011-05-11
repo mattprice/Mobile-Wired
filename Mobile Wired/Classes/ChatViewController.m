@@ -7,6 +7,7 @@
 //
 
 #import "ChatViewController.h"
+#import "NSString+Hashes.h"
 
 
 @implementation ChatViewController
@@ -44,7 +45,7 @@
     [connection setNick:@"Melman"];
     [connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
     [connection setIcon:userIcon];
-    [connection sendLogin:@"guest" withPassword:@""];
+    [connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
 }
 
 /*
@@ -89,6 +90,7 @@
     }
     
     [serverTopic setText:topic];
+    NSLog(@"%@",[[connection getMyUserInfo] description]);
 }
 
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
@@ -115,14 +117,29 @@
     NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
 }
 
-- (void)didReceiveJoinFromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+- (void)userJoined:(NSString *)nick withID:(NSString *)userID
 {
-    NSLog(@"%@ | <<< %@ has joined >>>",channel,nick);
+    NSLog(@"<<< %@ has joined >>>",nick);
 }
 
-- (void)didReceiveLeaveFromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+- (void)userLeft:(NSString *)nick withID:(NSString *)userID
 {
-    NSLog(@"%@ | <<< %@ has left >>>",channel,nick);
+    NSLog(@"<<< %@ has left >>>",nick);
+}
+
+- (void)updateConnectionProcessWithString:(NSString *)process
+{
+//    NSLog(@"%@",process);
+}
+
+- (void)didFailLoginWithReason:(NSString *)reason
+{
+//    NSLog(@"%@",reason);
+}
+
+- (void)setUserList:(NSDictionary *)userList
+{
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

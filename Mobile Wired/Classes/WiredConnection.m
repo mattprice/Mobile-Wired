@@ -9,9 +9,9 @@
 #import "WiredConnection.h"
 #import "NSString+Base64.h"
 #import "TBXML.h"
-#import <CommonCrypto/CommonHMAC.h>
 
 #define STEALTH_MODE  FALSE
+
 
 @implementation WiredConnection
 
@@ -108,24 +108,12 @@
  * Sends a users login information to the Wired server.
  *
  * The password must be converted to a SHA1 digest before sending it
- * to the server, which requires importing <CommonCrypto/CommonHMAC.h>.
+ * to the server, which is now done before hitting this method.
  *
  */
-- (void)sendLogin:(NSString *)user withPassword:(NSString *)clearText
+- (void)sendLogin:(NSString *)user withPassword:(NSString *)password
 {
     NSLog(@"Sending login information...");
-    
-    // Convert the password to a SHA1 digest.
-    const char *cString = [clearText UTF8String];
-    unsigned char result[CC_SHA1_DIGEST_LENGTH];
-    CC_SHA1(cString, strlen(cString), result);
-    NSString *password = [NSString  stringWithFormat:
-                          @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-                          result[0], result[1], result[2], result[3], result[4],
-                          result[5], result[6], result[7], result[8], result[9],
-                          result[10], result[11], result[12], result[13], result[14],
-                          result[15], result[16], result[17], result[18], result[19] ];
-    password = [password lowercaseString];
     
     // Send the user login information to the Wired server.
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
