@@ -504,9 +504,14 @@
     else if ([rootName isEqualToString:@"wired.login"]) {
         NSLog(@"Login was successful.");
         
-        // Only one child is returned, so no need for a do{} loop.
-        childValue = [TBXML textForElement:childElement];
-        myUserID = childValue;
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.user.id"]) {
+                childValue = [TBXML textForElement:childElement];
+                myUserID = [[NSString alloc] initWithString:childValue];
+            }
+        } while ((childElement = childElement->nextSibling));
         
         [delegate didLoginSuccessfully];
     }
