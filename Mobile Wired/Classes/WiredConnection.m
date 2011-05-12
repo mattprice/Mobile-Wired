@@ -567,7 +567,7 @@
         NSData *userIcon;
         NSDate *idleTime;
         UIColor *userColor;
-        NSMutableDictionary *channelInfo, *userInfo = [NSMutableDictionary dictionary];
+        NSMutableDictionary *channelInfo, *userInfo, *tempInfo = [NSMutableDictionary dictionary];
         
         do {
             childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
@@ -578,12 +578,12 @@
             
             else if ([childName isEqualToString:@"wired.user.id"]) {
                 userID = [TBXML textForElement:childElement];
-                [userInfo setValue:userID forKey:@"wired.user.id"];
+                [tempInfo setValue:userID forKey:@"wired.user.id"];
             }
             
             else if ([childName isEqualToString:@"wired.user.icon"]) {
                 userIcon = [NSString decodeBase64WithString:[TBXML textForElement:childElement]];
-                [userInfo setValue:userIcon forKey:@"wired.user.icon"];
+                [tempInfo setValue:userIcon forKey:@"wired.user.icon"];
             }
             
             else if ([childName isEqualToString:@"wired.account.color"]) {
@@ -613,17 +613,17 @@
                     userColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:1.0];
                 }
                 
-                [userInfo setValue:userColor forKey:@"wired.account.color"];
+                [tempInfo setValue:userColor forKey:@"wired.account.color"];
             }
             
             else if ([childName isEqualToString:@"wired.user.idle_time"]) {
                 idleTime = [NSDate dateWithTimeIntervalSince1970:[[TBXML textForElement:childElement] intValue]];
-                [userInfo setValue:idleTime forKey:@"wired.user.idle_time"];
+                [tempInfo setValue:idleTime forKey:@"wired.user.idle_time"];
             }
             
             else {
                 childValue = [TBXML textForElement:childElement];
-                [userInfo setValue:childValue forKey:childName];
+                [tempInfo setValue:childValue forKey:childName];
             }
         } while ((childElement = childElement->nextSibling));
         
@@ -634,14 +634,17 @@
         }
         
         // If we don't have data for the user already then they've just joined.
-        if ([channelInfo objectForKey:userID] == nil) {
-            [delegate userJoined:[userInfo objectForKey:@"wired.user.nick"] withID:userID];
-            [delegate setUserList:userList];
+        if ((userInfo = [channelInfo objectForKey:userID]) == nil) {
+            userInfo = [NSMutableDictionary dictionary];
+            [delegate userJoined:[tempInfo objectForKey:@"wired.user.nick"] withID:userID];
         }
+        
+        [userInfo addEntriesFromDictionary:tempInfo];
         
         // Save the new channel info and user info into the user list.
         [channelInfo setValue:userInfo forKey:userID];
         [userList setValue:channelInfo forKey:channel];
+        [delegate setUserList:userList];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.user_icon"]) {
