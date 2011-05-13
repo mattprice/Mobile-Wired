@@ -17,6 +17,7 @@
 
 @synthesize socket, delegate;
 @synthesize userList, myUserID;
+@synthesize serverInfo, isConnected;
 
 /*
  * Initiates a socket connection object.
@@ -28,6 +29,7 @@
         // Create a new socket connection using the main dispatch queue.
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+        isConnected = false;
     }
     
     return self;
@@ -64,6 +66,7 @@
     
     // Create an empty user list.
     userList = [[NSMutableDictionary alloc] init];
+    serverInfo = [[NSMutableDictionary alloc] init];
 
 }
 
@@ -98,6 +101,7 @@
     [self sendTransaction:@"wired.user.disconnect_user" withParameters:parameters];
     
     // Disconnect the socket and then release.
+    isConnected = false;
     [socket setDelegate:nil];
     [socket disconnectAfterWriting];
     [socket release], socket = nil;
@@ -163,10 +167,31 @@
     [self readData];
 }
 
+#pragma mark Connection Info
+
 - (NSDictionary *)getMyUserInfo
 {
     // User list heirarchy is Channel -> User Info.
     return [[userList objectForKey:@"1"] objectForKey:myUserID];
+}
+
+- (void)getInfoForUser:(NSString *)userID
+{
+    NSLog(@"Requesting info for user: %@...", userID);
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObject:userID forKey:@"wired.user.id"];
+    [self sendTransaction:@"wired.user.get_info" withParameters:parameters];
+    [self readData];
+}
+
+- (NSDictionary *)getServerInfo
+{
+    return serverInfo;
+}
+
+- (Boolean)isConnected
+{
+    return isConnected;
 }
 
 #pragma mark Channel Commands
@@ -498,7 +523,30 @@
     
     else if ([rootName isEqualToString:@"wired.server_info"]) {
         NSLog(@"Received server info.");
-        [delegate didReceiveServerInfo];
+        NSData *serverBanner;
+        NSDate *startTime;
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.info.banner"]) {
+                serverBanner = [NSString decodeBase64WithString:[TBXML textForElement:childElement]];
+                [serverInfo setValue:serverBanner forKey:@"wired.info.banner"];
+            }
+            
+            else if ([childName isEqualToString:@"wired.info.start_time"]) {
+                startTime = [NSDate dateWithTimeIntervalSince1970:[[TBXML textForElement:childElement] intValue]];
+                [serverInfo setValue:startTime forKey:@"wired.info.start_time"];
+            }
+            
+            else {
+                childValue = [TBXML textForElement:childElement];
+                [serverInfo setObject:childValue forKey:childName];
+            }
+            
+        } while ((childElement = childElement->nextSibling));
+        
+        [delegate didReceiveServerInfo:serverInfo];
     }
     
     else if ([rootName isEqualToString:@"wired.login"]) {
@@ -513,6 +561,7 @@
             }
         } while ((childElement = childElement->nextSibling));
         
+        isConnected = true;
         [delegate didLoginSuccessfully];
     }
     
@@ -665,7 +714,9 @@
         } while ((childElement = childElement->nextSibling));
         
         // Update the user's icon.
-        [[userList objectForKey:channel] setObject:userIcon forKey:userID];
+        NSMutableDictionary *userInfo = [[userList objectForKey:channel] objectForKey:userID];
+        [userInfo setObject:userIcon forKey:@"wired.user.icon"];
+        [[userList objectForKey:channel] setObject:userInfo forKey:userID];
         [delegate setUserList:userList];
     }
     
@@ -812,6 +863,36 @@
         nick = [[[userList objectForKey:@"1"] objectForKey:userID] objectForKey:@"wired.user.nick"];
         
         [delegate didReceiveBroadcast:message fromNick:nick withID:userID];
+    }
+    
+    else if ([rootName isEqualToString:@"wired.user.info"]) {
+        NSLog(@"Received user info.");
+        NSDictionary *userInfo = [NSMutableDictionary dictionary];
+        NSDate *idleTime, *loginTime;
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            childValue = [TBXML textForElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.user.login_time"]) {
+                loginTime = [NSDate dateWithTimeIntervalSince1970:[childValue intValue]];
+[               [userInfo setValue:loginTime forKey:@"wired.user.login_time"];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.idle_time"]) {
+                idleTime = [NSDate dateWithTimeIntervalSince1970:[childValue intValue]];
+[               [userInfo setValue:idleTime forKey:@"wired.user.idle_time"];
+            }
+            
+            else {
+                [userInfo setObject:childValue forKey:childName];
+            }
+            
+        } while ((childElement = childElement->nextSibling));
+        
+        [delegate didReceiveUserInfo:userInfo];
+        [userInfo release];
+
     }
     
     else {

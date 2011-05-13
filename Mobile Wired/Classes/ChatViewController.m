@@ -37,7 +37,7 @@
  * any order we want would technically work.
  *
  */
-- (void)didReceiveServerInfo
+- (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
     // Set up the DefaultUserIcon if the user hasn't selected one of their one.
     NSData *userIcon = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DefaultUserIcon" ofType:@"png"]];

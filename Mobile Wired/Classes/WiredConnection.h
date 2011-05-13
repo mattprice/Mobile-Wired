@@ -20,7 +20,9 @@
 @property (nonatomic, retain) GCDAsyncSocket *socket;
 @property (nonatomic, assign) id <WiredConnectionDelegate> delegate;
 @property (copy) NSMutableDictionary *userList;
+@property (copy) NSMutableDictionary *serverInfo;
 @property (nonatomic, assign) NSString *myUserID;
+@property (nonatomic, assign) Boolean isConnected;
 
 - (id)init;
 
@@ -32,7 +34,12 @@
 - (void)setStatus:(NSString *)status;
 - (void)setIcon:(NSData *)icon;
 - (void)setIdle;
+
+#pragma mark Connection Information
 - (NSDictionary *)getMyUserInfo;
+- (void)getInfoForUser:(NSString *)userID;
+- (NSDictionary *)getServerInfo;
+- (Boolean)isConnected;
 
 #pragma mark Channel Commands
 - (void)joinChannel:(NSString *)channel;
@@ -60,7 +67,7 @@
 @end
 
 @protocol WiredConnectionDelegate <NSObject>
-- (void)didReceiveServerInfo;
+- (void)didReceiveServerInfo:(NSDictionary *)serverInfo;
 - (void)didLoginSuccessfully;
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel;
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
@@ -72,5 +79,6 @@
 - (void)userJoined:(NSString *)nick withID:(NSString *)userID;
 - (void)userLeft:(NSString *)nick withID:(NSString *)userID;
 - (void)setUserList:(NSDictionary *)userList;
+- (void)didReceiveUserInfo:(NSDictionary *)info;
 
 @end
