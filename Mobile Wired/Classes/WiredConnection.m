@@ -29,7 +29,10 @@
         // Create a new socket connection using the main dispatch queue.
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+        
         isConnected = false;
+        userList = [[NSMutableDictionary alloc] init];
+        serverInfo = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -39,13 +42,12 @@
 /*
  * Connects to the given server and port specified.
  *
- * This method also handles sending the handshake, and creating an empty user list.
+ * This method also handles sending the handshake.
  *
  */
 - (void)connectToServer:(NSString *)server onPort:(UInt16)port
 {
     NSError *error = nil;
-    NSDictionary *parameters;
     
     // Attempt a socket connection to the server.
     NSLog(@"Beginning socket connection...");
@@ -56,38 +58,13 @@
     
     // Start sending Wired connection info.
     NSLog(@"Sending Wired handshake...");
-    parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                  @"1.0",   @"p7.handshake.version",
-                  @"Wired", @"p7.handshake.protocol.name",
-                  @"2.0",   @"p7.handshake.protocol.version",
-                  nil];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"1.0",   @"p7.handshake.version",
+                                @"Wired", @"p7.handshake.protocol.name",
+                                @"2.0",   @"p7.handshake.protocol.version",
+                                nil];
     [self sendTransaction:@"p7.handshake.client_handshake" withParameters:parameters];
     [self readData];
-    
-    // Create an empty user list.
-    userList = [[NSMutableDictionary alloc] init];
-    serverInfo = [[NSMutableDictionary alloc] init];
-
-}
-
-/*
- * Runs anything that needs to be done post-connection.
- *
- * For now, this only attempts to enable background support.
- * In the future it's possible that we may want to run other commands as well.
- *
- */
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
-{
-#if !TARGET_IPHONE_SIMULATOR
-    // Backgrounding doesn't seem to be supported on the simulator yet
-    [sock performBlock:^{
-        if ([sock enableBackgroundingOnSocket])
-            NSLog(@"Enabling backgrounding...");
-        else
-            NSLog(@"Failed to enable backgrounding.");
-    }];
-#endif
 }
 
 - (void)disconnect
@@ -104,8 +81,8 @@
     isConnected = false;
     [socket setDelegate:nil];
     [socket disconnectAfterWriting];
-    [socket release], socket = nil;
-    [userList release], userList = nil;
+    socket = nil;
+    userList = nil;
 }
 
 /*
@@ -149,9 +126,14 @@
 - (void)setIcon:(NSData *)icon
 {
     NSLog(@"Attempting to set user icon...");
+    NSString *base64;
     
     // Create a base64 representation of the image.
-    NSString *base64 = [NSString encodeBase64WithData:icon];
+    if (icon == nil) {
+        base64 = @"iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA6pJREFUSMftVktPE1EU7g/RpQlQ3iJ1FMX4NlGJCdGY+Fpposa4MEZXLjSujCGamLhwR8Q+AbECFlCB+IhArMRHFNFi6dx50Xb6munMdPxmaijB0haNiQtuTprbe++c75zznXPutazvZP6pWFYA/hKAMn/XeZgGtyGNntziXwFAha2TqXWRCjtd4yT4u+Uh29zN2jxMlYNY7aTORf4cAOpqXKTKSQ4PCHfex8Y4mU1qYtqQ2YQ6TEs3/OK+Xq7CQda6inuTBwBWt/Rxg0FJ1jJsSvUGUrcnY1fHo9cnonc/xIdDUkLJQDqmEs0P2WoHTZUOgKOw6/yLcFTWvkSUCy8jWLHa6Qo7sToMwaTSQbb1sDf9saicCcbVQz6+yoxhSQCI76nhOV3X3dNJ8Gl10KCXWsBqdrLWTcrt9J7H3Kdwmk9p+/v4ApTkAJAkW7pZLqn1/5AQpcLxxRYM39TNhBKqX0jDjsaiAPD91mQspmjbHrG1Bb3OCtKszE4fHRLufYxjns3gJQGwXediJrg0KC17QBeuDNgLa+rcBKbs9HKgekOXsVKbL1C/APANDn0VlbZ3MTBZQDvKYmMXc21cHCUSnVDFdCYsa58jivNr8tCAUOmgF7mS8wBFhHN3P8bLlwDIxr3Vx78T0nq+kVQybZMiLFiIYZkPKFLIF5Te8mk4a8sXUKTKbi83G1f1ggNEVjpJHpKrneTMSBgn8Fv2YDHJlJkF9qmEXmwk1cyB/lziWhZmRbWT7ptJRWQjtbNMzMM0mgXxTVT1Esa1iSgSnfq90FBBIBB5jfI5NxqGyRAsQjuyoKmLDcZLArjpF/MDUEagjYlnGo7qI7R08WVkl5eDdlCHDHk2K5UCcPL5HBil8jY7yvTDavYM9DU0JQiI7Z9JYffEM0HLFNH+PCTVu3OJZFmqSpGRVU56t5c9Oxq2TyXx5UEfv7o9dGUsKqtLgrxh5e09bL2r5ButwU1WtYcuv4rwkoZKbOnjEa5jQ8LQrNG05/Uqmv49pqKrZ7OZKvHKNHq1g27qYgKiev9L4tLrCOJzeiS8poOuN2qC9QVTWQC4iD6BuDd4FrdIS0HzmSODgp836jYQU1Jq5s77OBZtZgyBvbWHRfGbuyruuDrXci59FHODh7wgMvT+iKs9gdTxp4J1QavJ9qUdjzh0IUHSpqNKSz8HepfxqgAGbNzbyzV1G2Vc4yS/x7DejAyOtT7hN+NVsNxnCwICFes8TNFj4Na28nT8PwF+AtAeCZTCkyndAAAAAElFTkSuQmCC";
+    } else {
+        base64 = [NSString encodeBase64WithData:icon];
+    }
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:base64 forKey:@"wired.user.icon"];
     [self sendTransaction:@"wired.user.set_icon" withParameters:parameters];
@@ -313,6 +295,57 @@
     [self readData];
 }
 
+- (void)kickUserID:(NSString *)userID fromChannel:(NSString *)channel message:(NSString *)message
+{
+    NSLog(@"Attempting to kick user...");
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                channel, @"wired.chat.id",
+                                userID,  @"wired.user.id",
+                                message, @"wired.user.disconnect_message",
+                                nil];
+    [self sendTransaction:@"wired.chat.kick_user" withParameters:parameters];
+    [self readData];
+}
+
+/*
+ * Bans a user from the server.
+ *
+ * This method bans an IP address, not a user's account. Banning an account
+ * isn't possible with current Wired servers, so just delete it instead.
+ *
+ * Note: If Wired doesn't receive an expiration date then it bans the IP
+ * address permanently. Otherwise, the ban expires at the time specified.
+ * The expiration date needs to be sent based off the GMT timezone.
+ *
+ * Note: Disconnect message can be left blank but we still have to send it.
+ *
+ */
+- (void)banUserID:(NSString *)userID message:(NSString *)message expiration:(NSDate *)expiration
+{
+    NSLog(@"Attempting to ban user...");
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    // If no expiration date was listed then be sure not to send one back.
+    // Otherwise, convert the date to GMT and format it correctly.
+    if (expiration != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSTimeZone *GMT = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+        [dateFormatter setTimeZone:GMT];
+        
+        NSString *dateString = [dateFormatter stringFromDate:expiration];
+        [parameters setObject:dateString forKey:@"wired.banlist.expiration_date"];
+    }
+    
+    [parameters setObject:userID  forKey:@"wired.user.id"];
+    [parameters setObject:message forKey:@"wired.user.disconnect_message"];
+    
+    [self sendTransaction:@"wired.user.ban_user" withParameters:parameters];
+    [self readData];
+}
+
 #pragma mark Connection Helpers
 
 /*
@@ -414,6 +447,51 @@
 }
 
 #pragma mark GCDAsyncSocket Wrappers
+/*
+ * Runs anything that needs to be done post-connection.
+ *
+ * This attempts to enable background support (if not in the simulator)
+ * and then attempts to start a SSL/TLS connection to the server.
+ *
+ */
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
+{
+#if !TARGET_IPHONE_SIMULATOR
+    // Backgrounding doesn't seem to be supported on the simulator yet
+    [sock performBlock:^{
+        if ([sock enableBackgroundingOnSocket])
+            NSLog(@"Enabling backgrounding...");
+        else
+            NSLog(@"Failed to enable backgrounding.");
+    }];
+#endif
+}
+
+- (void)secureSocket
+{
+    NSLog(@"Attempting to secure connection...");
+    
+    // Configure SSL/TLS settings.
+    NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithCapacity:1];
+    
+    // Don't validate the certificate chain. This is insecure, but we
+    // don't know the Wired server's SSL certificate in advance.
+    [settings setObject:[NSNumber numberWithBool:NO]
+                 forKey:(NSString *)kCFStreamSSLValidatesCertificateChain];
+    
+    [socket startTLS:settings];
+}
+
+- (void)socketDidSecure:(GCDAsyncSocket *)sock
+{
+    NSLog(@"socketDidSecure:%p", sock);
+}
+
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error
+{
+    NSLog(@"Server disconnected unexpectedly. <Error: %@>", error);
+    isConnected = false;
+}
 
 /*
  * Sends a transaction message and its parameters to the Wired server.
@@ -426,7 +504,7 @@
 - (void)sendTransaction:(NSString *)transaction withParameters:(NSDictionary *)parameters
 {
     NSMutableString *generatedXML = [NSMutableString string];
-    NSString *CRLF = [[[NSString alloc] initWithData:[GCDAsyncSocket CRLFData] encoding:NSUTF8StringEncoding] autorelease];
+    NSString *CRLF = [[NSString alloc] initWithData:[GCDAsyncSocket CRLFData] encoding:NSUTF8StringEncoding];
     
     // Begin translating the transaction message into XML.
     [generatedXML appendString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
@@ -471,10 +549,10 @@
     NSString *rootName, *childName, *childValue;
     
     // Greate a TBXML object of the data.
-    TBXML *doc = [[TBXML tbxmlWithXMLData:data] retain];
+    TBXML *doc = [TBXML tbxmlWithXMLData:data];
     
     // Extract the root element and its name.
-    if (!doc.rootXMLElement) { [doc release]; return; }
+    if (!doc.rootXMLElement) {  return; }
     rootElement = doc.rootXMLElement;
     
     rootName = [TBXML valueOfAttributeNamed:@"name" forElement:rootElement];
@@ -601,7 +679,7 @@
                 }
                 
                 else {
-                    NSLog(@"%@",[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+                    NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                 }
             }
         } while ((childElement = childElement->nextSibling));
@@ -867,7 +945,7 @@
     
     else if ([rootName isEqualToString:@"wired.user.info"]) {
         NSLog(@"Received user info.");
-        NSDictionary *userInfo = [NSMutableDictionary dictionary];
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
         NSDate *idleTime, *loginTime;
         
         do {
@@ -876,12 +954,12 @@
             
             if ([childName isEqualToString:@"wired.user.login_time"]) {
                 loginTime = [NSDate dateWithTimeIntervalSince1970:[childValue intValue]];
-[               [userInfo setValue:loginTime forKey:@"wired.user.login_time"];
+                [userInfo setValue:loginTime forKey:@"wired.user.login_time"];
             }
             
             else if ([childName isEqualToString:@"wired.user.idle_time"]) {
                 idleTime = [NSDate dateWithTimeIntervalSince1970:[childValue intValue]];
-[               [userInfo setValue:idleTime forKey:@"wired.user.idle_time"];
+                [userInfo setValue:idleTime forKey:@"wired.user.idle_time"];
             }
             
             else {
@@ -891,23 +969,19 @@
         } while ((childElement = childElement->nextSibling));
         
         [delegate didReceiveUserInfo:userInfo];
-        [userInfo release];
-
     }
     
     else {
-        NSLog(@"%@",[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+        NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }
     
     [self readData];
-    [doc release];
 
 }
 
 - (void)dealloc
 {
     [self disconnect];
-    [super dealloc];
     [GCDAsyncSocket dealloc];
 }
 

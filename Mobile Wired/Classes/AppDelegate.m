@@ -8,18 +8,37 @@
 
 #import "AppDelegate.h"
 
+#import "IIViewDeckController.h"
+#import "ChatViewController.h"
+#import "UserListViewController.h"
+#import "ServerListViewController.h"
+
 @implementation AppDelegate
 
 
-@synthesize window=_window;
-
-@synthesize tabBarController=_tabBarController;
+@synthesize window = _window;
+@synthesize centerController = _viewController;
+@synthesize leftController = _leftController;
+@synthesize rightController = _imageController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.leftController = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
+    self.rightController = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+    
+    UIViewController *centerController = [[UIViewController alloc] initWithNibName:@"ChatView" bundle:nil];
+    self.centerController = [[UINavigationController alloc] initWithRootViewController:centerController];
+    
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.centerController 
+                                                                                    leftViewController:self.leftController
+                                                                                   rightViewController:self.rightController];
+    deckController.rightLedge = 100;
+    
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
-    self.window.rootViewController = self.tabBarController;
+    self.window.rootViewController = deckController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -63,25 +82,5 @@
      */
 }
 
-- (void)dealloc
-{
-    [_window release];
-    [_tabBarController release];
-    [super dealloc];
-}
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-}
-*/
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
-{
-}
-*/
 
 @end

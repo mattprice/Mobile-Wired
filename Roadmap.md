@@ -1,15 +1,21 @@
-# Version 1 Progression
-* Kick & Ban commands
-  * Add delegate for when users are kicked.
-* Reconnect if disconnected
-  * Should eventually be an option.
-  * Add a lastActivity timeout to recognize server-side disconnect.
-* Reconnect if kicked
-  * Should eventually be an option
-* Add isConnected method
+# Version 1
+* Reconnect if disconnected or kicked
+    * Add a lastActivity timeout to recognize server-side disconnect
+* Show nick changes in chat
+* Disable kick/ban buttons and User Info based on permissions
+
+## Version 1 Fixes
+* Avatar gallery can be slow.
+* Does not catch CocoaAsyncSocket connection issues, incase the server info is wrong.
+* Bookmark updates do not get saved.
+* App crashes when trying to add multiple bookmarks.
 
 # Version 1.1
-* Upload camera image to chat (CloudApp?)
+* SSL connection
+* Landscape mode
+* Local notifications for PMs or if incoming chat message has highlighted keywords
 
-# Version 2
-* Boards
+# Feature Ideas
+* On the bookmark page put a "Cancel" button in place of "Bookmarks" and a "Save" button in the place of "Cancel".
+* Ability to send attachments to chat (CloudApp?)
+* iPad support

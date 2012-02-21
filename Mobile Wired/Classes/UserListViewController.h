@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  UserListViewController.h
 //  Mobile Wired
 //
 //  Created by Matthew Price on 4/11/11.
@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SecondViewController : UIViewController {
-    
-}
+@interface UserListViewController : UIViewController
 
 @end

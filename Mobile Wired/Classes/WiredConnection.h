@@ -13,15 +13,15 @@
 @protocol WiredConnectionDelegate;
 @interface WiredConnection : NSObject {
     GCDAsyncSocket *socket;
-    id <WiredConnectionDelegate> delegate;
+    id <WiredConnectionDelegate> __unsafe_unretained delegate;
     NSMutableDictionary *userList;
 }
 
-@property (nonatomic, retain) GCDAsyncSocket *socket;
-@property (nonatomic, assign) id <WiredConnectionDelegate> delegate;
+@property (nonatomic) GCDAsyncSocket *socket;
+@property (nonatomic, unsafe_unretained) id <WiredConnectionDelegate> delegate;
 @property (copy) NSMutableDictionary *userList;
 @property (copy) NSMutableDictionary *serverInfo;
-@property (nonatomic, assign) NSString *myUserID;
+@property (nonatomic) NSString *myUserID;
 @property (nonatomic, assign) Boolean isConnected;
 
 - (id)init;
@@ -49,6 +49,8 @@
 - (void)setTopic:(NSString *)topic forChannel:(NSString *)channel;
 - (void)sendMessage:(NSString *)message toID:(NSString *)userID;
 - (void)sendBroadcast:(NSString *)message;
+- (void)kickUserID:(NSString *)userID fromChannel:(NSString *)channel message:(NSString *)message;
+- (void)banUserID:(NSString *)userID message:(NSString *)message expiration:(NSDate *)expiration;
 
 #pragma mark Connection Helpers
 - (void)sendCompatibilityCheck;
@@ -60,6 +62,7 @@
 - (void)readData;
 
 #pragma mark GCDAsyncSocket Wrappers
+- (void)secureSocket;
 - (void)sendTransaction:(NSString *)transaction withParameters:(NSDictionary *)parameters;
 - (void)sendTransaction:(NSString *)transaction;
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag;

@@ -16,6 +16,6 @@
     IBOutlet UITextView *serverTopic;
 }
 
-@property (nonatomic, retain) WiredConnection *connection;
+@property (nonatomic) WiredConnection *connection;
 
 @end
