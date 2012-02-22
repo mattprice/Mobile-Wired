@@ -14,8 +14,8 @@
 
 @property (nonatomic) IBOutlet UIWindow *window;
 
-@property ( nonatomic) UIViewController *centerController;
-@property ( nonatomic) UIViewController *leftController;
-@property ( nonatomic) UIViewController *rightController;
+@property (nonatomic) UIViewController *centerController;
+@property (nonatomic) UIViewController *leftController;
+@property (nonatomic) UIViewController *rightController;
 
 @end

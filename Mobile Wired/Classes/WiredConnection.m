@@ -549,10 +549,11 @@
     NSString *rootName, *childName, *childValue;
     
     // Greate a TBXML object of the data.
-    TBXML *doc = [TBXML tbxmlWithXMLData:data];
+    NSError *error;
+    TBXML *doc = [TBXML tbxmlWithXMLData:data error:&error];
     
     // Extract the root element and its name.
-    if (!doc.rootXMLElement) {  return; }
+    if (error || !doc.rootXMLElement) {  return; }
     rootElement = doc.rootXMLElement;
     
     rootName = [TBXML valueOfAttributeNamed:@"name" forElement:rootElement];

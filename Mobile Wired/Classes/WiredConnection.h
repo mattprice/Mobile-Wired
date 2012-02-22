@@ -13,12 +13,12 @@
 @protocol WiredConnectionDelegate;
 @interface WiredConnection : NSObject {
     GCDAsyncSocket *socket;
-    id <WiredConnectionDelegate> __unsafe_unretained delegate;
+    id <WiredConnectionDelegate> __weak delegate;
     NSMutableDictionary *userList;
 }
 
 @property (nonatomic) GCDAsyncSocket *socket;
-@property (nonatomic, unsafe_unretained) id <WiredConnectionDelegate> delegate;
+@property (nonatomic, weak) id <WiredConnectionDelegate> delegate;
 @property (copy) NSMutableDictionary *userList;
 @property (copy) NSMutableDictionary *serverInfo;
 @property (nonatomic) NSString *myUserID;

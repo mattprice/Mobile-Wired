@@ -15,7 +15,7 @@
 		3440CD03136611EE0046955F /* MobileWired.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD02136611EE0046955F /* MobileWired.png */; };
 		3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD04136613EF0046955F /* DefaultUserIcon.png */; };
 		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; };
-		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; };
+		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
 		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };

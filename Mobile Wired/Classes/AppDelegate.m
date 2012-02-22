@@ -16,28 +16,21 @@
 @implementation AppDelegate
 
 
-@synthesize window = _window;
-@synthesize centerController = _viewController;
-@synthesize leftController = _leftController;
-@synthesize rightController = _imageController;
+@synthesize window, centerController, leftController, rightController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.leftController = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
-    self.rightController = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
-    
-    UIViewController *centerController = [[UIViewController alloc] initWithNibName:@"ChatView" bundle:nil];
-    self.centerController = [[UINavigationController alloc] initWithRootViewController:centerController];
+    leftController = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
+    rightController = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+    centerController = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
     
     IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.centerController 
                                                                                     leftViewController:self.leftController
                                                                                    rightViewController:self.rightController];
-    deckController.rightLedge = 100;
     
     // Override point for customization after application launch.
-    // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = deckController;
     [self.window makeKeyAndVisible];
     return YES;
