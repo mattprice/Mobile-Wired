@@ -3,4 +3,4 @@
 	url = https://github.com/71squared/TBXML
 [submodule "Mobile Wired/Classes/GCDAsyncSocket"]
 	path = Mobile Wired/Classes/GCDAsyncSocket
-	url = https://github.com/robbiehanson/CocoaAsyncSocket
+	url = https://github.com/robbiehanson/CocoaAsyncSocket.git
