@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UserListViewController : UIViewController
+@interface UserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+    NSArray *userListArray;
+}
+
+@property (strong, nonatomic) NSArray *userListArray;
+
+- (void)setUserList:(NSDictionary *)userList;
 
 @end

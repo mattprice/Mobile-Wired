@@ -10,6 +10,8 @@
 #import "NSString+Hashes.h"
 #import "IIViewDeckController.h"
 
+#import "UserListViewController.h"
+
 @interface ChatViewController ()
 
 @end
@@ -45,11 +47,8 @@
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
     // Set up the DefaultUserIcon if the user hasn't selected one of their one.
-    NSData *userIcon = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DefaultUserIcon" ofType:@"png"]];
-
     [self.connection setNick:@"Melman"];
     [self.connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
-    [self.connection setIcon:userIcon];
     [self.connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
 }
 
@@ -62,17 +61,17 @@
  */
 - (void)didLoginSuccessfully
 {
-//    [connection joinChannel:@"1"];
-//    [connection sendChatMessage:@"Test..." toChannel:@"1"];
+    [self.connection joinChannel:@"1"];
+//    [self.connection sendChatMessage:@"Test..." toChannel:@"1"];
 
-//    [connection sendChatEmote:@"is having fun!" toChannel:@"1"];
-//    [connection sendChatMessage:@"/me is testing slash commands!" toChannel:@"1"];
+//    [self.connection sendChatEmote:@"is having fun!" toChannel:@"1"];
+//    [self.connection sendChatMessage:@"/me is testing slash commands!" toChannel:@"1"];
 
-//    [connection sendChatMessage:@"/afk" toChannel:@"1"];
-//    [connection setIdle];
-//    [connection disconnect];
+//    [self.connection sendChatMessage:@"/afk" toChannel:@"1"];
+//    [self.connection setIdle];
+//    [self.connection disconnect];
 
-//    [connection sendBroadcast:@"Broadcast"];
+//    [self.connection sendBroadcast:@"Broadcast"];
 }
 
 - (void)userStatusDidChange:(NSString *)newStatus withNick:(NSString *)nick withID:(NSString *)userID
@@ -100,7 +99,6 @@
     }
 
     [self.serverTopic setText:topic];
-    NSLog(@"%@",[[self.connection getMyUserInfo] description]);
 }
 
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
@@ -172,7 +170,8 @@
 
 - (void)setUserList:(NSDictionary *)userList
 {
-
+    UserListViewController *userListView = [[UserListViewController alloc] init];
+    [userListView setUserList:userList];
 }
 
 - (void)viewDidUnload

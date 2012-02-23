@@ -12,7 +12,13 @@
 @class UserListViewController;
 @class ServerListViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+    IBOutlet UIWindow *window;
+
+    IBOutlet ServerListViewController *leftView;
+    IBOutlet UserListViewController *rightView;
+    IBOutlet ChatViewController *centerView;
+}
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 

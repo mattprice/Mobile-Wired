@@ -10,7 +10,11 @@
 #import "WiredConnection.h"
 
 
-@interface ChatViewController : UIViewController <WiredConnectionDelegate>;
+@interface ChatViewController : UIViewController <WiredConnectionDelegate> {
+    WiredConnection *connection;
+    IBOutlet UINavigationItem *serverTitle;
+    IBOutlet UITextView *serverTopic;
+}
 
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) IBOutlet UINavigationItem *serverTitle;
