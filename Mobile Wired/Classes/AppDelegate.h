@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : NSObject <UIApplicationDelegate> {
+@class ChatViewController;
+@class UserListViewController;
+@class ServerListViewController;
 
-}
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (nonatomic) IBOutlet UIWindow *window;
+@property (strong, nonatomic) IBOutlet UIWindow *window;
 
-@property (nonatomic) UIViewController *centerController;
-@property (nonatomic) UIViewController *leftController;
-@property (nonatomic) UIViewController *rightController;
+@property (strong, nonatomic) IBOutlet ServerListViewController *leftView;
+@property (strong, nonatomic) IBOutlet UserListViewController *rightView;
+@property (strong, nonatomic) IBOutlet ChatViewController *centerView;
 
 @end

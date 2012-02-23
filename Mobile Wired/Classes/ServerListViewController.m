@@ -7,6 +7,7 @@
 //
 
 #import "ServerListViewController.h"
+#import "IIViewDeckController.h"
 
 @interface ServerListViewController ()
 

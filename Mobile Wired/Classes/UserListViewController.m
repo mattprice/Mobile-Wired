@@ -6,8 +6,8 @@
 //  Copyright 2011 Ember Code and Magic Lime Software. All rights reserved.
 //
 
-
 #import "UserListViewController.h"
+#import "IIViewDeckController.h"
 
 @interface UserListViewController ()
 

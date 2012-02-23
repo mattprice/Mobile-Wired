@@ -8,12 +8,17 @@
 
 #import "ChatViewController.h"
 #import "NSString+Hashes.h"
+#import "IIViewDeckController.h"
 
+@interface ChatViewController ()
+
+@end
 
 @implementation ChatViewController
 
-@synthesize connection;
-
+@synthesize connection = _connection;
+@synthesize serverTitle = _serverTitle;
+@synthesize serverTopic = _serverTopic;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -21,12 +26,12 @@
     [super viewDidLoad];
 
     // Set the server name.
-    [serverTitle setTitle:@"Cunning Giraffe"];
+    [self.serverTitle setTitle:@"Cunning Giraffe"];
 
     // Create a new WiredConnection.
-    connection = [[WiredConnection alloc] init];
-    connection.delegate = self;
-    [connection connectToServer:@"chat.embercode.com" onPort:2359];
+    self.connection = [[WiredConnection alloc] init];
+    self.connection.delegate = self;
+    [self.connection connectToServer:@"chat.embercode.com" onPort:2359];
 }
 
 /*
@@ -42,10 +47,10 @@
     // Set up the DefaultUserIcon if the user hasn't selected one of their one.
     NSData *userIcon = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DefaultUserIcon" ofType:@"png"]];
 
-    [connection setNick:@"Melman"];
-    [connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
-    [connection setIcon:userIcon];
-    [connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
+    [self.connection setNick:@"Melman"];
+    [self.connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
+    [self.connection setIcon:userIcon];
+    [self.connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
 }
 
 /*
@@ -57,7 +62,7 @@
  */
 - (void)didLoginSuccessfully
 {
-    [connection joinChannel:@"1"];
+//    [connection joinChannel:@"1"];
 //    [connection sendChatMessage:@"Test..." toChannel:@"1"];
 
 //    [connection sendChatEmote:@"is having fun!" toChannel:@"1"];
@@ -85,7 +90,7 @@
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
 {
     // Initial connection.
-    if (serverTopic == nil) {
+    if (self.serverTopic == nil) {
         NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
     }
 
@@ -94,8 +99,8 @@
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
     }
 
-    [serverTopic setText:topic];
-    NSLog(@"%@",[[connection getMyUserInfo] description]);
+    [self.serverTopic setText:topic];
+    NSLog(@"%@",[[self.connection getMyUserInfo] description]);
 }
 
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
@@ -170,29 +175,17 @@
 
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-
-    // Release any cached data, images, etc. that aren't in use.
-}
-
 - (void)viewDidUnload
 {
-    serverTitle = nil;
-    serverTopic = nil;
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
 
 @end

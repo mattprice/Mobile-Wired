@@ -15,20 +15,22 @@
 
 @implementation AppDelegate
 
-
-@synthesize window, centerController, leftController, rightController;
+@synthesize window = _window;
+@synthesize leftView = _leftView;
+@synthesize rightView = _rightView;
+@synthesize centerView = _centerView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    leftController = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
-    rightController = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
-    centerController = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
+    self.leftView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
+    self.rightView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+    self.centerView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
     
-    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.centerController 
-                                                                                    leftViewController:self.leftController
-                                                                                   rightViewController:self.rightController];
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.centerView 
+                                                                                    leftViewController:self.leftView
+                                                                                   rightViewController:self.rightView];
     
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
