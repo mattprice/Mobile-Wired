@@ -12,7 +12,6 @@
 		3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5C14F31D0A00362097 /* NSString+Base64.m */; };
 		3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5E14F31D0A00362097 /* NSString+Hashes.m */; };
 		3439EC6614F3264300362097 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC6314F3264300362097 /* IIViewDeckController.m */; };
-		3439EC6714F3264300362097 /* WrappedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC6514F3264300362097 /* WrappedController.m */; };
 		3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CCFE136611B00046955F /* MobileWired@2x.png */; };
 		3440CD03136611EE0046955F /* MobileWired.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD02136611EE0046955F /* MobileWired.png */; };
 		3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD04136613EF0046955F /* DefaultUserIcon.png */; };
@@ -53,8 +52,6 @@
 		3439EC5E14F31D0A00362097 /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Hashes.m"; path = "Mobile Wired/Classes/Categories/NSString+Hashes.m"; sourceTree = "<group>"; };
 		3439EC6214F3264300362097 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
 		3439EC6314F3264300362097 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
-		3439EC6414F3264300362097 /* WrappedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrappedController.h; sourceTree = "<group>"; };
-		3439EC6514F3264300362097 /* WrappedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrappedController.m; sourceTree = "<group>"; };
 		3440CCFE136611B00046955F /* MobileWired@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MobileWired@2x.png"; path = "Mobile Wired/Resources/Images/MobileWired@2x.png"; sourceTree = SOURCE_ROOT; };
 		3440CD02136611EE0046955F /* MobileWired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MobileWired.png; path = "Mobile Wired/Resources/Images/MobileWired.png"; sourceTree = SOURCE_ROOT; };
 		3440CD04136613EF0046955F /* DefaultUserIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DefaultUserIcon.png; path = "Mobile Wired/Resources/Images/DefaultUserIcon.png"; sourceTree = SOURCE_ROOT; };
@@ -117,8 +114,6 @@
 			children = (
 				3439EC6214F3264300362097 /* IIViewDeckController.h */,
 				3439EC6314F3264300362097 /* IIViewDeckController.m */,
-				3439EC6414F3264300362097 /* WrappedController.h */,
-				3439EC6514F3264300362097 /* WrappedController.m */,
 			);
 			name = ViewDeck;
 			path = Classes/ViewDeck;
@@ -388,7 +383,6 @@
 				3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */,
 				3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */,
 				3439EC6614F3264300362097 /* IIViewDeckController.m in Sources */,
-				3439EC6714F3264300362097 /* WrappedController.m in Sources */,
 				34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */,
 				34838FB014F32C640064B619 /* ServerListViewController.m in Sources */,
 				345FC70714F467C0004D2A7B /* TBXML.m in Sources */,
