@@ -4,3 +4,6 @@
 [submodule "Mobile Wired/Classes/GCDAsyncSocket"]
 	path = Mobile Wired/Classes/GCDAsyncSocket
 	url = https://github.com/robbiehanson/CocoaAsyncSocket.git
+[submodule "Mobile Wired/Classes/ViewDeck"]
+	path = Mobile Wired/Classes/ViewDeck
+	url = https://github.com/Inferis/ViewDeck.git
