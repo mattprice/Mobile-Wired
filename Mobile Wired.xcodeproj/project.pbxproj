@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15CB7C9C14F70BA90019EBAB /* UserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CB7C9B14F70BA90019EBAB /* UserListTableViewCell.m */; };
+		15CB7C9F14F70BD30019EBAB /* UserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CB7C9E14F70BD30019EBAB /* UserListTableViewCell.xib */; };
 		3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5C14F31D0A00362097 /* NSString+Base64.m */; };
 		3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5E14F31D0A00362097 /* NSString+Hashes.m */; };
 		3439EC6614F3264300362097 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC6314F3264300362097 /* IIViewDeckController.m */; };
@@ -41,6 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15CB7C9A14F70BA90019EBAB /* UserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListTableViewCell.h; sourceTree = "<group>"; };
+		15CB7C9B14F70BA90019EBAB /* UserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListTableViewCell.m; sourceTree = "<group>"; };
+		15CB7C9E14F70BD30019EBAB /* UserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserListTableViewCell.xib; path = ../../UserListTableViewCell.xib; sourceTree = "<group>"; };
 		3431FF5F136C93ED00EDB8D8 /* Roadmap.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Roadmap.md; sourceTree = "<group>"; };
 		3439EC5B14F31D0A00362097 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Mobile Wired/Classes/Categories/NSString+Base64.h"; sourceTree = "<group>"; };
 		3439EC5C14F31D0A00362097 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Mobile Wired/Classes/Categories/NSString+Base64.m"; sourceTree = "<group>"; };
@@ -198,6 +203,7 @@
 				347F7E9014F5C18000316FB3 /* DefaultView.xib */,
 				34EBE41B1359565100A24C01 /* ChatView.xib */,
 				34EBE41F1359565100A24C01 /* UserListView.xib */,
+				15CB7C9E14F70BD30019EBAB /* UserListTableViewCell.xib */,
 				34838FC114F3456D0064B619 /* ServerListView.xib */,
 				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
 			);
@@ -255,6 +261,8 @@
 				34EBE4271359569B00A24C01 /* ChatViewController.m */,
 				34838FA814F32BA80064B619 /* UserListViewController.h */,
 				34838FA914F32BA80064B619 /* UserListViewController.m */,
+				15CB7C9A14F70BA90019EBAB /* UserListTableViewCell.h */,
+				15CB7C9B14F70BA90019EBAB /* UserListTableViewCell.m */,
 				34838FAD14F32C640064B619 /* ServerListViewController.h */,
 				34838FAE14F32C640064B619 /* ServerListViewController.m */,
 			);
@@ -344,6 +352,7 @@
 				34A5A0F1136B74270022272F /* Default@2x.png in Resources */,
 				34838FC314F3456D0064B619 /* ServerListView.xib in Resources */,
 				347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */,
+				15CB7C9F14F70BD30019EBAB /* UserListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +393,7 @@
 				34838FB014F32C640064B619 /* ServerListViewController.m in Sources */,
 				345FC70714F467C0004D2A7B /* TBXML.m in Sources */,
 				345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */,
+				15CB7C9C14F70BA90019EBAB /* UserListTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

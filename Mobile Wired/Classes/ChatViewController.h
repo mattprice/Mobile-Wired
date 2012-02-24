@@ -8,15 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "WiredConnection.h"
+#import "UserListViewController.h"
 
 
 @interface ChatViewController : UIViewController <WiredConnectionDelegate> {
     WiredConnection *connection;
     IBOutlet UINavigationItem *serverTitle;
     IBOutlet UITextView *serverTopic;
+    IBOutlet UserListViewController *userListView;
 }
 
 @property (strong, nonatomic) WiredConnection *connection;
+@property (strong, nonatomic) IBOutlet UserListViewController *userListView;
+
+
 @property (strong, nonatomic) IBOutlet UINavigationItem *serverTitle;
 @property (strong, nonatomic) IBOutlet UITextView *serverTopic;
 

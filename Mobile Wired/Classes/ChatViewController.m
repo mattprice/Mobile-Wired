@@ -21,6 +21,7 @@
 @synthesize connection = _connection;
 @synthesize serverTitle = _serverTitle;
 @synthesize serverTopic = _serverTopic;
+@synthesize userListView;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -138,6 +139,7 @@
 - (void)userJoined:(NSString *)nick withID:(NSString *)userID
 {
     NSLog(@"<<< %@ has joined >>>",nick);
+    //[self.userList
     // [self.chatViewController printServerMessage:[NSString stringWithFormat:@"%@ has joined", nick]];
 }
 
@@ -170,8 +172,8 @@
 
 - (void)setUserList:(NSDictionary *)userList
 {
-    UserListViewController *userListView = [[UserListViewController alloc] init];
     [userListView setUserList:userList];
+    [userListView.tableView setNeedsDisplay];
 }
 
 - (void)viewDidUnload

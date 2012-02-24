@@ -28,9 +28,11 @@
     self.rightView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
     self.centerView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
     
+    self.centerView.userListView = self.rightView;
+    
     IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.centerView 
                                                                                     leftViewController:self.leftView
-                                                                                   rightViewController:self.rightView];
+                                                                                    rightViewController:self.rightView];
     
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
