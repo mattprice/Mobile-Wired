@@ -13,6 +13,7 @@
     * Implement server bookmarks
 * Fixes
 	* Don't send "has joined" messages when first receiving the user list.
+    * Icons in the user list are fuzzy. Manually resize them with code.
     * The user icon for Mobile Wired users doesn't appear
     * Text selection causes the keyboard to disappear, but the chatTextField doesn't move down
 
