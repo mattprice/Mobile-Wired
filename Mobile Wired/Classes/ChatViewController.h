@@ -11,18 +11,24 @@
 #import "UserListViewController.h"
 
 
-@interface ChatViewController : UIViewController <WiredConnectionDelegate> {
+@interface ChatViewController : UIViewController <WiredConnectionDelegate,UIGestureRecognizerDelegate> {
     WiredConnection *connection;
+    IBOutlet UserListViewController *userListView;
+    
     IBOutlet UINavigationItem *serverTitle;
     IBOutlet UITextView *serverTopic;
-    IBOutlet UserListViewController *userListView;
+    
+    IBOutlet UITextView *chatTextView;
+    IBOutlet UIView *accessoryView;
+    IBOutlet UITextField* textField;
+    
+    UIView* keyboard;
+    UIPanGestureRecognizer *panRecognizer;
+    int originalKeyboardY;
+    int lastLocation;
 }
 
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) IBOutlet UserListViewController *userListView;
-
-
-@property (strong, nonatomic) IBOutlet UINavigationItem *serverTitle;
-@property (strong, nonatomic) IBOutlet UITextView *serverTopic;
 
 @end

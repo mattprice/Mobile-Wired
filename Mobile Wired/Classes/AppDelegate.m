@@ -24,7 +24,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.leftView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
+//    self.leftView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
     self.rightView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
     self.centerView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
     

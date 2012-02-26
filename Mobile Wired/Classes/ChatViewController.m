@@ -12,25 +12,154 @@
 
 #import "UserListViewController.h"
 
-@interface ChatViewController ()
-
+@interface ChatViewController (private)
+    - (void)animateKeyboardReturnToOriginalPosition;
+    - (void)animateKeyboardOffscreen;
 @end
 
 @implementation ChatViewController
 
+static float FingerGrabHandleSize = 20.0f;
+
 @synthesize connection = _connection;
-@synthesize serverTitle = _serverTitle;
-@synthesize serverTopic = _serverTopic;
 @synthesize userListView;
+
+#pragma mark -
+#pragma mark Sliding Keyboard Methods
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Be sure we know which keyboard is selected
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldWasSelected:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    
+    // Register an event for when a keyboard pops up
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+- (void)textfieldWasSelected:(NSNotification *)notification {
+    textField = notification.object;
+    
+    // Move the textField out of the keyboard's way.
+    [UIView beginAnimations:nil context:NULL];
+    accessoryView.frame = CGRectMake(0.0, 200.0, accessoryView.frame.size.width, accessoryView.frame.size.height);
+    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, 155.0);
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    // We have to hide the keyboard to remove the animation for it sliding down.
+    // This is where we start displaying it again.
+    keyboard.hidden = NO;
+
+    // Create UIGestureRecognizer for sliding the keyboard down.
+    // This gets removed once the keyboard disappears.
+    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    panRecognizer.delegate = self;
+    [self.view addGestureRecognizer:panRecognizer];
+}
+
+
+- (void)keyboardDidShow:(NSNotification *)notification {
+    if(keyboard) return;
+    
+    // We can't access the UIKeyboard through the SDK we have to use a UIView. 
+    // See discussion http://www.iphonedevsdk.com/forum/iphone-sdk-development/6573-howto-customize-uikeyboard.html
+    
+    UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
+    for(int i = 0; i < [tempWindow.subviews count]; i++) {
+        UIView *possibleKeyboard = [tempWindow.subviews objectAtIndex:i];
+        if([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"] == YES){
+            keyboard = possibleKeyboard;
+            return;
+        }
+    }
+}
+
+- (void)panGesture:(UIPanGestureRecognizer *)gestureRecognizer {
+    CGPoint location = [gestureRecognizer locationInView:[self view]];  
+    CGPoint velocity = [gestureRecognizer velocityInView:self.view];
+    
+    if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        originalKeyboardY = keyboard.frame.origin.y;
+    }
+    
+    if(gestureRecognizer.state == UIGestureRecognizerStateEnded){    
+        if (velocity.y > 0) {
+            [self animateKeyboardOffscreen];
+        } else{
+            [self animateKeyboardReturnToOriginalPosition];
+        }
+        return;
+    }
+    
+    CGFloat spaceAboveKeyboard = self.view.bounds.size.height - (keyboard.frame.size.height + textField.frame.size.height) + FingerGrabHandleSize;
+    if (location.y < spaceAboveKeyboard) {
+        return;
+    }
+    
+    // Pan the keyboard up/down
+    CGRect newFrame = keyboard.frame;
+    CGFloat newY = originalKeyboardY + (location.y - spaceAboveKeyboard);
+    newY = MAX(newY, originalKeyboardY);
+    newFrame.origin.y = newY;
+    [keyboard setFrame: newFrame];
+    
+    // Determine how much we've moved our finger.
+    int locationChange = 0;
+    if (lastLocation != location.y && lastLocation != 0) {
+        locationChange = location.y - lastLocation;
+    }
+    lastLocation = location.y;
+    
+    // Pan the accessoryView up/down too.
+    accessoryView.frame = CGRectMake(0.0, accessoryView.frame.origin.y + locationChange, accessoryView.frame.size.width, accessoryView.frame.size.height);
+    
+    // Lengthen the chat view.
+    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, chatTextView.frame.size.height + locationChange);
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+}
+
+- (void)animateKeyboardOffscreen {
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         CGRect newFrame = keyboard.frame;
+                         newFrame.origin.y = keyboard.window.frame.size.height;
+                         [keyboard setFrame: newFrame];
+                     }
+     
+                     completion:^(BOOL finished){
+                         keyboard.hidden = YES;
+                         [textField resignFirstResponder];
+                         
+                         // Remove the UIGestureRecognizer so that you can swipe left/right again.
+                         [self.view removeGestureRecognizer:panRecognizer];
+                     }];
+}
+
+- (void)animateKeyboardReturnToOriginalPosition {
+    [UIView beginAnimations:nil context:NULL];
+    CGRect newFrame = keyboard.frame;
+    newFrame.origin.y = originalKeyboardY;
+    [keyboard setFrame: newFrame];
+    [UIView commitAnimations];
+}
+
+#pragma mark -
+#pragma mark Wired Connection Methods
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Set the server name.
-    [self.serverTitle setTitle:@"Cunning Giraffe"];
-
+    [serverTitle setTitle:@"Cunning Giraffe"];
+    
     // Create a new WiredConnection.
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
@@ -90,7 +219,7 @@
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
 {
     // Initial connection.
-    if (self.serverTopic == nil) {
+    if (serverTopic == nil) {
         NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
     }
 
@@ -99,7 +228,7 @@
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
     }
 
-    [self.serverTopic setText:topic];
+    [serverTopic setText:topic];
 }
 
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
