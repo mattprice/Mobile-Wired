@@ -19,15 +19,14 @@
 
 @implementation ChatViewController
 
-static float FingerGrabHandleSize = 20.0f;
-
 @synthesize connection = _connection;
 @synthesize userListView;
 
 #pragma mark -
 #pragma mark Sliding Keyboard Methods
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     // Be sure we know which keyboard is selected
@@ -38,18 +37,27 @@ static float FingerGrabHandleSize = 20.0f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 }
 
-- (void)textfieldWasSelected:(NSNotification *)notification {
+- (void)textfieldWasSelected:(NSNotification *)notification
+{
     textField = notification.object;
     
     // Move the textField out of the keyboard's way.
-    [UIView beginAnimations:nil context:NULL];
-    accessoryView.frame = CGRectMake(0.0, 200.0, accessoryView.frame.size.width, accessoryView.frame.size.height);
-    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, 155.0);
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.25
+                          delay:0
+                        options:UIViewAnimationCurveEaseInOut
+                     animations:^{
+                         accessoryView.frame = CGRectMake(0.0, 200.0, accessoryView.frame.size.width, accessoryView.frame.size.height);
+                         chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, 155.0);
+                         [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+                     }
+     
+                     completion:^(BOOL finished){
+                         // Do nothing.
+                     }];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification {
+- (void)keyboardWillShow:(NSNotification *)notification
+{
     // We have to hide the keyboard to remove the animation for it sliding down.
     // This is where we start displaying it again.
     keyboard.hidden = NO;
@@ -61,8 +69,8 @@ static float FingerGrabHandleSize = 20.0f;
     [self.view addGestureRecognizer:panRecognizer];
 }
 
-
-- (void)keyboardDidShow:(NSNotification *)notification {
+- (void)keyboardDidShow:(NSNotification *)notification
+{
     if(keyboard) return;
     
     // We can't access the UIKeyboard through the SDK we have to use a UIView. 
@@ -78,15 +86,26 @@ static float FingerGrabHandleSize = 20.0f;
     }
 }
 
-- (void)panGesture:(UIPanGestureRecognizer *)gestureRecognizer {
-    CGPoint location = [gestureRecognizer locationInView:[self view]];  
+- (void)adjustAccessoryView
+{
+    // Pan the accessoryView up/down.
+    accessoryView.frame = CGRectMake(0.0, keyboard.frame.origin.y - 64, accessoryView.frame.size.width, accessoryView.frame.size.height);
+    
+    // Lengthen the chat view.
+    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, accessoryView.frame.origin.y - 45);
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+}
+
+- (void)panGesture:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    CGPoint location = [gestureRecognizer locationInView:self.view];  
     CGPoint velocity = [gestureRecognizer velocityInView:self.view];
     
-    if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         originalKeyboardY = keyboard.frame.origin.y;
     }
     
-    if(gestureRecognizer.state == UIGestureRecognizerStateEnded){    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {    
         if (velocity.y > 0) {
             [self animateKeyboardOffscreen];
         } else{
@@ -95,41 +114,31 @@ static float FingerGrabHandleSize = 20.0f;
         return;
     }
     
-    CGFloat spaceAboveKeyboard = self.view.bounds.size.height - (keyboard.frame.size.height + textField.frame.size.height) + FingerGrabHandleSize;
-    if (location.y < spaceAboveKeyboard) {
+    CGFloat spaceAboveKeyboard = self.view.bounds.size.height - (keyboard.frame.size.height + textField.frame.size.height) + 20.0f;
+    if (location.y < spaceAboveKeyboard ) {
         return;
     }
     
-    // Pan the keyboard up/down
     CGRect newFrame = keyboard.frame;
     CGFloat newY = originalKeyboardY + (location.y - spaceAboveKeyboard);
     newY = MAX(newY, originalKeyboardY);
     newFrame.origin.y = newY;
     [keyboard setFrame: newFrame];
     
-    // Determine how much we've moved our finger.
-    int locationChange = 0;
-    if (lastLocation != location.y && lastLocation != 0) {
-        locationChange = location.y - lastLocation;
-    }
-    lastLocation = location.y;
-    
-    // Pan the accessoryView up/down too.
-    accessoryView.frame = CGRectMake(0.0, accessoryView.frame.origin.y + locationChange, accessoryView.frame.size.width, accessoryView.frame.size.height);
-    
-    // Lengthen the chat view.
-    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, chatTextView.frame.size.height + locationChange);
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    [self adjustAccessoryView];
 }
 
-- (void)animateKeyboardOffscreen {
-    [UIView animateWithDuration:0.3
+- (void)animateKeyboardOffscreen
+{
+    [UIView animateWithDuration:0.25
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
+                        options:UIViewAnimationCurveEaseInOut
                      animations:^{
+                         // Pan the keyboard up/down.
                          CGRect newFrame = keyboard.frame;
                          newFrame.origin.y = keyboard.window.frame.size.height;
                          [keyboard setFrame: newFrame];
+                         [self adjustAccessoryView];
                      }
      
                      completion:^(BOOL finished){
@@ -141,11 +150,14 @@ static float FingerGrabHandleSize = 20.0f;
                      }];
 }
 
-- (void)animateKeyboardReturnToOriginalPosition {
+- (void)animateKeyboardReturnToOriginalPosition
+{
     [UIView beginAnimations:nil context:NULL];
+    // Pan the keyboard up/down.
     CGRect newFrame = keyboard.frame;
     newFrame.origin.y = originalKeyboardY;
     [keyboard setFrame: newFrame];
+    [self adjustAccessoryView];
     [UIView commitAnimations];
 }
 
