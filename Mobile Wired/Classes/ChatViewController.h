@@ -19,8 +19,8 @@
     IBOutlet UITextView *serverTopic;
     
     IBOutlet UITextView *chatTextView;
+    IBOutlet UITextField* chatTextField;
     IBOutlet UIView *accessoryView;
-    IBOutlet UITextField* textField;
     
     UIView* keyboard;
     UIPanGestureRecognizer *panRecognizer;
@@ -30,5 +30,7 @@
 
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) IBOutlet UserListViewController *userListView;
+
+- (IBAction)sendButtonPressed:(id)sender;
 
 @end

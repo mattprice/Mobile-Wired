@@ -39,7 +39,7 @@
 
 - (void)textfieldWasSelected:(NSNotification *)notification
 {
-    textField = notification.object;
+    chatTextField = notification.object;
     
     // Move the textField out of the keyboard's way.
     [UIView animateWithDuration:0.25
@@ -114,7 +114,7 @@
         return;
     }
     
-    CGFloat spaceAboveKeyboard = self.view.bounds.size.height - (keyboard.frame.size.height + textField.frame.size.height) + 20.0f;
+    CGFloat spaceAboveKeyboard = self.view.bounds.size.height - (keyboard.frame.size.height + chatTextField.frame.size.height) + 20.0f;
     if (location.y < spaceAboveKeyboard ) {
         return;
     }
@@ -143,7 +143,7 @@
      
                      completion:^(BOOL finished){
                          keyboard.hidden = YES;
-                         [textField resignFirstResponder];
+                         [chatTextField resignFirstResponder];
                          
                          // Remove the UIGestureRecognizer so that you can swipe left/right again.
                          [self.view removeGestureRecognizer:panRecognizer];
@@ -177,6 +177,27 @@
     self.connection.delegate = self;
     [self.connection connectToServer:@"chat.embercode.com" onPort:2359];
 }
+
+- (IBAction)sendButtonPressed:(id)sender
+{
+    // Send the message
+    [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    chatTextField.text = @"";
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // Send the message
+    [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    chatTextField.text = @"";
+    
+    return YES;
+}
+
+#pragma mark -
+#pragma mark Wired Delegate Methods
 
 /*
  * Connection to server was successful.
@@ -245,8 +266,13 @@
 
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
-    // Message could be from anyone, including yourself.
-    NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
+//    NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
+    
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"%@: %@\n", nick, message];
+    chatTextView.text = chatText;
+    
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
 /*
@@ -273,21 +299,35 @@
 
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
-    // Emote could be from anyone, including yourself.
-    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
+//    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
+    
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"*** %@ %@\n", nick, message];
+    chatTextView.text = chatText;
+    
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
 - (void)userJoined:(NSString *)nick withID:(NSString *)userID
 {
-    NSLog(@"<<< %@ has joined >>>",nick);
-    //[self.userList
-    // [self.chatViewController printServerMessage:[NSString stringWithFormat:@"%@ has joined", nick]];
+//    NSLog(@"<<< %@ has joined >>>",nick);
+    
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< %@ has joined >>>\n", nick];
+    chatTextView.text = chatText;
+    
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
 - (void)userLeft:(NSString *)nick withID:(NSString *)userID
 {
     NSLog(@"<<< %@ has left >>>",nick);
-    // [self.chatViewController printServerMessage:[NSString stringWithFormat:@"%@ has left", nick]];
+    
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< %@ has left >>>\n", nick];
+    chatTextView.text = chatText;
+    
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
 - (void)updateConnectionProcessWithString:(NSString *)process

@@ -4,6 +4,14 @@
 * Show nick changes in chat
 * Does not catch connection issues incase the server info is wrong.
 
+# Version 1
+* Connect User button.
+* Add broadcasts
+* Add server topic
+* Add connection status messages
+* Server bookmarks
+* Fix chatTextView glitch when selecting text 
+
 # Version 1.1
 * SSL connection
 * Landscape mode
