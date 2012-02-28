@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 #import "WiredConnection.h"
 #import "UserListViewController.h"
 
 
-@interface ChatViewController : UIViewController <WiredConnectionDelegate,UIGestureRecognizerDelegate> {
+@interface ChatViewController : UIViewController <WiredConnectionDelegate, MBProgressHUDDelegate, UIGestureRecognizerDelegate> {
     WiredConnection *connection;
+    MBProgressHUD *progressHUD;
     IBOutlet UserListViewController *userListView;
     
     IBOutlet UINavigationItem *serverTitle;

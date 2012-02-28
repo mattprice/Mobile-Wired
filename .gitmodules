@@ -7,3 +7,6 @@
 [submodule "Mobile Wired/Classes/ViewDeck"]
 	path = Mobile Wired/Classes/ViewDeck
 	url = https://github.com/Inferis/ViewDeck.git
+[submodule "Mobile Wired/Classes/MBProgressHUD"]
+	path = Mobile Wired/Classes/MBProgressHUD
+	url = https://github.com/jdg/MBProgressHUD.git

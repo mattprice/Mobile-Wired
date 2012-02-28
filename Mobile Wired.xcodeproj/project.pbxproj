@@ -21,6 +21,8 @@
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
 		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };
 		34838FC314F3456D0064B619 /* ServerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34838FC114F3456D0064B619 /* ServerListView.xib */; };
+		348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F5C2414FC63A800F76AAC /* MBProgressHUD.m */; };
+		348F5C2914FC771C00F76AAC /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 348F5C2814FC771C00F76AAC /* 37x-Checkmark.png */; };
 		34A5A0F0136B74270022272F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EE136B74270022272F /* Default.png */; };
 		34A5A0F1136B74270022272F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EF136B74270022272F /* Default@2x.png */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
@@ -65,6 +67,9 @@
 		34838FAD14F32C640064B619 /* ServerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerListViewController.h; path = Classes/ServerListViewController.h; sourceTree = "<group>"; };
 		34838FAE14F32C640064B619 /* ServerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerListViewController.m; path = Classes/ServerListViewController.m; sourceTree = "<group>"; };
 		34838FC214F3456D0064B619 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ServerListView.xib; sourceTree = "<group>"; };
+		348F5C2314FC63A800F76AAC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Classes/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		348F5C2414FC63A800F76AAC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Classes/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
+		348F5C2814FC771C00F76AAC /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37x-Checkmark.png"; path = "Mobile Wired/Resources/Images/37x-Checkmark.png"; sourceTree = SOURCE_ROOT; };
 		34A5A0EE136B74270022272F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Mobile Wired/Resources/Images/Default.png"; sourceTree = SOURCE_ROOT; };
 		34A5A0EF136B74270022272F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Mobile Wired/Resources/Images/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +133,15 @@
 				3439EC5E14F31D0A00362097 /* NSString+Hashes.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		348F5C2114FC638800F76AAC /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				348F5C2314FC63A800F76AAC /* MBProgressHUD.h */,
+				348F5C2414FC63A800F76AAC /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		34EBE3B313594F7A00A24C01 = {
@@ -223,6 +237,7 @@
 				3440CCFE136611B00046955F /* MobileWired@2x.png */,
 				34A5A0EE136B74270022272F /* Default.png */,
 				34A5A0EF136B74270022272F /* Default@2x.png */,
+				348F5C2814FC771C00F76AAC /* 37x-Checkmark.png */,
 			);
 			name = Images;
 			path = Resources/images;
@@ -241,8 +256,9 @@
 		34EBE4331359677600A24C01 /* External Classes */ = {
 			isa = PBXGroup;
 			children = (
-				34FC5C85135BB2A30049C737 /* TBXML */,
 				34EBE42D1359676E00A24C01 /* GCDAsyncSocket */,
+				34FC5C85135BB2A30049C737 /* TBXML */,
+				348F5C2114FC638800F76AAC /* MBProgressHUD */,
 				3439EC6114F3264300362097 /* ViewDeck */,
 			);
 			name = "External Classes";
@@ -348,6 +364,7 @@
 				34838FC314F3456D0064B619 /* ServerListView.xib in Resources */,
 				347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */,
 				15CB7C9F14F70BD30019EBAB /* UserListTableViewCell.xib in Resources */,
+				348F5C2914FC771C00F76AAC /* 37x-Checkmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +405,7 @@
 				345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */,
 				15CB7C9C14F70BA90019EBAB /* UserListTableViewCell.m in Sources */,
 				34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */,
+				348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

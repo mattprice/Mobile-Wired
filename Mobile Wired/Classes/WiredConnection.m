@@ -562,7 +562,6 @@
     if ([rootName isEqualToString:@"p7.handshake.server_handshake"]) {
         NSLog(@"Received handshake.");
         
-        [delegate updateConnectionProcessWithString:@"Received handshake"];
         [self sendAcknowledgement];
         
         do {
@@ -582,8 +581,6 @@
     
     else if ([rootName isEqualToString:@"p7.compatibility_check.status"]) {
         NSLog(@"Received compatibility status.");
-        
-        [delegate updateConnectionProcessWithString:@"Received compatibility status"];
         
         do {
             childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];

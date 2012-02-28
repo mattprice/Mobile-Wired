@@ -7,9 +7,8 @@
 //
 
 #import "ChatViewController.h"
-#import "NSString+Hashes.h"
 #import "IIViewDeckController.h"
-
+#import "NSString+Hashes.h"
 #import "UserListViewController.h"
 
 @interface ChatViewController (private)
@@ -172,6 +171,17 @@
     // Set the server name.
     [serverTitle setTitle:@"Cunning Giraffe"];
     
+    // Create a Progress HUD
+    progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+	progressHUD.delegate = self;
+    [self.view addSubview:progressHUD];
+    
+    // Update the Progress HUD
+    progressHUD.mode = MBProgressHUDModeIndeterminate;
+    progressHUD.animationType = MBProgressHUDAnimationZoom;
+    progressHUD.labelText = @"Connecting...";
+    [progressHUD show:YES];
+    
     // Create a new WiredConnection.
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
@@ -330,11 +340,6 @@
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
-- (void)updateConnectionProcessWithString:(NSString *)process
-{
-//    NSLog(@"%@",process);
-}
-
 - (void)didFailLoginWithReason:(NSString *)reason
 {
 //    NSLog(@"%@",reason);
@@ -355,6 +360,12 @@
 {
     [userListView setUserList:userList];
     [userListView.tableView setNeedsDisplay];
+    
+    // Update the Progress HUD
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Connected";
+    [progressHUD hide:YES afterDelay:2];
 }
 
 - (void)viewDidUnload
