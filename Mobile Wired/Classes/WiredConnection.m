@@ -29,10 +29,6 @@
         // Create a new socket connection using the main dispatch queue.
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
-        
-        isConnected = false;
-        userList = [[NSMutableDictionary alloc] init];
-        serverInfo = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -46,6 +42,9 @@
 - (void)connectToServer:(NSString *)server onPort:(UInt16)port
 {
     NSError *error = nil;
+    isConnected = false;
+    userList = [[NSMutableDictionary alloc] init];
+    serverInfo = [[NSMutableDictionary alloc] init];
     
     // Attempt a socket connection to the server.
     NSLog(@"Beginning socket connection...");
@@ -646,6 +645,7 @@
     }
     
     else if ([rootName isEqualToString:@"wired.okay"]) {
+        // We should really keep up with what command this refers to.
         NSLog(@"The last command was successful.");
     }
     
