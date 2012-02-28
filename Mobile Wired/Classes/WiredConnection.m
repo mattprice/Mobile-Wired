@@ -42,8 +42,6 @@
 /*
  * Connects to the given server and port specified.
  *
- * This method also handles sending the handshake.
- *
  */
 - (void)connectToServer:(NSString *)server onPort:(UInt16)port
 {
@@ -54,17 +52,8 @@
     if (![socket connectToHost:server onPort:port withTimeout:15 error:&error]) {
         // Connection failed.
         NSLog(@"Connection error: %@",error);
+        [delegate didFailConnectionWithReason:error];
     }
-    
-    // Start sending Wired connection info.
-    NSLog(@"Sending Wired handshake...");
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"1.0",   @"p7.handshake.version",
-                                @"Wired", @"p7.handshake.protocol.name",
-                                @"2.0",   @"p7.handshake.protocol.version",
-                                nil];
-    [self sendTransaction:@"p7.handshake.client_handshake" withParameters:parameters];
-    [self readData];
 }
 
 - (void)disconnect
@@ -465,6 +454,16 @@
             NSLog(@"Failed to enable backgrounding.");
     }];
 #endif
+    
+    // Start sending Wired connection info.
+    NSLog(@"Sending Wired handshake...");
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"1.0",   @"p7.handshake.version",
+                                @"Wired", @"p7.handshake.protocol.name",
+                                @"2.0",   @"p7.handshake.protocol.version",
+                                nil];
+    [self sendTransaction:@"p7.handshake.client_handshake" withParameters:parameters];
+    [self readData];
 }
 
 - (void)secureSocket
@@ -490,6 +489,7 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error
 {
     NSLog(@"Server disconnected unexpectedly. <Error: %@>", error);
+    [delegate didFailConnectionWithReason:error];
     isConnected = false;
 }
 

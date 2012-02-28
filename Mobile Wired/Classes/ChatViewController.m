@@ -215,6 +215,14 @@
 //    [progressHUD hide:YES afterDelay:10];
 }
 
+- (void)didFailConnectionWithReason:(NSError *)error
+{
+    // Update the Progress HUD
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Error.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Connection Failed";
+}
+
 /*
  * Received information about a user.
  *
