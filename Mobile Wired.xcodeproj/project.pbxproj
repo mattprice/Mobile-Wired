@@ -16,6 +16,7 @@
 		3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD04136613EF0046955F /* DefaultUserIcon.png */; };
 		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; };
 		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		346CB48314FC81A500ED6A5F /* 37x-Error.png in Resources */ = {isa = PBXBuildFile; fileRef = 346CB48214FC81A500ED6A5F /* 37x-Error.png */; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 347F7E9014F5C18000316FB3 /* DefaultView.xib */; };
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
@@ -59,6 +60,7 @@
 		345FC70814F467E1004D2A7B /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBXML.h; path = "TBXML-Headers/TBXML.h"; sourceTree = "<group>"; };
 		345FC70914F468DC004D2A7B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
 		345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = GCD/GCDAsyncSocket.m; sourceTree = "<group>"; };
+		346CB48214FC81A500ED6A5F /* 37x-Error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37x-Error.png"; path = "Mobile Wired/Resources/Images/37x-Error.png"; sourceTree = SOURCE_ROOT; };
 		3477029D135A026100F91A8B /* WiredConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WiredConnection.h; path = Classes/WiredConnection.h; sourceTree = "<group>"; };
 		3477029E135A026200F91A8B /* WiredConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WiredConnection.m; path = Classes/WiredConnection.m; sourceTree = "<group>"; };
 		347F7E9014F5C18000316FB3 /* DefaultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DefaultView.xib; path = ../../Classes/DefaultView.xib; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				34A5A0EE136B74270022272F /* Default.png */,
 				34A5A0EF136B74270022272F /* Default@2x.png */,
 				348F5C2814FC771C00F76AAC /* 37x-Checkmark.png */,
+				346CB48214FC81A500ED6A5F /* 37x-Error.png */,
 			);
 			name = Images;
 			path = Resources/images;
@@ -365,6 +368,7 @@
 				347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */,
 				15CB7C9F14F70BD30019EBAB /* UserListTableViewCell.xib in Resources */,
 				348F5C2914FC771C00F76AAC /* 37x-Checkmark.png in Resources */,
+				346CB48314FC81A500ED6A5F /* 37x-Error.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,145 +22,6 @@
 @synthesize userListView;
 
 #pragma mark -
-#pragma mark Sliding Keyboard Methods
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Be sure we know which keyboard is selected
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldWasSelected:) name:UITextFieldTextDidBeginEditingNotification object:nil];
-    
-    // Register an event for when a keyboard pops up
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-}
-
-- (void)textfieldWasSelected:(NSNotification *)notification
-{
-    chatTextField = notification.object;
-    
-    // Move the textField out of the keyboard's way.
-    [UIView animateWithDuration:0.25
-                          delay:0
-                        options:UIViewAnimationCurveEaseInOut
-                     animations:^{
-                         accessoryView.frame = CGRectMake(0.0, 200.0, accessoryView.frame.size.width, accessoryView.frame.size.height);
-                         chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, 155.0);
-                         [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
-                     }
-     
-                     completion:^(BOOL finished){
-                         // Do nothing.
-                     }];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    // We have to hide the keyboard to remove the animation for it sliding down.
-    // This is where we start displaying it again.
-    keyboard.hidden = NO;
-
-    // Create UIGestureRecognizer for sliding the keyboard down.
-    // This gets removed once the keyboard disappears.
-    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
-    panRecognizer.delegate = self;
-    [self.view addGestureRecognizer:panRecognizer];
-}
-
-- (void)keyboardDidShow:(NSNotification *)notification
-{
-    if(keyboard) return;
-    
-    // We can't access the UIKeyboard through the SDK we have to use a UIView. 
-    // See discussion http://www.iphonedevsdk.com/forum/iphone-sdk-development/6573-howto-customize-uikeyboard.html
-    
-    UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
-    for(int i = 0; i < [tempWindow.subviews count]; i++) {
-        UIView *possibleKeyboard = [tempWindow.subviews objectAtIndex:i];
-        if([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"] == YES){
-            keyboard = possibleKeyboard;
-            return;
-        }
-    }
-}
-
-- (void)adjustAccessoryView
-{
-    // Pan the accessoryView up/down.
-    accessoryView.frame = CGRectMake(0.0, keyboard.frame.origin.y - 64, accessoryView.frame.size.width, accessoryView.frame.size.height);
-    
-    // Lengthen the chat view.
-    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, accessoryView.frame.origin.y - 45);
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
-}
-
-- (void)panGesture:(UIPanGestureRecognizer *)gestureRecognizer
-{
-    CGPoint location = [gestureRecognizer locationInView:self.view];  
-    CGPoint velocity = [gestureRecognizer velocityInView:self.view];
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        originalKeyboardY = keyboard.frame.origin.y;
-    }
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {    
-        if (velocity.y > 0) {
-            [self animateKeyboardOffscreen];
-        } else{
-            [self animateKeyboardReturnToOriginalPosition];
-        }
-        return;
-    }
-    
-    CGFloat spaceAboveKeyboard = self.view.bounds.size.height - (keyboard.frame.size.height + chatTextField.frame.size.height) + 20.0f;
-    if (location.y < spaceAboveKeyboard ) {
-        return;
-    }
-    
-    CGRect newFrame = keyboard.frame;
-    CGFloat newY = originalKeyboardY + (location.y - spaceAboveKeyboard);
-    newY = MAX(newY, originalKeyboardY);
-    newFrame.origin.y = newY;
-    [keyboard setFrame: newFrame];
-    
-    [self adjustAccessoryView];
-}
-
-- (void)animateKeyboardOffscreen
-{
-    [UIView animateWithDuration:0.25
-                          delay:0
-                        options:UIViewAnimationCurveEaseInOut
-                     animations:^{
-                         // Pan the keyboard up/down.
-                         CGRect newFrame = keyboard.frame;
-                         newFrame.origin.y = keyboard.window.frame.size.height;
-                         [keyboard setFrame: newFrame];
-                         [self adjustAccessoryView];
-                     }
-     
-                     completion:^(BOOL finished){
-                         keyboard.hidden = YES;
-                         [chatTextField resignFirstResponder];
-                         
-                         // Remove the UIGestureRecognizer so that you can swipe left/right again.
-                         [self.view removeGestureRecognizer:panRecognizer];
-                     }];
-}
-
-- (void)animateKeyboardReturnToOriginalPosition
-{
-    [UIView beginAnimations:nil context:NULL];
-    // Pan the keyboard up/down.
-    CGRect newFrame = keyboard.frame;
-    newFrame.origin.y = originalKeyboardY;
-    [keyboard setFrame: newFrame];
-    [self adjustAccessoryView];
-    [UIView commitAnimations];
-}
-
-#pragma mark -
 #pragma mark Wired Connection Methods
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -172,14 +33,16 @@
     [serverTitle setTitle:@"Cunning Giraffe"];
     
     // Create a Progress HUD
-    progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-	progressHUD.delegate = self;
-    [self.view addSubview:progressHUD];
+    if (!progressHUD) {
+        progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        progressHUD.delegate = self;
+        [self.view addSubview:progressHUD];
+    }
     
     // Update the Progress HUD
     progressHUD.mode = MBProgressHUDModeIndeterminate;
     progressHUD.animationType = MBProgressHUDAnimationZoom;
-    progressHUD.labelText = @"Connecting...";
+    progressHUD.labelText = @"Connecting";
     [progressHUD show:YES];
     
     // Create a new WiredConnection.
@@ -220,6 +83,7 @@
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
     // Set up the DefaultUserIcon if the user hasn't selected one of their one.
+    progressHUD.labelText = @"Logging In";
     [self.connection setNick:@"Melman"];
     [self.connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
     [self.connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
@@ -234,6 +98,7 @@
  */
 - (void)didLoginSuccessfully
 {
+    progressHUD.labelText = @"Joining Channel";
     [self.connection joinChannel:@"1"];
 //    [self.connection sendChatMessage:@"Test..." toChannel:@"1"];
 
@@ -331,7 +196,7 @@
 
 - (void)userLeft:(NSString *)nick withID:(NSString *)userID
 {
-    NSLog(@"<<< %@ has left >>>",nick);
+//    NSLog(@"<<< %@ has left >>>",nick);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
     [chatText appendFormat:@"<<< %@ has left >>>\n", nick];
@@ -342,7 +207,12 @@
 
 - (void)didFailLoginWithReason:(NSString *)reason
 {
-//    NSLog(@"%@",reason);
+    // Update the Progress HUD
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Error.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Login Failed";
+    progressHUD.detailsLabelText = reason;
+//    [progressHUD hide:YES afterDelay:10];
 }
 
 /*
@@ -379,6 +249,145 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark -
+#pragma mark Sliding Keyboard Methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // Be sure we know which keyboard is selected
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldWasSelected:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    
+    // Register an event for when a keyboard pops up
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+- (void)textfieldWasSelected:(NSNotification *)notification
+{
+    chatTextField = notification.object;
+    
+    // Move the textField out of the keyboard's way.
+    [UIView animateWithDuration:0.25
+                          delay:0
+                        options:UIViewAnimationCurveEaseInOut
+                     animations:^{
+                         accessoryView.frame = CGRectMake(0.0, 200.0, accessoryView.frame.size.width, accessoryView.frame.size.height);
+                         chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, 155.0);
+                         [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+                     }
+     
+                     completion:^(BOOL finished){
+                         // Do nothing.
+                     }];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    // We have to hide the keyboard to remove the animation for it sliding down.
+    // This is where we start displaying it again.
+    keyboard.hidden = NO;
+    
+    // Create UIGestureRecognizer for sliding the keyboard down.
+    // This gets removed once the keyboard disappears.
+    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    panRecognizer.delegate = self;
+    [self.view addGestureRecognizer:panRecognizer];
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    if(keyboard) return;
+    
+    // We can't access the UIKeyboard through the SDK we have to use a UIView.
+    // See discussion http://www.iphonedevsdk.com/forum/iphone-sdk-development/6573-howto-customize-uikeyboard.html
+    
+    UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
+    for(int i = 0; i < [tempWindow.subviews count]; i++) {
+        UIView *possibleKeyboard = [tempWindow.subviews objectAtIndex:i];
+        if([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"] == YES){
+            keyboard = possibleKeyboard;
+            return;
+        }
+    }
+}
+
+- (void)adjustAccessoryView
+{
+    // Pan the accessoryView up/down.
+    accessoryView.frame = CGRectMake(0.0, keyboard.frame.origin.y - 64, accessoryView.frame.size.width, accessoryView.frame.size.height);
+    
+    // Lengthen the chat view.
+    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, accessoryView.frame.origin.y - 45);
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+}
+
+- (void)panGesture:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    CGPoint location = [gestureRecognizer locationInView:self.view];
+    CGPoint velocity = [gestureRecognizer velocityInView:self.view];
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        originalKeyboardY = keyboard.frame.origin.y;
+    }
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        if (velocity.y > 0) {
+            [self animateKeyboardOffscreen];
+        } else{
+            [self animateKeyboardReturnToOriginalPosition];
+        }
+        return;
+    }
+    
+    CGFloat spaceAboveKeyboard = self.view.bounds.size.height - (keyboard.frame.size.height + chatTextField.frame.size.height) + 20.0f;
+    if (location.y < spaceAboveKeyboard ) {
+        return;
+    }
+    
+    CGRect newFrame = keyboard.frame;
+    CGFloat newY = originalKeyboardY + (location.y - spaceAboveKeyboard);
+    newY = MAX(newY, originalKeyboardY);
+    newFrame.origin.y = newY;
+    [keyboard setFrame: newFrame];
+    
+    [self adjustAccessoryView];
+}
+
+- (void)animateKeyboardOffscreen
+{
+    [UIView animateWithDuration:0.25
+                          delay:0
+                        options:UIViewAnimationCurveEaseInOut
+                     animations:^{
+                         // Pan the keyboard up/down.
+                         CGRect newFrame = keyboard.frame;
+                         newFrame.origin.y = keyboard.window.frame.size.height;
+                         [keyboard setFrame: newFrame];
+                         [self adjustAccessoryView];
+                     }
+     
+                     completion:^(BOOL finished){
+                         keyboard.hidden = YES;
+                         [chatTextField resignFirstResponder];
+                         
+                         // Remove the UIGestureRecognizer so that you can swipe left/right again.
+                         [self.view removeGestureRecognizer:panRecognizer];
+                     }];
+}
+
+- (void)animateKeyboardReturnToOriginalPosition
+{
+    [UIView beginAnimations:nil context:NULL];
+    // Pan the keyboard up/down.
+    CGRect newFrame = keyboard.frame;
+    newFrame.origin.y = originalKeyboardY;
+    [keyboard setFrame: newFrame];
+    [self adjustAccessoryView];
+    [UIView commitAnimations];
 }
 
 @end

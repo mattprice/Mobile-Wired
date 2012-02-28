@@ -11,7 +11,6 @@
     * Add viewing of broadcasts
     * Add viewing of server topic
     * Add ability to view user info
-    * Add connection status messages
     * Implement server bookmarks
 	* Expanding text field
 * Fixes

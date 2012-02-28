@@ -668,12 +668,12 @@
                 
                 if ([childValue isEqualToString:@"wired.error.login_failed"]) {
                     NSLog(@"Login failed: username or password is wrong.");
-                    [delegate didFailLoginWithReason:@"Login failed: username or password is wrong."];
+                    [delegate didFailLoginWithReason:@"user or password is wrong"];
                 }
                 
                 else if ([childValue isEqualToString:@"wired.banned"]) {
                     NSLog(@"Login failed: user is banned.");
-                    [delegate didFailLoginWithReason:@"Login failed: user is banned."];
+                    [delegate didFailLoginWithReason:@"user is banned"];
                 }
                 
                 else {
