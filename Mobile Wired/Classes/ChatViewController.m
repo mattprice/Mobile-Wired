@@ -19,7 +19,7 @@
 @implementation ChatViewController
 
 @synthesize connection = _connection;
-@synthesize userListView;
+@synthesize userListView, badgeCount;
 
 #pragma mark -
 #pragma mark Wired Connection Methods
@@ -158,7 +158,16 @@
  */
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
 {
-    NSLog(@"%@ (%@) : %@",nick,userID,message);
+//    NSLog(@"%@ (%@) : %@",nick,userID,message);
+    
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.alertBody = [NSString stringWithFormat:@"%@: %@",nick, message];
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    
+    self.badgeCount++;
+    localNotification.applicationIconBadgeNumber = self.badgeCount;
+    
+    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
 }
 
 /*
@@ -169,7 +178,16 @@
  */
 - (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
 {
-    NSLog(@"%@ (%@) : %@",nick,userID,message);
+//    NSLog(@"%@ (%@) : %@",nick,userID,message);
+    
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.alertBody = [NSString stringWithFormat:@"%@: %@",nick, message];
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    
+    self.badgeCount++;
+    localNotification.applicationIconBadgeNumber = self.badgeCount;
+    
+    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
 }
 
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel

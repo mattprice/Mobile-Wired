@@ -16,6 +16,7 @@
     WiredConnection *connection;
     MBProgressHUD *progressHUD;
     IBOutlet UserListViewController *userListView;
+    int badgeCount;
     
     IBOutlet UINavigationItem *serverTitle;
     IBOutlet UITextView *serverTopic;
@@ -32,6 +33,7 @@
 
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) IBOutlet UserListViewController *userListView;
+@property (nonatomic) int badgeCount;
 
 - (IBAction)sendButtonPressed:(id)sender;
 
