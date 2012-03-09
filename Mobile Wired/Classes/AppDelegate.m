@@ -44,7 +44,6 @@
     audioPlayer.volume = 0;
     audioPlayer.numberOfLoops = 6;
     
-    [audioPlayer prepareToPlay];
     [audioPlayer play];
     
     // Override point for customization after application launch.
