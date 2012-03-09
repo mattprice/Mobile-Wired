@@ -85,6 +85,7 @@
     // Set up the DefaultUserIcon if the user hasn't selected one of their one.
     progressHUD.labelText = @"Logging In";
     [self.connection setNick:@"Melman"];
+    [self.connection setIcon:nil];
     [self.connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
     [self.connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
 }
