@@ -16,14 +16,16 @@
 		3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD04136613EF0046955F /* DefaultUserIcon.png */; };
 		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; };
 		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		346CB48314FC81A500ED6A5F /* 37x-Error.png in Resources */ = {isa = PBXBuildFile; fileRef = 346CB48214FC81A500ED6A5F /* 37x-Error.png */; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
+		347B37FD15098D6500D88034 /* Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37F915098D6500D88034 /* Checkmark.png */; };
+		347B37FE15098D6500D88034 /* Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FA15098D6500D88034 /* Checkmark@2x.png */; };
+		347B37FF15098D6500D88034 /* Error.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FB15098D6500D88034 /* Error.png */; };
+		347B380015098D6500D88034 /* Error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FC15098D6500D88034 /* Error@2x.png */; };
 		347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 347F7E9014F5C18000316FB3 /* DefaultView.xib */; };
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
 		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };
 		34838FC314F3456D0064B619 /* ServerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34838FC114F3456D0064B619 /* ServerListView.xib */; };
 		348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F5C2414FC63A800F76AAC /* MBProgressHUD.m */; };
-		348F5C2914FC771C00F76AAC /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 348F5C2814FC771C00F76AAC /* 37x-Checkmark.png */; };
 		34A5A0F0136B74270022272F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EE136B74270022272F /* Default.png */; };
 		34A5A0F1136B74270022272F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EF136B74270022272F /* Default@2x.png */; };
 		34CBE9A01505ADA1000FBF2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */; };
@@ -62,9 +64,12 @@
 		345FC70814F467E1004D2A7B /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBXML.h; path = "TBXML-Headers/TBXML.h"; sourceTree = "<group>"; };
 		345FC70914F468DC004D2A7B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
 		345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = GCD/GCDAsyncSocket.m; sourceTree = "<group>"; };
-		346CB48214FC81A500ED6A5F /* 37x-Error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37x-Error.png"; path = "Mobile Wired/Resources/Images/37x-Error.png"; sourceTree = SOURCE_ROOT; };
 		3477029D135A026100F91A8B /* WiredConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WiredConnection.h; path = Classes/WiredConnection.h; sourceTree = "<group>"; };
 		3477029E135A026200F91A8B /* WiredConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WiredConnection.m; path = Classes/WiredConnection.m; sourceTree = "<group>"; };
+		347B37F915098D6500D88034 /* Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Checkmark.png; path = "Mobile Wired/Resources/Images/Checkmark.png"; sourceTree = SOURCE_ROOT; };
+		347B37FA15098D6500D88034 /* Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checkmark@2x.png"; path = "Mobile Wired/Resources/Images/Checkmark@2x.png"; sourceTree = SOURCE_ROOT; };
+		347B37FB15098D6500D88034 /* Error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Error.png; path = "Mobile Wired/Resources/Images/Error.png"; sourceTree = SOURCE_ROOT; };
+		347B37FC15098D6500D88034 /* Error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Error@2x.png"; path = "Mobile Wired/Resources/Images/Error@2x.png"; sourceTree = SOURCE_ROOT; };
 		347F7E9014F5C18000316FB3 /* DefaultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DefaultView.xib; path = ../../Classes/DefaultView.xib; sourceTree = "<group>"; };
 		34838FA814F32BA80064B619 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserListViewController.h; path = Classes/UserListViewController.h; sourceTree = "<group>"; };
 		34838FA914F32BA80064B619 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserListViewController.m; path = Classes/UserListViewController.m; sourceTree = "<group>"; };
@@ -73,7 +78,6 @@
 		34838FC214F3456D0064B619 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ServerListView.xib; sourceTree = "<group>"; };
 		348F5C2314FC63A800F76AAC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Classes/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		348F5C2414FC63A800F76AAC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Classes/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
-		348F5C2814FC771C00F76AAC /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37x-Checkmark.png"; path = "Mobile Wired/Resources/Images/37x-Checkmark.png"; sourceTree = SOURCE_ROOT; };
 		34A5A0EE136B74270022272F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Mobile Wired/Resources/Images/Default.png"; sourceTree = SOURCE_ROOT; };
 		34A5A0EF136B74270022272F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Mobile Wired/Resources/Images/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -255,8 +259,10 @@
 				3440CCFE136611B00046955F /* MobileWired@2x.png */,
 				34A5A0EE136B74270022272F /* Default.png */,
 				34A5A0EF136B74270022272F /* Default@2x.png */,
-				348F5C2814FC771C00F76AAC /* 37x-Checkmark.png */,
-				346CB48214FC81A500ED6A5F /* 37x-Error.png */,
+				347B37F915098D6500D88034 /* Checkmark.png */,
+				347B37FA15098D6500D88034 /* Checkmark@2x.png */,
+				347B37FB15098D6500D88034 /* Error.png */,
+				347B37FC15098D6500D88034 /* Error@2x.png */,
 			);
 			name = Images;
 			path = Resources/images;
@@ -383,9 +389,11 @@
 				34838FC314F3456D0064B619 /* ServerListView.xib in Resources */,
 				347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */,
 				15CB7C9F14F70BD30019EBAB /* UserListTableViewCell.xib in Resources */,
-				348F5C2914FC771C00F76AAC /* 37x-Checkmark.png in Resources */,
-				346CB48314FC81A500ED6A5F /* 37x-Error.png in Resources */,
 				34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */,
+				347B37FD15098D6500D88034 /* Checkmark.png in Resources */,
+				347B37FE15098D6500D88034 /* Checkmark@2x.png in Resources */,
+				347B37FF15098D6500D88034 /* Error.png in Resources */,
+				347B380015098D6500D88034 /* Error@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

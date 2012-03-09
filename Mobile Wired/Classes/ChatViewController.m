@@ -226,7 +226,7 @@
 - (void)didFailLoginWithReason:(NSString *)reason
 {
     // Update the Progress HUD
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Error.png"]];
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Login Failed";
     progressHUD.detailsLabelText = reason;
@@ -236,7 +236,7 @@
 - (void)didFailConnectionWithReason:(NSError *)error
 {
     // Update the Progress HUD
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Error.png"]];
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Connection Failed";
 }
@@ -258,7 +258,7 @@
     [userListView.tableView setNeedsDisplay];
     
     // Update the Progress HUD
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Connected";
     [progressHUD hide:YES afterDelay:2];
