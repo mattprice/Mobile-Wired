@@ -91,12 +91,25 @@
         }
     }
     
+    // Get info about the current row's user
     NSDictionary *currentUser = [userListArray objectAtIndex:[indexPath row]];
+    
+    // Center the nickname if there's no status.
+    if ( [[currentUser objectForKey:@"wired.user.status"] isEqualToString:@""] ) {
+        cell.nickLabel.text = @"";
+        cell.statusLabel.text = @"";
         
+        cell.onlyNickLabel.text = [currentUser objectForKey:@"wired.user.nick"];
+        cell.onlyNickLabel.textColor = [currentUser objectForKey:@"wired.account.color"];
+    } else {
+        cell.onlyNickLabel.text = @"";
+        
+        cell.nickLabel.text = [currentUser objectForKey:@"wired.user.nick"];
+        cell.nickLabel.textColor = [currentUser objectForKey:@"wired.account.color"];
+        cell.statusLabel.text = [currentUser objectForKey:@"wired.user.status"];
+    }
+    
     cell.avatar.image = [UIImage imageWithData:[currentUser objectForKey:@"wired.user.icon"]];
-    cell.nickLabel.text = [currentUser objectForKey:@"wired.user.nick"];
-    cell.nickLabel.textColor = [currentUser objectForKey:@"wired.account.color"];
-    cell.statusLabel.text = [currentUser objectForKey:@"wired.user.status"];
     //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;

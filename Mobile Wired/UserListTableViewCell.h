@@ -10,10 +10,10 @@
 
 @interface UserListTableViewCell : UITableViewCell
 {
-    IBOutlet UILabel *nickLabel, *statusLabel;
+    IBOutlet UILabel *nickLabel, *onlyNickLabel, *statusLabel;
     IBOutlet UIImageView *avatar;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *avatar;
-@property (nonatomic, retain) IBOutlet UILabel *nickLabel, *statusLabel;
+@property (nonatomic, retain) IBOutlet UILabel *nickLabel, *onlyNickLabel, *statusLabel;
 @end

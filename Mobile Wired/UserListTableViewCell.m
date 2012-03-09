@@ -10,7 +10,7 @@
 
 @implementation UserListTableViewCell
 
-@synthesize nickLabel, statusLabel, avatar;
+@synthesize nickLabel, onlyNickLabel, statusLabel, avatar;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
