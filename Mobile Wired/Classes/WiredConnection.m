@@ -214,9 +214,8 @@
         [self setIdle];
     }
     
-    else if ([message hasPrefix:@"/me"]) {
+    else if ([message hasPrefix:@"/me "]) {
         message = [message stringByReplacingOccurrencesOfString:@"/me " withString:@""];
-        message = [message stringByReplacingOccurrencesOfString:@"/me" withString:@""];
         [self sendChatEmote:message toChannel:channel];
     }
     
@@ -226,9 +225,8 @@
         [self setStatus:message];
     }
     
-    else if ([message hasPrefix:@"/nick"]) {
+    else if ([message hasPrefix:@"/nick "]) {
         message = [message stringByReplacingOccurrencesOfString:@"/nick " withString:@""];
-        message = [message stringByReplacingOccurrencesOfString:@"/nick" withString:@""];
         [self setNick:message];
     }
     
@@ -238,9 +236,8 @@
         [self setTopic:message forChannel:channel];
     }
     
-    else if ([message hasPrefix:@"/broadcast"]) {
+    else if ([message hasPrefix:@"/broadcast "]) {
         message = [message stringByReplacingOccurrencesOfString:@"/broadcast " withString:@""];
-        message = [message stringByReplacingOccurrencesOfString:@"/broadcast" withString:@""];
         [self sendBroadcast:message];
     }
     
