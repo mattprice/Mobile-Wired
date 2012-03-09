@@ -209,32 +209,38 @@
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel
 {
     // TODO: Clear and Ping commands.
+    // TODO: Need a less messy way to handle blank commands.
     if ([message isEqualToString:@"/afk"]) {
         [self setIdle];
     }
     
     else if ([message hasPrefix:@"/me"]) {
         message = [message stringByReplacingOccurrencesOfString:@"/me " withString:@""];
+        message = [message stringByReplacingOccurrencesOfString:@"/me" withString:@""];
         [self sendChatEmote:message toChannel:channel];
     }
     
     else if ([message hasPrefix:@"/status"]) {
         message = [message stringByReplacingOccurrencesOfString:@"/status " withString:@""];
+        message = [message stringByReplacingOccurrencesOfString:@"/status" withString:@""];
         [self setStatus:message];
     }
     
     else if ([message hasPrefix:@"/nick"]) {
         message = [message stringByReplacingOccurrencesOfString:@"/nick " withString:@""];
+        message = [message stringByReplacingOccurrencesOfString:@"/nick" withString:@""];
         [self setNick:message];
     }
     
     else if ([message hasPrefix:@"/topic"]) {
         message = [message stringByReplacingOccurrencesOfString:@"/topic " withString:@""];
+        message = [message stringByReplacingOccurrencesOfString:@"/topic" withString:@""];
         [self setTopic:message forChannel:channel];
     }
     
     else if ([message hasPrefix:@"/broadcast"]) {
         message = [message stringByReplacingOccurrencesOfString:@"/broadcast " withString:@""];
+        message = [message stringByReplacingOccurrencesOfString:@"/broadcast" withString:@""];
         [self sendBroadcast:message];
     }
     
