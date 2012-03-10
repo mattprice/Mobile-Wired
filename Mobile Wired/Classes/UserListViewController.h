@@ -10,10 +10,10 @@
 
 
 @interface UserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
-    NSArray *userListArray;
+    NSMutableArray *userListArray;
 }
 
-@property (strong, nonatomic) NSArray *userListArray;
+@property (strong, nonatomic) NSMutableArray *userListArray;
 
 - (void)setUserList:(NSDictionary *)userList;
 

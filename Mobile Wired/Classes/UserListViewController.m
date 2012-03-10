@@ -53,8 +53,13 @@
 
 - (void)setUserList:(NSDictionary *)userList
 {
-    // User lists are sorted into channels; save only channel 1.
-    self.userListArray = [[userList objectForKey:@"1"] allValues];
+    // User lists are organized into channels; save only channel 1.
+    self.userListArray = [[[userList objectForKey:@"1"] allValues] mutableCopy];
+    
+    // Sort the user list by user ID, which increments each time someone connects.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"wired.user.id" ascending:YES];
+    [self.userListArray sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    [self.tableView reloadData];
     
     // Reload the TableView
     [self.tableView reloadData];
