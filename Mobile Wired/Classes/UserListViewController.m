@@ -109,6 +109,19 @@
         cell.statusLabel.text = [currentUser objectForKey:@"wired.user.status"];
     }
     
+    // Fade information about idle users
+    if ( [[currentUser objectForKey:@"wired.user.idle"] isEqualToString:@"1"] ) {
+        cell.nickLabel.alpha = 0.3;
+        cell.onlyNickLabel.alpha = 0.3;
+        cell.statusLabel.alpha = 0.4;
+        cell.avatar.alpha = 0.5;
+    } else {
+        cell.nickLabel.alpha = 1;
+        cell.onlyNickLabel.alpha = 1;
+        cell.statusLabel.alpha = 1;
+        cell.avatar.alpha = 1;
+    }
+    
     cell.avatar.image = [UIImage imageWithData:[currentUser objectForKey:@"wired.user.icon"]];
     //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
