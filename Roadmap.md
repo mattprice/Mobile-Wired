@@ -1,6 +1,6 @@
 # WiredConnection Improvements
-* Reconnect if disconnected or kicked
-    * Add a lastActivity timeout to recognize server-side disconnect
+* Reconnect if disconnected
+* Add a lastActivity timeout to recognize server-side disconnect
 
 # Version 1
 * TestFlight SDK

@@ -15,13 +15,16 @@
     GCDAsyncSocket *socket;
     id <WiredConnectionDelegate> delegate;
     NSMutableDictionary *userList;
+    NSMutableDictionary *serverInfo;
+    NSString *myUserID;
+    Boolean isConnected;
 }
 
 @property (strong, nonatomic) GCDAsyncSocket *socket;
 @property (strong, nonatomic) id <WiredConnectionDelegate> delegate;
 @property (copy) NSMutableDictionary *userList;
 @property (copy) NSMutableDictionary *serverInfo;
-@property (nonatomic) NSString *myUserID;
+@property (strong, nonatomic) NSString *myUserID;
 @property (nonatomic) Boolean isConnected;
 
 - (id)init;
@@ -38,8 +41,6 @@
 #pragma mark Connection Information
 - (NSDictionary *)getMyUserInfo;
 - (void)getInfoForUser:(NSString *)userID;
-- (NSDictionary *)getServerInfo;
-- (Boolean)isConnected;
 
 #pragma mark Channel Commands
 - (void)joinChannel:(NSString *)channel;
@@ -74,6 +75,11 @@
 - (void)didReceiveUserInfo:(NSDictionary *)info;
 - (void)didLoginSuccessfully;
 - (void)didFailLoginWithReason:(NSString *)reason;
+- (void)didDisconnect;
+- (void)willReconnect;
+- (void)didReconnect;
+- (Boolean)isReconnecting;
+- (void)didConnectAndLoginSuccessfully;
 - (void)didFailConnectionWithReason:(NSError *)error;
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel;
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
@@ -83,6 +89,7 @@
 - (void)userJoined:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
 - (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick forChannel:(NSString *)channel;
 - (void)userLeft:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
+- (void)userWasKicked:(NSString *)nick withID:(NSString *)userID byUser:(NSString *)kicker forReason:(NSString *)reason forChannel:(NSString *)channel;
 - (void)setUserList:(NSDictionary *)userList forChannel:(NSString *)channel;
 
 @end

@@ -141,7 +141,6 @@
 
 - (NSDictionary *)getMyUserInfo
 {
-    // User list heirarchy is Channel -> User Info.
     return [[userList objectForKey:@"1"] objectForKey:myUserID];
 }
 
@@ -154,23 +153,25 @@
     [self readData];
 }
 
-- (NSDictionary *)getServerInfo
-{
-    return serverInfo;
-}
-
-- (Boolean)isConnected
-{
-    return isConnected;
-}
-
 #pragma mark Channel Commands
 
+/*
+ * Attempts to join a channel on the Wired server.
+ *
+ * We need to make sure we reset the user list for the channel every time we join it.
+ * This is only for if the user was kicked since we reset all user lists on server connection.
+ *
+ * TODO: Check to make sure the channel was joined successfully.
+ *
+ */
 - (void)joinChannel:(NSString *)channel
 {
     NSLog(@"Attempting to join channel %@...",channel);
     
-    // TODO: Check to make sure the channel was joined successfully.
+    // Reset the user list for this channel.
+    [userList removeObjectForKey:channel];
+    
+    // Attempt to join the channel.
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:channel forKey:@"wired.chat.id"];
     [self sendTransaction:@"wired.chat.join_chat" withParameters:parameters];
     [self readData];
@@ -185,9 +186,17 @@
     [self readData];
 }
 
+/*
+ * Attempts to set the channel topic.
+ *
+ * User must have the correct permissions in order to set the topic.
+ * We currently do not check for those permissions.
+ *
+ * TODO: Check for errors, such as lack of permission.
+ *
+ */
 - (void)setTopic:(NSString *)topic forChannel:(NSString *)channel
 {
-    // TODO: I'm sure we should check for errors.
     NSLog(@"Attempting to set topic for channel %@...",channel);
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -205,11 +214,12 @@
  * message is equal to a known /command then we'll execute the command
  * instead of sending it as a literal message.
  *
+ * TODO: Clear and Ping commands.
+ * TODO: Need a less messy way to handle blank commands.
+ *
  */
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel
 {
-    // TODO: Clear and Ping commands.
-    // TODO: Need a less messy way to handle blank commands.
     if ([message isEqualToString:@"/afk"]) {
         [self setIdle];
     }
@@ -382,7 +392,7 @@
                                 @"2.0",           @"wired.info.application.version",
                                 @"8182",          @"wired.info.application.build",
                                 @"Mac OS X",      @"wired.info.os.name",
-                                @"10.6.7",        @"wired.info.os.version",
+                                @"10.7.3",        @"wired.info.os.version",
                                 @"i386",          @"wired.info.arch",
                                 @"false",         @"wired.info.supports_rsrc",
                                 nil];
@@ -635,7 +645,7 @@
             
             if ([childName isEqualToString:@"wired.user.id"]) {
                 childValue = [TBXML textForElement:childElement];
-                myUserID = [[NSString alloc] initWithString:childValue];
+                myUserID = childValue;
             }
         } while ((childElement = childElement->nextSibling));
         
@@ -839,6 +849,37 @@
         [delegate setUserList:userList forChannel:channel];
     }
     
+    else if ([rootName isEqualToString:@"wired.chat.user_kick"]) {
+        NSLog(@"User was kicked from channel.");
+        NSString *userID = @"0", *kickerUserID = @"0", *channel = @"1", *reason = @"";
+        NSString *nick = @"Unknown", *kicker = @"Unknown";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.chat.id"]) {
+                channel = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.id"]) {
+                kickerUserID = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.disconnected_id"]) {
+                userID = [TBXML textForElement:childElement];
+            }
+            
+            else if ([childName isEqualToString:@"wired.user.disconnect_message"]) {
+                reason = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        kicker = [[[userList objectForKey:channel] objectForKey:kickerUserID] objectForKey:@"wired.user.nick"];
+        
+        [delegate userWasKicked:nick withID:userID byUser:kicker forReason:reason forChannel:channel];
+    }
+    
     else if ([rootName isEqualToString:@"wired.chat.user_list.done"]) {
         NSLog(@"Finished receiving a list of users in the channel.");
         NSString *channel = @"1";
@@ -852,6 +893,13 @@
         } while ((childElement = childElement->nextSibling));
         
         [delegate setUserList:userList forChannel:channel];
+        
+        // Check for a reconnection attempt.
+        if ([delegate isReconnecting]) {
+            [delegate didReconnect];
+        } else {
+            [delegate didConnectAndLoginSuccessfully];
+        }
     }
     
     else if ([rootName isEqualToString:@"wired.chat.topic"]) {

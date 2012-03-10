@@ -20,7 +20,7 @@
 
 @synthesize connection = _connection;
 @synthesize navigationBar = _navigationBar;
-@synthesize userListView, badgeCount;
+@synthesize userListView, badgeCount, isReconnecting;
 
 #pragma mark -
 #pragma mark Wired Connection Methods
@@ -64,7 +64,6 @@
 {
     // Send the message.
     [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
     chatTextField.text = @"";
 }
 
@@ -72,7 +71,6 @@
 {
     // Send the message.
     [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
     chatTextField.text = @"";
     
     return YES;
@@ -144,6 +142,27 @@
 }
 
 /*
+ * Connection and login was successful.
+ *
+ * Called once the user is finally able to perform actions.
+ *
+ */
+- (void)didConnectAndLoginSuccessfully
+{
+    // Update the Progress HUD
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Connected";
+    [progressHUD hide:YES afterDelay:2];
+    
+    // Report the connection to chat.
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< Connected to %@ >>>\n",@"Cunning Giraffe"];
+    chatTextView.text = chatText;
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+}
+
+/*
  * Connection to the server failed.
  *
  * This method is called if the socket connection is not successful. The NSError sent is the
@@ -157,6 +176,79 @@
 	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Connection Failed";
+    
+    // If we were reconnection, assume the server is offline. We don't want to waste battery.
+    isReconnecting = false;
+}
+
+/*
+ * Disconnected from the Wired server.
+ *
+ * This method is called when the user disconnects from the Wired server and we do not expect
+ * to reconnect.
+ *
+ */
+- (void)didDisconnect
+{
+    // Update the progress HUD.
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Disconnected";
+    [progressHUD show:YES];
+    
+    // Report the disconnect to chat.
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",@"Cunning Giraffe"];
+    chatTextView.text = chatText;
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+}
+
+/*
+ * Reconnecting to the Wired server.
+ *
+ * This method is called when a user unexpectedly disconnects from the server and we are in the
+ * process of reconnecting. This may occur if the user is kicked, as well as a true loss of connection.
+ *
+ */
+- (void)willReconnect
+{
+    // We set this to know if this was a reconnection in the future.
+    isReconnecting = true;
+    
+    // Update the Progress HUD
+    progressHUD.mode = MBProgressHUDModeIndeterminate;
+    progressHUD.labelText = @"Reconnecting";
+    [progressHUD show:YES];
+    
+    // Report the disconnect to chat.
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",@"Cunning Giraffe"];
+    chatTextView.text = chatText;
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+}
+
+/*
+ * Reconnected to the Wired server.
+ *
+ * This method is called once the server reconnects from a willReconnect scenario.
+ *
+ */
+- (void)didReconnect
+{
+    // This is no longer a reconnection.
+    isReconnecting = false;
+    
+    // Update the Progress HUD
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Reconnected";
+    [progressHUD hide:YES afterDelay:2];
+    
+    // Report the disconnect to chat.
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< Reconnected to %@ >>>\n",@"Cunning Giraffe"];
+    chatTextView.text = chatText;
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
 /*
@@ -192,9 +284,10 @@
 //    NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"%@: %@\n", nick, message];
-    chatTextView.text = chatText;
     
+    [chatText appendFormat:@"%@: %@\n", nick, message];
+    
+    chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
@@ -252,9 +345,10 @@
 //    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"*** %@ %@\n",nick,message];
-    chatTextView.text = chatText;
     
+    [chatText appendFormat:@"*** %@ %@\n",nick,message];
+    
+    chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
@@ -269,9 +363,10 @@
 //    NSLog(@"<<< %@ has joined >>>",nick);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< %@ has joined >>>\n",nick];
-    chatTextView.text = chatText;
     
+    [chatText appendFormat:@"<<< %@ has joined >>>\n",nick];
+    
+    chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
@@ -286,9 +381,10 @@
 //    NSLog(@"<<< %@ is now known as %@ >>>",oldNick,newNick);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< %@ is now known as %@ >>>\n",oldNick,newNick];
-    chatTextView.text = chatText;
     
+    [chatText appendFormat:@"<<< %@ is now known as %@ >>>\n",oldNick,newNick];
+    
+    chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];    
 }
 
@@ -303,10 +399,43 @@
 //    NSLog(@"<<< %@ has left >>>",nick);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< %@ has left >>>\n",nick];
-    chatTextView.text = chatText;
     
+    [chatText appendFormat:@"<<< %@ has left >>>\n",nick];
+    
+    chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+}
+
+/*
+ * User was kicked from a channel.
+ *
+ * Kick notification could be for anyone, including yourself. If you're the user kicked, and you
+ * want to rejoin the channel, then you should do so in this method. WiredConnection will not
+ * rejoin for you. Also, the reason may be blank. Be sure to handle that.
+ *
+ * NOTE: Right now we assume that the user wants to rejoin the channel.
+ *
+ */
+- (void)userWasKicked:(NSString *)nick withID:(NSString *)userID byUser:(NSString *)kicker forReason:(NSString *)reason forChannel:(NSString *)channel
+{
+//    NSLog(@"<<< %@ was kicked by %@ (%@) >>>",nick,kicker,reason);
+    
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+
+    if ([reason isEqualToString:@""]) {
+        [chatText appendFormat:@"<<< %@ was kicked by %@ >>>\n",nick,kicker,reason];
+    } else {
+        [chatText appendFormat:@"<<< %@ was kicked by %@ (%@) >>>\n",nick,kicker,reason];        
+    }
+    
+    chatTextView.text = chatText;
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    
+    // Rejoin the channel if we were the one kicked.
+    if ([userID isEqualToString:self.connection.myUserID]) {
+        [self willReconnect];
+        [self.connection joinChannel:@"1"];
+    }
 }
 
 /*
@@ -320,12 +449,6 @@
 {
     [userListView setUserList:userList];
     [userListView.tableView setNeedsDisplay];
-    
-    // Update the Progress HUD
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Connected";
-    [progressHUD hide:YES afterDelay:2];
 }
 
 - (void)viewDidUnload
