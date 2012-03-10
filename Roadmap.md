@@ -1,7 +1,6 @@
 # WiredConnection Improvements
 * Reconnect if disconnected or kicked
     * Add a lastActivity timeout to recognize server-side disconnect
-* Show nick changes in chat
 
 # Version 1
 * TestFlight SDK

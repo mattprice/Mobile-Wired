@@ -80,6 +80,7 @@
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID;
 - (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID;
 - (void)userJoined:(NSString *)nick withID:(NSString *)userID;
+- (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick;
 - (void)userLeft:(NSString *)nick withID:(NSString *)userID;
 - (void)setUserList:(NSDictionary *)userList;
 - (void)didReceiveUserInfo:(NSDictionary *)info;

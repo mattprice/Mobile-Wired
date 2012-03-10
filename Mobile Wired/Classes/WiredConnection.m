@@ -767,6 +767,16 @@
             userInfo = [NSMutableDictionary dictionary];
         }
         
+        // Check existing users for name changes.
+        else {
+            NSString *oldNick = [userInfo objectForKey:@"wired.user.nick"];
+            NSString *newNick = [tempInfo objectForKey:@"wired.user.nick"];
+            
+            if (![oldNick isEqualToString:newNick]) {
+                [delegate userChangedNick:oldNick toNick:newNick];
+            }
+        }
+        
         // If the user just joined then notify the delegate.
         if ([rootName isEqualToString:@"wired.chat.user_join"]) {
             [delegate userJoined:[tempInfo objectForKey:@"wired.user.nick"] withID:userID];

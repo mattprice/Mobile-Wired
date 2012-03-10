@@ -171,7 +171,7 @@
 //    NSLog(@"%@ (%@) : %@",nick,userID,message);
     
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    localNotification.alertBody = [NSString stringWithFormat:@"%@: %@",nick, message];
+    localNotification.alertBody = [NSString stringWithFormat:@"%@: %@",nick,message];
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     
     self.badgeCount++;
@@ -191,7 +191,7 @@
 //    NSLog(@"%@ (%@) : %@",nick,userID,message);
     
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    localNotification.alertBody = [NSString stringWithFormat:@"%@: %@",nick, message];
+    localNotification.alertBody = [NSString stringWithFormat:@"%@: %@",nick,message];
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     
     self.badgeCount++;
@@ -205,7 +205,7 @@
 //    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"*** %@ %@\n", nick, message];
+    [chatText appendFormat:@"*** %@ %@\n",nick,message];
     chatTextView.text = chatText;
     
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
@@ -216,10 +216,21 @@
 //    NSLog(@"<<< %@ has joined >>>",nick);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< %@ has joined >>>\n", nick];
+    [chatText appendFormat:@"<<< %@ has joined >>>\n",nick];
     chatTextView.text = chatText;
     
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+}
+
+- (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick
+{
+//    NSLog(@"<<< %@ is now known as %@ >>>",oldNick,newNick);
+    
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< %@ is now known as %@ >>>\n",oldNick,newNick];
+    chatTextView.text = chatText;
+    
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];    
 }
 
 - (void)userLeft:(NSString *)nick withID:(NSString *)userID
@@ -227,7 +238,7 @@
 //    NSLog(@"<<< %@ has left >>>",nick);
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< %@ has left >>>\n", nick];
+    [chatText appendFormat:@"<<< %@ has left >>>\n",nick];
     chatTextView.text = chatText;
     
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
