@@ -12,7 +12,6 @@
     * Implement server bookmarks
 	* Expanding text field
 * Fixes
-	* Don't send "has joined" messages when first receiving the user list.
     * Text selection causes the keyboard to disappear, but the chatTextField doesn't move down
 
 # Version 1.x

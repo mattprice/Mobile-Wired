@@ -118,7 +118,6 @@
     
     // Create a base64 representation of the image.
     if (icon == nil) {
-//        base64 = @"iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA6pJREFUSMftVktPE1EU7g/RpQlQ3iJ1FMX4NlGJCdGY+Fpposa4MEZXLjSujCGamLhwR8Q+AbECFlCB+IhArMRHFNFi6dx50Xb6munMdPxmaijB0haNiQtuTprbe++c75zznXPutazvZP6pWFYA/hKAMn/XeZgGtyGNntziXwFAha2TqXWRCjtd4yT4u+Uh29zN2jxMlYNY7aTORf4cAOpqXKTKSQ4PCHfex8Y4mU1qYtqQ2YQ6TEs3/OK+Xq7CQda6inuTBwBWt/Rxg0FJ1jJsSvUGUrcnY1fHo9cnonc/xIdDUkLJQDqmEs0P2WoHTZUOgKOw6/yLcFTWvkSUCy8jWLHa6Qo7sToMwaTSQbb1sDf9saicCcbVQz6+yoxhSQCI76nhOV3X3dNJ8Gl10KCXWsBqdrLWTcrt9J7H3Kdwmk9p+/v4ApTkAJAkW7pZLqn1/5AQpcLxxRYM39TNhBKqX0jDjsaiAPD91mQspmjbHrG1Bb3OCtKszE4fHRLufYxjns3gJQGwXediJrg0KC17QBeuDNgLa+rcBKbs9HKgekOXsVKbL1C/APANDn0VlbZ3MTBZQDvKYmMXc21cHCUSnVDFdCYsa58jivNr8tCAUOmgF7mS8wBFhHN3P8bLlwDIxr3Vx78T0nq+kVQybZMiLFiIYZkPKFLIF5Te8mk4a8sXUKTKbi83G1f1ggNEVjpJHpKrneTMSBgn8Fv2YDHJlJkF9qmEXmwk1cyB/lziWhZmRbWT7ptJRWQjtbNMzMM0mgXxTVT1Esa1iSgSnfq90FBBIBB5jfI5NxqGyRAsQjuyoKmLDcZLArjpF/MDUEagjYlnGo7qI7R08WVkl5eDdlCHDHk2K5UCcPL5HBil8jY7yvTDavYM9DU0JQiI7Z9JYffEM0HLFNH+PCTVu3OJZFmqSpGRVU56t5c9Oxq2TyXx5UEfv7o9dGUsKqtLgrxh5e09bL2r5ButwU1WtYcuv4rwkoZKbOnjEa5jQ8LQrNG05/Uqmv49pqKrZ7OZKvHKNHq1g27qYgKiev9L4tLrCOJzeiS8poOuN2qC9QVTWQC4iD6BuDd4FrdIS0HzmSODgp836jYQU1Jq5s77OBZtZgyBvbWHRfGbuyruuDrXci59FHODh7wgMvT+iKs9gdTxp4J1QavJ9qUdjzh0IUHSpqNKSz8HepfxqgAGbNzbyzV1G2Vc4yS/x7DejAyOtT7hN+NVsNxnCwICFes8TNFj4Na28nT8PwF+AtAeCZTCkyndAAAAAElFTkSuQmCC";
         base64 = @"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";
     } else {
         base64 = [NSString encodeBase64WithData:icon];
@@ -762,9 +761,14 @@
             channelInfo = [NSMutableDictionary dictionary];
         }
         
-        // If we don't have data for the user already then they've just joined.
-        if ((userInfo = [channelInfo objectForKey:userID]) == nil) {
+        // If we don't have data for the user already then create a new NSDictionary.
+        userInfo = [channelInfo objectForKey:userID];
+        if (userInfo == nil) {
             userInfo = [NSMutableDictionary dictionary];
+        }
+        
+        // If the user just joined then notify the delegate.
+        if ([rootName isEqualToString:@"wired.chat.user_join"]) {
             [delegate userJoined:[tempInfo objectForKey:@"wired.user.nick"] withID:userID];
         }
         
