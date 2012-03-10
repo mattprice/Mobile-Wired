@@ -6,7 +6,6 @@
 # Version 1
 * TestFlight SDK
 * Features:
-    * Connect the user button
     * Add viewing of broadcasts
     * Add viewing of server topic
     * Add ability to view user info

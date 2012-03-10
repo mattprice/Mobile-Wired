@@ -18,7 +18,7 @@
     IBOutlet UserListViewController *userListView;
     int badgeCount;
     
-    IBOutlet UINavigationItem *serverTitle;
+    IBOutlet UINavigationBar *navigationBar;
     IBOutlet UITextView *serverTopic;
     
     IBOutlet UITextView *chatTextView;
@@ -34,6 +34,8 @@
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) IBOutlet UserListViewController *userListView;
 @property (nonatomic) int badgeCount;
+
+@property (strong, nonatomic) UINavigationBar *navigationBar;
 
 - (IBAction)sendButtonPressed:(id)sender;
 

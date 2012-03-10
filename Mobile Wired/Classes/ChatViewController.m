@@ -19,6 +19,7 @@
 @implementation ChatViewController
 
 @synthesize connection = _connection;
+@synthesize navigationBar = _navigationBar;
 @synthesize userListView, badgeCount;
 
 #pragma mark -
@@ -29,8 +30,13 @@
 {
     [super viewDidLoad];
     
-    // Set the server name.
-    [serverTitle setTitle:@"Cunning Giraffe"];
+    // Create the navigation bar
+    UINavigationItem *navItem = [[UINavigationItem alloc] init];
+    self.navigationBar.items = [NSArray arrayWithObject:navItem];
+    
+    // Customize the bar title and buttons
+    self.navigationBar.topItem.title = @"Cunning Giraffe";
+    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Users" style:UIBarButtonItemStyleBordered target:self.viewDeckController action:@selector(toggleRightView)];
     
     // Create a Progress HUD
     if (!progressHUD) {
