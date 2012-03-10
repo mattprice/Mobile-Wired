@@ -773,13 +773,13 @@
             NSString *newNick = [tempInfo objectForKey:@"wired.user.nick"];
             
             if (![oldNick isEqualToString:newNick]) {
-                [delegate userChangedNick:oldNick toNick:newNick];
+                [delegate userChangedNick:oldNick toNick:newNick forChannel:channel];
             }
         }
         
         // If the user just joined then notify the delegate.
         if ([rootName isEqualToString:@"wired.chat.user_join"]) {
-            [delegate userJoined:[tempInfo objectForKey:@"wired.user.nick"] withID:userID];
+            [delegate userJoined:[tempInfo objectForKey:@"wired.user.nick"] withID:userID forChannel:channel];
         }
         
         [userInfo addEntriesFromDictionary:tempInfo];
@@ -787,7 +787,7 @@
         // Save the new channel info and user info into the user list.
         [channelInfo setValue:userInfo forKey:userID];
         [userList setValue:channelInfo forKey:channel];
-        [delegate setUserList:userList];
+        [delegate setUserList:userList forChannel:channel];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.user_icon"]) {
@@ -811,7 +811,7 @@
         NSMutableDictionary *userInfo = [[userList objectForKey:channel] objectForKey:userID];
         [userInfo setObject:userIcon forKey:@"wired.user.icon"];
         [[userList objectForKey:channel] setObject:userInfo forKey:userID];
-        [delegate setUserList:userList];
+        [delegate setUserList:userList forChannel:channel];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.user_leave"]) {
@@ -835,13 +835,23 @@
         // Remove the user from the user list.
         [[userList objectForKey:channel] removeObjectForKey:userID];
         
-        [delegate userLeft:nick withID:userID];
-        [delegate setUserList:userList];
+        [delegate userLeft:nick withID:userID forChannel:channel];
+        [delegate setUserList:userList forChannel:channel];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.user_list.done"]) {
         NSLog(@"Finished receiving a list of users in the channel.");
-        [delegate setUserList:userList];
+        NSString *channel = @"1";
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            
+            if ([childName isEqualToString:@"wired.chat.id"]) {
+                channel = [TBXML textForElement:childElement];
+            }
+        } while ((childElement = childElement->nextSibling));
+        
+        [delegate setUserList:userList forChannel:channel];
     }
     
     else if ([rootName isEqualToString:@"wired.chat.topic"]) {

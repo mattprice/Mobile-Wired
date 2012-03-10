@@ -30,25 +30,25 @@
 {
     [super viewDidLoad];
     
-    // Create the navigation bar
+    // Create the navigation bar.
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
     self.navigationBar.items = [NSArray arrayWithObject:navItem];
     
-    // Customize the bar title and buttons
+    // Customize the bar title and buttons.
     self.navigationBar.topItem.title = @"Cunning Giraffe";
     self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
                                                                                      style:UIBarButtonItemStyleBordered
                                                                                     target:self.viewDeckController
                                                                                     action:@selector(toggleRightView)];
     
-    // Create a Progress HUD
+    // Create a progress HUD.
     if (!progressHUD) {
         progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
         progressHUD.delegate = self;
         [self.view addSubview:progressHUD];
     }
     
-    // Update the Progress HUD
+    // Update the progress HUD.
     progressHUD.mode = MBProgressHUDModeIndeterminate;
     progressHUD.animationType = MBProgressHUDAnimationZoom;
     progressHUD.labelText = @"Connecting";
@@ -62,7 +62,7 @@
 
 - (IBAction)sendButtonPressed:(id)sender
 {
-    // Send the message
+    // Send the message.
     [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
     chatTextField.text = @"";
@@ -70,7 +70,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    // Send the message
+    // Send the message.
     [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
     chatTextField.text = @"";
@@ -91,12 +91,26 @@
  */
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
-    // Set up the DefaultUserIcon if the user hasn't selected one of their one.
+    // Update the progress HUD.
     progressHUD.labelText = @"Logging In";
+    
     [self.connection setNick:@"Melman"];
     [self.connection setIcon:nil];
     [self.connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
     [self.connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
+}
+
+/*
+ * Received information about a user.
+ *
+ * This method is called when we receive specifically requested information about a user.
+ *
+ * TODO: Need to implement a UIView that displays this information when requested.
+ *
+ */
+- (void)didReceiveUserInfo:(NSDictionary *)info
+{
+    
 }
 
 /*
@@ -109,22 +123,40 @@
 - (void)didLoginSuccessfully
 {
     progressHUD.labelText = @"Joining Channel";
+    
     [self.connection joinChannel:@"1"];
-//    [self.connection sendChatMessage:@"Test..." toChannel:@"1"];
-
-//    [self.connection sendChatEmote:@"is having fun!" toChannel:@"1"];
-//    [self.connection sendChatMessage:@"/me is testing slash commands!" toChannel:@"1"];
-
-//    [self.connection sendChatMessage:@"/afk" toChannel:@"1"];
-//    [self.connection setIdle];
-//    [self.connection disconnect];
-
-//    [self.connection sendBroadcast:@"Broadcast"];
 }
 
-- (void)userStatusDidChange:(NSString *)newStatus withNick:(NSString *)nick withID:(NSString *)userID
+/*
+ * Login to the server failed.
+ *
+ * This method is called if the user is banned or their username and password combination
+ * is incorrect. The reason returned is not a complete sentence.
+ *
+ */
+- (void)didFailLoginWithReason:(NSString *)reason
 {
+    // Update the progress HUD.
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Login Failed";
+    progressHUD.detailsLabelText = reason;
+}
 
+/*
+ * Connection to the server failed.
+ *
+ * This method is called if the socket connection is not successful. The NSError sent is the
+ * same NSError returned by GCDAsyncSocket. We do not yet attempt to parse the NSError.
+ * Assume that the host/port is incorrect, or that the Wired server is currently offline.
+ *
+ */
+- (void)didFailConnectionWithReason:(NSError *)error
+{
+    // Update the progress HUD.
+	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Connection Failed";
 }
 
 /*
@@ -149,6 +181,12 @@
     [serverTopic setText:topic];
 }
 
+/*
+ * Received chat message for a channel.
+ *
+ * Message could be from anyone, including yourself.
+ *
+ */
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
 //    NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
@@ -163,7 +201,10 @@
 /*
  * Received a private message from some user.
  *
- * Message could be from anyone, including yourself.
+ * Message could be from anyone, including yourself. Be sure not to send a push notification
+ * if the message was from yourself.
+ *
+ * TODO: Don't send notification if message is from yourself.
  *
  */
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
@@ -183,7 +224,7 @@
 /*
  * Received a broadcast from someone.
  *
- * Message could be from anyone, including yourself.
+ * Broadcast could be from anyone, including yourself.
  *
  */
 - (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
@@ -200,6 +241,12 @@
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
 }
 
+/*
+ * Received an emote for a channel.
+ *
+ * Emote could be from anyone, including yourself.
+ *
+ */
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
 //    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
@@ -211,7 +258,13 @@
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
-- (void)userJoined:(NSString *)nick withID:(NSString *)userID
+/*
+ * User joined a channel.
+ *
+ * Join notifications will only be about other users.
+ *
+ */
+- (void)userJoined:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
 //    NSLog(@"<<< %@ has joined >>>",nick);
     
@@ -222,7 +275,13 @@
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
-- (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick
+/*
+ * User changed their nick.
+ *
+ * Notification could be about anyone, including yourself.
+ *
+ */
+- (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick forChannel:(NSString *)channel
 {
 //    NSLog(@"<<< %@ is now known as %@ >>>",oldNick,newNick);
     
@@ -233,7 +292,13 @@
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];    
 }
 
-- (void)userLeft:(NSString *)nick withID:(NSString *)userID
+/*
+ * User left a channel.
+ *
+ * Leave notifications will only be about other users.
+ *
+ */
+- (void)userLeft:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
 //    NSLog(@"<<< %@ has left >>>",nick);
     
@@ -244,36 +309,14 @@
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
-- (void)didFailLoginWithReason:(NSString *)reason
-{
-    // Update the Progress HUD
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Login Failed";
-    progressHUD.detailsLabelText = reason;
-//    [progressHUD hide:YES afterDelay:10];
-}
-
-- (void)didFailConnectionWithReason:(NSError *)error
-{
-    // Update the Progress HUD
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Connection Failed";
-}
-
 /*
- * Received information about a user.
+ * Received an updated user list.
  *
- * This method is called when we receive specifically requested information about a user.
+ * This method is called each time we receive an updated user list. Individual event notifications
+ * should be handled elsewhere.
  *
  */
-- (void)didReceiveUserInfo:(NSDictionary *)info
-{
-
-}
-
-- (void)setUserList:(NSDictionary *)userList
+- (void)setUserList:(NSDictionary *)userList forChannel:(NSString *)channel
 {
     [userListView setUserList:userList];
     [userListView.tableView setNeedsDisplay];

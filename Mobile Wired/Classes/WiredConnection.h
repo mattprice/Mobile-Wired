@@ -71,18 +71,18 @@
 
 @protocol WiredConnectionDelegate <NSObject>
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo;
+- (void)didReceiveUserInfo:(NSDictionary *)info;
 - (void)didLoginSuccessfully;
+- (void)didFailLoginWithReason:(NSString *)reason;
+- (void)didFailConnectionWithReason:(NSError *)error;
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel;
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
-- (void)didFailLoginWithReason:(NSString *)reason;
-- (void)didFailConnectionWithReason:(NSError *)error;
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID;
 - (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID;
-- (void)userJoined:(NSString *)nick withID:(NSString *)userID;
-- (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick;
-- (void)userLeft:(NSString *)nick withID:(NSString *)userID;
-- (void)setUserList:(NSDictionary *)userList;
-- (void)didReceiveUserInfo:(NSDictionary *)info;
+- (void)userJoined:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
+- (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick forChannel:(NSString *)channel;
+- (void)userLeft:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel;
+- (void)setUserList:(NSDictionary *)userList forChannel:(NSString *)channel;
 
 @end
