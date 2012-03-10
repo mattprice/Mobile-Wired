@@ -36,7 +36,10 @@
     
     // Customize the bar title and buttons
     self.navigationBar.topItem.title = @"Cunning Giraffe";
-    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Users" style:UIBarButtonItemStyleBordered target:self.viewDeckController action:@selector(toggleRightView)];
+    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
+                                                                                     style:UIBarButtonItemStyleBordered
+                                                                                    target:self.viewDeckController
+                                                                                    action:@selector(toggleRightView)];
     
     // Create a Progress HUD
     if (!progressHUD) {

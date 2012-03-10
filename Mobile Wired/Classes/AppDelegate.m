@@ -25,6 +25,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    // Set the status bar style
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];  
+    
+    // Setup the sliding UI
 //    self.leftView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
     self.rightView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
     self.centerView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
