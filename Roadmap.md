@@ -12,7 +12,8 @@
     * Implement server bookmarks
 	* Expanding text field
 * Fixes
-    * Text selection causes the keyboard to disappear, but the chatTextField doesn't move down
+    * chatTextField doesn't move down when clicking links or selecting text
+    
 
 # Version 1.x
 * SSL connection
