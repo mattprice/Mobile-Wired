@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ServerListViewController : UIViewController
+@interface ServerListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+    NSMutableArray *serverBookmarks;
+}
+
+@property (strong, nonatomic) NSMutableArray *serverBookmarks;
 
 @end

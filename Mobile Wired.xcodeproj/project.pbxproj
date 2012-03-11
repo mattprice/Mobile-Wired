@@ -28,6 +28,8 @@
 		34A5A0F1136B74270022272F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EF136B74270022272F /* Default@2x.png */; };
 		34AEB777150D0201005F2B96 /* UserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */; };
 		34AEB77A150D0210005F2B96 /* UserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB779150D0210005F2B96 /* UserListTableViewCell.m */; };
+		34AEB77D150D02D6005F2B96 /* ServerListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB77C150D02D6005F2B96 /* ServerListTableViewCell.m */; };
+		34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */; };
 		34CBE9A01505ADA1000FBF2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */; };
 		34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34CBE9A31505AF49000FBF2C /* Default.mp3 */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
@@ -82,6 +84,9 @@
 		34AEB776150D0201005F2B96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = UserListTableViewCell.xib; sourceTree = "<group>"; };
 		34AEB778150D0210005F2B96 /* UserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserListTableViewCell.h; path = Classes/UserListTableViewCell.h; sourceTree = "<group>"; };
 		34AEB779150D0210005F2B96 /* UserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserListTableViewCell.m; path = Classes/UserListTableViewCell.m; sourceTree = "<group>"; };
+		34AEB77B150D02D6005F2B96 /* ServerListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerListTableViewCell.h; path = Classes/ServerListTableViewCell.h; sourceTree = "<group>"; };
+		34AEB77C150D02D6005F2B96 /* ServerListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerListTableViewCell.m; path = Classes/ServerListTableViewCell.m; sourceTree = "<group>"; };
+		34AEB77F150D03E0005F2B96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ServerListTableViewCell.xib; sourceTree = "<group>"; };
 		34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		34CBE9A31505AF49000FBF2C /* Default.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Default.mp3; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +180,8 @@
 			children = (
 				34838FAD14F32C640064B619 /* ServerListViewController.h */,
 				34838FAE14F32C640064B619 /* ServerListViewController.m */,
+				34AEB77B150D02D6005F2B96 /* ServerListTableViewCell.h */,
+				34AEB77C150D02D6005F2B96 /* ServerListTableViewCell.m */,
 			);
 			name = "Server List";
 			sourceTree = "<group>";
@@ -260,6 +267,7 @@
 				34EBE41F1359565100A24C01 /* UserListView.xib */,
 				34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */,
 				34838FC114F3456D0064B619 /* ServerListView.xib */,
+				34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */,
 				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
 			);
 			name = "Interface Builder";
@@ -418,6 +426,7 @@
 				34EC1153150AD1730015B2CD /* Users.png in Resources */,
 				34EC1154150AD1730015B2CD /* Users@2x.png in Resources */,
 				34AEB777150D0201005F2B96 /* UserListTableViewCell.xib in Resources */,
+				34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +468,7 @@
 				34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */,
 				348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */,
 				34AEB77A150D0210005F2B96 /* UserListTableViewCell.m in Sources */,
+				34AEB77D150D02D6005F2B96 /* ServerListTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +489,14 @@
 				34AEB776150D0201005F2B96 /* en */,
 			);
 			name = UserListTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34AEB77F150D03E0005F2B96 /* en */,
+			);
+			name = ServerListTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 		34EBE3FC135951A700A24C01 /* InfoPlist.strings */ = {
