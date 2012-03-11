@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15CB7C9C14F70BA90019EBAB /* UserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CB7C9B14F70BA90019EBAB /* UserListTableViewCell.m */; };
-		15CB7C9F14F70BD30019EBAB /* UserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CB7C9E14F70BD30019EBAB /* UserListTableViewCell.xib */; };
 		3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5C14F31D0A00362097 /* NSString+Base64.m */; };
 		3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5E14F31D0A00362097 /* NSString+Hashes.m */; };
 		3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CCFE136611B00046955F /* MobileWired@2x.png */; };
@@ -28,6 +26,8 @@
 		348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F5C2414FC63A800F76AAC /* MBProgressHUD.m */; };
 		34A5A0F0136B74270022272F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EE136B74270022272F /* Default.png */; };
 		34A5A0F1136B74270022272F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EF136B74270022272F /* Default@2x.png */; };
+		34AEB777150D0201005F2B96 /* UserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */; };
+		34AEB77A150D0210005F2B96 /* UserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB779150D0210005F2B96 /* UserListTableViewCell.m */; };
 		34CBE9A01505ADA1000FBF2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */; };
 		34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34CBE9A31505AF49000FBF2C /* Default.mp3 */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
@@ -51,9 +51,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15CB7C9A14F70BA90019EBAB /* UserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListTableViewCell.h; sourceTree = "<group>"; };
-		15CB7C9B14F70BA90019EBAB /* UserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListTableViewCell.m; sourceTree = "<group>"; };
-		15CB7C9E14F70BD30019EBAB /* UserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserListTableViewCell.xib; path = ../../UserListTableViewCell.xib; sourceTree = "<group>"; };
 		3431FF5F136C93ED00EDB8D8 /* Roadmap.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Roadmap.md; sourceTree = "<group>"; };
 		3439EC5B14F31D0A00362097 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Mobile Wired/Classes/Categories/NSString+Base64.h"; sourceTree = "<group>"; };
 		3439EC5C14F31D0A00362097 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Mobile Wired/Classes/Categories/NSString+Base64.m"; sourceTree = "<group>"; };
@@ -82,6 +79,9 @@
 		348F5C2414FC63A800F76AAC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Classes/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		34A5A0EE136B74270022272F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Mobile Wired/Resources/Images/Default.png"; sourceTree = SOURCE_ROOT; };
 		34A5A0EF136B74270022272F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Mobile Wired/Resources/Images/Default@2x.png"; sourceTree = SOURCE_ROOT; };
+		34AEB776150D0201005F2B96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = UserListTableViewCell.xib; sourceTree = "<group>"; };
+		34AEB778150D0210005F2B96 /* UserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserListTableViewCell.h; path = Classes/UserListTableViewCell.h; sourceTree = "<group>"; };
+		34AEB779150D0210005F2B96 /* UserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserListTableViewCell.m; path = Classes/UserListTableViewCell.m; sourceTree = "<group>"; };
 		34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		34CBE9A31505AF49000FBF2C /* Default.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Default.mp3; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +157,26 @@
 				348F5C2414FC63A800F76AAC /* MBProgressHUD.m */,
 			);
 			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		34AEB770150CFDCD005F2B96 /* User List */ = {
+			isa = PBXGroup;
+			children = (
+				34838FA814F32BA80064B619 /* UserListViewController.h */,
+				34838FA914F32BA80064B619 /* UserListViewController.m */,
+				34AEB778150D0210005F2B96 /* UserListTableViewCell.h */,
+				34AEB779150D0210005F2B96 /* UserListTableViewCell.m */,
+			);
+			name = "User List";
+			sourceTree = "<group>";
+		};
+		34AEB772150CFDE1005F2B96 /* Server List */ = {
+			isa = PBXGroup;
+			children = (
+				34838FAD14F32C640064B619 /* ServerListViewController.h */,
+				34838FAE14F32C640064B619 /* ServerListViewController.m */,
+			);
+			name = "Server List";
 			sourceTree = "<group>";
 		};
 		34CBE9A21505AF49000FBF2C /* Audio */ = {
@@ -238,7 +258,7 @@
 				347F7E9014F5C18000316FB3 /* DefaultView.xib */,
 				34EBE41B1359565100A24C01 /* ChatView.xib */,
 				34EBE41F1359565100A24C01 /* UserListView.xib */,
-				15CB7C9E14F70BD30019EBAB /* UserListTableViewCell.xib */,
+				34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */,
 				34838FC114F3456D0064B619 /* ServerListView.xib */,
 				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
 			);
@@ -301,12 +321,8 @@
 			children = (
 				34EBE4261359569B00A24C01 /* ChatViewController.h */,
 				34EBE4271359569B00A24C01 /* ChatViewController.m */,
-				34838FA814F32BA80064B619 /* UserListViewController.h */,
-				34838FA914F32BA80064B619 /* UserListViewController.m */,
-				15CB7C9A14F70BA90019EBAB /* UserListTableViewCell.h */,
-				15CB7C9B14F70BA90019EBAB /* UserListTableViewCell.m */,
-				34838FAD14F32C640064B619 /* ServerListViewController.h */,
-				34838FAE14F32C640064B619 /* ServerListViewController.m */,
+				34AEB772150CFDE1005F2B96 /* Server List */,
+				34AEB770150CFDCD005F2B96 /* User List */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -394,7 +410,6 @@
 				34A5A0F1136B74270022272F /* Default@2x.png in Resources */,
 				34838FC314F3456D0064B619 /* ServerListView.xib in Resources */,
 				347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */,
-				15CB7C9F14F70BD30019EBAB /* UserListTableViewCell.xib in Resources */,
 				34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */,
 				347B37FD15098D6500D88034 /* Checkmark.png in Resources */,
 				347B37FE15098D6500D88034 /* Checkmark@2x.png in Resources */,
@@ -402,6 +417,7 @@
 				347B380015098D6500D88034 /* Error@2x.png in Resources */,
 				34EC1153150AD1730015B2CD /* Users.png in Resources */,
 				34EC1154150AD1730015B2CD /* Users@2x.png in Resources */,
+				34AEB777150D0201005F2B96 /* UserListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,9 +456,9 @@
 				34838FB014F32C640064B619 /* ServerListViewController.m in Sources */,
 				345FC70714F467C0004D2A7B /* TBXML.m in Sources */,
 				345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */,
-				15CB7C9C14F70BA90019EBAB /* UserListTableViewCell.m in Sources */,
 				34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */,
 				348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */,
+				34AEB77A150D0210005F2B96 /* UserListTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +471,14 @@
 				34838FC214F3456D0064B619 /* en */,
 			);
 			name = ServerListView.xib;
+			sourceTree = "<group>";
+		};
+		34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34AEB776150D0201005F2B96 /* en */,
+			);
+			name = UserListTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 		34EBE3FC135951A700A24C01 /* InfoPlist.strings */ = {

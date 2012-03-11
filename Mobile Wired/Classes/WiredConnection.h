@@ -25,7 +25,7 @@
 @property (strong) NSMutableDictionary *userList;
 @property (strong) NSMutableDictionary *serverInfo;
 @property (strong, nonatomic) NSString *myUserID;
-@property (nonatomic) Boolean isConnected;
+@property Boolean isConnected;
 
 - (id)init;
 
