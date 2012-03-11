@@ -3,15 +3,17 @@
 * Add a lastActivity timeout to recognize server-side disconnect
 
 # Version 1
-* TestFlight SDK
+* TestFlight SDK (?)
 * Features:
     * Add viewing of broadcasts
     * Add viewing of server topic
     * Add ability to view user info
     * Implement server bookmarks
 	* Expanding text field
+    * Color <<< notification >>> messages
 * Fixes
     * chatTextField doesn't move down when clicking links or selecting text
+    * Server name changes don't update until next connect
     
 
 # Version 1.x

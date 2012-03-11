@@ -34,13 +34,6 @@
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
     self.navigationBar.items = [NSArray arrayWithObject:navItem];
     
-    // Customize the bar title and buttons.
-    self.navigationBar.topItem.title = @"Cunning Giraffe";
-    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
-                                                                                     style:UIBarButtonItemStyleBordered
-                                                                                    target:self.viewDeckController
-                                                                                    action:@selector(toggleRightView)];
-    
     // Create a progress HUD.
     if (!progressHUD) {
         progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -89,6 +82,14 @@
  */
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
+    // Update the server name and add some more buttons.
+    // Customize the bar title and buttons.
+    self.navigationBar.topItem.title = [self.connection.serverInfo objectForKey:@"wired.info.name"];
+    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
+                                                                                     style:UIBarButtonItemStyleBordered
+                                                                                    target:self.viewDeckController
+                                                                                    action:@selector(toggleRightView)];
+    
     // Update the progress HUD.
     progressHUD.labelText = @"Logging In";
     
@@ -157,7 +158,7 @@
     
     // Report the connection to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Connected to %@ >>>\n",@"Cunning Giraffe"];
+    [chatText appendFormat:@"<<< Connected to %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
@@ -198,7 +199,7 @@
     
     // Report the disconnect to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",@"Cunning Giraffe"];
+    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
@@ -222,7 +223,7 @@
     
     // Report the disconnect to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",@"Cunning Giraffe"];
+    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
@@ -246,7 +247,7 @@
     
     // Report the disconnect to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Reconnected to %@ >>>\n",@"Cunning Giraffe"];
+    [chatText appendFormat:@"<<< Reconnected to %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
