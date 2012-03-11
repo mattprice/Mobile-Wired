@@ -22,8 +22,8 @@
 
 @property (strong, nonatomic) GCDAsyncSocket *socket;
 @property (strong, nonatomic) id <WiredConnectionDelegate> delegate;
-@property (copy) NSMutableDictionary *userList;
-@property (copy) NSMutableDictionary *serverInfo;
+@property (strong) NSMutableDictionary *userList;
+@property (strong) NSMutableDictionary *serverInfo;
 @property (strong, nonatomic) NSString *myUserID;
 @property (nonatomic) Boolean isConnected;
 
