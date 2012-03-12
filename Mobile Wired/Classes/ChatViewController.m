@@ -477,6 +477,7 @@
     
     // Register an event for when a keyboard pops up
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adjustAccessoryView) name:UIKeyboardDidHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 }
 
@@ -514,13 +515,12 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    if(keyboard) return;
+    if (keyboard) return;
     
     // We can't access the UIKeyboard through the SDK we have to use a UIView.
     // See discussion http://www.iphonedevsdk.com/forum/iphone-sdk-development/6573-howto-customize-uikeyboard.html
-    
     UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
-    for(int i = 0; i < [tempWindow.subviews count]; i++) {
+    for (int i = 0; i < [tempWindow.subviews count]; i++) {
         UIView *possibleKeyboard = [tempWindow.subviews objectAtIndex:i];
         if([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"] == YES){
             keyboard = possibleKeyboard;
@@ -531,7 +531,7 @@
 
 - (void)adjustAccessoryView
 {
-    // Pan the accessoryView up/down.
+    // Pan the accessory view up/down.
     accessoryView.frame = CGRectMake(0.0, keyboard.frame.origin.y - 64, accessoryView.frame.size.width, accessoryView.frame.size.height);
     
     // Lengthen the chat view.
