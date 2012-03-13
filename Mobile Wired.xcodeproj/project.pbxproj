@@ -39,7 +39,6 @@
 		34EBE3D213594F7B00A24C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3D113594F7B00A24C01 /* main.m */; };
 		34EBE402135951A700A24C01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3FC135951A700A24C01 /* InfoPlist.strings */; };
 		34EBE403135951A700A24C01 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3FE135951A700A24C01 /* MainWindow.xib */; };
-		34EBE408135951C100A24C01 /* MobileWired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE406135951C100A24C01 /* MobileWired.xcdatamodeld */; };
 		34EBE4211359565100A24C01 /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41B1359565100A24C01 /* ChatView.xib */; };
 		34EBE4231359565100A24C01 /* UserListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41F1359565100A24C01 /* UserListView.xib */; };
 		34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4251359569B00A24C01 /* AppDelegate.m */; };
@@ -98,7 +97,6 @@
 		34EBE3F61359515F00A24C01 /* MobileWired-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MobileWired-Info.plist"; sourceTree = "<group>"; };
 		34EBE3F71359515F00A24C01 /* MobileWired-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MobileWired-Prefix.pch"; sourceTree = "<group>"; };
 		34EBE3FD135951A700A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
-		34EBE407135951C100A24C01 /* Mobile_Wired.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mobile_Wired.xcdatamodel; sourceTree = "<group>"; };
 		34EBE41C1359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ChatView.xib; sourceTree = "<group>"; };
 		34EBE4201359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = UserListView.xib; sourceTree = "<group>"; };
 		34EBE4241359569B00A24C01 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
@@ -199,7 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				3431FF5F136C93ED00EDB8D8 /* Roadmap.md */,
-				34EBE405135951C100A24C01 /* Models */,
 				34EBE3CA13594F7B00A24C01 /* Wired Classes */,
 				3440CD061366188E0046955F /* Categories */,
 				34EBE4331359677600A24C01 /* External Classes */,
@@ -272,15 +269,6 @@
 			);
 			name = "Interface Builder";
 			path = Resources/en.lproj;
-			sourceTree = "<group>";
-		};
-		34EBE405135951C100A24C01 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				34EBE406135951C100A24C01 /* MobileWired.xcdatamodeld */,
-			);
-			name = Models;
-			path = "Mobile Wired/Models";
 			sourceTree = "<group>";
 		};
 		34EBE40F1359528700A24C01 /* Images */ = {
@@ -455,7 +443,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
-				34EBE408135951C100A24C01 /* MobileWired.xcdatamodeld in Sources */,
 				34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */,
 				34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */,
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
@@ -634,20 +621,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		34EBE406135951C100A24C01 /* MobileWired.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				34EBE407135951C100A24C01 /* Mobile_Wired.xcdatamodel */,
-			);
-			currentVersion = 34EBE407135951C100A24C01 /* Mobile_Wired.xcdatamodel */;
-			name = MobileWired.xcdatamodeld;
-			path = Mobile_Wired.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 34EBE3B513594F7A00A24C01 /* Project object */;
 }
