@@ -163,12 +163,12 @@
 /*
  * Connection and login was successful.
  *
- * Called once the user is finally able to perform actions.
+ * Called on first connection to the Wired server once the user is finally able to perform actions.
  *
  */
 - (void)didConnectAndLoginSuccessfully
 {
-    // Update the Progress HUD
+    // Update the progress HUD.
 	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Connected";
@@ -179,6 +179,9 @@
     [chatText appendFormat:@"<<< Connected to %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    
+    // Enable sliding to see the user list.
+    self.viewDeckController.rightController = self.userListView;
 }
 
 /*

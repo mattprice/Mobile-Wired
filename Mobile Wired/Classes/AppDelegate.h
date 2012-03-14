@@ -34,18 +34,18 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, AVAudioPlayerDelegate> {
     IBOutlet UIWindow *window;
 
-    IBOutlet ServerListViewController *leftView;
-    IBOutlet UserListViewController *rightView;
-    IBOutlet ChatViewController *centerView;
+    IBOutlet ServerListViewController *serverListView;
+    IBOutlet UserListViewController *userListView;
+    IBOutlet ChatViewController *chatView;
     
     AVAudioPlayer *audioPlayer;
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 
-@property (strong, nonatomic) IBOutlet ServerListViewController *leftView;
-@property (strong, nonatomic) IBOutlet UserListViewController *rightView;
-@property (strong, nonatomic) IBOutlet ChatViewController *centerView;
+@property (strong, nonatomic) IBOutlet ServerListViewController *serverListView;
+@property (strong, nonatomic) IBOutlet UserListViewController *userListView;
+@property (strong, nonatomic) IBOutlet ChatViewController *chatView;
 
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 

@@ -34,9 +34,9 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize leftView = _leftView;
-@synthesize rightView = _rightView;
-@synthesize centerView = _centerView;
+@synthesize serverListView = serverListView;
+@synthesize userListView = _userListView;
+@synthesize chatView = _chatView;
 @synthesize audioPlayer;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -47,15 +47,15 @@
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];  
     
     // Setup the sliding UI
-//    self.leftView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
-    self.rightView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
-    self.centerView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
+    self.serverListView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
+    self.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+    self.chatView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
     
-    self.centerView.userListView = self.rightView;
+    self.chatView.userListView = self.userListView;
     
-    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.centerView 
-                                                                                    leftViewController:self.leftView
-                                                                                    rightViewController:self.rightView];
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.chatView 
+                                                                                    leftViewController:self.serverListView
+                                                                                    rightViewController:nil];
     
     // Keep the app running in background indefinitely.
     NSError *error;
@@ -79,7 +79,7 @@
      Sent whenever we receive a notification whilte the application is currently open.
      */
     
-    self.centerView.badgeCount = 0;
+    self.chatView.badgeCount = 0;
     application.applicationIconBadgeNumber = 0;
 }
 
@@ -114,7 +114,7 @@
      If the application was previously in the background, optionally refresh the user interface.
      */
     
-    self.centerView.badgeCount = 0;
+    self.chatView.badgeCount = 0;
     application.applicationIconBadgeNumber = 0;
 }
 

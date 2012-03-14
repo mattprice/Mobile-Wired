@@ -100,10 +100,18 @@
         }
     }
     
-    // Get info about the current row's user
-    NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+    // Section 0 is for server bookmarks
+    if ([indexPath section] == 0) {
+        // Get info about the current row's user
+//        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+    }
     
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    // Section 1 is for Settings
+    if ([indexPath section] == 1) {
+        cell.bookmarkLabel.text = @"Settings";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     
     return cell;
 }
