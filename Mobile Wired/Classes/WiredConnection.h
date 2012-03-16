@@ -32,17 +32,25 @@
 @interface WiredConnection : NSObject {
     GCDAsyncSocket *socket;
     id <WiredConnectionDelegate> delegate;
+    
+    NSString *serverHost;
+    UInt16 serverPort;
+    
     NSMutableDictionary *userList;
     NSMutableDictionary *serverInfo;
     NSString *myUserID;
+    
     Boolean isConnected;
+    NSInteger failCount;
 }
 
 @property (strong, nonatomic) GCDAsyncSocket *socket;
 @property (strong, nonatomic) id <WiredConnectionDelegate> delegate;
+
 @property (strong) NSMutableDictionary *userList;
 @property (strong) NSMutableDictionary *serverInfo;
 @property (strong, nonatomic) NSString *myUserID;
+
 @property Boolean isConnected;
 
 - (id)init;
@@ -79,6 +87,7 @@
 - (void)sendPingReply;
 - (void)sendPingRequest;
 - (void)readData;
+- (void)attemptReconnection;
 
 #pragma mark GCDAsyncSocket Wrappers
 - (void)secureSocket;
@@ -95,8 +104,9 @@
 - (void)didFailLoginWithReason:(NSString *)reason;
 - (void)didDisconnect;
 - (void)willReconnect;
+- (void)willReconnectDelayed:(NSString *)delay;
+- (void)willReconnectDelayed:(NSString *)delay withError:(NSError *)error;
 - (void)didReconnect;
-- (Boolean)isReconnecting;
 - (void)didConnectAndLoginSuccessfully;
 - (void)didFailConnectionWithReason:(NSError *)error;
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel;

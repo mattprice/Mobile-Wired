@@ -38,10 +38,7 @@
 
 @synthesize connection = _connection;
 @synthesize navigationBar = _navigationBar;
-@synthesize userListView, badgeCount, isReconnecting;
-
-#pragma mark -
-#pragma mark Wired Connection Methods
+@synthesize userListView, badgeCount;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -59,6 +56,27 @@
         [self.view addSubview:progressHUD];
     }
     
+    [self connect];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark -
+#pragma mark Wired Connection Methods
+
+- (void)connect
+{
     // Update the progress HUD.
     progressHUD.mode = MBProgressHUDModeIndeterminate;
     progressHUD.animationType = MBProgressHUDAnimationZoom;
@@ -198,9 +216,6 @@
 	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Connection Failed";
-    
-    // If we were reconnection, assume the server is offline. We don't want to waste battery.
-    isReconnecting = false;
 }
 
 /*
@@ -229,14 +244,11 @@
  * Reconnecting to the Wired server.
  *
  * This method is called when a user unexpectedly disconnects from the server and we are in the
- * process of reconnecting. This may occur if the user is kicked, as well as a true loss of connection.
+ * process of reconnecting. This will most likely occur if the user is kicked.
  *
  */
 - (void)willReconnect
 {
-    // We set this to know if this was a reconnection in the future.
-    isReconnecting = true;
-    
     // Update the Progress HUD
     progressHUD.mode = MBProgressHUDModeIndeterminate;
     progressHUD.labelText = @"Reconnecting";
@@ -250,6 +262,42 @@
 }
 
 /*
+ * Reconnecting to the Wired server.
+ *
+ * This method is called when a user expectedly disconnects from the server and we are in the
+ * process of reconnecting. This will most likely occur if the server crashed and we're waiting
+ * a few seconds for it to restart.
+ *
+ */
+- (void)willReconnectDelayed:(NSString *)delay
+{
+    // Report the disconnect to chat.
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< Reconnecting to %@ in %@ seconds >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"], delay];
+    chatTextView.text = chatText;
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];   
+}
+
+/*
+ * Reconnecting to the Wired server.
+ *
+ * This method is called when a user expectedly disconnects from the server and we are in the
+ * process of reconnecting. This will most likely occur if the server crashed and we're waiting
+ * a few seconds for it to restart. An error is sent when this is not our first reconnection try.
+ *
+ */
+- (void)willReconnectDelayed:(NSString *)delay withError:(NSError *)error
+{
+    // Report the disconnect to chat.
+    NSMutableString *chatText = [chatTextView.text mutableCopy];
+    [chatText appendFormat:@"<<< Disconnected from %@:%@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"], error.description];
+    chatTextView.text = chatText;
+    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    
+    [self willReconnectDelayed:delay];
+}
+
+/*
  * Reconnected to the Wired server.
  *
  * This method is called once the server reconnects from a willReconnect scenario.
@@ -257,9 +305,6 @@
  */
 - (void)didReconnect
 {
-    // This is no longer a reconnection.
-    isReconnecting = false;
-    
     // Update the Progress HUD
 	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
@@ -455,6 +500,7 @@
     
     // Rejoin the channel if we were the one kicked.
     if ([userID isEqualToString:self.connection.myUserID]) {
+        
         [self willReconnect];
         [self.connection joinChannel:@"1"];
     }
@@ -471,19 +517,6 @@
 {
     [userListView setUserList:userList];
     [userListView.tableView setNeedsDisplay];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark -

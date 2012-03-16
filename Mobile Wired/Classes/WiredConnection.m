@@ -64,6 +64,9 @@
     userList = [[NSMutableDictionary alloc] init];
     serverInfo = [[NSMutableDictionary alloc] init];
     
+    serverHost = server;
+    serverPort = port;
+    
     // Attempt a socket connection to the server.
     NSLog(@"Beginning socket connection...");
     if (![socket connectToHost:server onPort:port withTimeout:15 error:&error]) {
@@ -83,12 +86,15 @@
                                 nil];
     [self sendTransaction:@"wired.user.disconnect_user" withParameters:parameters];
     
+    // Alert the delegate that we're disconnectiong.
+    [delegate didDisconnect];
+    
     // Disconnect the socket and then release.
     isConnected = false;
     [socket setDelegate:nil];
     [socket disconnectAfterWriting];
     socket = nil;
-    userList = nil;
+    userList = nil, serverHost = nil, serverPort = 0;
 }
 
 /*
@@ -465,6 +471,12 @@
     [socket readDataToData:[GCDAsyncSocket CRLFData] withTimeout:-1 tag:0];
 }
 
+- (void)attemptReconnection
+{
+    failCount++;
+    [self connectToServer:serverHost onPort:serverPort];
+}
+
 #pragma mark GCDAsyncSocket Wrappers
 /*
  * Runs anything that needs to be done post-connection.
@@ -484,6 +496,9 @@
             NSLog(@"Failed to enable backgrounding.");
     }];
 #endif
+    
+    // Reset the failCount if we were in a reconnecting loop.
+    failCount = 0;
     
     // Start sending Wired connection info.
     NSLog(@"Sending Wired handshake...");
@@ -519,8 +534,26 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error
 {
     NSLog(@"Server disconnected unexpectedly. <Error: %@>", error);
-    [delegate didFailConnectionWithReason:error];
-    isConnected = false;
+    
+    // If we're already connected then we must have unexpected disconnected.
+    if (isConnected && !failCount) {
+        failCount = 1;
+        
+        [delegate willReconnect];
+        [delegate willReconnectDelayed:@"00:10"];
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(attemptReconnection) userInfo:nil repeats:NO];
+    }
+    
+    // If we have a failCount then we must be in a reconnecting loop.
+    else if (failCount && failCount < 3) {
+        [delegate willReconnectDelayed:@"00:10" withError:error];
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(attemptReconnection) userInfo:nil repeats:NO];
+    }
+    
+    // Anything else must be an utter connection failure. Sorry guys!
+    else {
+        [delegate didFailConnectionWithReason:error];
+    }
 }
 
 /*
@@ -667,7 +700,6 @@
             }
         } while ((childElement = childElement->nextSibling));
         
-        isConnected = true;
         [delegate didLoginSuccessfully];
     }
     
@@ -912,11 +944,12 @@
         
         [delegate setUserList:userList forChannel:channel];
         
-        // Check for a reconnection attempt.
-        if ([delegate isReconnecting]) {
+        // If we're already connected then we must be rejoining the channel.
+        if (isConnected) {
             [delegate didReconnect];
         } else {
             [delegate didConnectAndLoginSuccessfully];
+            isConnected = true;
         }
     }
     

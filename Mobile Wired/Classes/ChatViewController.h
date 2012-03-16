@@ -34,7 +34,6 @@
     WiredConnection *connection;
     MBProgressHUD *progressHUD;
     IBOutlet UserListViewController *userListView;
-    Boolean isReconnecting;
     int badgeCount;
     
     IBOutlet UINavigationBar *navigationBar;
@@ -52,7 +51,6 @@
 
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) IBOutlet UserListViewController *userListView;
-@property (nonatomic) Boolean isReconnecting;
 @property (nonatomic) int badgeCount;
 
 @property (strong, nonatomic) UINavigationBar *navigationBar;

@@ -1,7 +1,3 @@
-# WiredConnection Improvements
-* Reconnect if disconnected
-* Add a lastActivity timeout to recognize server-side disconnect
-
 # Version 1
 * TestFlight SDK (?)
 * Features:
@@ -9,12 +5,12 @@
     * Add viewing of server topic
     * Add ability to view user info
     * Implement server bookmarks
-	* Expanding text field
-    * Color <<< notification >>> messages
-* Fixes
-    * chatTextField doesn't move down when clicking links or selecting text
-    * Server name changes don't update until next connect
-    
+    * Implement settings screen
+* Improvements:
+	* Improve the UINavigationBar background color/image.
+	* When selecting text/link, keyboard disappears before the text field moves down.
+	* Text field does not expand with long messages.
+	* <<< Notification messages >>> should be colored red.
 
 # Version 1.x
 * SSL connection
