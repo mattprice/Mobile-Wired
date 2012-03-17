@@ -1,5 +1,6 @@
 # Version 1
 * TestFlight SDK (?)
+* Check connection status if the app has returned from being backgrounded.
 * Features:
     * Add viewing of broadcasts
     * Add viewing of server topic

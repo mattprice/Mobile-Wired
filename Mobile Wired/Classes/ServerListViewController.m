@@ -92,7 +92,7 @@
         
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"ServerListTableViewCell" owner:nil options:nil];
         
-        for(id currentObject in topLevelObjects) {
+        for (id currentObject in topLevelObjects) {
             if([currentObject isKindOfClass:[ServerListTableViewCell class]]) {
                 cell = (ServerListTableViewCell *)currentObject;
                 break;

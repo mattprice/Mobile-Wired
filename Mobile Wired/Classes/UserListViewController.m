@@ -105,7 +105,7 @@
         
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"UserListTableViewCell" owner:nil options:nil];
         
-        for(id currentObject in topLevelObjects) {
+        for (id currentObject in topLevelObjects) {
             if([currentObject isKindOfClass:[UserListTableViewCell class]]) {
                 cell = (UserListTableViewCell *)currentObject;
                 break;
@@ -145,7 +145,7 @@
     }
     
     cell.avatar.image = [UIImage imageWithData:[currentUser objectForKey:@"wired.user.icon"]];
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
