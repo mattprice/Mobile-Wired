@@ -58,9 +58,9 @@
     
     // Set up a custom UILabel so that we can change the text color.
     titleLabel = [[UILabel alloc] init];
-    titleLabel.frame = CGRectMake(0, 0, 320, 44);
+    titleLabel.frame = CGRectMake(0, 0, 215, 44);
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
     titleLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1];
     titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.shadowColor = [UIColor colorWithWhite:0.8 alpha:0.3];

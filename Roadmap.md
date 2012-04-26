@@ -1,6 +1,5 @@
 # Version 1
 * TestFlight SDK (?)
-* Check connection status if the app has returned from being backgrounded.
 * Features:
     * Add viewing of broadcasts
     * Add viewing of server topic
@@ -8,7 +7,6 @@
     * Implement server bookmarks
     * Implement settings screen
 * Improvements:
-	* Improve the UINavigationBar background color/image.
 	* When selecting text/link, keyboard disappears before the text field moves down.
 	* Text field does not expand with long messages.
 	* <<< Notification messages >>> should be colored red.
