@@ -10,3 +10,6 @@
 [submodule "Mobile Wired/Classes/MBProgressHUD"]
 	path = Mobile Wired/Classes/MBProgressHUD
 	url = https://github.com/jdg/MBProgressHUD.git
+[submodule "Mobile Wired/Classes/PrettyKit"]
+	path = Mobile Wired/Classes/PrettyKit
+	url = https://github.com/vicpenap/PrettyKit.git
