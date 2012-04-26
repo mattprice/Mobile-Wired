@@ -12,6 +12,8 @@
 		3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CCFE136611B00046955F /* MobileWired@2x.png */; };
 		3440CD03136611EE0046955F /* MobileWired.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD02136611EE0046955F /* MobileWired.png */; };
 		3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD04136613EF0046955F /* DefaultUserIcon.png */; };
+		3450D0B91548DBA700D320AE /* PrettyDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450D0B61548DBA700D320AE /* PrettyDrawing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; settings = {COMPILER_FLAGS = "-Xanalyzer -analyzer-disable-checker"; }; };
 		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
@@ -60,6 +62,10 @@
 		3440CCFE136611B00046955F /* MobileWired@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MobileWired@2x.png"; path = "Mobile Wired/Resources/Images/MobileWired@2x.png"; sourceTree = SOURCE_ROOT; };
 		3440CD02136611EE0046955F /* MobileWired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MobileWired.png; path = "Mobile Wired/Resources/Images/MobileWired.png"; sourceTree = SOURCE_ROOT; };
 		3440CD04136613EF0046955F /* DefaultUserIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DefaultUserIcon.png; path = "Mobile Wired/Resources/Images/DefaultUserIcon.png"; sourceTree = SOURCE_ROOT; };
+		3450D0B51548DBA700D320AE /* PrettyDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyDrawing.h; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyDrawing.h"; sourceTree = "<group>"; };
+		3450D0B61548DBA700D320AE /* PrettyDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyDrawing.m; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyDrawing.m"; sourceTree = "<group>"; };
+		3450D0B71548DBA700D320AE /* PrettyNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyNavigationBar.h; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyNavigationBar.h"; sourceTree = "<group>"; };
+		3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyNavigationBar.m; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyNavigationBar.m"; sourceTree = "<group>"; };
 		345FC70614F467C0004D2A7B /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBXML.m; path = "TBXML-Code/TBXML.m"; sourceTree = "<group>"; };
 		345FC70814F467E1004D2A7B /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBXML.h; path = "TBXML-Headers/TBXML.h"; sourceTree = "<group>"; };
 		345FC70914F468DC004D2A7B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -151,6 +157,18 @@
 				3439EC5E14F31D0A00362097 /* NSString+Hashes.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		3450D0B31548DB7B00D320AE /* PrettyKit */ = {
+			isa = PBXGroup;
+			children = (
+				3450D0B51548DBA700D320AE /* PrettyDrawing.h */,
+				3450D0B61548DBA700D320AE /* PrettyDrawing.m */,
+				3450D0B71548DBA700D320AE /* PrettyNavigationBar.h */,
+				3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */,
+			);
+			name = PrettyKit;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		348F5C2114FC638800F76AAC /* MBProgressHUD */ = {
@@ -306,6 +324,7 @@
 				34EBE42D1359676E00A24C01 /* GCDAsyncSocket */,
 				34FC5C85135BB2A30049C737 /* TBXML */,
 				348F5C2114FC638800F76AAC /* MBProgressHUD */,
+				3450D0B31548DB7B00D320AE /* PrettyKit */,
 				3439EC6114F3264300362097 /* ViewDeck */,
 			);
 			name = "External Classes";
@@ -456,6 +475,8 @@
 				348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */,
 				34AEB77A150D0210005F2B96 /* UserListTableViewCell.m in Sources */,
 				34AEB77D150D02D6005F2B96 /* ServerListTableViewCell.m in Sources */,
+				3450D0B91548DBA700D320AE /* PrettyDrawing.m in Sources */,
+				3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +553,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -549,7 +570,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -569,7 +590,7 @@
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -588,7 +609,7 @@
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

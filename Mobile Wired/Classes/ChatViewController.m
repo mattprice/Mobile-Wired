@@ -49,6 +49,23 @@
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
     self.navigationBar.items = [NSArray arrayWithObject:navItem];
     
+    // Set up custom navigation bar styling.
+    self.navigationBar.topLineColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
+    self.navigationBar.gradientStartColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
+    self.navigationBar.gradientEndColor = [UIColor colorWithRed:0.718 green:0.722 blue:0.718 alpha:1];
+    self.navigationBar.bottomLineColor = [UIColor colorWithRed:0.416 green:0.416 blue:0.416 alpha:.5];
+    self.navigationBar.tintColor = self.navigationBar.gradientEndColor;
+    
+    // Set up a custom UILabel so that we can change the text color.
+    titleLabel = [[UILabel alloc] init];
+    titleLabel.frame = CGRectMake(0, 0, 320, 44);
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+    titleLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1];
+    titleLabel.textAlignment = UITextAlignmentCenter;
+    titleLabel.shadowColor = [UIColor colorWithWhite:0.8 alpha:0.3];
+	self.navigationBar.topItem.titleView = titleLabel;
+    
     // Create a progress HUD.
     if (!progressHUD) {
         progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -120,7 +137,7 @@
 {
     // Update the server name and add some more buttons.
     // Customize the bar title and buttons.
-    self.navigationBar.topItem.title = [self.connection.serverInfo objectForKey:@"wired.info.name"];
+    titleLabel.text = [self.connection.serverInfo objectForKey:@"wired.info.name"];
     self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
                                                                                      style:UIBarButtonItemStyleBordered
                                                                                     target:self.viewDeckController

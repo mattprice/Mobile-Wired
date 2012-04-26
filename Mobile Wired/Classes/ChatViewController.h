@@ -26,6 +26,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "PrettyNavigationBar.h"
 #import "WiredConnection.h"
 #import "UserListViewController.h"
 
@@ -36,8 +37,9 @@
     IBOutlet UserListViewController *userListView;
     int badgeCount;
     
-    IBOutlet UINavigationBar *navigationBar;
+    IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet UITextView *serverTopic;
+    UILabel *titleLabel;
     
     IBOutlet UITextView *chatTextView;
     IBOutlet UITextField* chatTextField;
@@ -53,7 +55,7 @@
 @property (strong, nonatomic) IBOutlet UserListViewController *userListView;
 @property (nonatomic) int badgeCount;
 
-@property (strong, nonatomic) UINavigationBar *navigationBar;
+@property (strong, nonatomic) PrettyNavigationBar *navigationBar;
 
 - (IBAction)sendButtonPressed:(id)sender;
 
