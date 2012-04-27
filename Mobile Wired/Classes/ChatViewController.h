@@ -25,10 +25,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MBProgressHUD.h"
-#import "PrettyNavigationBar.h"
 #import "WiredConnection.h"
 #import "UserListViewController.h"
+#import "MBProgressHUD.h"
+#import "PrettyNavigationBar.h"
+#import "PrettyToolbar.h"
 
 
 @interface ChatViewController : UIViewController <WiredConnectionDelegate, MBProgressHUDDelegate, UIGestureRecognizerDelegate> {
@@ -38,6 +39,7 @@
     int badgeCount;
     
     IBOutlet PrettyNavigationBar *navigationBar;
+    IBOutlet PrettyToolbar *toolBar;
     IBOutlet UITextView *serverTopic;
     UILabel *titleLabel;
     

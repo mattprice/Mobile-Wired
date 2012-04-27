@@ -113,7 +113,6 @@
 										<string key="NSFrame">{{12, 7}, {235, 31}}</string>
 										<reference key="NSSuperview" ref="213137872"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -244,6 +243,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">toolBar</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="213137872"/>
+					</object>
+					<int key="connectionID">63</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="746691397"/>
 						<reference key="destination" ref="372490531"/>
@@ -364,6 +371,7 @@
 					<string>-2.IBPluginDependency</string>
 					<string>1.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
+					<string>42.CustomClassName</string>
 					<string>42.IBPluginDependency</string>
 					<string>45.IBPluginDependency</string>
 					<string>46.IBPluginDependency</string>
@@ -381,6 +389,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>PrettyToolbar</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -403,7 +412,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">62</int>
+			<int key="maxID">63</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -431,6 +440,7 @@
 							<string>chatTextView</string>
 							<string>navigationBar</string>
 							<string>serverTopic</string>
+							<string>toolBar</string>
 							<string>userListView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -440,6 +450,7 @@
 							<string>UITextView</string>
 							<string>PrettyNavigationBar</string>
 							<string>UITextView</string>
+							<string>PrettyToolbar</string>
 							<string>UserListViewController</string>
 						</object>
 					</object>
@@ -452,6 +463,7 @@
 							<string>chatTextView</string>
 							<string>navigationBar</string>
 							<string>serverTopic</string>
+							<string>toolBar</string>
 							<string>userListView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -477,6 +489,10 @@
 								<string key="candidateClassName">UITextView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">toolBar</string>
+								<string key="candidateClassName">PrettyToolbar</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">userListView</string>
 								<string key="candidateClassName">UserListViewController</string>
 							</object>
@@ -493,6 +509,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PrettyNavigationBar.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PrettyToolbar</string>
+					<string key="superclassName">UIToolbar</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PrettyToolbar.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

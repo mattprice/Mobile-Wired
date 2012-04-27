@@ -54,7 +54,14 @@
     self.navigationBar.gradientStartColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
     self.navigationBar.gradientEndColor = [UIColor colorWithRed:0.718 green:0.722 blue:0.718 alpha:1];
     self.navigationBar.bottomLineColor = [UIColor colorWithRed:0.416 green:0.416 blue:0.416 alpha:.5];
-    self.navigationBar.tintColor = self.navigationBar.gradientEndColor;
+    self.navigationBar.tintColor = [UIColor colorWithWhite:0.65 alpha:1];
+    
+    // Set up custom toolbar styling.
+    toolBar.topLineColor = self.navigationBar.bottomLineColor;
+    toolBar.gradientStartColor = self.navigationBar.gradientStartColor;
+    toolBar.gradientEndColor = self.navigationBar.gradientEndColor;
+    toolBar.bottomLineColor = self.navigationBar.gradientEndColor;
+    toolBar.tintColor = self.navigationBar.tintColor;
     
     // Set up a custom UILabel so that we can change the text color.
     titleLabel = [[UILabel alloc] init];
