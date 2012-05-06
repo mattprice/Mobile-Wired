@@ -26,6 +26,8 @@
 
 #import "ServerListViewController.h"
 #import "ServerListTableViewCell.h"
+#import "IIViewDeckController.h"
+#import "SettingsViewController.h"
 
 @implementation ServerListViewController
 
@@ -130,7 +132,7 @@
     }
     
     // Section 0 is for server bookmarks
-    else if ([indexPath section] == 0) {
+    if ([indexPath section] == 0) {
         // Get info about the current row's user
 //        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
     }
@@ -168,8 +170,25 @@
     
     // Section 1 is Settings
     else if ([indexPath section] == 1) {
-        NSLog(@"*** Pressed settings!");
+        // Change the center controller, close the left view, and then disable panning.
+        self.viewDeckController.centerController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        self.viewDeckController.panningMode = IIViewDeckNoPanning;
     }
 }
+
+/*
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ }   
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }   
+ }
+ */
 
 @end

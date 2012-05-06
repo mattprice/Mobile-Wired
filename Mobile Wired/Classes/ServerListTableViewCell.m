@@ -35,7 +35,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        [self setFrame:CGRectMake(self.frame.origin.x + 50.0, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
     }
     return self;
 }

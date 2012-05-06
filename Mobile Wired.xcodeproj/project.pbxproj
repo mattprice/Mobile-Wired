@@ -36,7 +36,9 @@
 		34CBE9A01505ADA1000FBF2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */; };
 		34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34CBE9A31505AF49000FBF2C /* Default.mp3 */; };
 		34D464D615561BB600856E46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D464D415561BB600856E46 /* SettingsViewController.m */; };
-		34D464D715561BB600856E46 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34D464D515561BB600856E46 /* SettingsViewController.xib */; };
+		34D464D715561BB600856E46 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34D464D515561BB600856E46 /* SettingsView.xib */; };
+		34DB44ED155705E500C955A5 /* SettingsTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DB44EC155705E400C955A5 /* SettingsTextCell.m */; };
+		34DB44F1155707C200C955A5 /* SettingsTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DB44EF155707C200C955A5 /* SettingsTextCell.xib */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
 		34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */; };
@@ -101,7 +103,10 @@
 		34CBE9A31505AF49000FBF2C /* Default.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Default.mp3; sourceTree = "<group>"; };
 		34D464D315561BB600856E46 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Classes/SettingsViewController.h; sourceTree = "<group>"; };
 		34D464D415561BB600856E46 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Classes/SettingsViewController.m; sourceTree = "<group>"; };
-		34D464D515561BB600856E46 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = ../../Classes/SettingsViewController.xib; sourceTree = "<group>"; };
+		34D464D515561BB600856E46 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = ../../Classes/SettingsView.xib; sourceTree = "<group>"; };
+		34DB44EB155705E400C955A5 /* SettingsTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTextCell.h; path = Classes/SettingsTextCell.h; sourceTree = "<group>"; };
+		34DB44EC155705E400C955A5 /* SettingsTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTextCell.m; path = Classes/SettingsTextCell.m; sourceTree = "<group>"; };
+		34DB44F0155707C200C955A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SettingsTextCell.xib; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34EBE3C213594F7B00A24C01 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		34EBE3C413594F7B00A24C01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -221,6 +226,17 @@
 			path = "Mobile Wired/Resources/Audio";
 			sourceTree = SOURCE_ROOT;
 		};
+		34DB44EE155705F200C955A5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				34D464D315561BB600856E46 /* SettingsViewController.h */,
+				34D464D415561BB600856E46 /* SettingsViewController.m */,
+				34DB44EB155705E400C955A5 /* SettingsTextCell.h */,
+				34DB44EC155705E400C955A5 /* SettingsTextCell.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		34EBE3B313594F7A00A24C01 = {
 			isa = PBXGroup;
 			children = (
@@ -293,7 +309,8 @@
 				34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */,
 				34838FC114F3456D0064B619 /* ServerListView.xib */,
 				34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */,
-				34D464D515561BB600856E46 /* SettingsViewController.xib */,
+				34D464D515561BB600856E46 /* SettingsView.xib */,
+				34DB44EF155707C200C955A5 /* SettingsTextCell.xib */,
 				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
 			);
 			name = "Interface Builder";
@@ -347,8 +364,7 @@
 			children = (
 				34EBE4261359569B00A24C01 /* ChatViewController.h */,
 				34EBE4271359569B00A24C01 /* ChatViewController.m */,
-				34D464D315561BB600856E46 /* SettingsViewController.h */,
-				34D464D415561BB600856E46 /* SettingsViewController.m */,
+				34DB44EE155705F200C955A5 /* Settings */,
 				34AEB772150CFDE1005F2B96 /* Server List */,
 				34AEB770150CFDCD005F2B96 /* User List */,
 			);
@@ -447,7 +463,8 @@
 				34EC1154150AD1730015B2CD /* Users@2x.png in Resources */,
 				34AEB777150D0201005F2B96 /* UserListTableViewCell.xib in Resources */,
 				34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */,
-				34D464D715561BB600856E46 /* SettingsViewController.xib in Resources */,
+				34D464D715561BB600856E46 /* SettingsView.xib in Resources */,
+				34DB44F1155707C200C955A5 /* SettingsTextCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +510,7 @@
 				3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */,
 				34A562C1154A1CA60012CF26 /* PrettyToolbar.m in Sources */,
 				34D464D615561BB600856E46 /* SettingsViewController.m in Sources */,
+				34DB44ED155705E500C955A5 /* SettingsTextCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +539,14 @@
 				34AEB77F150D03E0005F2B96 /* en */,
 			);
 			name = ServerListTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		34DB44EF155707C200C955A5 /* SettingsTextCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34DB44F0155707C200C955A5 /* en */,
+			);
+			name = SettingsTextCell.xib;
 			sourceTree = "<group>";
 		};
 		34EBE3FC135951A700A24C01 /* InfoPlist.strings */ = {

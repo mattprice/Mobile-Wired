@@ -1,5 +1,5 @@
 //
-//  ServerListViewController.h
+//  SettingsTextCell.h
 //  Mobile Wired
 //
 //  Copyright (c) 2012 Matthew Price, http://mattprice.me/
@@ -25,19 +25,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PrettyNavigationBar.h"
 
-
-@interface ServerListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    NSMutableArray *serverBookmarks;
-    
-    IBOutlet PrettyNavigationBar *navigationBar;
-    IBOutlet UITableView *mainTableView;
+@interface SettingsTextCell : UITableViewCell {
+    IBOutlet UILabel *settingName;
+    IBOutlet UITextField *settingValue;
 }
 
-@property (strong, nonatomic) NSMutableArray *serverBookmarks;
-
-@property (strong, nonatomic) PrettyNavigationBar *navigationBar;
-@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
+@property (nonatomic, retain) IBOutlet UILabel *settingName;
+@property (nonatomic, retain) IBOutlet UITextField *settingValue;
 
 @end

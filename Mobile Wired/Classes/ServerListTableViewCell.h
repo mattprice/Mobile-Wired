@@ -30,6 +30,6 @@
     IBOutlet UILabel *bookmarkLabel;
 }
 
-@property (nonatomic, retain) UILabel *bookmarkLabel;
+@property (nonatomic, retain) IBOutlet UILabel *bookmarkLabel;
 
 @end

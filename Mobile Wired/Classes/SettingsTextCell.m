@@ -1,5 +1,5 @@
 //
-//  ServerListViewController.h
+//  SettingsTextCell.m
 //  Mobile Wired
 //
 //  Copyright (c) 2012 Matthew Price, http://mattprice.me/
@@ -24,20 +24,26 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "PrettyNavigationBar.h"
+#import "SettingsTextCell.h"
 
+@implementation SettingsTextCell
 
-@interface ServerListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    NSMutableArray *serverBookmarks;
-    
-    IBOutlet PrettyNavigationBar *navigationBar;
-    IBOutlet UITableView *mainTableView;
+@synthesize settingName, settingValue;
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+    }
+    return self;
 }
 
-@property (strong, nonatomic) NSMutableArray *serverBookmarks;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
 
-@property (strong, nonatomic) PrettyNavigationBar *navigationBar;
-@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
+    // Configure the view for the selected state
+}
 
 @end
