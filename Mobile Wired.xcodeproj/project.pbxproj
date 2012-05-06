@@ -35,6 +35,8 @@
 		34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */; };
 		34CBE9A01505ADA1000FBF2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */; };
 		34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34CBE9A31505AF49000FBF2C /* Default.mp3 */; };
+		34D464D615561BB600856E46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D464D415561BB600856E46 /* SettingsViewController.m */; };
+		34D464D715561BB600856E46 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34D464D515561BB600856E46 /* SettingsViewController.xib */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
 		34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */; };
@@ -97,6 +99,9 @@
 		34AEB77F150D03E0005F2B96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ServerListTableViewCell.xib; sourceTree = "<group>"; };
 		34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		34CBE9A31505AF49000FBF2C /* Default.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Default.mp3; sourceTree = "<group>"; };
+		34D464D315561BB600856E46 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Classes/SettingsViewController.h; sourceTree = "<group>"; };
+		34D464D415561BB600856E46 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Classes/SettingsViewController.m; sourceTree = "<group>"; };
+		34D464D515561BB600856E46 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = ../../Classes/SettingsViewController.xib; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34EBE3C213594F7B00A24C01 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		34EBE3C413594F7B00A24C01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -288,6 +293,7 @@
 				34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */,
 				34838FC114F3456D0064B619 /* ServerListView.xib */,
 				34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */,
+				34D464D515561BB600856E46 /* SettingsViewController.xib */,
 				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
 			);
 			name = "Interface Builder";
@@ -341,6 +347,8 @@
 			children = (
 				34EBE4261359569B00A24C01 /* ChatViewController.h */,
 				34EBE4271359569B00A24C01 /* ChatViewController.m */,
+				34D464D315561BB600856E46 /* SettingsViewController.h */,
+				34D464D415561BB600856E46 /* SettingsViewController.m */,
 				34AEB772150CFDE1005F2B96 /* Server List */,
 				34AEB770150CFDCD005F2B96 /* User List */,
 			);
@@ -439,6 +447,7 @@
 				34EC1154150AD1730015B2CD /* Users@2x.png in Resources */,
 				34AEB777150D0201005F2B96 /* UserListTableViewCell.xib in Resources */,
 				34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */,
+				34D464D715561BB600856E46 /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +492,7 @@
 				3450D0B91548DBA700D320AE /* PrettyDrawing.m in Sources */,
 				3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */,
 				34A562C1154A1CA60012CF26 /* PrettyToolbar.m in Sources */,
+				34D464D615561BB600856E46 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

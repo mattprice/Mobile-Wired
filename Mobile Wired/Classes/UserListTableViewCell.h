@@ -26,8 +26,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserListTableViewCell : UITableViewCell
-{
+@interface UserListTableViewCell : UITableViewCell {
     IBOutlet UILabel *nickLabel, *onlyNickLabel, *statusLabel;
     IBOutlet UIImageView *avatar;
 }

@@ -1,5 +1,5 @@
 //
-//  ServerListTableViewCell.h
+//  SettingsViewController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2012 Matthew Price, http://mattprice.me/
@@ -25,11 +25,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PrettyNavigationBar.h"
 
-@interface ServerListTableViewCell : UITableViewCell {
-    IBOutlet UILabel *bookmarkLabel;
+
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    IBOutlet PrettyNavigationBar *navigationBar;
+    IBOutlet UITableView *mainTableView;
 }
 
-@property (nonatomic, retain) UILabel *bookmarkLabel;
+@property (strong, nonatomic) PrettyNavigationBar *navigationBar;
+@property (strong, nonatomic) UITableView *mainTableView;
 
 @end

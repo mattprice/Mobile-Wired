@@ -28,10 +28,6 @@
 #import "UserListTableViewCell.h"
 
 
-@interface UserListViewController ()
-
-@end
-
 @implementation UserListViewController
 
 @synthesize userListArray;
