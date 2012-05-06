@@ -27,11 +27,10 @@
 #import "ServerListViewController.h"
 #import "ServerListTableViewCell.h"
 
-@interface ServerListViewController ()
-
-@end
-
 @implementation ServerListViewController
+
+@synthesize navigationBar = _navigationBar;
+@synthesize mainTableView = _mainTableView;
 
 @synthesize serverBookmarks;
 
@@ -47,7 +46,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    // Create the navigation bar.
+    UINavigationItem *navItem = [[UINavigationItem alloc] init];
+    self.navigationBar.items = [NSArray arrayWithObject:navItem];
+    
+    // Set up custom navigation bar styling.
+    self.navigationBar.topLineColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
+    self.navigationBar.gradientStartColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
+    self.navigationBar.gradientEndColor = [UIColor colorWithRed:0.718 green:0.722 blue:0.718 alpha:1];
+    self.navigationBar.bottomLineColor = [UIColor colorWithRed:0.416 green:0.416 blue:0.416 alpha:.5];
+    self.navigationBar.tintColor = [UIColor colorWithWhite:0.65 alpha:1];
+    
+    // Create the edit button
+    self.navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                                 target:self
+                                                                                                  action:@selector(editButtonWasPressed)];
 }
 
 - (void)viewDidUnload
@@ -63,6 +77,21 @@
 }
 
 #pragma mark -
+#pragma mark TableView Actions
+
+- (void)editButtonWasPressed
+{
+    NSLog(@"*** Edit button was pressed.");
+    if (self.mainTableView.editing) {
+        NSLog(@"*** Server is about to stop editing.");
+        [self.mainTableView setEditing:NO animated:YES];
+    } else {
+        NSLog(@"*** Server is about to edit.");
+        [self.mainTableView setEditing:YES animated:YES];
+    }
+}
+
+#pragma mark -
 #pragma mark TableView Data Sources
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
@@ -72,12 +101,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-    // Section 0 is server bookmarks
+    // Section 0 is the server bookmarks.
     if (section == 0) {
         return [serverBookmarks count];
     }
     
-    // Section 1 is for Settings
+    // Section 1 is the settings.
     else {
         return 1;
     }
@@ -101,14 +130,14 @@
     }
     
     // Section 0 is for server bookmarks
-    if ([indexPath section] == 0) {
+    else if ([indexPath section] == 0) {
         // Get info about the current row's user
 //        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
     }
     
     
-    // Section 1 is for Settings
-    if ([indexPath section] == 1) {
+    // Section 1 is Settings
+    else if ([indexPath section] == 1) {
         cell.bookmarkLabel.text = @"Settings";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -116,18 +145,31 @@
     return cell;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSDictionary *currentUser = [userListArray objectAtIndex:[indexPath row]];
-//    
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-//                                                    message:[NSString stringWithFormat:@"You selected %@!",[currentUser objectForKey:@"wired.user.nick"]]
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"OK"
-//                                          otherButtonTitles:nil];
-//    [alert show];
-//    
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Section 0 is the server bookmarks.
+    if ([indexPath section] == 0) {
+        return YES;
+    }
+    
+    // Section 1 is the settings.
+    else {
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Section 0 is for server bookmarks
+    if ([indexPath section] == 0) {
+        // Get info about the current bookmark.
+        //        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+    }
+    
+    // Section 1 is Settings
+    else if ([indexPath section] == 1) {
+        NSLog(@"*** Pressed settings!");
+    }
+}
 
 @end

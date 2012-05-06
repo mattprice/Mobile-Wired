@@ -25,12 +25,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PrettyNavigationBar.h"
 
 
-@interface ServerListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface ServerListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray *serverBookmarks;
+    
+    IBOutlet PrettyNavigationBar *navigationBar;
+    IBOutlet UITableView *mainTableView;
 }
 
 @property (strong, nonatomic) NSMutableArray *serverBookmarks;
+
+@property (strong, nonatomic) PrettyNavigationBar *navigationBar;
+@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 
 @end
