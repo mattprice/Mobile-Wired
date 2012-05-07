@@ -31,7 +31,6 @@
 
 @implementation ServerListViewController
 
-@synthesize navigationBar = _navigationBar;
 @synthesize mainTableView = _mainTableView;
 
 @synthesize serverBookmarks;
@@ -50,13 +49,10 @@
     [super viewDidLoad];
     
     // Create the navigation bar.
-    UINavigationItem *navItem = [[UINavigationItem alloc] init];
-    self.navigationBar.items = [NSArray arrayWithObject:navItem];
-    
-    // Create the edit button
-    self.navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                                 target:self
-                                                                                                  action:@selector(editButtonWasPressed)];
+    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
+    navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                            target:self
+                                                                                            action:@selector(editButtonWasPressed)];
 }
 
 - (void)viewDidUnload

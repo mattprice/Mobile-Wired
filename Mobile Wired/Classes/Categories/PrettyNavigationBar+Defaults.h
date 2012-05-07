@@ -28,4 +28,6 @@
 
 @interface PrettyNavigationBar (Defaults)
 
+- (void)setTitle:(NSString *)newTitle;
+
 @end

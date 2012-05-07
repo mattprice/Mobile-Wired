@@ -30,7 +30,6 @@
 
 @implementation SettingsViewController
 
-@synthesize navigationBar = _navigationBar;
 @synthesize mainTableView = _mainTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,30 +46,18 @@
     [super viewDidLoad];
     
     // Create the navigation bar.
-    UINavigationItem *navItem = [[UINavigationItem alloc] init];
-    self.navigationBar.items = [NSArray arrayWithObject:navItem];
-    
-    // Set up a custom UILabel so that we can change the text color.
-    titleLabel = [[UILabel alloc] init];
-    titleLabel.frame = CGRectMake(0, 0, 215, 44);
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-    titleLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1];
-    titleLabel.textAlignment = UITextAlignmentCenter;
-    titleLabel.shadowColor = [UIColor colorWithWhite:0.8 alpha:0.3];
-	self.navigationBar.topItem.titleView = titleLabel;
-
-    titleLabel.text = @"Settings";
+    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
+    [navigationBar setTitle:@"Settings"];
     
     // Create the Cancel button.
-    self.navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                                 target:self
-                                                                                                 action:@selector(didPressCancel)];
+    navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                            target:self
+                                                                                            action:@selector(didPressCancel)];
     
     // Create the Save button.
-    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                                                  target:self
-                                                                                                  action:@selector(didPressSave)];
+    navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                                                                             target:self
+                                                                                             action:@selector(didPressSave)];
 }
 
 - (void)viewDidUnload

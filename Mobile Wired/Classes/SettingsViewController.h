@@ -29,11 +29,9 @@
 
 @interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet PrettyNavigationBar *navigationBar;
-    UILabel *titleLabel;
     IBOutlet UITableView *mainTableView;
 }
 
-@property (strong, nonatomic) PrettyNavigationBar *navigationBar;
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 
 @end

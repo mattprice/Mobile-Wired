@@ -36,7 +36,6 @@
 
 @property (strong, nonatomic) NSMutableArray *serverBookmarks;
 
-@property (strong, nonatomic) PrettyNavigationBar *navigationBar;
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 
 @end

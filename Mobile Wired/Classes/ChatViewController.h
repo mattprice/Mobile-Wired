@@ -40,7 +40,6 @@
     IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet PrettyToolbar *toolBar;
     IBOutlet UITextView *serverTopic;
-    UILabel *titleLabel;
     
     IBOutlet UITextView *chatTextView;
     IBOutlet UITextField* chatTextField;

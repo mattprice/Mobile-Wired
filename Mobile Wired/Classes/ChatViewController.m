@@ -45,18 +45,7 @@
     [super viewDidLoad];
     
     // Create the navigation bar.
-    UINavigationItem *navItem = [[UINavigationItem alloc] init];
-    navigationBar.items = [NSArray arrayWithObject:navItem];
-    
-    // Set up a custom UILabel so that we can change the text color.
-    titleLabel = [[UILabel alloc] init];
-    titleLabel.frame = CGRectMake(0, 0, 215, 44);
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-    titleLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1];
-    titleLabel.textAlignment = UITextAlignmentCenter;
-    titleLabel.shadowColor = [UIColor colorWithWhite:0.8 alpha:0.3];
-	navigationBar.topItem.titleView = titleLabel;
+    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
     
     // Create a progress HUD.
     if (!progressHUD) {
@@ -129,7 +118,7 @@
 {
     // Update the server name and add some more buttons.
     // Customize the bar title and buttons.
-    titleLabel.text = [self.connection.serverInfo objectForKey:@"wired.info.name"];
+    [navigationBar setTitle:[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
                                                                                 style:UIBarButtonItemStyleBordered
                                                                                target:self.viewDeckController
