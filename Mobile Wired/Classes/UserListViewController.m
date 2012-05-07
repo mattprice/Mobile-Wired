@@ -27,7 +27,6 @@
 #import "UserListViewController.h"
 #import "UserListTableViewCell.h"
 
-
 @implementation UserListViewController
 
 @synthesize userListArray;

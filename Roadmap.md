@@ -1,5 +1,4 @@
 # 5/7 Notes
-* Subclass navigation bar colors and labels.
 * Create controller class for changing views on the fly.
 * Fix crash on touching Settings page. 
 * Settings don't save yet.

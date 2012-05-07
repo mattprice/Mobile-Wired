@@ -25,8 +25,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PrettyNavigationBar.h"
-
+#import "PrettyNavigationBar+Defaults.h"
 
 @interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet PrettyNavigationBar *navigationBar;

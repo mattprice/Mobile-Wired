@@ -30,7 +30,6 @@
 
 #define STEALTH_MODE  FALSE
 
-
 @implementation WiredConnection
 
 @synthesize socket, delegate;

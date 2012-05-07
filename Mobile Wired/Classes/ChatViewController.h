@@ -28,9 +28,8 @@
 #import "WiredConnection.h"
 #import "UserListViewController.h"
 #import "MBProgressHUD.h"
-#import "PrettyNavigationBar.h"
-#import "PrettyToolbar.h"
-
+#import "PrettyNavigationBar+Defaults.h"
+#import "PrettyToolbar+Defaults.h"
 
 @interface ChatViewController : UIViewController <WiredConnectionDelegate, MBProgressHUDDelegate, UIGestureRecognizerDelegate> {
     WiredConnection *connection;
@@ -56,8 +55,6 @@
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) UserListViewController *userListView;
 @property (nonatomic) int badgeCount;
-
-@property (strong, nonatomic) PrettyNavigationBar *navigationBar;
 
 - (IBAction)sendButtonPressed:(id)sender;
 

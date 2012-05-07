@@ -53,6 +53,8 @@
 		34EBE43D1359690000A24C01 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE43C1359690000A24C01 /* CFNetwork.framework */; };
 		34EC1153150AD1730015B2CD /* Users.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EC1151150AD1730015B2CD /* Users.png */; };
 		34EC1154150AD1730015B2CD /* Users@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EC1152150AD1730015B2CD /* Users@2x.png */; };
+		34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */; };
+		34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */; };
 		34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FB815D14F71FDE001780E4 /* IIViewDeckController.m */; };
 		34FC5C7E135B458A0049C737 /* MobileWired_Spec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */; };
 		34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FC5C8C135BB3430049C737 /* libz.dylib */; };
@@ -125,6 +127,10 @@
 		34EBE43C1359690000A24C01 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		34EC1151150AD1730015B2CD /* Users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Users.png; path = "Mobile Wired/Resources/Images/Users.png"; sourceTree = SOURCE_ROOT; };
 		34EC1152150AD1730015B2CD /* Users@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Users@2x.png"; path = "Mobile Wired/Resources/Images/Users@2x.png"; sourceTree = SOURCE_ROOT; };
+		34EE4FBA1558579400F5B508 /* PrettyNavigationBar+Defaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PrettyNavigationBar+Defaults.h"; path = "Mobile Wired/Classes/Categories/PrettyNavigationBar+Defaults.h"; sourceTree = "<group>"; };
+		34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PrettyNavigationBar+Defaults.m"; path = "Mobile Wired/Classes/Categories/PrettyNavigationBar+Defaults.m"; sourceTree = "<group>"; };
+		34EE4FBD1558593300F5B508 /* PrettyToolbar+Defaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PrettyToolbar+Defaults.h"; path = "Mobile Wired/Classes/Categories/PrettyToolbar+Defaults.h"; sourceTree = "<group>"; };
+		34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PrettyToolbar+Defaults.m"; path = "Mobile Wired/Classes/Categories/PrettyToolbar+Defaults.m"; sourceTree = "<group>"; };
 		34FB815C14F71FDE001780E4 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIViewDeckController.h; path = ViewDeck/IIViewDeckController.h; sourceTree = "<group>"; };
 		34FB815D14F71FDE001780E4 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIViewDeckController.m; path = ViewDeck/IIViewDeckController.m; sourceTree = "<group>"; };
 		34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MobileWired_Spec.xml; path = Resources/MobileWired_Spec.xml; sourceTree = "<group>"; };
@@ -168,6 +174,10 @@
 				3439EC5C14F31D0A00362097 /* NSString+Base64.m */,
 				3439EC5D14F31D0A00362097 /* NSString+Hashes.h */,
 				3439EC5E14F31D0A00362097 /* NSString+Hashes.m */,
+				34EE4FBA1558579400F5B508 /* PrettyNavigationBar+Defaults.h */,
+				34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */,
+				34EE4FBD1558593300F5B508 /* PrettyToolbar+Defaults.h */,
+				34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -511,6 +521,8 @@
 				34A562C1154A1CA60012CF26 /* PrettyToolbar.m in Sources */,
 				34D464D615561BB600856E46 /* SettingsViewController.m in Sources */,
 				34DB44ED155705E500C955A5 /* SettingsTextCell.m in Sources */,
+				34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */,
+				34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

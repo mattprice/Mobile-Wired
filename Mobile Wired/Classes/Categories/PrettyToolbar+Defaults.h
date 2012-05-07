@@ -1,5 +1,5 @@
 //
-//  Mobile_WiredAppDelegate.h
+//  PrettyToolbar+Defaults.h
 //  Mobile Wired
 //
 //  Copyright (c) 2012 Matthew Price, http://mattprice.me/
@@ -24,10 +24,8 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "PrettyToolbar.h"
 
-@interface NSString (Hashes)
-
-- (NSString *)SHA1Value;
+@interface PrettyToolbar (Defaults)
 
 @end

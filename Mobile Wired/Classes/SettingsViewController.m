@@ -50,13 +50,6 @@
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
     self.navigationBar.items = [NSArray arrayWithObject:navItem];
     
-    // Set up custom navigation bar styling.
-    self.navigationBar.topLineColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
-    self.navigationBar.gradientStartColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
-    self.navigationBar.gradientEndColor = [UIColor colorWithRed:0.718 green:0.722 blue:0.718 alpha:1];
-    self.navigationBar.bottomLineColor = [UIColor colorWithRed:0.416 green:0.416 blue:0.416 alpha:.5];
-    self.navigationBar.tintColor = [UIColor colorWithWhite:0.65 alpha:1];
-    
     // Set up a custom UILabel so that we can change the text color.
     titleLabel = [[UILabel alloc] init];
     titleLabel.frame = CGRectMake(0, 0, 215, 44);

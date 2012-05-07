@@ -27,7 +27,6 @@
 #import "NSString+Hashes.h"
 #import <CommonCrypto/CommonHMAC.h>
 
-
 @implementation NSString (Hashes)
 
 - (NSString *)SHA1Value

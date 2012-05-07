@@ -26,7 +26,6 @@
 
 #import "NSString+Base64.h"
 
-
 @implementation NSString (Base64)
 
 static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

@@ -26,7 +26,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface UserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray *userListArray;
 }

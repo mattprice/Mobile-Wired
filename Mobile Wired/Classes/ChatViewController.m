@@ -37,7 +37,6 @@
 @implementation ChatViewController
 
 @synthesize connection = _connection;
-@synthesize navigationBar = _navigationBar;
 @synthesize userListView, badgeCount;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -47,21 +46,7 @@
     
     // Create the navigation bar.
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
-    self.navigationBar.items = [NSArray arrayWithObject:navItem];
-    
-    // Set up custom navigation bar styling.
-    self.navigationBar.topLineColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
-    self.navigationBar.gradientStartColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
-    self.navigationBar.gradientEndColor = [UIColor colorWithRed:0.718 green:0.722 blue:0.718 alpha:1];
-    self.navigationBar.bottomLineColor = [UIColor colorWithRed:0.416 green:0.416 blue:0.416 alpha:.5];
-    self.navigationBar.tintColor = [UIColor colorWithWhite:0.65 alpha:1];
-    
-    // Set up custom toolbar styling.
-    toolBar.topLineColor = self.navigationBar.bottomLineColor;
-    toolBar.gradientStartColor = self.navigationBar.gradientStartColor;
-    toolBar.gradientEndColor = self.navigationBar.gradientEndColor;
-    toolBar.bottomLineColor = self.navigationBar.gradientEndColor;
-    toolBar.tintColor = self.navigationBar.tintColor;
+    navigationBar.items = [NSArray arrayWithObject:navItem];
     
     // Set up a custom UILabel so that we can change the text color.
     titleLabel = [[UILabel alloc] init];
@@ -71,7 +56,7 @@
     titleLabel.textColor = [UIColor colorWithWhite:0.25 alpha:1];
     titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.shadowColor = [UIColor colorWithWhite:0.8 alpha:0.3];
-	self.navigationBar.topItem.titleView = titleLabel;
+	navigationBar.topItem.titleView = titleLabel;
     
     // Create a progress HUD.
     if (!progressHUD) {
@@ -145,10 +130,10 @@
     // Update the server name and add some more buttons.
     // Customize the bar title and buttons.
     titleLabel.text = [self.connection.serverInfo objectForKey:@"wired.info.name"];
-    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
-                                                                                     style:UIBarButtonItemStyleBordered
-                                                                                    target:self.viewDeckController
-                                                                                    action:@selector(toggleRightView)];
+    navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
+                                                                                style:UIBarButtonItemStyleBordered
+                                                                               target:self.viewDeckController
+                                                                               action:@selector(toggleRightView)];
     
     // Update the progress HUD.
     progressHUD.labelText = @"Logging In";

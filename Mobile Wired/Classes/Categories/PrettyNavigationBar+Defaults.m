@@ -1,5 +1,5 @@
 //
-//  Mobile_WiredAppDelegate.h
+//  PrettyNavigationBar+Defaults.m
 //  Mobile Wired
 //
 //  Copyright (c) 2012 Matthew Price, http://mattprice.me/
@@ -24,10 +24,19 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "PrettyNavigationBar+Defaults.h"
 
-@interface NSString (Hashes)
+@implementation PrettyNavigationBar (Defaults)
 
-- (NSString *)SHA1Value;
+- (void) initializeVars 
+{
+    self.contentMode = UIViewContentModeRedraw;
+    self.shadowOpacity = 0.5;
+    self.gradientStartColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
+    self.gradientEndColor = [UIColor colorWithRed:0.718 green:0.722 blue:0.718 alpha:1];;
+    self.topLineColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1];
+    self.bottomLineColor = [UIColor colorWithRed:0.416 green:0.416 blue:0.416 alpha:.5];
+    self.tintColor = [UIColor colorWithWhite:0.65 alpha:1];
+}
 
 @end

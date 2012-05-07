@@ -27,7 +27,6 @@
 #import <Foundation/Foundation.h>
 #import "GCDAsyncSocket.h"
 
-
 @protocol WiredConnectionDelegate;
 @interface WiredConnection : NSObject {
     GCDAsyncSocket *socket;
