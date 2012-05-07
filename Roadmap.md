@@ -1,11 +1,19 @@
+# 5/7 Notes
+* Subclass navigation bar colors and labels.
+* Create controller class for changing views on the fly.
+* Fix crash on touching Settings page. 
+* Settings don't save yet.
+* Settings should allow you to swipe.
+* Next button doesn't actually go to next field.
+
 # Version 1
+* Credits file.
 * TestFlight SDK (?)
 * Features:
     * Add viewing of broadcasts
     * Add viewing of server topic
     * Add ability to view user info
     * Implement server bookmarks
-    * Implement settings screen
 * Improvements:
 	* When selecting text/link, keyboard disappears before the text field moves down.
 	* Text field does not expand with long messages.

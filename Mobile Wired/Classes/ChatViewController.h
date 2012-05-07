@@ -35,7 +35,7 @@
 @interface ChatViewController : UIViewController <WiredConnectionDelegate, MBProgressHUDDelegate, UIGestureRecognizerDelegate> {
     WiredConnection *connection;
     MBProgressHUD *progressHUD;
-    IBOutlet UserListViewController *userListView;
+    UserListViewController *userListView;
     int badgeCount;
     
     IBOutlet PrettyNavigationBar *navigationBar;
@@ -54,7 +54,7 @@
 }
 
 @property (strong, nonatomic) WiredConnection *connection;
-@property (strong, nonatomic) IBOutlet UserListViewController *userListView;
+@property (strong, nonatomic) UserListViewController *userListView;
 @property (nonatomic) int badgeCount;
 
 @property (strong, nonatomic) PrettyNavigationBar *navigationBar;

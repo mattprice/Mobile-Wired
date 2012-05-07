@@ -31,7 +31,6 @@
 @interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet PrettyNavigationBar *navigationBar;
     UILabel *titleLabel;
-    
     IBOutlet UITableView *mainTableView;
 }
 

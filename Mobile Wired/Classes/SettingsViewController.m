@@ -113,6 +113,13 @@
     // Enable panning, open the left view, and change the center view.
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
     [self.viewDeckController openLeftViewAnimated:YES];
+    
+    // Save the values.
+    SettingsTextCell *nickCell = (SettingsTextCell*)[mainTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    SettingsTextCell *statusCell = (SettingsTextCell*)[mainTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    
+    NSLog(@"Nick: %@", nickCell.settingValue.text);
+    NSLog(@"Status: %@", statusCell.settingValue.text);
 }
 
 #pragma mark -

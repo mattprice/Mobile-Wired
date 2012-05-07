@@ -34,10 +34,6 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize serverListView = serverListView;
-@synthesize userListView = _userListView;
-@synthesize chatView = _chatView;
-@synthesize audioPlayer;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -46,27 +42,16 @@
     // Set the status bar style
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];  
     
-    // Setup the sliding UI
-    self.serverListView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
-    self.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
-    self.chatView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
+    // Setup all the possible views.
+    serverListView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
+    userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+    chatView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
     
-    self.chatView.userListView = self.userListView;
+    chatView.userListView = userListView;
     
-    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.chatView 
-                                                                                    leftViewController:self.serverListView
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:chatView 
+                                                                                    leftViewController:serverListView
                                                                                     rightViewController:nil];
-    
-    // Keep the app running in background indefinitely.
-    NSError *error;
-    NSURL *defaultTrack = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Default" ofType:@"mp3"]];
-    
-    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:defaultTrack error:&error];
-    audioPlayer.delegate = self;
-    audioPlayer.volume = 0;
-    audioPlayer.numberOfLoops = 6;
-    
-    [audioPlayer play];
     
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
@@ -79,7 +64,7 @@
      Sent whenever we receive a notification whilte the application is currently open.
      */
     
-    self.chatView.badgeCount = 0;
+    chatView.badgeCount = 0;
     application.applicationIconBadgeNumber = 0;
 }
 
@@ -114,7 +99,7 @@
      If the application was previously in the background, optionally refresh the user interface.
      */
     
-    self.chatView.badgeCount = 0;
+    chatView.badgeCount = 0;
     application.applicationIconBadgeNumber = 0;
 }
 

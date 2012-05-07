@@ -80,7 +80,7 @@
         [self.view addSubview:progressHUD];
     }
     
-    [self connect];
+//    [self connect];
 }
 
 - (void)viewDidUnload
