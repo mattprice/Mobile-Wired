@@ -27,9 +27,12 @@
 #import <UIKit/UIKit.h>
 #import "PrettyNavigationBar+Defaults.h"
 
-@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, UITableViewDataSource> {
     IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
+    
+    UITextField *nickField;
+    UITextField *statusField;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;

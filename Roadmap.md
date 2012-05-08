@@ -1,9 +1,5 @@
 # 5/7 Notes
 * Create controller class for changing views on the fly.
-* Fix crash on touching Settings page. 
-* Settings don't save yet.
-* Settings should allow you to swipe.
-* Next button doesn't actually go to next field.
 
 # Version 1
 * Credits file.

@@ -40,7 +40,22 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Set the status bar style
-    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];  
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+
+    // Set up user defaults if they haven't run the app before.
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedBefore"])
+    {
+        NSLog(@"Setting up user defaults for the first time.");
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"Melman" forKey:@"UserNick"];
+        
+        NSString *defaultStatus = [NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]];
+        [[NSUserDefaults standardUserDefaults] setObject:defaultStatus forKey:@"UserStatus"];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedBefore"];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     
     // Setup all the possible views.
     serverListView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];

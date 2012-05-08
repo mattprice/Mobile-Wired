@@ -77,29 +77,52 @@
 
 - (void)didPressCancel
 {
-    // Close the keyboard.
-    [self resignFirstResponder];
+    // We need to call resignFirstResponder for all possible UITextFields.
+    [nickField resignFirstResponder];
+    [statusField resignFirstResponder];
     
-    // Enable panning, open the left view, and change the center view.
-    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    // Reset the view to default values just incase something changed.
+    nickField.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
+    statusField.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
+    
+    // Re-open the left view.
     [self.viewDeckController openLeftViewAnimated:YES];
 }
 
 - (void)didPressSave
 {
-    // Close the keyboard.
-    [self resignFirstResponder];
+    // We need to call resignFirstResponder for all possible UITextFields.
+    [nickField resignFirstResponder];
+    [statusField resignFirstResponder];
     
-    // Enable panning, open the left view, and change the center view.
-    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    // Save all the settings, changed or not.
+    [[NSUserDefaults standardUserDefaults] setObject:nickField.text forKey:@"UserNick"];
+    [[NSUserDefaults standardUserDefaults] setObject:statusField.text forKey:@"UserStatus"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Re-open the left view.
     [self.viewDeckController openLeftViewAnimated:YES];
-    
-    // Save the values.
-    SettingsTextCell *nickCell = (SettingsTextCell*)[mainTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    SettingsTextCell *statusCell = (SettingsTextCell*)[mainTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    
-    NSLog(@"Nick: %@", nickCell.settingValue.text);
-    NSLog(@"Status: %@", statusCell.settingValue.text);
+}
+
+#pragma mark -
+#pragma mark Text Field Delegates
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    return YES;
 }
 
 #pragma mark -
@@ -135,19 +158,23 @@
     switch ([indexPath row]) {
         case 0:
             cell.settingName.text = @"Nick";
-            cell.settingValue.text = @"Melman";
+            cell.settingValue.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
+            nickField = cell.settingValue;
             break;
             
         case 1:
             cell.settingName.text = @"Status";
-            cell.settingValue.text = [NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]];
+            cell.settingValue.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
+            statusField = cell.settingValue;
             break;
             
         default:
-            cell.settingName.text = @"";
-            cell.settingValue.text = @"";
+            cell.settingName.text = @"Name";
+            cell.settingValue.text = @"Value";
             break;
     }
+    
+    cell.settingValue.delegate = self;
     
     return cell;
 }

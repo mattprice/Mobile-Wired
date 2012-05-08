@@ -159,10 +159,8 @@
     
     // Section 1 is Settings
     else if ([indexPath section] == 1) {
-        // Change the center controller, close the left view, and then disable panning.
         self.viewDeckController.centerController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
         [self.viewDeckController closeLeftViewAnimated:YES];
-        self.viewDeckController.panningMode = IIViewDeckNoPanning;
     }
 }
 

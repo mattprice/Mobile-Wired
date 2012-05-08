@@ -33,7 +33,6 @@
 		34AEB77A150D0210005F2B96 /* UserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB779150D0210005F2B96 /* UserListTableViewCell.m */; };
 		34AEB77D150D02D6005F2B96 /* ServerListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB77C150D02D6005F2B96 /* ServerListTableViewCell.m */; };
 		34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */; };
-		34CBE9A01505ADA1000FBF2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CBE99F1505ADA1000FBF2C /* AVFoundation.framework */; };
 		34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34CBE9A31505AF49000FBF2C /* Default.mp3 */; };
 		34D464D615561BB600856E46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D464D415561BB600856E46 /* SettingsViewController.m */; };
 		34D464D715561BB600856E46 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34D464D515561BB600856E46 /* SettingsView.xib */; };
@@ -105,7 +104,7 @@
 		34CBE9A31505AF49000FBF2C /* Default.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Default.mp3; sourceTree = "<group>"; };
 		34D464D315561BB600856E46 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Classes/SettingsViewController.h; sourceTree = "<group>"; };
 		34D464D415561BB600856E46 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Classes/SettingsViewController.m; sourceTree = "<group>"; };
-		34D464D515561BB600856E46 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = ../../Classes/SettingsView.xib; sourceTree = "<group>"; };
+		34D464D515561BB600856E46 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = Classes/SettingsView.xib; sourceTree = "<group>"; };
 		34DB44EB155705E400C955A5 /* SettingsTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTextCell.h; path = Classes/SettingsTextCell.h; sourceTree = "<group>"; };
 		34DB44EC155705E400C955A5 /* SettingsTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTextCell.m; path = Classes/SettingsTextCell.m; sourceTree = "<group>"; };
 		34DB44F0155707C200C955A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SettingsTextCell.xib; sourceTree = "<group>"; };
@@ -144,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34CBE9A01505ADA1000FBF2C /* AVFoundation.framework in Frameworks */,
 				34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */,
 				34EBE43D1359690000A24C01 /* CFNetwork.framework in Frameworks */,
 				34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */,
@@ -210,8 +208,10 @@
 			children = (
 				34838FA814F32BA80064B619 /* UserListViewController.h */,
 				34838FA914F32BA80064B619 /* UserListViewController.m */,
+				34EBE41F1359565100A24C01 /* UserListView.xib */,
 				34AEB778150D0210005F2B96 /* UserListTableViewCell.h */,
 				34AEB779150D0210005F2B96 /* UserListTableViewCell.m */,
+				34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */,
 			);
 			name = "User List";
 			sourceTree = "<group>";
@@ -221,8 +221,10 @@
 			children = (
 				34838FAD14F32C640064B619 /* ServerListViewController.h */,
 				34838FAE14F32C640064B619 /* ServerListViewController.m */,
+				34838FC114F3456D0064B619 /* ServerListView.xib */,
 				34AEB77B150D02D6005F2B96 /* ServerListTableViewCell.h */,
 				34AEB77C150D02D6005F2B96 /* ServerListTableViewCell.m */,
+				34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */,
 			);
 			name = "Server List";
 			sourceTree = "<group>";
@@ -241,8 +243,10 @@
 			children = (
 				34D464D315561BB600856E46 /* SettingsViewController.h */,
 				34D464D415561BB600856E46 /* SettingsViewController.m */,
+				34D464D515561BB600856E46 /* SettingsView.xib */,
 				34DB44EB155705E400C955A5 /* SettingsTextCell.h */,
 				34DB44EC155705E400C955A5 /* SettingsTextCell.m */,
+				34DB44EF155707C200C955A5 /* SettingsTextCell.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -314,13 +318,6 @@
 			isa = PBXGroup;
 			children = (
 				347F7E9014F5C18000316FB3 /* DefaultView.xib */,
-				34EBE41B1359565100A24C01 /* ChatView.xib */,
-				34EBE41F1359565100A24C01 /* UserListView.xib */,
-				34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */,
-				34838FC114F3456D0064B619 /* ServerListView.xib */,
-				34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */,
-				34D464D515561BB600856E46 /* SettingsView.xib */,
-				34DB44EF155707C200C955A5 /* SettingsTextCell.xib */,
 				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
 			);
 			name = "Interface Builder";
@@ -374,6 +371,7 @@
 			children = (
 				34EBE4261359569B00A24C01 /* ChatViewController.h */,
 				34EBE4271359569B00A24C01 /* ChatViewController.m */,
+				34EBE41B1359565100A24C01 /* ChatView.xib */,
 				34DB44EE155705F200C955A5 /* Settings */,
 				34AEB772150CFDE1005F2B96 /* Server List */,
 				34AEB770150CFDCD005F2B96 /* User List */,
@@ -535,6 +533,7 @@
 				34838FC214F3456D0064B619 /* en */,
 			);
 			name = ServerListView.xib;
+			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};
 		34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */ = {
@@ -543,6 +542,7 @@
 				34AEB776150D0201005F2B96 /* en */,
 			);
 			name = UserListTableViewCell.xib;
+			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};
 		34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */ = {
@@ -551,6 +551,7 @@
 				34AEB77F150D03E0005F2B96 /* en */,
 			);
 			name = ServerListTableViewCell.xib;
+			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};
 		34DB44EF155707C200C955A5 /* SettingsTextCell.xib */ = {
@@ -559,6 +560,7 @@
 				34DB44F0155707C200C955A5 /* en */,
 			);
 			name = SettingsTextCell.xib;
+			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};
 		34EBE3FC135951A700A24C01 /* InfoPlist.strings */ = {
@@ -583,6 +585,7 @@
 				34EBE41C1359565100A24C01 /* en */,
 			);
 			name = ChatView.xib;
+			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};
 		34EBE41F1359565100A24C01 /* UserListView.xib */ = {
@@ -591,6 +594,7 @@
 				34EBE4201359565100A24C01 /* en */,
 			);
 			name = UserListView.xib;
+			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
