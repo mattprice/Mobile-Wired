@@ -533,6 +533,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    // Disable panning view while typing.
+    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    // Re-enable panning of view.
+    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    return YES;
+}
+
 - (void)textfieldWasSelected:(NSNotification *)notification
 {
     chatTextField = notification.object;
