@@ -68,6 +68,8 @@
                                                                                     leftViewController:serverListView
                                                                                     rightViewController:nil];
     
+    deckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractive;
+    
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
     [self.window makeKeyAndVisible];

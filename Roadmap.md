@@ -1,6 +1,3 @@
-# 5/7 Notes
-* Create controller class for changing views on the fly.
-
 # Version 1
 * Credits file.
 * TestFlight SDK (?)
