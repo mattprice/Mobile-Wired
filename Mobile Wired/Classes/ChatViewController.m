@@ -127,9 +127,9 @@
     // Update the progress HUD.
     progressHUD.labelText = @"Logging In";
     
-    [self.connection setNick:@"Melman"];
+    [self.connection setNick:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"]];
     [self.connection setIcon:nil];
-    [self.connection setStatus:[NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]]];
+    [self.connection setStatus:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"]];
     [self.connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
 }
 
