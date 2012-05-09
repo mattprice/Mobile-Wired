@@ -49,15 +49,15 @@
     navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
     [navigationBar setTitle:@"Settings"];
     
-    // Create the Cancel button.
-    navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                            target:self
-                                                                                            action:@selector(didPressCancel)];
+    // Store the current nickname and status.
+    oldNick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
+    oldStatus = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
     
-    // Create the Save button.
-    navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                                             target:self
-                                                                                             action:@selector(didPressSave)];
+    // Create the reset button.
+    navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset"
+                                                                                style:UIBarButtonSystemItemTrash
+                                                                               target:self
+                                                                               action:@selector(didPressReset)];
 }
 
 - (void)viewDidUnload
@@ -75,33 +75,30 @@
 #pragma mark -
 #pragma mark Table View Actions
 
-- (void)didPressCancel
+- (void)didPressReset
 {
     // We need to call resignFirstResponder for all possible UITextFields.
     [nickField resignFirstResponder];
     [statusField resignFirstResponder];
     
-    // Reset the view to default values just incase something changed.
-    nickField.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
-    statusField.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
+    // Reset the view to its previous values.
+    nickField.text = oldNick;
+    statusField.text = oldStatus;
     
-    // Re-open the left view.
-    [self.viewDeckController openLeftViewAnimated:YES];
+    // Re-save the previous values.
+    [[NSUserDefaults standardUserDefaults] setObject:oldNick forKey:@"UserNick"];
+    [[NSUserDefaults standardUserDefaults] setObject:oldStatus forKey:@"UserStatus"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)didPressSave
+#pragma mark -
+#pragma mark View Deck Delegates
+
+- (void)viewDeckControllerDidShowCenterView:(IIViewDeckController*)viewDeckController animated:(BOOL)animated
 {
-    // We need to call resignFirstResponder for all possible UITextFields.
-    [nickField resignFirstResponder];
-    [statusField resignFirstResponder];
-    
-    // Save all the settings, changed or not.
-    [[NSUserDefaults standardUserDefaults] setObject:nickField.text forKey:@"UserNick"];
-    [[NSUserDefaults standardUserDefaults] setObject:statusField.text forKey:@"UserStatus"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    // Re-open the left view.
-    [self.viewDeckController openLeftViewAnimated:YES];
+    // Store the current nickname and status.
+    oldNick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
+    oldStatus = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
 }
 
 #pragma mark -
@@ -110,6 +107,12 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    
+    // Save the settings.
+    [[NSUserDefaults standardUserDefaults] setObject:nickField.text forKey:@"UserNick"];
+    [[NSUserDefaults standardUserDefaults] setObject:statusField.text forKey:@"UserStatus"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     return YES;
 }
 
@@ -117,6 +120,7 @@
 {
     // Disable panning view while typing.
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
+    
     return YES;
 }
 
@@ -124,6 +128,7 @@
 {
     // Re-enable panning of view.
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    
     return YES;
 }
 

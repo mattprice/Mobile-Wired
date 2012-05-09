@@ -25,14 +25,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IIViewDeckController.h"
 #import "PrettyNavigationBar+Defaults.h"
 
-@interface SettingsViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, UITableViewDataSource> {
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, IIViewDeckControllerDelegate, UITableViewDataSource> {
     IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
     
     UITextField *nickField;
     UITextField *statusField;
+    
+    NSString *oldNick;
+    NSString *oldStatus;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
