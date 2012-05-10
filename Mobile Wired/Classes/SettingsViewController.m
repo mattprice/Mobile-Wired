@@ -55,7 +55,7 @@
     
     // Create the reset button.
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset"
-                                                                                style:UIBarButtonSystemItemTrash
+                                                                                style:UIBarButtonItemStyleDone
                                                                                target:self
                                                                                action:@selector(didPressReset)];
 }

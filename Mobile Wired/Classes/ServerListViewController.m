@@ -44,15 +44,25 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    // Start out by opening the left view.
+    // TODO: Maybe we should check to see if we're connected to any servers.
+    [self.viewDeckController openLeftViewAnimated:NO];
+//    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+//    self.viewDeckController.leftLedge = -10;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     // Create the navigation bar.
     navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
-    navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                            target:self
-                                                                                            action:@selector(editButtonWasPressed)];
+    navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self
+                                                                              action:@selector(editButtonWasPressed)];
 }
 
 - (void)viewDidUnload
@@ -72,13 +82,22 @@
 
 - (void)editButtonWasPressed
 {
-    NSLog(@"*** Edit button was pressed.");
     if (self.mainTableView.editing) {
-        NSLog(@"*** Server is about to stop editing.");
+        // Disable editing.
         [self.mainTableView setEditing:NO animated:YES];
-    } else {
-        NSLog(@"*** Server is about to edit.");
+        
+        // Change the Done button back to an Edit button.
+        navigationBar.topItem.leftBarButtonItem.title = @"Edit";
+        navigationBar.topItem.leftBarButtonItem.style = UIBarButtonItemStylePlain;
+    }
+    
+    else {
+        // Enable editing.
         [self.mainTableView setEditing:YES animated:YES];
+        
+        // Change the Edit button to a Done button.
+        navigationBar.topItem.leftBarButtonItem.title = @"Done";
+        navigationBar.topItem.leftBarButtonItem.style = UIBarButtonItemStyleDone;
     }
 }
 
@@ -160,6 +179,7 @@
     // Section 1 is Settings
     else if ([indexPath section] == 1) {
         self.viewDeckController.centerController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
+        self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
         [self.viewDeckController closeLeftViewAnimated:YES];
     }
 }
