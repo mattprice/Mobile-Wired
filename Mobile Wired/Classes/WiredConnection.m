@@ -612,7 +612,7 @@
     
     // Greate a TBXML object of the data.
     NSError *error;
-    TBXML *doc = [TBXML tbxmlWithXMLData:data error:&error];
+    TBXML *doc = [TBXML newTBXMLWithXMLData:data error:&error];
     
     // Extract the root element and its name.
     if (error || !doc.rootXMLElement) {  return; }

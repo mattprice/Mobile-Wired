@@ -13,3 +13,6 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 #endif
+
+// TBXML checks for this but it's not defined in anything we import.
+#define ARC_ENABLED 1
