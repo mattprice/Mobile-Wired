@@ -89,6 +89,12 @@
         // Change the Done button back to an Edit button.
         navigationBar.topItem.leftBarButtonItem.title = @"Edit";
         navigationBar.topItem.leftBarButtonItem.style = UIBarButtonItemStylePlain;
+        
+        // Remove the "Add Bookmark" button. It only exists if there are other bookmarks.
+        if ([serverBookmarks count] > 0) {
+            NSArray *paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]];
+            [self.mainTableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
+        }
     }
     
     else {
@@ -98,6 +104,12 @@
         // Change the Edit button to a Done button.
         navigationBar.topItem.leftBarButtonItem.title = @"Done";
         navigationBar.topItem.leftBarButtonItem.style = UIBarButtonItemStyleDone;
+        
+        // Insert the "Add Bookmark" button, but only if other bookmarks exist.
+        if ([serverBookmarks count] > 0) {
+            NSArray *paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]];
+            [self.mainTableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
+        }
     }
 }
 
@@ -111,15 +123,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-    // Section 0 is the server bookmarks.
+    // Section 0 is for server bookmarks.
     if (section == 0) {
+        // If we don't have any bookmarks display an "Add Bookmark" button.
+        if ([serverBookmarks count] == 0) {
+            return 1;
+        }
+        
+        // If we're editing, include an extra space for an "Add Bookmark" button.
+        if (self.mainTableView.editing) {
+            return [serverBookmarks count]+1;
+        }
+        
         return [serverBookmarks count];
     }
     
-    // Section 1 is the settings.
-    else {
-        return 1;
-    }
+    // Section 1 is settings.
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -139,14 +159,29 @@
         }
     }
     
-    // Section 0 is for server bookmarks
+    // Section 0 is for server bookmarks.
     if ([indexPath section] == 0) {
-        // Get info about the current row's user
-//        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+        // If we don't have any bookmarks display an "Add Bookmark" button.
+        if ([serverBookmarks count] == 0) {
+            cell.bookmarkLabel.text = @"Add Bookmark";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        // Else, if we're editing, then Count + 1 is the "Add Bookmark" item.
+        else if ([indexPath row] == [serverBookmarks count]+1) {
+            cell.bookmarkLabel.text = @"Add Bookmark";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        // Everything else is a real bookmark!
+        else {
+            // Get info about the current row's user
+//        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];   
+        }
     }
     
     
-    // Section 1 is Settings
+    // Section 1 is settings.
     else if ([indexPath section] == 1) {
         cell.bookmarkLabel.text = @"Settings";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -157,26 +192,46 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Section 0 is the server bookmarks.
+    // Section 0 is for server bookmarks.
     if ([indexPath section] == 0) {
         return YES;
     }
     
     // Section 1 is the settings.
-    else {
-        return NO;
+    return NO;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Section 0 is for server bookmarks
+    if ([indexPath section] == 0) {
+        // If we don't have any bookmarks, the only thing is an "Add Bookmark" button.
+        if ([serverBookmarks count] == 0) {
+            return UITableViewCellEditingStyleInsert;
+        }
+        
+        // Else, if we're editing, then Count + 1 is the "Add Bookmark" item.
+        if ([indexPath row] == [serverBookmarks count]+1) {
+            return UITableViewCellEditingStyleInsert;
+        }
+        
+        // Everything else is a real bookmark!
+        return UITableViewCellEditingStyleDelete;
     }
+
+    // Section 1 is settings.
+    return UITableViewCellAccessoryNone;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Section 0 is for server bookmarks
+    // Section 0 is for server bookmarks.
     if ([indexPath section] == 0) {
         // Get info about the current bookmark.
         //        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
     }
     
-    // Section 1 is Settings
+    // Section 1 is settings.
     else if ([indexPath section] == 1) {
         self.viewDeckController.centerController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
         self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
