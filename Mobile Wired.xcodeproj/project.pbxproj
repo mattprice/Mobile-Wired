@@ -25,6 +25,8 @@
 		3482C1A9155C6C5D00415794 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3482C1A8155C6C5D00415794 /* Security.framework */; };
 		3482C1AA155C6C6E00415794 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE43C1359690000A24C01 /* CFNetwork.framework */; };
 		3482C1AD155C6DCD00415794 /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482C1AC155C6DCD00415794 /* WrapController.m */; };
+		3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482C1B8155C7E9200415794 /* BookmarkViewController.m */; };
+		3482C1BB155C7E9200415794 /* BookmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3482C1B9155C7E9200415794 /* BookmarkView.xib */; };
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
 		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };
 		34838FC314F3456D0064B619 /* ServerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34838FC114F3456D0064B619 /* ServerListView.xib */; };
@@ -87,6 +89,9 @@
 		3482C1A8155C6C5D00415794 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3482C1AB155C6DCD00415794 /* WrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WrapController.h; path = ViewDeck/WrapController.h; sourceTree = "<group>"; };
 		3482C1AC155C6DCD00415794 /* WrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WrapController.m; path = ViewDeck/WrapController.m; sourceTree = "<group>"; };
+		3482C1B7155C7E9200415794 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookmarkViewController.h; path = Classes/BookmarkViewController.h; sourceTree = "<group>"; };
+		3482C1B8155C7E9200415794 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookmarkViewController.m; path = Classes/BookmarkViewController.m; sourceTree = "<group>"; };
+		3482C1B9155C7E9200415794 /* BookmarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookmarkView.xib; path = Classes/BookmarkView.xib; sourceTree = "<group>"; };
 		34838FA814F32BA80064B619 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserListViewController.h; path = Classes/UserListViewController.h; sourceTree = "<group>"; };
 		34838FA914F32BA80064B619 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserListViewController.m; path = Classes/UserListViewController.m; sourceTree = "<group>"; };
 		34838FAD14F32C640064B619 /* ServerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerListViewController.h; path = Classes/ServerListViewController.h; sourceTree = "<group>"; };
@@ -196,6 +201,16 @@
 			);
 			name = PrettyKit;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		3482C1B6155C7E1B00415794 /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				3482C1B7155C7E9200415794 /* BookmarkViewController.h */,
+				3482C1B8155C7E9200415794 /* BookmarkViewController.m */,
+				3482C1B9155C7E9200415794 /* BookmarkView.xib */,
+			);
+			name = Bookmark;
 			sourceTree = "<group>";
 		};
 		348F5C2114FC638800F76AAC /* MBProgressHUD */ = {
@@ -375,8 +390,9 @@
 				34EBE4261359569B00A24C01 /* ChatViewController.h */,
 				34EBE4271359569B00A24C01 /* ChatViewController.m */,
 				34EBE41B1359565100A24C01 /* ChatView.xib */,
-				34DB44EE155705F200C955A5 /* Settings */,
+				3482C1B6155C7E1B00415794 /* Bookmark */,
 				34AEB772150CFDE1005F2B96 /* Server List */,
+				34DB44EE155705F200C955A5 /* Settings */,
 				34AEB770150CFDCD005F2B96 /* User List */,
 			);
 			name = "View Controllers";
@@ -476,6 +492,7 @@
 				34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */,
 				34D464D715561BB600856E46 /* SettingsView.xib in Resources */,
 				34DB44F1155707C200C955A5 /* SettingsTextCell.xib in Resources */,
+				3482C1BB155C7E9200415794 /* BookmarkView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +542,7 @@
 				34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */,
 				34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */,
 				3482C1AD155C6DCD00415794 /* WrapController.m in Sources */,
+				3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

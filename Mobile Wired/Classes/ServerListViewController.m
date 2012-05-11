@@ -28,6 +28,7 @@
 #import "ServerListTableViewCell.h"
 #import "IIViewDeckController.h"
 #import "SettingsViewController.h"
+#import "BookmarkViewController.h"
 
 @implementation ServerListViewController
 
@@ -227,6 +228,20 @@
 {
     // Section 0 is for server bookmarks.
     if ([indexPath section] == 0) {
+        // If we don't have any bookmarks, the only thing is an "Add Bookmark" button.
+        if ([serverBookmarks count] == 0) {
+            self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
+            self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+            [self.viewDeckController closeLeftViewAnimated:YES];
+        }
+        
+        // Else, if we're editing, then Count + 1 is the "Add Bookmark" item.
+        if ([indexPath row] == [serverBookmarks count]+1) {
+            self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
+            self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+            [self.viewDeckController closeLeftViewAnimated:YES];
+        }
+        
         // Get info about the current bookmark.
         //        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
     }
@@ -237,6 +252,10 @@
         self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
         [self.viewDeckController closeLeftViewAnimated:YES];
     }
+    
+    // Clear selection after pressing.
+    [self.mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 /*

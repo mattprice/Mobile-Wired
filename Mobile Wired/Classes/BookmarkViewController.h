@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.h
+//  BookmarkViewController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2012 Matthew Price, http://mattprice.me/
@@ -28,14 +28,21 @@
 #import "IIViewDeckController.h"
 #import "PrettyNavigationBar+Defaults.h"
 
-@interface SettingsViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, IIViewDeckControllerDelegate, UITableViewDataSource> {
+@interface BookmarkViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, IIViewDeckControllerDelegate, UITableViewDataSource> {
     IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
-    
-    UITextField *nickField;
-    UITextField *statusField;
-    NSString *oldNick;
-    NSString *oldStatus;
+
+    UITextField *serverNameField;
+    UITextField *serverHostField;
+    UITextField *serverPortField;
+    NSString *oldServerName;
+    NSString *oldServerHost;
+    NSString *oldServerPort;
+        
+    UITextField *userLoginField;
+    UITextField *userPassField;
+    NSString *oldUserLogin;
+    NSString *oldUserPass;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
