@@ -45,6 +45,9 @@
 {
     [super viewDidLoad];
 
+    // Register an event for when a keyboard pops up
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldWasSelected:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    
     // Create the navigation bar.
     navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
     [navigationBar setTitle:@"Edit Bookmark"];
@@ -111,6 +114,21 @@
 
 #pragma mark -
 #pragma mark Text Field Delegates
+
+- (void)textfieldWasSelected:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.25
+                          delay:0
+                        options:UIViewAnimationCurveEaseInOut
+                     animations:^{
+                         self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x, self.mainTableView.frame.origin.y, self.mainTableView.frame.size.width, 200.0);
+                         [self.mainTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                     }
+     
+                     completion:^(BOOL finished){
+                         // Do nothing.
+                     }];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
