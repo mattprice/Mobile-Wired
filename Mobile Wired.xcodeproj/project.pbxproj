@@ -14,6 +14,8 @@
 		3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD04136613EF0046955F /* DefaultUserIcon.png */; };
 		3450D0B91548DBA700D320AE /* PrettyDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450D0B61548DBA700D320AE /* PrettyDrawing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */; };
+		3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */; };
 		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; };
 		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
@@ -58,7 +60,6 @@
 		34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */; };
 		34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */; };
 		34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FB815D14F71FDE001780E4 /* IIViewDeckController.m */; };
-		34FC5C7E135B458A0049C737 /* MobileWired_Spec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */; };
 		34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FC5C8C135BB3430049C737 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		3450D0B61548DBA700D320AE /* PrettyDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyDrawing.m; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyDrawing.m"; sourceTree = "<group>"; };
 		3450D0B71548DBA700D320AE /* PrettyNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyNavigationBar.h; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyNavigationBar.h"; sourceTree = "<group>"; };
 		3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyNavigationBar.m; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyNavigationBar.m"; sourceTree = "<group>"; };
+		3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b51.xml; path = Resources/WiredSpec_2.0b51.xml; sourceTree = "<group>"; };
+		3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b55.xml; path = Resources/WiredSpec_2.0b55.xml; sourceTree = "<group>"; };
 		345FC70614F467C0004D2A7B /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBXML.m; path = "TBXML-Code/TBXML.m"; sourceTree = "<group>"; };
 		345FC70814F467E1004D2A7B /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBXML.h; path = "TBXML-Headers/TBXML.h"; sourceTree = "<group>"; };
 		345FC70914F468DC004D2A7B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -139,7 +142,6 @@
 		34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PrettyToolbar+Defaults.m"; path = "Mobile Wired/Classes/Categories/PrettyToolbar+Defaults.m"; sourceTree = "<group>"; };
 		34FB815C14F71FDE001780E4 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIViewDeckController.h; path = ViewDeck/IIViewDeckController.h; sourceTree = "<group>"; };
 		34FB815D14F71FDE001780E4 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIViewDeckController.m; path = ViewDeck/IIViewDeckController.m; sourceTree = "<group>"; };
-		34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MobileWired_Spec.xml; path = Resources/MobileWired_Spec.xml; sourceTree = "<group>"; };
 		34FC5C80135B493D0049C737 /* Connection Dump.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Connection Dump.xml"; sourceTree = SOURCE_ROOT; };
 		34FC5C82135B4D150049C737 /* P7 Specification.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "P7 Specification.xml"; sourceTree = SOURCE_ROOT; };
 		34FC5C8C135BB3430049C737 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -401,7 +403,8 @@
 		34FC5C84135B4D790049C737 /* Wired Specs */ = {
 			isa = PBXGroup;
 			children = (
-				34FC5C7D135B458A0049C737 /* MobileWired_Spec.xml */,
+				3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */,
+				3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */,
 				34FC5C82135B4D150049C737 /* P7 Specification.xml */,
 				34FC5C80135B493D0049C737 /* Connection Dump.xml */,
 			);
@@ -473,7 +476,6 @@
 				34EBE403135951A700A24C01 /* MainWindow.xib in Resources */,
 				34EBE4211359565100A24C01 /* ChatView.xib in Resources */,
 				34EBE4231359565100A24C01 /* UserListView.xib in Resources */,
-				34FC5C7E135B458A0049C737 /* MobileWired_Spec.xml in Resources */,
 				3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */,
 				3440CD03136611EE0046955F /* MobileWired.png in Resources */,
 				3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */,
@@ -493,6 +495,8 @@
 				34D464D715561BB600856E46 /* SettingsView.xib in Resources */,
 				34DB44F1155707C200C955A5 /* SettingsTextCell.xib in Resources */,
 				3482C1BB155C7E9200415794 /* BookmarkView.xib in Resources */,
+				3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */,
+				3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

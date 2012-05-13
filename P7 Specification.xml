@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<p7:protocol xmlns:p7="http://www.zankasoftware.com/P7/Specification"
+<p7:protocol xmlns:p7="http://www.read-write.fr/wired/html/wired.html"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			 xsi:schemaLocation="http://www.zankasoftware.com/P7/Specification p7-specification.xsd"
+			 xsi:schemaLocation="http://www.read-write.fr/wired/html/p7-specification.xsd"
 			 name="Wired"
-			 version="2.0b53">
+			 version="2.0b55">
 	<p7:documentation>
 		TBD
 		
@@ -85,9 +85,9 @@
 				Application version, e.g. "1.0".
 			</p7:documentation>
 		</p7:field>
-		<p7:field name="wired.info.application.build" type="uint32" id="2002" version="2.0">
+		<p7:field name="wired.info.application.build" type="string" id="2002" version="2.0">
 			<p7:documentation>
-				Application build, e.g. 1000.
+				Application build, e.g. 0xEEEEEEEE (git commit hash).
 			</p7:documentation>
 		</p7:field>
 		<p7:field name="wired.info.os.name" type="string" id="2003" version="2.0">
@@ -1118,6 +1118,11 @@
 				TBD
 			</p7:documentation>
 		</p7:field>
+		<p7:field name="wired.event.to_time" type="date" id="10050" version="2.0">
+			<p7:documentation>
+				TBD
+			</p7:documentation>
+		</p7:field>
 		<p7:field name="wired.event.number_of_days" type="uint32" id="10005" version="2.0">
 			<p7:documentation>
 				TBD
@@ -2016,14 +2021,6 @@
 			</p7:documentation>
 			<p7:parameter field="wired.transaction" version="2.0" />
 			<p7:parameter field="wired.board.board" use="required" version="2.0" />
-			<p7:parameter field="wired.board.owner" use="required" version="2.0" />
-			<p7:parameter field="wired.board.owner.read" use="required" version="2.0" />
-			<p7:parameter field="wired.board.owner.write" use="required" version="2.0" />
-			<p7:parameter field="wired.board.group" use="required" version="2.0" />
-			<p7:parameter field="wired.board.group.read" use="required" version="2.0" />
-			<p7:parameter field="wired.board.group.write" use="required" version="2.0" />
-			<p7:parameter field="wired.board.everyone.read" use="required" version="2.0" />
-			<p7:parameter field="wired.board.everyone.write" use="required" version="2.0" />
 		</p7:message>
 
 		<p7:message name="wired.board.board_info" id="6019" version="2.0">
@@ -2920,6 +2917,15 @@
 			<p7:parameter field="wired.transaction" version="2.0" />
 		</p7:message>
 		
+		<p7:message name="wired.event.delete_events" id="10022" version="2.0">
+			<p7:documentation>
+				TBD
+			</p7:documentation>
+			<p7:parameter field="wired.transaction" version="2.0" />
+			<p7:parameter field="wired.event.from_time" version="2.0" />
+			<p7:parameter field="wired.event.to_time" version="2.0" />
+		</p7:message>
+		
 		<p7:message name="wired.event.subscribe" id="10011" version="2.0">
 			<p7:documentation>
 				Subscribe to events message.
@@ -3112,6 +3118,7 @@
 			<p7:parameter field="wired.info.files.count" use="required" version="2.0" />
 			<p7:parameter field="wired.info.files.size" use="required" version="2.0" />
 		</p7:message>
+        
 	</p7:messages>
 
 	<p7:transactions>
@@ -4662,6 +4669,16 @@
 			</p7:or>
 		</p7:transaction>
 		
+		<p7:transaction message="wired.event.delete_events" originator="client" version="2.0">
+			<p7:documentation>
+				TBD
+			</p7:documentation>
+			<p7:or>
+				<p7:reply message="wired.okay" count="1" use="required" version="2.0" />
+				<p7:reply message="wired.error" count="1" use="required" version="2.0" />
+			</p7:or>
+		</p7:transaction>
+		
 		<p7:transaction message="wired.event.subscribe" originator="client" version="2.0">
 			<p7:documentation>
 				[message:wired.error] should be replied with [enum:wired.error.permission_denied]
@@ -4898,6 +4915,7 @@
 				<p7:reply message="wired.error" count="1" use="required" version="2.0" />
 			</p7:or>
 		</p7:transaction>
+     
 	</p7:transactions>
 	
 	<p7:broadcasts>
@@ -5068,5 +5086,6 @@
 				TBD
 			</p7:documentation>
 		</p7:broadcast>
+        
 	</p7:broadcasts>
 </p7:protocol>

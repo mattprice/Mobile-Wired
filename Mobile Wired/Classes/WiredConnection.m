@@ -375,15 +375,31 @@
 /*
  * Sends a compatibility check to the server.
  *
- * Reads in MobileWired_Spec.xml and sends it to the server. Wired requires that
+ * Reads in the WiredSpec XML file and sends it to the server. Wired requires that
  * certain characters be encoded before sending. To save processing time the XML
- * is now pre-encoded. The orginal code is left in only for reference.
+ * should be pre-encoded. To save bandwidth the documentation lines should be removed.
+ * 
+ * The orginal code is left in only for reference.
  *
  */
 - (void)sendCompatibilityCheck
 {
     NSLog(@"Sending compatibility check...");
-    NSString *contents = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MobileWired_Spec" ofType:@"xml"]
+    
+    // Send the correct WiredSpec XML file depending on what version the server is.
+    // TODO: There's probably a better way of handling multiple server versions but this works for now.
+    NSString *resource, *version = [serverInfo objectForKey:@"p7.handshake.protocol.version"];
+    
+    if ([version isEqualToString:@"2.0b55"])
+        resource = @"WiredSpec_2.0b55";
+    
+    else if ([version isEqualToString:@"2.0b51"])
+        resource = @"WiredSpec_2.0b51";
+    
+    else
+        resource = @"WiredSpec_2.0b55";
+    
+    NSString *contents = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:resource ofType:@"xml"]
                                                    encoding:NSUTF8StringEncoding error:nil];
     
     // Escape the XML document.
@@ -637,6 +653,12 @@
                 } else {
                     [self sendClientInformation];
                 }
+            }
+            
+            else if ([childName isEqualToString:@"p7.handshake.protocol.version"]) {
+                childValue = [TBXML textForElement:childElement];
+                
+                [serverInfo setValue:childValue forKey:@"p7.handshake.protocol.version"];
             }
         } while ((childElement = childElement->nextSibling));
     }
