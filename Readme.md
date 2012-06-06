@@ -1,8 +1,30 @@
-# Mobile Wired
+## About
 
 Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
 
-# MIT License (MIT)
+## Download Instructions
+1. Checkout the repository:
+   * `$ git clone https://github.com/mattprice/Mobile-Wired.git`
+2. Download all the required submodules:
+   * `$ cd Mobile-Wired`
+   * `$ git submodule init`
+   * `$ git submodule update`
+
+## External Resources
+
+* [GCDAsyncSocket][] — Asynchronous socket networking library for Mac and iOS.
+* [IIViewDeckController][] — An implementation of the sliding views found in the Path 2.0 or Facebook iOS apps.
+* [MBProgressHUD][] — iOS class for displaying a translucent HUD with an indicator and/or labels.
+* [PrettyKit][] — A small set of widgets and UIKit subclasses that gives you deeper UIKit customization.
+* [TBXML][] — Super-fast, lightweight, easy to use XML parser for the Mac and iOS.
+
+[GCDAsyncSocket]: https://github.com/robbiehanson/CocoaAsyncSocket
+[IIViewDeckController]: https://github.com/Inferis/ViewDeck*
+[MBProgressHUD]: https://github.com/jdg/MBProgressHUD
+[PrettyKit]: https://github.com/vicpenap/PrettyKit
+[TBXML]: https://github.com/71squared/TBXML
+
+## MIT License (MIT)
 
 Copyright (c) 2012 Matthew Price, http://mattprice.me/ <br>
 Copyright (c) 2012 Ember Code, http://embercode.com/
