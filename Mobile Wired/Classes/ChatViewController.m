@@ -524,13 +524,27 @@
 {
     [super viewWillAppear:animated];
     
-    // Be sure we know which keyboard is selected
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldWasSelected:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    // Be sure we know which keyboard is selected.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textfieldWasSelected:)
+                                                 name:UITextFieldTextDidBeginEditingNotification
+                                               object:nil];
     
-    // Register an event for when a keyboard pops up
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adjustAccessoryView) name:UIKeyboardDidHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    // Register an event for when a keyboard pops up.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(adjustAccessoryView)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -556,8 +570,14 @@
                           delay:0
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
-                         accessoryView.frame = CGRectMake(0.0, 200.0, accessoryView.frame.size.width, accessoryView.frame.size.height);
-                         chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, 155.0);
+                         accessoryView.frame = CGRectMake(0.0,
+                                                          200.0,
+                                                          accessoryView.frame.size.width,
+                                                          accessoryView.frame.size.height);
+                         chatTextView.frame = CGRectMake(chatTextView.frame.origin.x,
+                                                         chatTextView.frame.origin.y,
+                                                         chatTextView.frame.size.width,
+                                                         155.0);
                          [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
                      }
      
@@ -598,10 +618,16 @@
 - (void)adjustAccessoryView
 {
     // Pan the accessory view up/down.
-    accessoryView.frame = CGRectMake(0.0, keyboard.frame.origin.y - 64, accessoryView.frame.size.width, accessoryView.frame.size.height);
+    accessoryView.frame = CGRectMake(0.0,
+                                     keyboard.frame.origin.y - 64,
+                                     accessoryView.frame.size.width,
+                                     accessoryView.frame.size.height);
     
     // Lengthen the chat view.
-    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x, chatTextView.frame.origin.y, chatTextView.frame.size.width, accessoryView.frame.origin.y - 45);
+    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x,
+                                    chatTextView.frame.origin.y,
+                                    chatTextView.frame.size.width,
+                                    accessoryView.frame.origin.y - 45);
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 

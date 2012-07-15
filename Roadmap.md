@@ -1,5 +1,4 @@
 # 5/11 Notes
-* Can pan away from Edit Bookmarks when keyboard is up.
 * Can't press "Add Bookmark" when editing the server list.
 
 # Version 1

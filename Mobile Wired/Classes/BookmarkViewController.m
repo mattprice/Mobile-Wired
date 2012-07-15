@@ -58,6 +58,12 @@
                                                                                 style:UIBarButtonItemStyleDone
                                                                                target:self
                                                                                action:@selector(didPressReset)];
+    
+    // Notify us when the keyboard is hidden.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(adjustMainTableView)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 - (void)viewDidUnload
@@ -184,7 +190,10 @@
                           delay:0
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
-                         self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x, self.mainTableView.frame.origin.y, self.mainTableView.frame.size.width, 200.0);
+                         self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,
+                                                               self.mainTableView.frame.origin.y,
+                                                               self.mainTableView.frame.size.width,
+                                                               200.0);
                          [self.mainTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:NO];
                      }
      
@@ -229,6 +238,25 @@
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
     
     return YES;
+}
+
+- (void)adjustMainTableView
+{
+    // Lengthen the chat view.
+    [UIView animateWithDuration:.25
+                          delay:0
+                        options:UIViewAnimationCurveEaseInOut
+                     animations:^{
+                         self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,
+                                                               self.mainTableView.frame.origin.y,
+                                                               self.mainTableView.frame.size.width,
+                                                               416.0);
+                         [self.mainTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                     }
+     
+                     completion:^(BOOL finished){
+                         // Do nothing.
+                     }];
 }
 
 #pragma mark -
