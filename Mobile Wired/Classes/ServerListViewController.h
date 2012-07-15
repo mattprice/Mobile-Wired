@@ -29,12 +29,14 @@
 
 @interface ServerListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray *serverBookmarks;
+    NSUInteger selectedIndex;
     
     IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
 }
 
 @property (strong, nonatomic) NSMutableArray *serverBookmarks;
+@property (nonatomic) NSUInteger selectedIndex;
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 

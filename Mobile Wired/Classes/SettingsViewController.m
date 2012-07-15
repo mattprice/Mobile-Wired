@@ -48,11 +48,7 @@
     // Create the navigation bar.
     navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
     [navigationBar setTitle:@"Settings"];
-    
-    // Store the current nickname and status.
-    oldNick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
-    oldStatus = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
-    
+
     // Create the reset button.
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset"
                                                                                 style:UIBarButtonItemStyleDone

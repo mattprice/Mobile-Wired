@@ -27,10 +27,14 @@
 #import <UIKit/UIKit.h>
 #import "IIViewDeckController.h"
 #import "PrettyNavigationBar+Defaults.h"
+#import "ServerListViewController.h"
 
 @interface BookmarkViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, IIViewDeckControllerDelegate, UITableViewDataSource> {
     IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
+    
+    ServerListViewController *serverList;
+    Boolean isEditing;
 
     UITextField *serverNameField;
     UITextField *serverHostField;
@@ -46,5 +50,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
+
+@property (strong, nonatomic) ServerListViewController *serverList;
 
 @end

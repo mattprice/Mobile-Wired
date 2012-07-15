@@ -33,8 +33,7 @@
 @implementation ServerListViewController
 
 @synthesize mainTableView = _mainTableView;
-
-@synthesize serverBookmarks;
+@synthesize serverBookmarks, selectedIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -127,12 +126,13 @@
     // Section 0 is for server bookmarks.
     if (section == 0) {
         // If we don't have any bookmarks display an "Add Bookmark" button.
+        serverBookmarks = [[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"];
         if ([serverBookmarks count] == 0) {
             return 1;
         }
         
         // If we're editing, include an extra space for an "Add Bookmark" button.
-        if (self.mainTableView.editing) {
+        else if (self.mainTableView.editing) {
             return [serverBookmarks count]+1;
         }
         
@@ -212,7 +212,7 @@
         }
         
         // Else, if we're editing, then Count + 1 is the "Add Bookmark" item.
-        if ([indexPath row] == [serverBookmarks count]+1) {
+        else if ([indexPath row] == [serverBookmarks count]+1) {
             return UITableViewCellEditingStyleInsert;
         }
         
@@ -231,30 +231,36 @@
         // If we don't have any bookmarks, the only thing is an "Add Bookmark" button.
         if ([serverBookmarks count] == 0) {
             self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
-            self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-            [self.viewDeckController closeLeftViewAnimated:YES];
         }
         
         // Else, if we're editing, then Count + 1 is the "Add Bookmark" item.
-        if ([indexPath row] == [serverBookmarks count]+1) {
+        else if ([indexPath row] == [serverBookmarks count]+1) {
             self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
-            self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-            [self.viewDeckController closeLeftViewAnimated:YES];
         }
         
+        // Else, this is actually a bookmark!
+        else {
         // Get info about the current bookmark.
         //        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+        }
+        
+        // Set the selectedIndex so that we know what row to save changes to.
+        selectedIndex = [indexPath row];
+        BookmarkViewController *bookmarkView = (BookmarkViewController *)self.viewDeckController.centerController;
+        bookmarkView.serverList = self;
     }
     
     // Section 1 is settings.
     else if ([indexPath section] == 1) {
         self.viewDeckController.centerController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
-        self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-        [self.viewDeckController closeLeftViewAnimated:YES];
     }
     
     // Clear selection after pressing.
     [self.mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // Re-enable panning and open the center view.
+    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    [self.viewDeckController closeLeftViewAnimated:YES];
 
 }
 
