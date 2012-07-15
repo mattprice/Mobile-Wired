@@ -488,7 +488,7 @@
     NSMutableString *chatText = [chatTextView.text mutableCopy];
 
     if ([reason isEqualToString:@""]) {
-        [chatText appendFormat:@"<<< %@ was kicked by %@ >>>\n",nick,kicker,reason];
+        [chatText appendFormat:@"<<< %@ was kicked by %@ >>>\n",nick,kicker];
     } else {
         [chatText appendFormat:@"<<< %@ was kicked by %@ (%@) >>>\n",nick,kicker,reason];        
     }
