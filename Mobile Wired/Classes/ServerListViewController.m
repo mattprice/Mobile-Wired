@@ -29,6 +29,7 @@
 #import "IIViewDeckController.h"
 #import "SettingsViewController.h"
 #import "BookmarkViewController.h"
+#import "ChatViewController.h"
 
 @implementation ServerListViewController
 
@@ -168,8 +169,9 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
-        // Else, if we're editing, then Count + 1 is the "Add Bookmark" item.
-        else if ([indexPath row] == [serverBookmarks count]+1) {
+        // Else, if we're editing, then bookmark count is the "Add Bookmark" item.
+        // This is because indices are 0 based, but array count is not.
+        else if ([indexPath row] == [serverBookmarks count]) {
             cell.bookmarkLabel.text = @"Add Bookmark";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
@@ -177,7 +179,8 @@
         // Everything else is a real bookmark!
         else {
             // Get info about the current row's user
-//        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];   
+            NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+            cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerName"];
         }
     }
     
@@ -211,8 +214,9 @@
             return UITableViewCellEditingStyleInsert;
         }
         
-        // Else, if we're editing, then Count + 1 is the "Add Bookmark" item.
-        else if ([indexPath row] == [serverBookmarks count]+1) {
+        // Else, if we're editing, then bookmark count is the "Add Bookmark" item.
+        // This is because indices are 0 based, but an array count is not.
+        else if ([indexPath row] == [serverBookmarks count]) {
             return UITableViewCellEditingStyleInsert;
         }
         
@@ -240,8 +244,24 @@
         
         // Else, this is actually a bookmark!
         else {
-        // Get info about the current bookmark.
-        //        NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+            // Get info about the current bookmark.
+            NSMutableDictionary *currentBookmark = [[serverBookmarks objectAtIndex:[indexPath row]] mutableCopy];
+            
+            // Check to see if an existing controller is saved.
+            if ([currentBookmark objectForKey:@"CurrentConnection"]) {
+                self.viewDeckController.centerController = [currentBookmark objectForKey:@"CurrentConnection"];
+            }
+            
+            // No existing controller is saved, so make a new one.
+            else {
+                // Create a new ChatViewController.
+                ChatViewController *controller = [ChatViewController new];
+                [controller new:[indexPath row]];
+                
+                // Save the ChatViewController and load it into the center view.
+                [currentBookmark setObject:controller forKey:@"CurrentConnection"];
+                self.viewDeckController.centerController = [currentBookmark objectForKey:@"CurrentConnection"];
+            }
         }
         
         // Set the selectedIndex so that we know what row to save changes to.

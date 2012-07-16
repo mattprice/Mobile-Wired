@@ -27,6 +27,7 @@
 #import "BookmarkViewController.h"
 #import "SettingsTextCell.h"
 #import "IIViewDeckController.h"
+#import "NSString+Hashes.h"
 
 @implementation BookmarkViewController
 
@@ -97,18 +98,7 @@
     userLoginField.text = oldUserLogin;
     userPassField.text = oldUserPass;
     
-    // Re-save the previous values.
-    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-      objectAtIndex:serverList.selectedIndex] setObject:oldServerName forKey:@"ServerName"];
-    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-      objectAtIndex:serverList.selectedIndex] setObject:oldServerHost forKey:@"ServerHost"];
-    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-      objectAtIndex:serverList.selectedIndex] setObject:oldServerPort forKey:@"ServerPort"];
-    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-      objectAtIndex:serverList.selectedIndex] setObject:oldUserLogin forKey:@"UserLogin"];
-    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-      objectAtIndex:serverList.selectedIndex] setObject:oldUserPass forKey:@"UserPass"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self saveBookmark];
 }
 
 - (void)didPressSave
@@ -120,29 +110,7 @@
     [userLoginField resignFirstResponder];
     [userPassField resignFirstResponder];
     
-    // Save the values.
-//    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-//      objectAtIndex:serverList.selectedIndex] setObject:serverNameField.text forKey:@"ServerName"];
-//    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-//      objectAtIndex:serverList.selectedIndex] setObject:serverHostField.text forKey:@"ServerHost"];
-//    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-//      objectAtIndex:serverList.selectedIndex] setObject:serverPortField.text forKey:@"ServerPort"];
-//    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-//      objectAtIndex:serverList.selectedIndex] setObject:userLoginField.text forKey:@"UserLogin"];
-//    [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-//      objectAtIndex:serverList.selectedIndex] setObject:userPassField.text forKey:@"UserPass"];
-    
-    NSMutableDictionary *newBookmark = [NSMutableDictionary dictionary];
-    [newBookmark setObject:serverNameField.text forKey:@"SeverName"];
-    [newBookmark setObject:serverHostField.text forKey:@"ServerHost"];
-    [newBookmark setObject:serverPortField.text forKey:@"ServerPort"];
-    [newBookmark setObject:userLoginField.text forKey:@"UserLogin"];
-    [newBookmark setObject:userPassField.text forKey:@"UserPass"];
-    
-    NSMutableArray *savedBookmarks = [[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"];
-    [savedBookmarks insertObject:newBookmark atIndex:serverList.selectedIndex];
-    [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self saveBookmark];
     
     // Reload the server list.
     [serverList.mainTableView reloadData];
@@ -151,33 +119,41 @@
     [self.viewDeckController openLeftViewAnimated:YES];
 }
 
+- (void)saveBookmark
+{
+    // Create a dictionary to store the bookmark in.
+    NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
+    [bookmark setObject:serverNameField.text forKey:@"ServerName"];
+    [bookmark setObject:serverHostField.text forKey:@"ServerHost"];
+    [bookmark setObject:serverPortField.text forKey:@"ServerPort"];
+    [bookmark setObject:userLoginField.text forKey:@"UserLogin"];
+    [bookmark setObject:[userPassField.text SHA1Value] forKey:@"UserPass"];
+    
+    // Store the new bookmark list.
+    NSMutableArray *savedBookmarks = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] mutableCopy];
+    [savedBookmarks insertObject:bookmark atIndex:serverList.selectedIndex];
+    [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark -
 #pragma mark View Deck Delegates
 
 - (void)viewDeckControllerDidShowCenterView:(IIViewDeckController*)viewDeckController animated:(BOOL)animated
 {
-    // If this is a new bookmark, there's no old values to save.
-    NSDictionary *bookmark = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] objectAtIndex:serverList.selectedIndex];
-    if (bookmark == nil) {
+    // Becasue selectedIndex starts counting at 0, the only time it will ever
+    // equal the number of saved bookmarks is if we are creating a new bookmark.
+    // Ex: If we have 4 bookmarks, the highest bookmark index is 3. Add Bookmark is index 4.
+    if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] count] ==  serverList.selectedIndex ) {
         isEditing = NO;
         navigationBar.topItem.rightBarButtonItem.title = @"Save";
         navigationBar.topItem.rightBarButtonItem.action = @selector(didPressSave);
-    }
-    
-    // If we're editing, save the current values.
-    else {
+       [navigationBar setTitle:@"Add Bookmark"];
+    } else {
         isEditing = YES;
-        oldServerName = [bookmark objectForKey:@"ServerName"];
-        oldServerHost = [bookmark objectForKey:@"ServerHost"];
-        oldServerPort = [bookmark objectForKey:@"ServerPort"];
-        oldUserLogin = [bookmark objectForKey:@"UserLogin"];
-        oldUserPass = [bookmark objectForKey:@"UserPass"];
-        
-        serverNameField.text = oldServerName;
-        serverHostField.text = oldServerHost;
-        serverPortField.text = oldServerPort;
-        userLoginField.text = oldUserLogin;
-        userPassField.text = oldUserPass;
+        navigationBar.topItem.rightBarButtonItem.title = @"Reset";
+        navigationBar.topItem.rightBarButtonItem.action = @selector(didPressReset);
+        [navigationBar setTitle:@"Edit Bookmark"];
     }
 }
 
@@ -208,17 +184,7 @@
     
     // New bookmarks have a Save button, so don't save them when the keyboard closes.
     if (isEditing) {
-        [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-          objectAtIndex:serverList.selectedIndex] setObject:serverNameField.text forKey:@"ServerName"];
-        [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-          objectAtIndex:serverList.selectedIndex] setObject:serverHostField.text forKey:@"ServerHost"];
-        [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-          objectAtIndex:serverList.selectedIndex] setObject:serverPortField.text forKey:@"ServerPort"];
-        [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-          objectAtIndex:serverList.selectedIndex] setObject:userLoginField.text forKey:@"UserLogin"];
-        [[[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"]
-          objectAtIndex:serverList.selectedIndex] setObject:userPassField.text forKey:@"UserPass"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self saveBookmark];
     }
     
     return YES;
@@ -310,23 +276,56 @@
         }
     }
     
+    // Becasue selectedIndex starts counting at 0, the only time it will ever
+    // equal the number of saved bookmarks is if we are creating a new bookmark.
+    // Ex: If we have 4 bookmarks, the highest bookmark index is 3. Add Bookmark is index 4.
+    NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
+    if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] count] != serverList.selectedIndex ) {
+        // Attempt to load a previously saved bookmark.
+        bookmark = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] objectAtIndex:serverList.selectedIndex];
+    }
+    
     if ([indexPath section] == 0) {
         switch ([indexPath row]) {
             case 0:
                 cell.settingName.text = @"Name";
                 serverNameField = cell.settingValue;
+                
+                if (bookmark != nil) {
+                    oldServerName = [bookmark objectForKey:@"ServerName"];
+                    cell.settingValue.text = oldServerName;
+                } else {
+                    cell.settingValue.text = @"";
+                }
+                
                 break;
                 
             case 1:
                 cell.settingName.text = @"Host";
                 cell.settingValue.keyboardType = UIKeyboardTypeURL;
                 serverHostField = cell.settingValue;
+                
+                if (isEditing) {
+                    oldServerHost = [bookmark objectForKey:@"ServerHost"];
+                    cell.settingValue.text = oldServerHost;
+                } else {
+                    cell.settingValue.text = @"";
+                }
+                
                 break;
                 
             case 2:
                 cell.settingName.text = @"Port";
                 cell.settingValue.keyboardType = UIKeyboardTypeNumberPad;
                 serverPortField = cell.settingValue;
+                
+                if (isEditing) {
+                    oldServerPort = [bookmark objectForKey:@"ServerPort"];
+                    cell.settingValue.text = oldServerPort;
+                } else {
+                    cell.settingValue.text = @"";
+                }
+                
                 break;
                 
             default:
@@ -341,11 +340,27 @@
             case 0:
                 cell.settingName.text = @"Login";
                 userLoginField = cell.settingValue;
+                
+                if (isEditing) {
+                    oldUserLogin = [bookmark objectForKey:@"UserLogin"];
+                    cell.settingValue.text = oldUserLogin;
+                } else {
+                    cell.settingValue.text = @"";
+                }
+                
                 break;
                 
             case 1:
                 cell.settingName.text = @"Password";
                 userPassField = cell.settingValue;
+                
+                if (isEditing) {
+                    oldUserPass = [bookmark objectForKey:@"UserPass"];
+                    cell.settingValue.text = oldUserPass;
+                } else {
+                    cell.settingValue.text = @"";
+                }
+                
                 break;
                 
             default:
@@ -355,7 +370,6 @@
         }
     }
     
-    cell.settingValue.text = @"";
     cell.settingValue.delegate = self;
     
     return cell;

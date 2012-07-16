@@ -37,6 +37,8 @@
     UserListViewController *userListView;
     int badgeCount;
     
+    NSDictionary *bookmark;
+    
     IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet PrettyToolbar *toolBar;
     IBOutlet UITextView *serverTopic;
@@ -55,6 +57,7 @@
 @property (strong, nonatomic) UserListViewController *userListView;
 @property (nonatomic) int badgeCount;
 
+- (void)new:(NSInteger)indexRow;
 - (IBAction)sendButtonPressed:(id)sender;
 
 @end

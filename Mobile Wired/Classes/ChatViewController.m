@@ -26,7 +26,6 @@
 
 #import "ChatViewController.h"
 #import "IIViewDeckController.h"
-#import "NSString+Hashes.h"
 #import "UserListViewController.h"
 
 @interface ChatViewController (private)
@@ -53,8 +52,6 @@
         progressHUD.delegate = self;
         [self.view addSubview:progressHUD];
     }
-    
-//    [self connect];
 }
 
 - (void)viewDidUnload
@@ -73,6 +70,12 @@
 #pragma mark -
 #pragma mark Wired Connection Methods
 
+- (void)new:(NSInteger)indexRow
+{
+    bookmark = [[[NSUserDefaults standardUserDefaults] valueForKey:@"Bookmarks"] objectAtIndex:indexRow];
+    [self connect];
+}
+
 - (void)connect
 {
     // Update the progress HUD.
@@ -84,7 +87,7 @@
     // Create a new WiredConnection.
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
-    [self.connection connectToServer:@"chat.embercode.com" onPort:2359];
+    [self.connection connectToServer:[bookmark valueForKey:@"ServerHost"] onPort:(UInt16)[bookmark valueForKey:@"ServerPort"]];
 }
 
 - (IBAction)sendButtonPressed:(id)sender
@@ -130,7 +133,7 @@
     [self.connection setNick:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"]];
     [self.connection setIcon:nil];
     [self.connection setStatus:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"]];
-    [self.connection sendLogin:@"guest" withPassword:[@"" SHA1Value]];
+    [self.connection sendLogin:[bookmark valueForKey:@"UserLogin"] withPassword:[bookmark valueForKey:@"UserPass"]];
 }
 
 /*
