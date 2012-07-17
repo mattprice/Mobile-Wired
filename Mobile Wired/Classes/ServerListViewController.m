@@ -93,7 +93,7 @@
         
         // Remove the "Add Bookmark" button. It only exists if there are other bookmarks.
         if ([serverBookmarks count] > 0) {
-            NSArray *paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]];
+            NSArray *paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
             [self.mainTableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
         }
     }
@@ -108,7 +108,7 @@
         
         // Insert the "Add Bookmark" button, but only if other bookmarks exist.
         if ([serverBookmarks count] > 0) {
-            NSArray *paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]];
+            NSArray *paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
             [self.mainTableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
         }
     }
