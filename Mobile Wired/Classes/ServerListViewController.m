@@ -221,7 +221,7 @@
         }
         
         // Everything else is a real bookmark!
-        return UITableViewCellEditingStyleDelete;
+        return UITableViewCellAccessoryNone;
     }
 
     // Section 1 is settings.
@@ -248,21 +248,16 @@
             // Get info about the current bookmark.
             NSMutableDictionary *currentBookmark = [[serverBookmarks objectAtIndex:[indexPath row]] mutableCopy];
             
-            // Check to see if an existing controller is saved.
-            if ([currentBookmark objectForKey:@"CurrentConnection"]) {
-                self.viewDeckController.centerController = [currentBookmark objectForKey:@"CurrentConnection"];
-            }
-            
-            // No existing controller is saved, so make a new one.
-            else {
-                // Create a new ChatViewController.
+            // Check for an existing saved controller.
+            if (![currentBookmark objectForKey:@"CurrentConnection"]) {
+                // We don't have one, so create and save a new ChatViewController.
                 ChatViewController *controller = [ChatViewController new];
                 [controller new:[indexPath row]];
-                
-                // Save the ChatViewController and load it into the center view.
                 [currentBookmark setObject:controller forKey:@"CurrentConnection"];
-                self.viewDeckController.centerController = [currentBookmark objectForKey:@"CurrentConnection"];
             }
+            
+            // Open the correct ChatViewController object.
+            self.viewDeckController.centerController = [currentBookmark objectForKey:@"CurrentConnection"];
         }
         
         // Set the selectedIndex so that we know what row to save changes to.
