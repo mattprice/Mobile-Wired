@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DBD205C15B4D10B00D86B6C /* UIButton_Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */; };
+		0DBD205D15B4D10B00D86B6C /* UIButton_Gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */; };
+		0DBD205E15B4D10B00D86B6C /* UIButton_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205815B4D10B00D86B6C /* UIButton_Green.png */; };
+		0DBD205F15B4D10B00D86B6C /* UIButton_Green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205915B4D10B00D86B6C /* UIButton_Green@2x.png */; };
+		0DBD206015B4D10B00D86B6C /* UIButton_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205A15B4D10B00D86B6C /* UIButton_Red.png */; };
+		0DBD206115B4D10B00D86B6C /* UIButton_Red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205B15B4D10B00D86B6C /* UIButton_Red@2x.png */; };
 		3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5C14F31D0A00362097 /* NSString+Base64.m */; };
 		3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5E14F31D0A00362097 /* NSString+Hashes.m */; };
 		3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CCFE136611B00046955F /* MobileWired@2x.png */; };
@@ -16,7 +22,7 @@
 		3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */; };
 		3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */; };
-		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; };
+		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker"; }; };
 		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		347B37FD15098D6500D88034 /* Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37F915098D6500D88034 /* Checkmark.png */; };
@@ -59,11 +65,17 @@
 		34EC1154150AD1730015B2CD /* Users@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EC1152150AD1730015B2CD /* Users@2x.png */; };
 		34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */; };
 		34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */; };
-		34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FB815D14F71FDE001780E4 /* IIViewDeckController.m */; };
+		34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FB815D14F71FDE001780E4 /* IIViewDeckController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker"; }; };
 		34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FC5C8C135BB3430049C737 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButton_Gray.png; path = "Mobile Wired/Resources/Images/UIButton_Gray.png"; sourceTree = SOURCE_ROOT; };
+		0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIButton_Gray@2x.png"; path = "Mobile Wired/Resources/Images/UIButton_Gray@2x.png"; sourceTree = SOURCE_ROOT; };
+		0DBD205815B4D10B00D86B6C /* UIButton_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButton_Green.png; path = "Mobile Wired/Resources/Images/UIButton_Green.png"; sourceTree = SOURCE_ROOT; };
+		0DBD205915B4D10B00D86B6C /* UIButton_Green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIButton_Green@2x.png"; path = "Mobile Wired/Resources/Images/UIButton_Green@2x.png"; sourceTree = SOURCE_ROOT; };
+		0DBD205A15B4D10B00D86B6C /* UIButton_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButton_Red.png; path = "Mobile Wired/Resources/Images/UIButton_Red.png"; sourceTree = SOURCE_ROOT; };
+		0DBD205B15B4D10B00D86B6C /* UIButton_Red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIButton_Red@2x.png"; path = "Mobile Wired/Resources/Images/UIButton_Red@2x.png"; sourceTree = SOURCE_ROOT; };
 		3431FF5F136C93ED00EDB8D8 /* Roadmap.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Roadmap.md; sourceTree = "<group>"; };
 		3439EC5B14F31D0A00362097 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Mobile Wired/Classes/Categories/NSString+Base64.h"; sourceTree = "<group>"; };
 		3439EC5C14F31D0A00362097 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Mobile Wired/Classes/Categories/NSString+Base64.m"; sourceTree = "<group>"; };
@@ -356,6 +368,12 @@
 				347B37FC15098D6500D88034 /* Error@2x.png */,
 				3440CD02136611EE0046955F /* MobileWired.png */,
 				3440CCFE136611B00046955F /* MobileWired@2x.png */,
+				0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */,
+				0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */,
+				0DBD205815B4D10B00D86B6C /* UIButton_Green.png */,
+				0DBD205915B4D10B00D86B6C /* UIButton_Green@2x.png */,
+				0DBD205A15B4D10B00D86B6C /* UIButton_Red.png */,
+				0DBD205B15B4D10B00D86B6C /* UIButton_Red@2x.png */,
 				34EC1151150AD1730015B2CD /* Users.png */,
 				34EC1152150AD1730015B2CD /* Users@2x.png */,
 			);
@@ -497,6 +515,12 @@
 				3482C1BB155C7E9200415794 /* BookmarkView.xib in Resources */,
 				3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */,
 				3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */,
+				0DBD205C15B4D10B00D86B6C /* UIButton_Gray.png in Resources */,
+				0DBD205D15B4D10B00D86B6C /* UIButton_Gray@2x.png in Resources */,
+				0DBD205E15B4D10B00D86B6C /* UIButton_Green.png in Resources */,
+				0DBD205F15B4D10B00D86B6C /* UIButton_Green@2x.png in Resources */,
+				0DBD206015B4D10B00D86B6C /* UIButton_Red.png in Resources */,
+				0DBD206115B4D10B00D86B6C /* UIButton_Red@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

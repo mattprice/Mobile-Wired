@@ -237,8 +237,9 @@
             self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
         }
         
-        // Else, if we're editing, then Count + 1 is the "Add Bookmark" item.
-        else if ([indexPath row] == [serverBookmarks count]+1) {
+        // Else, if we're editing, then bookmark count is the "Add Bookmark" item.
+        // This is because indices are 0 based, but an array count is not.
+        else if ([indexPath row] == [serverBookmarks count]) {
             self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
         }
         
@@ -284,18 +285,17 @@
 
 }
 
-/*
- // Override to support editing the table view.
  - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
  {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
+     if (editingStyle == UITableViewCellEditingStyleDelete) {
+         // Delete the row from the data source
+         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+     }
+     
+     else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Add a row to the data source.
+        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+     }
  }
- */
 
 @end

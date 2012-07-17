@@ -34,7 +34,6 @@
     IBOutlet UITableView *mainTableView;
     
     ServerListViewController *serverList;
-    Boolean isEditing;
 
     UITextField *serverNameField;
     UITextField *serverHostField;

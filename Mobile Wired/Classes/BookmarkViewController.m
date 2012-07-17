@@ -25,8 +25,8 @@
 //
 
 #import "BookmarkViewController.h"
-#import "SettingsTextCell.h"
 #import "IIViewDeckController.h"
+#import "SettingsTextCell.h"
 #import "NSString+Hashes.h"
 
 @implementation BookmarkViewController
@@ -101,60 +101,57 @@
     [self saveBookmark];
 }
 
-- (void)didPressSave
+- (void)deleteBookmark
 {
-    // We need to call resignFirstResponder for all possible UITextFields.
-    [serverNameField resignFirstResponder];
-    [serverHostField resignFirstResponder];
-    [serverPortField resignFirstResponder];
-    [userLoginField resignFirstResponder];
-    [userPassField resignFirstResponder];
-    
-    [self saveBookmark];
-    
-    // Reload the server list.
-    [serverList.mainTableView reloadData];
-    
-    // Open the left view.
-    [self.viewDeckController openLeftViewAnimated:YES];
+    // Store the bookmark.
+    NSMutableArray *savedBookmarks = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] mutableCopy];
+    [savedBookmarks removeObjectAtIndex:serverList.selectedIndex];
+    [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)saveBookmark
 {
     // Create a dictionary to store the bookmark in.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
-    [bookmark setObject:serverNameField.text forKey:@"ServerName"];
-    [bookmark setObject:serverHostField.text forKey:@"ServerHost"];
-    [bookmark setObject:serverPortField.text forKey:@"ServerPort"];
-    [bookmark setObject:userLoginField.text forKey:@"UserLogin"];
-    [bookmark setObject:[userPassField.text SHA1Value] forKey:@"UserPass"];
+    if (serverNameField.text) {
+        [bookmark setObject:serverNameField.text forKey:@"ServerName"];
+    } else {
+        [bookmark setObject:@"" forKey:@"ServerName"];
+    }
+    
+    if (serverHostField.text) {
+        [bookmark setObject:serverHostField.text forKey:@"ServerHost"];
+    } else {
+        [bookmark setObject:@"" forKey:@"ServerHost"];
+    }
+    
+    if (serverPortField.text) {
+        [bookmark setObject:serverPortField.text forKey:@"ServerPort"];
+    } else {
+        [bookmark setObject:@"" forKey:@"ServerPort"];
+    }
+    
+    if (userLoginField.text) {
+        [bookmark setObject:userLoginField.text forKey:@"UserLogin"];
+    } else {
+        [bookmark setObject:@"" forKey:@"UserLogin"];
+    }
+    
+    if (userPassField.text) {
+        [bookmark setObject:[userPassField.text SHA1Value] forKey:@"UserPass"];
+    } else {
+        [bookmark setObject:[@"" SHA1Value] forKey:@"UserPass"];
+    }
     
     // Store the new bookmark list.
     NSMutableArray *savedBookmarks = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] mutableCopy];
     [savedBookmarks insertObject:bookmark atIndex:serverList.selectedIndex];
     [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#pragma mark -
-#pragma mark View Deck Delegates
-
-- (void)viewDeckControllerDidShowCenterView:(IIViewDeckController*)viewDeckController animated:(BOOL)animated
-{
-    // Becasue selectedIndex starts counting at 0, the only time it will ever
-    // equal the number of saved bookmarks is if we are creating a new bookmark.
-    // Ex: If we have 4 bookmarks, the highest bookmark index is 3. Add Bookmark is index 4.
-    if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] count] ==  serverList.selectedIndex ) {
-        isEditing = NO;
-        navigationBar.topItem.rightBarButtonItem.title = @"Save";
-        navigationBar.topItem.rightBarButtonItem.action = @selector(didPressSave);
-       [navigationBar setTitle:@"Add Bookmark"];
-    } else {
-        isEditing = YES;
-        navigationBar.topItem.rightBarButtonItem.title = @"Reset";
-        navigationBar.topItem.rightBarButtonItem.action = @selector(didPressReset);
-        [navigationBar setTitle:@"Edit Bookmark"];
-    }
+    
+    // Reload the server list view.
+    [serverList.mainTableView reloadData];
 }
 
 #pragma mark -
@@ -182,10 +179,8 @@
 {
     [textField resignFirstResponder];
     
-    // New bookmarks have a Save button, so don't save them when the keyboard closes.
-    if (isEditing) {
-        [self saveBookmark];
-    }
+    // Re-enable panning of view.
+    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
     
     return YES;
 }
@@ -200,8 +195,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    // Re-enable panning of view.
-    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    [self saveBookmark];
     
     return YES;
 }
@@ -230,7 +224,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
@@ -241,7 +235,12 @@
     }
     
     // Login Info
-    return 2;
+    else if (section == 1) {
+        return 2;
+    }
+    
+    // Delete Button
+    return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -276,15 +275,18 @@
         }
     }
     
-    // Becasue selectedIndex starts counting at 0, the only time it will ever
+    // Set the UITextField's delegate.
+    cell.settingValue.delegate = self;
+    
+    // Because selectedIndex starts counting at 0, the only time it will ever
     // equal the number of saved bookmarks is if we are creating a new bookmark.
     // Ex: If we have 4 bookmarks, the highest bookmark index is 3. Add Bookmark is index 4.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
     if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] count] != serverList.selectedIndex ) {
-        // Attempt to load a previously saved bookmark.
         bookmark = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] objectAtIndex:serverList.selectedIndex];
     }
-    
+
+    // Server Info
     if ([indexPath section] == 0) {
         switch ([indexPath row]) {
             case 0:
@@ -305,7 +307,7 @@
                 cell.settingValue.keyboardType = UIKeyboardTypeURL;
                 serverHostField = cell.settingValue;
                 
-                if (isEditing) {
+                if (bookmark != nil) {
                     oldServerHost = [bookmark objectForKey:@"ServerHost"];
                     cell.settingValue.text = oldServerHost;
                 } else {
@@ -319,7 +321,7 @@
                 cell.settingValue.keyboardType = UIKeyboardTypeNumberPad;
                 serverPortField = cell.settingValue;
                 
-                if (isEditing) {
+                if (bookmark != nil) {
                     oldServerPort = [bookmark objectForKey:@"ServerPort"];
                     cell.settingValue.text = oldServerPort;
                 } else {
@@ -335,13 +337,14 @@
         }
     }
     
+    // Login Info
     else if ([indexPath section] == 1) {
         switch ([indexPath row]) {
             case 0:
                 cell.settingName.text = @"Login";
                 userLoginField = cell.settingValue;
                 
-                if (isEditing) {
+                if (bookmark != nil) {
                     oldUserLogin = [bookmark objectForKey:@"UserLogin"];
                     cell.settingValue.text = oldUserLogin;
                 } else {
@@ -351,11 +354,12 @@
                 break;
                 
             case 1:
-                cell.settingName.text = @"Password";
+                cell.settingName.text = @"Pass";
                 userPassField = cell.settingValue;
                 
-                if (isEditing) {
+                if (bookmark != nil) {
                     oldUserPass = [bookmark objectForKey:@"UserPass"];
+                    cell.settingValue.secureTextEntry = YES;
                     cell.settingValue.text = oldUserPass;
                 } else {
                     cell.settingValue.text = @"";
@@ -370,7 +374,28 @@
         }
     }
     
-    cell.settingValue.delegate = self;
+    // Delete Button
+    else if ([indexPath section] == 2) {
+        // Create the button.
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(9, 0, 302, 45);
+        
+        // Set the button title.
+        [button setTitle:@"Delete Bookmark" forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
+        button.titleLabel.shadowColor = [UIColor colorWithWhite:0.8 alpha:0.3];
+        button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+        
+        // Set the button background image.
+        UIImage *buttonImage = [UIImage imageNamed:@"UIButton_Red.png"];
+        [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+        
+        // Set the button action.
+        [button addTarget:self action:@selector(deleteBookmark) forControlEvents:UIControlEventTouchUpInside];
+        
+        // Add the button as a subview.
+        [cell addSubview:button];
+    }
     
     return cell;
 }
