@@ -268,6 +268,7 @@
                 if (![currentBookmark objectForKey:@"CurrentConnection"]) {
                     // We don't have one, so create and save a new ChatViewController.
                     ChatViewController *controller = [ChatViewController new];
+                    controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
                     [controller new:[indexPath row]];
                     [currentBookmark setObject:controller forKey:@"CurrentConnection"];
                 }
