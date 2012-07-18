@@ -55,7 +55,7 @@ static const short _base64DecodingTable[256] = {
     char * strResult;
     
     // Get the Raw Data length and ensure we actually have data
-    int intLength = [objData length];
+    size_t intLength = [objData length];
     if (intLength == 0) return nil;
     
     // Setup the String-based Result placeholder and pointer within that placeholder
@@ -71,7 +71,7 @@ static const short _base64DecodingTable[256] = {
         
         // we just handled 3 octets (24 bits) of data
         objRawData += 3;
-        intLength -= 3; 
+        intLength -= 3;
     }
     
     // now deal with the tail end of things
@@ -88,17 +88,14 @@ static const short _base64DecodingTable[256] = {
         }
     }
     
-    // Terminate the string-based result
-    *objPointer = '\0';
-    
-    // Return the results as an NSString object
-    return [NSString stringWithCString:strResult encoding:NSASCIIStringEncoding];
+    return [[NSString alloc] initWithBytesNoCopy:strResult length:objPointer - strResult encoding:NSASCIIStringEncoding freeWhenDone:YES];
 }
 
 + (NSData *)decodeBase64WithString:(NSString *)strBase64
 {
     const char * objPointer = [strBase64 cStringUsingEncoding:NSASCIIStringEncoding];
-    int intLength = strlen(objPointer);
+    if (objPointer == NULL)  return nil;
+    size_t intLength = strlen(objPointer);
     int intCurrent;
     int i = 0, j = 0, k;
     
@@ -109,7 +106,7 @@ static const short _base64DecodingTable[256] = {
     while ( ((intCurrent = *objPointer++) != '\0') && (intLength-- > 0) ) {
         if (intCurrent == '=') {
             if (*objPointer != '=' && ((i % 4) == 1)) {// || (intLength > 0)) {
-                                                       // the padding character is invalid at this point -- so this entire string is invalid
+                // the padding character is invalid at this point -- so this entire string is invalid
                 free(objResult);
                 return nil;
             }
@@ -166,9 +163,7 @@ static const short _base64DecodingTable[256] = {
     }
     
     // Cleanup and setup the return NSData
-    NSData * objData = [[NSData alloc] initWithBytes:objResult length:j];
-    free(objResult);
-    return objData;
+    return [[NSData alloc] initWithBytesNoCopy:objResult length:j freeWhenDone:YES];
 }
 
 @end
