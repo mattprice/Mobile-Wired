@@ -87,7 +87,7 @@
     // Create a new WiredConnection.
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
-    [self.connection connectToServer:[bookmark valueForKey:@"ServerHost"] onPort:(UInt16)[bookmark valueForKey:@"ServerPort"]];
+    [self.connection connectToServer:[bookmark valueForKey:@"ServerHost"] onPort:[[bookmark valueForKey:@"ServerPort"] integerValue]];
 }
 
 - (IBAction)sendButtonPressed:(id)sender
@@ -173,7 +173,7 @@
 - (void)didFailLoginWithReason:(NSString *)reason
 {
     // Update the progress HUD.
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Login Failed";
     progressHUD.detailsLabelText = reason;
@@ -188,7 +188,7 @@
 - (void)didConnectAndLoginSuccessfully
 {
     // Update the progress HUD.
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Connected";
     [progressHUD hide:YES afterDelay:2];
@@ -214,7 +214,7 @@
 - (void)didFailConnectionWithReason:(NSError *)error
 {
     // Update the progress HUD.
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Connection Failed";
 }
@@ -229,7 +229,7 @@
 - (void)didDisconnect
 {
     // Update the progress HUD.
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Disconnected";
     [progressHUD show:YES];
@@ -307,7 +307,7 @@
 - (void)didReconnect
 {
     // Update the Progress HUD
-	progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     progressHUD.mode = MBProgressHUDModeCustomView;
     progressHUD.labelText = @"Reconnected";
     [progressHUD hide:YES afterDelay:2];

@@ -56,7 +56,7 @@
  * Connects to the given server and port specified.
  *
  */
-- (void)connectToServer:(NSString *)server onPort:(UInt16)port
+- (void)connectToServer:(NSString *)server onPort:(NSInteger)port
 {
     NSError *error = nil;
     isConnected = false;

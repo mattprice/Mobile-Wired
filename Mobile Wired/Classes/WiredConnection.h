@@ -33,7 +33,7 @@
     id <WiredConnectionDelegate> delegate;
     
     NSString *serverHost;
-    UInt16 serverPort;
+    NSInteger serverPort;
     
     NSMutableDictionary *userList;
     NSMutableDictionary *serverInfo;
@@ -55,7 +55,7 @@
 - (id)init;
 
 #pragma mark User Commands
-- (void)connectToServer:(NSString *)server onPort:(UInt16)port;
+- (void)connectToServer:(NSString *)server onPort:(NSInteger)port;
 - (void)disconnect;
 - (void)sendLogin:(NSString *)user withPassword:(NSString *)password;
 - (void)setNick:(NSString *)nick;
