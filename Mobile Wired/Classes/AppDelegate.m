@@ -61,10 +61,7 @@
     
     // Setup all the possible views.
     serverListView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
-    userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
     chatView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
-    
-    chatView.userListView = userListView;
     
     IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:chatView 
                                                                                     leftViewController:serverListView
