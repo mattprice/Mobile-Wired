@@ -221,7 +221,7 @@
         }
         
         // Everything else is a real bookmark!
-        return UITableViewCellAccessoryNone;
+        return UITableViewCellEditingStyleDelete;
     }
 
     // Section 1 is settings.
@@ -284,6 +284,11 @@
  {
      if (editingStyle == UITableViewCellEditingStyleDelete) {
          // Delete the row from the data source
+         NSMutableArray *savedBookmarks = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] mutableCopy];
+         [savedBookmarks removeObjectAtIndex:[indexPath row]];
+         [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+         
          [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
      }
      

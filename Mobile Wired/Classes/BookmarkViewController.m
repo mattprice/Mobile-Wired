@@ -240,7 +240,7 @@
     }
     
     // Delete Button
-    return 1;
+    return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
