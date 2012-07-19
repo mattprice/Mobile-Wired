@@ -1,5 +1,5 @@
 //
-//  Mobile_WiredAppDelegate.h
+//  NSString+Hashes.m
 //  Mobile Wired
 //
 //  Copyright (c) 2012 Matthew Price, http://mattprice.me/
