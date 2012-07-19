@@ -1,7 +1,7 @@
-# 7/16 Notes
-* We need to verify that all bookmark fields are filled in before we try to connect to it. The program will crash without any indication of the failure if we don't.
+# 7/19 Notes
+* Display an alert if all bookmark fields are not filled in before we try to connect to it.
+* Display an alert if someone tries to edit a bookmark while it's connected.
 * The ChatViewController's UITextField can be flicked off screen and become stuck. The only way to fix it is a hard restart of the app.
-* Bookmark view should scroll to selected field.
 
 # Version 1
 * TestFlight SDK (?)
@@ -13,6 +13,7 @@
 * Improvements:
    * Display a disclosure triangle while editing the server list so that it's more obvious they're selectable.
    * When selecting text/link, keyboard disappears before the text field moves down.
+   * Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).
    * Text field does not expand with long messages.
    * <<< Notification messages >>> should be colored red.
 

@@ -173,11 +173,20 @@
                           delay:0
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
+                         // Resize the main UITableView.
                          self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,
                                                                self.mainTableView.frame.origin.y,
                                                                self.mainTableView.frame.size.width,
                                                                200.0);
-                         [self.mainTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                         
+                         // Scroll the table view to the selected text field.
+                         UITextField *textField = [notification object];
+                         UITableViewCell *tableCell = (UITableViewCell*)textField.superview.superview;
+                         NSIndexPath *indexPath = [self.mainTableView indexPathForCell:tableCell];
+                         
+                         [self.mainTableView scrollToRowAtIndexPath:indexPath
+                                                   atScrollPosition:UITableViewScrollPositionMiddle
+                                                           animated:YES];
                      }
      
                      completion:^(BOOL finished){
@@ -212,16 +221,15 @@
 
 - (void)adjustMainTableView
 {
-    // Lengthen the chat view.
     [UIView animateWithDuration:.25
                           delay:0
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
+                         // Resize the main UITableView.
                          self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,
                                                                self.mainTableView.frame.origin.y,
                                                                self.mainTableView.frame.size.width,
                                                                416.0);
-                         [self.mainTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:NO];
                      }
      
                      completion:^(BOOL finished){
