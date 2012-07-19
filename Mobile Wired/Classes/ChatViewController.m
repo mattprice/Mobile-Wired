@@ -42,16 +42,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Create the navigation bar.
-    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
-    
-    // Create a progress HUD.
-    if (!progressHUD) {
-        progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-        progressHUD.delegate = self;
-        [self.view addSubview:progressHUD];
-    }
 }
 
 - (void)viewDidUnload
@@ -72,6 +62,17 @@
 
 - (void)new:(NSInteger)indexRow
 {
+    // Create the navigation bar.
+    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
+    
+    // Create a progress HUD.
+    if (!progressHUD) {
+        progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        progressHUD.delegate = self;
+        [self.view addSubview:progressHUD];
+    }
+    
+    // Connect to the bookmark.
     bookmark = [[[NSUserDefaults standardUserDefaults] valueForKey:@"Bookmarks"] objectAtIndex:indexRow];
     [self connect];
 }

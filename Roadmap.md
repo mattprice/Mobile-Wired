@@ -5,6 +5,7 @@
 * The ChatViewController's UITextField can be flicked off screen and become stuck. The only way to fix it is a hard restart of the app.
     * After sending a message, you are not allowed to swipe to the server or user list. Attempting to will result in the keyboard flying offscreen.
 * If possible, fix UITableView background color on iOS 6.
+* Add a connection status message for downloading the userlist.
 
 # Version 1
 * TestFlight SDK (?)
