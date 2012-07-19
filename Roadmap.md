@@ -2,6 +2,7 @@
 * Display an alert if all bookmark fields are not filled in before we try to connect to it.
 * Display an alert if someone tries to edit a bookmark while it's connected.
 * The ChatViewController's UITextField can be flicked off screen and become stuck. The only way to fix it is a hard restart of the app.
+* If possible, fix UITableView background color on iOS 6.
 
 # Version 1
 * TestFlight SDK (?)
