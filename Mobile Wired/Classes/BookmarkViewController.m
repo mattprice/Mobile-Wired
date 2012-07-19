@@ -146,7 +146,7 @@
     
     // Store the new bookmark list.
     NSMutableArray *savedBookmarks = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] mutableCopy];
-    [savedBookmarks insertObject:bookmark atIndex:serverList.selectedIndex];
+    [savedBookmarks setObject:bookmark atIndexedSubscript:serverList.selectedIndex];
     [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
