@@ -112,6 +112,11 @@
 
 - (void)saveBookmark
 {
+    [self saveBookmark:nil];
+}
+
+- (void)saveBookmark:(UITextField *)textField
+{
     // Create a dictionary to store the bookmark in.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
     if (serverNameField.text) {
@@ -138,8 +143,13 @@
         [bookmark setObject:@"" forKey:@"UserLogin"];
     }
     
+    // If the current field is the password field, create a SHA1 hash.
+    if (textField == userPassField) {
+        userPassField.text = [userPassField.text SHA1Value];
+    }
+    
     if (userPassField.text) {
-        [bookmark setObject:[userPassField.text SHA1Value] forKey:@"UserPass"];
+        [bookmark setObject:userPassField.text forKey:@"UserPass"];
     } else {
         [bookmark setObject:[@"" SHA1Value] forKey:@"UserPass"];
     }
@@ -195,7 +205,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    [self saveBookmark];
+    [self saveBookmark:textField];
     
     return YES;
 }

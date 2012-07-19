@@ -1,7 +1,6 @@
 # 7/16 Notes
 * We need to verify that all bookmark fields are filled in before we try to connect to it. The program will crash without any indication of the failure if we don't.
 * The ChatViewController's UITextField can be flicked off screen and become stuck. The only way to fix it is a hard restart of the app.
-* The SHA1 of a password gets re-SHA1'd on every save.
 * Bookmark view should scroll to selected field.
 
 # Version 1
