@@ -266,11 +266,14 @@
                 
                 // Check for an existing saved controller.
                 if (![currentBookmark objectForKey:@"CurrentConnection"]) {
-                    // We don't have one, so create and save a new ChatViewController.
+                    // We don't have one, so create a new one.
                     ChatViewController *controller = [ChatViewController new];
                     controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
                     [controller new:[indexPath row]];
+                    
+                    // Save it to the bookmark list.
                     [currentBookmark setObject:controller forKey:@"CurrentConnection"];
+                    [serverBookmarks replaceObjectAtIndex:[indexPath row] withObject:currentBookmark];
                 }
                 
                 // Open the correct ChatViewController object.
