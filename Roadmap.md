@@ -1,5 +1,4 @@
 # 7/20 Notes
-* Display an alert if someone tries to edit a bookmark while it's connected.
 * If the server/user info is incorrect, ServerList does not reconnect. Tries to open failed view.
 * Need to display connection images.
 * Add a connection status message for downloading the userlist.

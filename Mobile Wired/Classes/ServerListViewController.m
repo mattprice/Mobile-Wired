@@ -242,6 +242,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Boolean shouldPan = true;
+    
     // Set the selectedIndex so that we know what row to save changes to.
     selectedIndex = [indexPath row];
 
@@ -264,18 +266,29 @@
         
         // Else, this is actually a bookmark!
         else {
+            // Get info about the current bookmark.
+            NSMutableDictionary *currentBookmark = [[serverBookmarks objectAtIndex:[indexPath row]] mutableCopy];
+            
             // If we're editing, we need to display the Bookmark view.
             if (self.mainTableView.editing) {
-                self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
-                BookmarkViewController *bookmarkView = (BookmarkViewController *)self.viewDeckController.centerController;
-                bookmarkView.serverList = self;
+                // Make sure that were aren't currently connected.
+                if (![currentBookmark objectForKey:@"CurrentConnection"]) {
+                    self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
+                    BookmarkViewController *bookmarkView = (BookmarkViewController *)self.viewDeckController.centerController;
+                    bookmarkView.serverList = self;
+                } else {
+                    shouldPan = false;
+                    
+                    [[[UIAlertView alloc] initWithTitle:@"Server Currently Connected"
+                                                message:@"Please disconnect from this server before attempting to edit it."
+                                               delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil] show];
+                }
             }
             
             // If we're not editing, we need to open up the bookmark in the ChatView.
             else {
-                // Get info about the current bookmark.
-                NSMutableDictionary *currentBookmark = [[serverBookmarks objectAtIndex:[indexPath row]] mutableCopy];
-                
                 // Check for an existing saved controller.
                 if (![currentBookmark objectForKey:@"CurrentConnection"]) {
                     
@@ -300,8 +313,10 @@
                     
                     // Display an alert if there's no server address.
                     else {
-                        [[[UIAlertView alloc] initWithTitle:@"Missing Server Address"
-                                                    message:@"You need to enter an address for this server in order to connect."
+                        shouldPan = false;
+                        
+                        [[[UIAlertView alloc] initWithTitle:@"Missing Server Host"
+                                                    message:@"You need to enter a host for this server in order to connect."
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                             otherButtonTitles:nil] show];
@@ -322,19 +337,21 @@
     }
     
     // Clear selection after pressing.
-    [self.mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.mainTableView deselectRowAtIndexPath:indexPath animated:NO];
     
     // Re-enable panning and open the center view.
-    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-    [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller) {
-        // If this is the first item we've opened after launch then we need to resize
-        // the server list window and change the  left ledge size.
-        CGRect frame = self.mainTableView.frame;
-        frame.size.width = 275.0;
-        self.mainTableView.frame = frame;
-        
-        self.viewDeckController.leftLedge = 44.0;
-    }];
+    if (shouldPan) {
+        self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+        [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller) {
+            // If this is the first item we've opened after launch then we need to resize
+            // the server list window and change the  left ledge size.
+            CGRect frame = self.mainTableView.frame;
+            frame.size.width = 275.0;
+            self.mainTableView.frame = frame;
+            
+            self.viewDeckController.leftLedge = 44.0;
+        }];
+    }
 }
 
  - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
