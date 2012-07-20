@@ -147,14 +147,10 @@
     }
     
     // If the current field is the password field, create a SHA1 hash.
-    if (textField == userPassField) {
-        userPassField.text = [userPassField.text SHA1Value];
-    }
-    
-    if (userPassField.text) {
-        [bookmark setObject:userPassField.text forKey:@"UserPass"];
+    if (textField == userPassField && ![userPassField.text isEqualToString:@""]) {
+        [bookmark setObject:[userPassField.text SHA1Value] forKey:@"UserPass"];
     } else {
-        [bookmark setObject:[@"" SHA1Value] forKey:@"UserPass"];
+        [bookmark setObject:@"" forKey:@"UserPass"];
     }
     
     // Store the new bookmark list.
@@ -321,7 +317,6 @@
                     cell.settingValue.text = @"";
                 }
                 
-                // Set placeholder text for the default value.
                 cell.settingValue.placeholder = [bookmark objectForKey:@"ServerHost"];
                 
                 break;
@@ -352,7 +347,6 @@
                     cell.settingValue.text = @"";
                 }
                 
-                // Set placeholder text for the default value.
                 cell.settingValue.placeholder = @"4871";
                 
                 break;
@@ -377,6 +371,7 @@
                 } else {
                     cell.settingValue.text = @"";
                 }
+                
                 cell.settingValue.placeholder = @"guest";
                 
                 break;
@@ -392,6 +387,8 @@
                 } else {
                     cell.settingValue.text = @"";
                 }
+                
+                cell.settingValue.placeholder = @"none";
                 
                 break;
                 
