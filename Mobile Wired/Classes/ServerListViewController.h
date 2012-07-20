@@ -29,6 +29,7 @@
 
 @interface ServerListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray *serverBookmarks;
+    NSMutableDictionary *currentConnections;
     NSUInteger selectedIndex;
     
     IBOutlet PrettyNavigationBar *navigationBar;

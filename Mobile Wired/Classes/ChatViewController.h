@@ -58,6 +58,7 @@
 @property (nonatomic) int badgeCount;
 
 - (void)new:(NSInteger)indexRow;
+- (Boolean)isConnected;
 - (IBAction)sendButtonPressed:(id)sender;
 
 @end

@@ -82,6 +82,15 @@
     [self connect];
 }
 
+- (Boolean)isConnected
+{
+    if (self.connection) {
+        return self.connection.isConnected;
+    } else {
+        return 0;
+    }
+}
+
 - (void)connect
 {
     // Update the progress HUD.
