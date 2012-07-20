@@ -64,8 +64,7 @@
     chatView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
     
     IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:chatView 
-                                                                                    leftViewController:serverListView
-                                                                                    rightViewController:nil];
+                                                                                    leftViewController:serverListView];
     
     deckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractive;
     

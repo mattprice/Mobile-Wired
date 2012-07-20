@@ -42,6 +42,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Create UIGestureRecognizer for sliding the keyboard down.
+    // This gets removed once the keyboard disappears.
+    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    panRecognizer.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -535,18 +540,18 @@
     
     // Register an event for when a keyboard pops up.
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidHide)
+                                             selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
                                                object:nil];
 }
 
@@ -554,13 +559,18 @@
 {
     // Disable panning view while typing.
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
+    
     return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    // Remove the UIGestureRecognizer so that you can swipe left/right again.
+    [self.view removeGestureRecognizer:panRecognizer];
+    
     // Re-enable panning of view.
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    
     return YES;
 }
 
@@ -595,10 +605,7 @@
     // This is where we start displaying it again.
     keyboard.hidden = NO;
     
-    // Create UIGestureRecognizer for sliding the keyboard down.
-    // This gets removed once the keyboard disappears.
-    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
-    panRecognizer.delegate = self;
+    // Add the UIGestureRecognizer to the view.
     [self.view addGestureRecognizer:panRecognizer];
 }
 
@@ -618,13 +625,10 @@
     }
 }
 
-- (void)keyboardDidHide
+- (void)keyboardDidHide:(NSNotification *)notification
 {
     // Adjust the accessory view.
     [self adjustAccessoryView];
-    
-    // Remove the UIGestureRecognizer so that you can swipe left/right again.
-    [self.view removeGestureRecognizer:panRecognizer];
 }
 
 - (void)adjustAccessoryView

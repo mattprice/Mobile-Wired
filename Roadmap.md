@@ -1,10 +1,10 @@
 # 7/19 Notes
 * Display an alert if no server host is filled in before trying to connect to a Wired server.
 * Display an alert if someone tries to edit a bookmark while it's connected.
+* If the server/user info is incorrect, ServerList does not reconnect. Tries to open failed view.
 * Need to display connection images.
-* If possible, fix UITableView background color on iOS 6.
 * Add a connection status message for downloading the userlist.
-* App crashes after editing a bookmark and then attempting to connect to a server. Need to figure out why.
+* App crashes after editing a bookmark and then attempting to connect to a server.
 
 # Version 1
 * TestFlight SDK (?)
