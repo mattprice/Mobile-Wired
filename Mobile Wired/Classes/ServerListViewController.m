@@ -185,6 +185,7 @@
             // Get info about the current row's bookmark.
             NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
             
+            // If there's no Server Name, try using the Server Host.
             if ([[currentBookmark objectForKey:@"ServerName"] isEqualToString:@""]) {
                 cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerHost"];
             } else {
@@ -277,22 +278,40 @@
                 
                 // Check for an existing saved controller.
                 if (![currentBookmark objectForKey:@"CurrentConnection"]) {
-                    // We don't have one, so create a new one.
-                    ChatViewController *controller = [ChatViewController new];
-                    controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
-                    [controller new:[indexPath row]];
                     
-                    // Reset the center view before saving the bookmark.
-                    // This is so the app doesn't crash if we try to modify a bookmark we just edited.
-                    self.viewDeckController.centerController = nil;
+                    // Check to make sure the bookmark is complete.
+                    if (![[currentBookmark objectForKey:@"ServerHost"] isEqualToString:@""]) {
+                        // Bookmark is complete and we don't have a saved controller.
+                        ChatViewController *controller = [ChatViewController new];
+                        controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+                        [controller new:[indexPath row]];
+                        
+                        // Reset the center view before saving the bookmark.
+                        // This is so the app doesn't crash if we try to modify a bookmark we just edited.
+                        self.viewDeckController.centerController = nil;
+                        
+                        // Save it to the bookmark list.
+                        [currentBookmark setObject:controller forKey:@"CurrentConnection"];
+                        [serverBookmarks replaceObjectAtIndex:[indexPath row] withObject:currentBookmark];
+                        
+                        // Open the new ChatViewController object.
+                        self.viewDeckController.centerController = [currentBookmark objectForKey:@"CurrentConnection"];
+                    }
                     
-                    // Save it to the bookmark list.
-                    [currentBookmark setObject:controller forKey:@"CurrentConnection"];
-                    [serverBookmarks replaceObjectAtIndex:[indexPath row] withObject:currentBookmark];
+                    // Display an alert if there's no server address.
+                    else {
+                        [[[UIAlertView alloc] initWithTitle:@"Missing Server Address"
+                                                    message:@"You need to enter an address for this server in order to connect."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil] show];
+                    }
                 }
                 
-                // Open the correct ChatViewController object.
-                self.viewDeckController.centerController = [currentBookmark objectForKey:@"CurrentConnection"];
+                // Open the saved ChatViewController object.
+                else {
+                    self.viewDeckController.centerController = [currentBookmark objectForKey:@"CurrentConnection"];
+                }
             }
         }
     }
