@@ -120,7 +120,6 @@
  */
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
-    // Update the server name and add some more buttons.
     // Customize the bar title and buttons.
     [navigationBar setTitle:[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
@@ -541,7 +540,7 @@
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(adjustAccessoryView)
+                                             selector:@selector(keyboardDidHide)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
     
@@ -619,6 +618,15 @@
     }
 }
 
+- (void)keyboardDidHide
+{
+    // Adjust the accessory view.
+    [self adjustAccessoryView];
+    
+    // Remove the UIGestureRecognizer so that you can swipe left/right again.
+    [self.view removeGestureRecognizer:panRecognizer];
+}
+
 - (void)adjustAccessoryView
 {
     // Pan the accessory view up/down.
@@ -663,7 +671,6 @@
     newY = MAX(newY, originalKeyboardY);
     newFrame.origin.y = newY;
     [keyboard setFrame: newFrame];
-    
     [self adjustAccessoryView];
 }
 
@@ -683,9 +690,6 @@
                      completion:^(BOOL finished){
                          keyboard.hidden = YES;
                          [chatTextField resignFirstResponder];
-                         
-                         // Remove the UIGestureRecognizer so that you can swipe left/right again.
-                         [self.view removeGestureRecognizer:panRecognizer];
                      }];
 }
 

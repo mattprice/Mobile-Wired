@@ -1,11 +1,10 @@
 # 7/19 Notes
-* Display an alert if all bookmark fields are not filled in before we try to connect to it.
+* Display an alert if no server host is filled in before trying to connect to a Wired server.
 * Display an alert if someone tries to edit a bookmark while it's connected.
 * Need to display connection images.
-* The ChatViewController's UITextField can be flicked off screen and become stuck. The only way to fix it is a hard restart of the app.
-    * After sending a message, you are not allowed to swipe to the server or user list. Attempting to will result in the keyboard flying offscreen.
 * If possible, fix UITableView background color on iOS 6.
 * Add a connection status message for downloading the userlist.
+* App crashes after editing a bookmark and then attempting to connect to a server. Need to figure out why.
 
 # Version 1
 * TestFlight SDK (?)
