@@ -4,7 +4,6 @@
 * If the server/user info is incorrect, ServerList does not reconnect. Tries to open failed view.
 * Need to display connection images.
 * Add a connection status message for downloading the userlist.
-* App crashes after editing a bookmark and then attempting to connect to a server.
 
 # Version 1
 * TestFlight SDK (?)

@@ -275,6 +275,10 @@
                     controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
                     [controller new:[indexPath row]];
                     
+                    // Reset the center view before saving the bookmark.
+                    // This is so the app doesn't crash if we try to modify a bookmark we just edited.
+                    self.viewDeckController.centerController = nil;
+                    
                     // Save it to the bookmark list.
                     [currentBookmark setObject:controller forKey:@"CurrentConnection"];
                     [serverBookmarks replaceObjectAtIndex:[indexPath row] withObject:currentBookmark];
