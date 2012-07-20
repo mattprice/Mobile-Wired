@@ -48,10 +48,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // Start out by opening the left view.
-    // TODO: Maybe we should check to see if we're connected to any servers.
+    self.viewDeckController.leftLedge = -10;
     [self.viewDeckController openLeftViewAnimated:NO];
-//    self.viewDeckController.panningMode = IIViewDeckNoPanning;
-//    self.viewDeckController.leftLedge = -10;
+    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+    
+    // Resize the server list to fill the whole screen.
+    CGRect frame = self.mainTableView.frame;
+    frame.size.width = self.view.frame.size.width;
+    self.mainTableView.frame = frame;
 }
 
 - (void)viewDidLoad
@@ -180,11 +184,14 @@
         else {
             // Get info about the current row's bookmark.
             NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+            
             if ([[currentBookmark objectForKey:@"ServerName"] isEqualToString:@""]) {
                 cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerHost"];
             } else {
                 cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerName"];
             }
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     
@@ -300,8 +307,15 @@
     
     // Re-enable panning and open the center view.
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-    [self.viewDeckController closeLeftViewAnimated:YES];
-
+    [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller) {
+        // If this is the first item we've opened after launch then we need to resize
+        // the server list window and change the  left ledge size.
+        CGRect frame = self.mainTableView.frame;
+        frame.size.width = 275.0;
+        self.mainTableView.frame = frame;
+        
+        self.viewDeckController.leftLedge = 44.0;
+    }];
 }
 
  - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

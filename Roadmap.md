@@ -1,4 +1,4 @@
-# 7/19 Notes
+# 7/20 Notes
 * Display an alert if no server host is filled in before trying to connect to a Wired server.
 * Display an alert if someone tries to edit a bookmark while it's connected.
 * If the server/user info is incorrect, ServerList does not reconnect. Tries to open failed view.

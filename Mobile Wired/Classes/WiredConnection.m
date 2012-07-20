@@ -554,6 +554,7 @@
     NSLog(@"Server disconnected unexpectedly. <Error: %@>", error);
     
     // If we're already connected then we must have unexpected disconnected.
+    // TODO: Change isConnected to something else when we're in the process of connecting.
     if (isConnected && !failCount) {
         failCount = 1;
         
