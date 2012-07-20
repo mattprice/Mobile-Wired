@@ -64,11 +64,11 @@
     serverInfo = [[NSMutableDictionary alloc] init];
     
     serverHost = server;
-    serverPort = port;
+    serverPort = (port) ? port : 4871;
     
     // Attempt a socket connection to the server.
     NSLog(@"Beginning socket connection...");
-    if (![socket connectToHost:server onPort:port withTimeout:15 error:&error]) {
+    if (![socket connectToHost:serverHost onPort:serverPort withTimeout:15 error:&error]) {
         // Connection failed.
         NSLog(@"Connection error: %@",error);
         [delegate didFailConnectionWithReason:error];
@@ -106,6 +106,9 @@
 - (void)sendLogin:(NSString *)user withPassword:(NSString *)password
 {
     NSLog(@"Sending login information...");
+    
+    user = (![user isEqualToString:@""]) ? user : @"guest";
+    password = (![password isEqualToString:@""]) ? password : @"da39a3ee5e6b4b0d3255bfef95601890afd80709";
     
     // Send the user login information to the Wired server.
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
