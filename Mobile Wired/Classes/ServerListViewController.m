@@ -178,9 +178,13 @@
         
         // Everything else is a real bookmark!
         else {
-            // Get info about the current row's user
+            // Get info about the current row's bookmark.
             NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
-            cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerName"];
+            if ([[currentBookmark objectForKey:@"ServerName"] isEqualToString:@""]) {
+                cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerHost"];
+            } else {
+                cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerName"];
+            }
         }
     }
     
