@@ -119,17 +119,20 @@
 {
     // Create a dictionary to store the bookmark in.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
+    if (serverHostField.text) {
+        [bookmark setObject:serverHostField.text forKey:@"ServerHost"];
+    } else {
+        [bookmark setObject:@"" forKey:@"ServerHost"];
+    }
+    
     if (serverNameField.text) {
         [bookmark setObject:serverNameField.text forKey:@"ServerName"];
     } else {
         [bookmark setObject:@"" forKey:@"ServerName"];
     }
     
-    if (serverHostField.text) {
-        [bookmark setObject:serverHostField.text forKey:@"ServerHost"];
-    } else {
-        [bookmark setObject:@"" forKey:@"ServerHost"];
-    }
+    // Set placeholder text for the server name field on each change.
+    serverNameField.placeholder = serverHostField.text;
     
     if (serverPortField.text) {
         [bookmark setObject:serverPortField.text forKey:@"ServerPort"];
@@ -318,6 +321,9 @@
                     cell.settingValue.text = @"";
                 }
                 
+                // Set placeholder text for the default value.
+                cell.settingValue.placeholder = [bookmark objectForKey:@"ServerHost"];
+                
                 break;
                 
             case 1:
@@ -346,6 +352,9 @@
                     cell.settingValue.text = @"";
                 }
                 
+                // Set placeholder text for the default value.
+                cell.settingValue.placeholder = @"4871";
+                
                 break;
                 
             default:
@@ -368,6 +377,7 @@
                 } else {
                     cell.settingValue.text = @"";
                 }
+                cell.settingValue.placeholder = @"guest";
                 
                 break;
                 
