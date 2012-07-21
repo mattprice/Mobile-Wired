@@ -610,7 +610,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GIT=/usr/local/git/bin/git\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion `$GIT log --pretty=format:'' | wc -l | egrep '[0-9]{1,}' -o`\" ${TARGET_BUILD_DIR}/Mobile\\ Wired.app/Info.plist";
+			shellScript = "# Set the Info.plist end path.\nBUILD_PATH=${CODESIGNING_FOLDER_PATH}/Info.plist\n\n# Parse the version number from GIT.\nVERSION=$(eval echo `git log --pretty=format:'' | wc -l | egrep '[0-9]{1,}' -o`)\n˝\n# Save the resulting file.\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $VERSION\" \"$BUILD_PATH\"";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
