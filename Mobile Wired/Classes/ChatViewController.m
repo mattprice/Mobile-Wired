@@ -212,9 +212,6 @@
     [chatText appendFormat:@"<<< Connected to %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
-    
-    // Enable sliding to see the user list.
-    self.viewDeckController.rightController = self.userListView;
 }
 
 /*
@@ -540,6 +537,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // Enable sliding to see the user list.
+    self.viewDeckController.rightController = self.userListView;
     
     // Be sure we know which keyboard is selected.
     [[NSNotificationCenter defaultCenter] addObserver:self
