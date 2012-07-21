@@ -49,6 +49,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self.tableView reloadData];
+    
+    [TestFlight passCheckpoint:@"Viewed User List"];
 }
 
 - (void)viewDidUnload

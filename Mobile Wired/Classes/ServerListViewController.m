@@ -375,11 +375,15 @@
          [[NSUserDefaults standardUserDefaults] synchronize];
          
          [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         
+         [TestFlight passCheckpoint:@"Deleted Bookmark"];
      }
      
      else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Add a row to the data source.
         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         
+        [TestFlight passCheckpoint:@"Added Bookmark"];
      }
  }
 

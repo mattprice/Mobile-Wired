@@ -54,6 +54,8 @@
                                                                                 style:UIBarButtonItemStyleDone
                                                                                target:self
                                                                                action:@selector(didPressReset)];
+    
+    [TestFlight passCheckpoint:@"Viewed Settings"];
 }
 
 - (void)viewDidUnload
@@ -85,6 +87,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:oldNick forKey:@"UserNick"];
     [[NSUserDefaults standardUserDefaults] setObject:oldStatus forKey:@"UserStatus"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [TestFlight passCheckpoint:@"Reset Settings"];
 }
 
 #pragma mark -
@@ -108,6 +112,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:nickField.text forKey:@"UserNick"];
     [[NSUserDefaults standardUserDefaults] setObject:statusField.text forKey:@"UserStatus"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [TestFlight passCheckpoint:@"Modified Settings"];
     
     return YES;
 }

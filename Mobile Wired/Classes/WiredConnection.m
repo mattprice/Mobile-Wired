@@ -121,7 +121,8 @@
 
 - (void)setNick:(NSString *)nick
 {
-    NSLog(@"Attempting to change nick to: %@...", nick);
+//    NSLog(@"Attempting to change nick to: %@...", nick);
+    NSLog(@"Attempting to change nick.");
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:nick forKey:@"wired.user.nick"];
     [self sendTransaction:@"wired.user.set_nick" withParameters:parameters];
@@ -130,7 +131,8 @@
 
 - (void)setStatus:(NSString *)status
 {
-    NSLog(@"Attempting to change status to: %@...", status);
+//    NSLog(@"Attempting to change status to: %@...", status);
+    NSLog(@"Attempting to change status.");
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObject:status forKey:@"wired.user.status"];
     [self sendTransaction:@"wired.user.set_status" withParameters:parameters];

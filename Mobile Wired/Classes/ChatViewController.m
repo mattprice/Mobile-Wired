@@ -80,6 +80,8 @@
     // Connect to the bookmark.
     bookmark = [[[NSUserDefaults standardUserDefaults] valueForKey:@"Bookmarks"] objectAtIndex:indexRow];
     [self connect];
+    
+    [TestFlight passCheckpoint:@"Connected to Server"];
 }
 
 - (Boolean)isConnected
@@ -110,6 +112,8 @@
     // Send the message.
     [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
     chatTextField.text = @"";
+    
+    [TestFlight passCheckpoint:@"Sent Chat Message (Button)"];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -119,6 +123,8 @@
     chatTextField.text = @"";
     
     return YES;
+    
+    [TestFlight passCheckpoint:@"Sent Chat Message (Keyboard)"];
 }
 
 #pragma mark -
@@ -328,6 +334,8 @@
     [chatText appendFormat:@"<<< Reconnected to %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    
+    [TestFlight passCheckpoint:@"Reconnected to Server"];
 }
 
 /*
@@ -341,12 +349,12 @@
 {
     // Initial connection.
     if (serverTopic == nil) {
-        NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
+//        NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
     }
 
     // Subsequent topic changes, so we should notify the user.
     else {
-        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
+//        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
     }
 
     [serverTopic setText:topic];
