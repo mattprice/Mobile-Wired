@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D12846515BA501400CB6522 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D12846315BA501400CB6522 /* libTestFlight.a */; };
 		0DA7A76F15BA44B20013DDFB /* GrayDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76515BA44AF0013DDFB /* GrayDot.png */; };
 		0DA7A77015BA44B20013DDFB /* GrayDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76615BA44B00013DDFB /* GrayDot@2x.png */; };
 		0DA7A77115BA44B20013DDFB /* GreenDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76715BA44B00013DDFB /* GreenDot.png */; };
@@ -80,6 +81,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D12846315BA501400CB6522 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "Mobile Wired/Classes/TestFlight/libTestFlight.a"; sourceTree = "<group>"; };
+		0D12846415BA501400CB6522 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "Mobile Wired/Classes/TestFlight/TestFlight.h"; sourceTree = "<group>"; };
+		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0DA7A76515BA44AF0013DDFB /* GrayDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GrayDot.png; path = "Mobile Wired/Resources/Images/GrayDot.png"; sourceTree = SOURCE_ROOT; };
 		0DA7A76615BA44B00013DDFB /* GrayDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GrayDot@2x.png"; path = "Mobile Wired/Resources/Images/GrayDot@2x.png"; sourceTree = SOURCE_ROOT; };
 		0DA7A76715BA44B00013DDFB /* GreenDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenDot.png; path = "Mobile Wired/Resources/Images/GreenDot.png"; sourceTree = SOURCE_ROOT; };
@@ -190,6 +194,7 @@
 				3482C1AA155C6C6E00415794 /* CFNetwork.framework in Frameworks */,
 				3482C1A9155C6C5D00415794 /* Security.framework in Frameworks */,
 				34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */,
+				0D12846515BA501400CB6522 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +229,15 @@
 				0DBD205B15B4D10B00D86B6C /* UIButton_Red@2x.png */,
 			);
 			name = UIButtons;
+			sourceTree = "<group>";
+		};
+		0D12846215BA4DF300CB6522 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				0D12846315BA501400CB6522 /* libTestFlight.a */,
+				0D12846415BA501400CB6522 /* TestFlight.h */,
+			);
+			name = TestFlight;
 			sourceTree = "<group>";
 		};
 		3439EC6114F3264300362097 /* ViewDeck */ = {
@@ -358,6 +372,7 @@
 		34EBE3C113594F7B00A24C01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D12846215BA4DF300CB6522 /* TestFlight */,
 				34EBE3C413594F7B00A24C01 /* Foundation.framework */,
 				34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */,
 				34EBE3C213594F7B00A24C01 /* UIKit.framework */,
@@ -376,6 +391,7 @@
 				3477029E135A026200F91A8B /* WiredConnection.m */,
 				34EBE4241359569B00A24C01 /* AppDelegate.h */,
 				34EBE4251359569B00A24C01 /* AppDelegate.m */,
+				0D12846615BA54C700CB6522 /* TestFlightTokens.h */,
 			);
 			name = "Wired Classes";
 			path = "Mobile Wired";
@@ -758,6 +774,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Mobile Wired/Classes/TestFlight\"",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -769,7 +789,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mobile Wired/MobileWired-Prefix.pch";
@@ -777,6 +797,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Mobile Wired/Classes/TestFlight\"",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

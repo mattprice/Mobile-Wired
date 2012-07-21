@@ -12,7 +12,13 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
+    #import "TestFlight.h"
 #endif
 
 // TBXML checks for this but it's not defined in anything we import.
 #define ARC_ENABLED 1
+
+// If we're not debugging, swap all NSLogs over to TestFlight.
+#ifndef DEBUG
+    #define NSLog TFLog
+#endif

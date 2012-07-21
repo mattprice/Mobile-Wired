@@ -30,6 +30,7 @@
 #import "ChatViewController.h"
 #import "UserListViewController.h"
 #import "ServerListViewController.h"
+#import "TestFlightTokens.h"
 
 @implementation AppDelegate
 
@@ -41,7 +42,15 @@
     
     // Set the status bar style
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-
+    
+    // Add the TestFlight SDK.
+#ifndef DEBUG
+    #ifdef TF_TEAM_TOKEN
+        [TestFlight takeOff:TF_TEAM_TOKEN];
+        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    #endif
+#endif
+    
     // Set up user defaults if they haven't run the app before.
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedBefore"])
     {

@@ -1,21 +1,18 @@
-# 7/20 Notes
-* Need to display connection images.
-* Add a connection status message for downloading the userlist.
-
 # Version 1
-* TestFlight SDK (?)
 * Features:
     * Add viewing of broadcasts
     * Add viewing of server topic
     * Add ability to view user info
     * Add ability to send and receive PMs
 * Improvements:
-   * Sort the server list manually, or by connection status.
-   * Display a disclosure triangle while editing the server list so that it's more obvious they're selectable.
-   * When selecting text/link, keyboard disappears before the text field moves down.
-   * Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).
-   * Text field does not expand with long messages.
-   * <<< Notification messages >>> should be colored red.
+    * Need to display connection images.
+    * Add a connection status message for downloading the userlist.
+    * Sort the server list manually, or by connection status.
+    * Display a disclosure triangle while editing the server list so that it's more obvious they're selectable.
+    * When selecting text/link, keyboard disappears before the text field moves down.
+    * Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).
+    * Text field does not expand with long messages.
+    * <<< Notification messages >>> should be colored red.
 
 # Version 1.x
 * SSL connection
