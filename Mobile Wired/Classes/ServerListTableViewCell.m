@@ -28,7 +28,7 @@
 
 @implementation ServerListTableViewCell
 
-@synthesize bookmarkLabel;
+@synthesize bookmarkLabel, statusImage;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

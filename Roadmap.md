@@ -10,6 +10,7 @@
     * Add ability to view user info
     * Add ability to send and receive PMs
 * Improvements:
+   * Sort the server list manually, or by connection status.
    * Display a disclosure triangle while editing the server list so that it's more obvious they're selectable.
    * When selecting text/link, keyboard disappears before the text field moves down.
    * Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).

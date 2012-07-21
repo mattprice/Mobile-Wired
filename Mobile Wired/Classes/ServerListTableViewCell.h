@@ -28,8 +28,10 @@
 
 @interface ServerListTableViewCell : UITableViewCell {
     IBOutlet UILabel *bookmarkLabel;
+    IBOutlet UIImageView *statusImage;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *bookmarkLabel;
+@property (nonatomic, retain) IBOutlet UIImageView *statusImage;
 
 @end

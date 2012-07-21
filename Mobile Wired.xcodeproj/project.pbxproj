@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DA7A76F15BA44B20013DDFB /* GrayDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76515BA44AF0013DDFB /* GrayDot.png */; };
+		0DA7A77015BA44B20013DDFB /* GrayDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76615BA44B00013DDFB /* GrayDot@2x.png */; };
+		0DA7A77115BA44B20013DDFB /* GreenDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76715BA44B00013DDFB /* GreenDot.png */; };
+		0DA7A77215BA44B20013DDFB /* GreenDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76815BA44B00013DDFB /* GreenDot@2x.png */; };
+		0DA7A77315BA44B20013DDFB /* OrangeDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76915BA44B00013DDFB /* OrangeDot.png */; };
+		0DA7A77415BA44B20013DDFB /* OrangeDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76A15BA44B10013DDFB /* OrangeDot@2x.png */; };
+		0DA7A77515BA44B20013DDFB /* RedDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76B15BA44B10013DDFB /* RedDot.png */; };
+		0DA7A77615BA44B20013DDFB /* RedDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76C15BA44B10013DDFB /* RedDot@2x.png */; };
+		0DA7A77715BA44B20013DDFB /* YellowDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76D15BA44B10013DDFB /* YellowDot.png */; };
+		0DA7A77815BA44B20013DDFB /* YellowDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76E15BA44B20013DDFB /* YellowDot@2x.png */; };
 		0DBD205C15B4D10B00D86B6C /* UIButton_Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */; };
 		0DBD205D15B4D10B00D86B6C /* UIButton_Gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */; };
 		0DBD205E15B4D10B00D86B6C /* UIButton_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205815B4D10B00D86B6C /* UIButton_Green.png */; };
@@ -70,6 +80,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DA7A76515BA44AF0013DDFB /* GrayDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GrayDot.png; path = "Mobile Wired/Resources/Images/GrayDot.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76615BA44B00013DDFB /* GrayDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GrayDot@2x.png"; path = "Mobile Wired/Resources/Images/GrayDot@2x.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76715BA44B00013DDFB /* GreenDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenDot.png; path = "Mobile Wired/Resources/Images/GreenDot.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76815BA44B00013DDFB /* GreenDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GreenDot@2x.png"; path = "Mobile Wired/Resources/Images/GreenDot@2x.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76915BA44B00013DDFB /* OrangeDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeDot.png; path = "Mobile Wired/Resources/Images/OrangeDot.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76A15BA44B10013DDFB /* OrangeDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OrangeDot@2x.png"; path = "Mobile Wired/Resources/Images/OrangeDot@2x.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76B15BA44B10013DDFB /* RedDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RedDot.png; path = "Mobile Wired/Resources/Images/RedDot.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76C15BA44B10013DDFB /* RedDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "RedDot@2x.png"; path = "Mobile Wired/Resources/Images/RedDot@2x.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76D15BA44B10013DDFB /* YellowDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowDot.png; path = "Mobile Wired/Resources/Images/YellowDot.png"; sourceTree = SOURCE_ROOT; };
+		0DA7A76E15BA44B20013DDFB /* YellowDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowDot@2x.png"; path = "Mobile Wired/Resources/Images/YellowDot@2x.png"; sourceTree = SOURCE_ROOT; };
 		0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButton_Gray.png; path = "Mobile Wired/Resources/Images/UIButton_Gray.png"; sourceTree = SOURCE_ROOT; };
 		0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIButton_Gray@2x.png"; path = "Mobile Wired/Resources/Images/UIButton_Gray@2x.png"; sourceTree = SOURCE_ROOT; };
 		0DBD205815B4D10B00D86B6C /* UIButton_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButton_Green.png; path = "Mobile Wired/Resources/Images/UIButton_Green.png"; sourceTree = SOURCE_ROOT; };
@@ -176,6 +196,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D12845F15BA44F000CB6522 /* Status Dots */ = {
+			isa = PBXGroup;
+			children = (
+				0DA7A76515BA44AF0013DDFB /* GrayDot.png */,
+				0DA7A76615BA44B00013DDFB /* GrayDot@2x.png */,
+				0DA7A76715BA44B00013DDFB /* GreenDot.png */,
+				0DA7A76815BA44B00013DDFB /* GreenDot@2x.png */,
+				0DA7A76915BA44B00013DDFB /* OrangeDot.png */,
+				0DA7A76A15BA44B10013DDFB /* OrangeDot@2x.png */,
+				0DA7A76B15BA44B10013DDFB /* RedDot.png */,
+				0DA7A76C15BA44B10013DDFB /* RedDot@2x.png */,
+				0DA7A76D15BA44B10013DDFB /* YellowDot.png */,
+				0DA7A76E15BA44B20013DDFB /* YellowDot@2x.png */,
+			);
+			name = "Status Dots";
+			sourceTree = "<group>";
+		};
+		0D12846115BA44FA00CB6522 /* UIButtons */ = {
+			isa = PBXGroup;
+			children = (
+				0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */,
+				0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */,
+				0DBD205815B4D10B00D86B6C /* UIButton_Green.png */,
+				0DBD205915B4D10B00D86B6C /* UIButton_Green@2x.png */,
+				0DBD205A15B4D10B00D86B6C /* UIButton_Red.png */,
+				0DBD205B15B4D10B00D86B6C /* UIButton_Red@2x.png */,
+			);
+			name = UIButtons;
+			sourceTree = "<group>";
+		};
 		3439EC6114F3264300362097 /* ViewDeck */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +409,8 @@
 		34EBE40F1359528700A24C01 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0D12845F15BA44F000CB6522 /* Status Dots */,
+				0D12846115BA44FA00CB6522 /* UIButtons */,
 				347B37F915098D6500D88034 /* Checkmark.png */,
 				347B37FA15098D6500D88034 /* Checkmark@2x.png */,
 				3440CD04136613EF0046955F /* DefaultUserIcon.png */,
@@ -368,12 +420,6 @@
 				347B37FC15098D6500D88034 /* Error@2x.png */,
 				3440CD02136611EE0046955F /* MobileWired.png */,
 				3440CCFE136611B00046955F /* MobileWired@2x.png */,
-				0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */,
-				0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */,
-				0DBD205815B4D10B00D86B6C /* UIButton_Green.png */,
-				0DBD205915B4D10B00D86B6C /* UIButton_Green@2x.png */,
-				0DBD205A15B4D10B00D86B6C /* UIButton_Red.png */,
-				0DBD205B15B4D10B00D86B6C /* UIButton_Red@2x.png */,
 				34EC1151150AD1730015B2CD /* Users.png */,
 				34EC1152150AD1730015B2CD /* Users@2x.png */,
 			);
@@ -521,6 +567,16 @@
 				0DBD205F15B4D10B00D86B6C /* UIButton_Green@2x.png in Resources */,
 				0DBD206015B4D10B00D86B6C /* UIButton_Red.png in Resources */,
 				0DBD206115B4D10B00D86B6C /* UIButton_Red@2x.png in Resources */,
+				0DA7A76F15BA44B20013DDFB /* GrayDot.png in Resources */,
+				0DA7A77015BA44B20013DDFB /* GrayDot@2x.png in Resources */,
+				0DA7A77115BA44B20013DDFB /* GreenDot.png in Resources */,
+				0DA7A77215BA44B20013DDFB /* GreenDot@2x.png in Resources */,
+				0DA7A77315BA44B20013DDFB /* OrangeDot.png in Resources */,
+				0DA7A77415BA44B20013DDFB /* OrangeDot@2x.png in Resources */,
+				0DA7A77515BA44B20013DDFB /* RedDot.png in Resources */,
+				0DA7A77615BA44B20013DDFB /* RedDot@2x.png in Resources */,
+				0DA7A77715BA44B20013DDFB /* YellowDot.png in Resources */,
+				0DA7A77815BA44B20013DDFB /* YellowDot@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

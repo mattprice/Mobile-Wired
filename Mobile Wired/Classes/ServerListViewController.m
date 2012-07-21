@@ -195,6 +195,14 @@
                 cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerName"];
             }
             
+            // Set the status image.
+//            NSString *indexString = [NSString stringWithFormat:@"%d", [indexPath row]];
+//            if ([currentConnections objectForKey:indexString]) {
+//                cell.statusImage.image = [UIImage imageNamed:@"GreenDot.png"];
+//            } else {
+//                cell.statusImage.image = [UIImage imageNamed:@"GrayDot.png"];
+//            }
+            
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
