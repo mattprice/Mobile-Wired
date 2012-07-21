@@ -9,8 +9,8 @@ build/
 *.xcworkspace
 *.xcworkspacedata
 
-# OSX Noise
+# OS X Noise
 .DS_Store
 
-# SVN Noises
-.svn
+# TestFlight API Tokens
+TestFlightTokens.h

@@ -27,4 +27,4 @@
 // If you want to use TestFlight logging, uncomment and set the TestFlight SDK token below.
 // You can find the token at https://testflightapp.com/dashboard/team/edit/ under "Team Token".
 
-//#define TF_TEAM_TOKEN @"YOUR_TEAM_TOKEN_HERE"
+#define TF_TEAM_TOKEN @"YOUR_TEAM_TOKEN_HERE"
