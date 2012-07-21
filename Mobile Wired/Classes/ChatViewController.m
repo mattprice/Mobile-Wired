@@ -564,23 +564,22 @@
                                                object:nil];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    // Add the UIGestureRecognizer to the view.
+    [self.view addGestureRecognizer:panRecognizer];
+    
     // Disable panning view while typing.
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
-    
-    return YES;
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // Remove the UIGestureRecognizer so that you can swipe left/right again.
     [self.view removeGestureRecognizer:panRecognizer];
     
     // Re-enable panning of view.
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-    
-    return YES;
 }
 
 - (void)textfieldWasSelected:(NSNotification *)notification
@@ -613,9 +612,6 @@
     // We have to hide the keyboard to remove the animation for it sliding down.
     // This is where we start displaying it again.
     keyboard.hidden = NO;
-    
-    // Add the UIGestureRecognizer to the view.
-    [self.view addGestureRecognizer:panRecognizer];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification

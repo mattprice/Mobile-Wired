@@ -1,5 +1,4 @@
 # 7/20 Notes
-* If the server/user info is incorrect, ServerList does not reconnect. Tries to open failed view.
 * Need to display connection images.
 * Add a connection status message for downloading the userlist.
 

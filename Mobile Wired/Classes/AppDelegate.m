@@ -61,9 +61,8 @@
     
     // Setup all the possible views.
     serverListView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
-    chatView = [[ChatViewController alloc] initWithNibName:@"ChatView" bundle:nil];
     
-    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:chatView 
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:nil
                                                                                     leftViewController:serverListView];
     
     deckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractive;
