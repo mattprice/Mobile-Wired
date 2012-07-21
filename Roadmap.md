@@ -1,18 +1,31 @@
-# Version 1
-* Features:
-    * Add viewing of broadcasts
-    * Add viewing of server topic
-    * Add ability to view user info
-    * Add ability to send and receive PMs
-* Improvements:
-    * Need to display connection images.
-    * Add a connection status message for downloading the userlist.
-    * Sort the server list manually, or by connection status.
-    * Display a disclosure triangle while editing the server list so that it's more obvious they're selectable.
+# 7/21 Notes
+    * Add a connection status message for downloading the UserList.
+    * Display a disclosure arrow while editing the server list, if possible.
+
+# Version 0.9
+    * View User Info:
+        * Kick
+        * Ban
+    * ChatView Cog Menu:
+        * View or set server topic.
+        * View or send broadcasts.
+        * Disconnect button.
+
+# Version 0.95
+    * Send and receive PMs.
+    * Set user icon.
+    * Changing settings should update current connections.
+    * Display connection images in server list.
+
+# Version 1.0 RC 1
+    * Add highlights (custom, and based on current nick).
+    * <<< Notification messages >>> should be colored red.
+
+# Version 1.1
+    * Sort the server list by connection status (default) and manually.
     * When selecting text/link, keyboard disappears before the text field moves down.
     * Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).
-    * Text field does not expand with long messages.
-    * <<< Notification messages >>> should be colored red.
+    * Make the UITextField expand for long chat messages.
 
 # Version 1.x
 * SSL connection
