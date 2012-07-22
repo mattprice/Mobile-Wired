@@ -1,31 +1,33 @@
 # 7/21 Notes
-    * Add a connection status message for downloading the UserList.
-    * Display a disclosure arrow while editing the server list, if possible.
+* Add a connection status message for downloading the UserList.
+* Display a disclosure arrow while editing the server list, if possible.
+* Swipe to hide keyboard on bookmark screen.
+* Editing a bookmark seems to forget the password.
 
 # Version 0.9
-    * View User Info:
-        * Kick
-        * Ban
-    * ChatView Cog Menu:
-        * View or set server topic.
-        * View or send broadcasts.
-        * Disconnect button.
+* View User Info:
+    * Kick
+    * Ban
+* ChatView Cog Menu:
+    * View or set server topic.
+    * View or send broadcasts.
+    * Disconnect button.
 
 # Version 0.95
-    * Send and receive PMs.
-    * Set user icon.
-    * Changing settings should update current connections.
-    * Display connection images in server list.
+* Send and receive PMs.
+* Set user icon.
+* Changing settings should update current connections.
+* Display connection images in server list.
 
 # Version 1.0 RC 1
-    * Add highlights (custom, and based on current nick).
-    * <<< Notification messages >>> should be colored red.
+* Add highlights (custom, and based on current nick).
+* <<< Notification messages >>> should be colored red.
 
 # Version 1.1
-    * Sort the server list by connection status (default) and manually.
-    * When selecting text/link, keyboard disappears before the text field moves down.
-    * Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).
-    * Make the UITextField expand for long chat messages.
+* Sort the server list by connection status (default) and manually.
+* When selecting text/link, keyboard disappears before the text field moves down.
+* Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).
+* Make the UITextField expand for long chat messages.
 
 # Version 1.x
 * SSL connection

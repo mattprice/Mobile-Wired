@@ -80,8 +80,6 @@
     // Connect to the bookmark.
     bookmark = [[[NSUserDefaults standardUserDefaults] valueForKey:@"Bookmarks"] objectAtIndex:indexRow];
     [self connect];
-    
-    [TestFlight passCheckpoint:@"Connected to Server"];
 }
 
 - (Boolean)isConnected
@@ -122,9 +120,9 @@
     [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
     chatTextField.text = @"";
     
-    return YES;
-    
     [TestFlight passCheckpoint:@"Sent Chat Message (Keyboard)"];
+    
+    return YES;
 }
 
 #pragma mark -
@@ -218,6 +216,8 @@
     [chatText appendFormat:@"<<< Connected to %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    
+    [TestFlight passCheckpoint:@"Connected to Server"];
 }
 
 /*
