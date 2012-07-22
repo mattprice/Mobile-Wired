@@ -12,6 +12,7 @@ Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr
 
 ## External Resources
 
+* [BlockAlerts][] — Beautifully done UIAlertView and UIActionSheet replacements inspired by TweetBot.
 * [GCDAsyncSocket][] — Asynchronous socket networking library for Mac and iOS.
 * [IIViewDeckController][] — An implementation of the sliding views found in the Path 2.0 or Facebook iOS apps.
 * [MBProgressHUD][] — iOS class for displaying a translucent HUD with an indicator and/or labels.
@@ -19,6 +20,7 @@ Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr
 * [TBXML][] — Super-fast, lightweight, easy to use XML parser for the Mac and iOS.
 * [TestFlight SDK][] — Remote crash logging and in-app updates for beta testers.
 
+[BlockAlerts]: https://github.com/Lyc0s/BlockAlertsAnd-ActionSheets
 [GCDAsyncSocket]: https://github.com/robbiehanson/CocoaAsyncSocket
 [IIViewDeckController]: https://github.com/Inferis/ViewDeck*
 [MBProgressHUD]: https://github.com/jdg/MBProgressHUD

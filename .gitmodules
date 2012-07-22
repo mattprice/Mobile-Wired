@@ -13,3 +13,6 @@
 [submodule "Mobile Wired/Classes/PrettyKit"]
 	path = Mobile Wired/Classes/PrettyKit
 	url = https://github.com/vicpenap/PrettyKit.git
+[submodule "Mobile Wired/Classes/BlockAlerts"]
+	path = Mobile Wired/Classes/BlockAlerts
+	url = https://github.com/Lyc0s/BlockAlertsAnd-ActionSheets.git

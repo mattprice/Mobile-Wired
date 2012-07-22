@@ -26,10 +26,13 @@
 
 #import "ServerListViewController.h"
 #import "ServerListTableViewCell.h"
+
 #import "IIViewDeckController.h"
 #import "SettingsViewController.h"
 #import "BookmarkViewController.h"
 #import "ChatViewController.h"
+
+#import "BlockAlertView.h"
 
 @implementation ServerListViewController
 
@@ -295,11 +298,11 @@
                 } else {
                     shouldPan = false;
                     
-                    [[[UIAlertView alloc] initWithTitle:@"Server Currently Connected"
-                                                message:@"Please disconnect from this server before attempting to edit it."
-                                               delegate:nil
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil] show];
+                    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Server Currently Connected"
+                                                                   message:@"Please disconnect from this server before attempting to edit it."];
+                    
+                    [alert setCancelButtonWithTitle:@"OK" block:nil];
+                    [alert show];
                 }
             }
             
@@ -326,11 +329,11 @@
                     else {
                         shouldPan = false;
                         
-                        [[[UIAlertView alloc] initWithTitle:@"Missing Server Host"
-                                                    message:@"You need to enter a host for this server in order to connect."
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                            otherButtonTitles:nil] show];
+                        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Missing Server Host"
+                                                                       message:@"You need to enter a host for this server before connecting."];
+                        
+                        [alert setCancelButtonWithTitle:@"OK" block:nil];
+                        [alert show];
                     }
                 }
                 
