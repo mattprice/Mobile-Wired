@@ -28,6 +28,8 @@
 #import "IIViewDeckController.h"
 #import "UserListViewController.h"
 
+#import "BlockAlertView.h"
+
 @interface ChatViewController (private)
     - (void)animateKeyboardReturnToOriginalPosition;
     - (void)animateKeyboardOffscreen;
@@ -105,6 +107,13 @@
     [self.connection connectToServer:[bookmark valueForKey:@"ServerHost"] onPort:[[bookmark valueForKey:@"ServerPort"] integerValue]];
 }
 
+- (void)disconnect
+{
+    // Disconnect from the server.
+    // This will invoke the didDisconnect delegate method.
+    [self.connection disconnect];
+}
+
 - (IBAction)sendButtonPressed:(id)sender
 {
     // Send the message.
@@ -125,6 +134,28 @@
     return YES;
 }
 
+- (void)openOptionsMenu
+{
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Connection Options" message:@""];
+    
+    // Disconnect from the server.
+    [alert setDestructiveButtonWithTitle:@"Disconnect" block:^{
+        [self disconnect];
+    }];
+    
+    // Cancel.
+    [alert setCancelButtonWithTitle:@"Cancel" block:nil];
+    
+    // Send a broadcast.
+//    [alert addButtonWithTitle:@"Send Broadcast" block:nil];
+    
+    // Set the server topic.
+//    [alert addButtonWithTitle:@"Set Server Topic" block:nil];
+    
+    // Show the alert.
+    [alert show];
+}
+
 #pragma mark -
 #pragma mark Wired Delegate Methods
 
@@ -140,10 +171,10 @@
 {
     // Customize the bar title and buttons.
     [navigationBar setTitle:[self.connection.serverInfo objectForKey:@"wired.info.name"]];
-    navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Users"]
+    navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cog.png"]
                                                                                 style:UIBarButtonItemStyleBordered
-                                                                               target:self.viewDeckController
-                                                                               action:@selector(toggleRightView)];
+                                                                               target:self
+                                                                               action:@selector(openOptionsMenu)];
     
     // Update the progress HUD.
     progressHUD.labelText = @"Logging In";

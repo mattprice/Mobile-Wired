@@ -11,7 +11,6 @@
 * ChatView Cog Menu:
     * View or set server topic.
     * View or send broadcasts.
-    * Disconnect button.
 
 # Version 0.95
 * Send and receive PMs.
