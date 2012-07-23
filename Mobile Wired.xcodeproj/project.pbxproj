@@ -26,6 +26,11 @@
 		0DBD206115B4D10B00D86B6C /* UIButton_Red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205B15B4D10B00D86B6C /* UIButton_Red@2x.png */; };
 		0DC0FE7615BBAD5C009610D1 /* Cog.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DC0FE7515BBAD5C009610D1 /* Cog.png */; };
 		0DC0FE7815BBADF0009610D1 /* Cog@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DC0FE7715BBADF0009610D1 /* Cog@2x.png */; };
+		0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D515BCD8960030069F /* UserInfoViewController.m */; };
+		0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */; };
+		0DD4C0DE15BCDAAB0030069F /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0DC15BCDAAB0030069F /* SettingsView.xib */; };
+		0DD4C0E115BCDAB60030069F /* BookmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0DF15BCDAB60030069F /* BookmarkView.xib */; };
+		0DD4C0E415BCDAC80030069F /* DefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0E215BCDAC80030069F /* DefaultView.xib */; };
 		0DEF007315BB922700289AEB /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEF006C15BB922700289AEB /* BlockActionSheet.m */; };
 		0DEF007415BB922700289AEB /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEF006E15BB922700289AEB /* BlockAlertView.m */; };
 		0DEF007515BB922700289AEB /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEF007015BB922700289AEB /* BlockBackground.m */; };
@@ -68,12 +73,10 @@
 		347B37FE15098D6500D88034 /* Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FA15098D6500D88034 /* Checkmark@2x.png */; };
 		347B37FF15098D6500D88034 /* Error.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FB15098D6500D88034 /* Error.png */; };
 		347B380015098D6500D88034 /* Error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FC15098D6500D88034 /* Error@2x.png */; };
-		347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 347F7E9014F5C18000316FB3 /* DefaultView.xib */; };
 		3482C1A9155C6C5D00415794 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3482C1A8155C6C5D00415794 /* Security.framework */; };
 		3482C1AA155C6C6E00415794 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE43C1359690000A24C01 /* CFNetwork.framework */; };
 		3482C1AD155C6DCD00415794 /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482C1AC155C6DCD00415794 /* WrapController.m */; };
 		3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482C1B8155C7E9200415794 /* BookmarkViewController.m */; };
-		3482C1BB155C7E9200415794 /* BookmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3482C1B9155C7E9200415794 /* BookmarkView.xib */; };
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
 		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };
 		34838FC314F3456D0064B619 /* ServerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34838FC114F3456D0064B619 /* ServerListView.xib */; };
@@ -87,7 +90,6 @@
 		34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */; };
 		34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34CBE9A31505AF49000FBF2C /* Default.mp3 */; };
 		34D464D615561BB600856E46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D464D415561BB600856E46 /* SettingsViewController.m */; };
-		34D464D715561BB600856E46 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34D464D515561BB600856E46 /* SettingsView.xib */; };
 		34DB44ED155705E500C955A5 /* SettingsTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DB44EC155705E400C955A5 /* SettingsTextCell.m */; };
 		34DB44F1155707C200C955A5 /* SettingsTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DB44EF155707C200C955A5 /* SettingsTextCell.xib */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
@@ -131,6 +133,12 @@
 		0DC0FE6015BB991C009610D1 /* BlockUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlockUI.h; path = Classes/BlockUI.h; sourceTree = "<group>"; };
 		0DC0FE7515BBAD5C009610D1 /* Cog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cog.png; path = "Mobile Wired/Resources/Images/Cog.png"; sourceTree = SOURCE_ROOT; };
 		0DC0FE7715BBADF0009610D1 /* Cog@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Cog@2x.png"; path = "../Images/Cog@2x.png"; sourceTree = "<group>"; };
+		0DD4C0D415BCD8960030069F /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = Classes/UserInfoViewController.h; sourceTree = "<group>"; };
+		0DD4C0D515BCD8960030069F /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = Classes/UserInfoViewController.m; sourceTree = "<group>"; };
+		0DD4C0DA15BCDA9E0030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/UserInfoView.xib; sourceTree = "<group>"; };
+		0DD4C0DD15BCDAAB0030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/SettingsView.xib; sourceTree = "<group>"; };
+		0DD4C0E015BCDAB60030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/BookmarkView.xib; sourceTree = "<group>"; };
+		0DD4C0E315BCDAC80030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = DefaultView.xib; sourceTree = "<group>"; };
 		0DEF006B15BB922700289AEB /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlockActionSheet.h; path = Classes/BlockAlerts/BlockAlertsDemo/ToAddToYourProjects/BlockActionSheet.h; sourceTree = "<group>"; };
 		0DEF006C15BB922700289AEB /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlockActionSheet.m; path = Classes/BlockAlerts/BlockAlertsDemo/ToAddToYourProjects/BlockActionSheet.m; sourceTree = "<group>"; };
 		0DEF006D15BB922700289AEB /* BlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlockAlertView.h; path = Classes/BlockAlerts/BlockAlertsDemo/ToAddToYourProjects/BlockAlertView.h; sourceTree = "<group>"; };
@@ -185,13 +193,11 @@
 		347B37FA15098D6500D88034 /* Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checkmark@2x.png"; path = "Mobile Wired/Resources/Images/Checkmark@2x.png"; sourceTree = SOURCE_ROOT; };
 		347B37FB15098D6500D88034 /* Error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Error.png; path = "Mobile Wired/Resources/Images/Error.png"; sourceTree = SOURCE_ROOT; };
 		347B37FC15098D6500D88034 /* Error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Error@2x.png"; path = "Mobile Wired/Resources/Images/Error@2x.png"; sourceTree = SOURCE_ROOT; };
-		347F7E9014F5C18000316FB3 /* DefaultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DefaultView.xib; path = ../../Classes/DefaultView.xib; sourceTree = "<group>"; };
 		3482C1A8155C6C5D00415794 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3482C1AB155C6DCD00415794 /* WrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WrapController.h; path = ViewDeck/WrapController.h; sourceTree = "<group>"; };
 		3482C1AC155C6DCD00415794 /* WrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WrapController.m; path = ViewDeck/WrapController.m; sourceTree = "<group>"; };
 		3482C1B7155C7E9200415794 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookmarkViewController.h; path = Classes/BookmarkViewController.h; sourceTree = "<group>"; };
 		3482C1B8155C7E9200415794 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookmarkViewController.m; path = Classes/BookmarkViewController.m; sourceTree = "<group>"; };
-		3482C1B9155C7E9200415794 /* BookmarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookmarkView.xib; path = Classes/BookmarkView.xib; sourceTree = "<group>"; };
 		34838FA814F32BA80064B619 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserListViewController.h; path = Classes/UserListViewController.h; sourceTree = "<group>"; };
 		34838FA914F32BA80064B619 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserListViewController.m; path = Classes/UserListViewController.m; sourceTree = "<group>"; };
 		34838FAD14F32C640064B619 /* ServerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerListViewController.h; path = Classes/ServerListViewController.h; sourceTree = "<group>"; };
@@ -212,7 +218,6 @@
 		34CBE9A31505AF49000FBF2C /* Default.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Default.mp3; sourceTree = "<group>"; };
 		34D464D315561BB600856E46 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Classes/SettingsViewController.h; sourceTree = "<group>"; };
 		34D464D415561BB600856E46 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Classes/SettingsViewController.m; sourceTree = "<group>"; };
-		34D464D515561BB600856E46 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = Classes/SettingsView.xib; sourceTree = "<group>"; };
 		34DB44EB155705E400C955A5 /* SettingsTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTextCell.h; path = Classes/SettingsTextCell.h; sourceTree = "<group>"; };
 		34DB44EC155705E400C955A5 /* SettingsTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTextCell.m; path = Classes/SettingsTextCell.m; sourceTree = "<group>"; };
 		34DB44F0155707C200C955A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SettingsTextCell.xib; sourceTree = "<group>"; };
@@ -401,7 +406,7 @@
 			children = (
 				3482C1B7155C7E9200415794 /* BookmarkViewController.h */,
 				3482C1B8155C7E9200415794 /* BookmarkViewController.m */,
-				3482C1B9155C7E9200415794 /* BookmarkView.xib */,
+				0DD4C0DF15BCDAB60030069F /* BookmarkView.xib */,
 			);
 			name = Bookmark;
 			sourceTree = "<group>";
@@ -424,6 +429,9 @@
 				34AEB778150D0210005F2B96 /* UserListTableViewCell.h */,
 				34AEB779150D0210005F2B96 /* UserListTableViewCell.m */,
 				34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */,
+				0DD4C0D415BCD8960030069F /* UserInfoViewController.h */,
+				0DD4C0D515BCD8960030069F /* UserInfoViewController.m */,
+				0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */,
 			);
 			name = "User List";
 			sourceTree = "<group>";
@@ -455,7 +463,7 @@
 			children = (
 				34D464D315561BB600856E46 /* SettingsViewController.h */,
 				34D464D415561BB600856E46 /* SettingsViewController.m */,
-				34D464D515561BB600856E46 /* SettingsView.xib */,
+				0DD4C0DC15BCDAAB0030069F /* SettingsView.xib */,
 				34DB44EB155705E400C955A5 /* SettingsTextCell.h */,
 				34DB44EC155705E400C955A5 /* SettingsTextCell.m */,
 				34DB44EF155707C200C955A5 /* SettingsTextCell.xib */,
@@ -530,7 +538,7 @@
 		34EBE3FB135951A700A24C01 /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
-				347F7E9014F5C18000316FB3 /* DefaultView.xib */,
+				0DD4C0E215BCDAC80030069F /* DefaultView.xib */,
 				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
 			);
 			name = "Interface Builder";
@@ -682,7 +690,6 @@
 				34A5A0F0136B74270022272F /* Default.png in Resources */,
 				34A5A0F1136B74270022272F /* Default@2x.png in Resources */,
 				34838FC314F3456D0064B619 /* ServerListView.xib in Resources */,
-				347F7E9114F5C18000316FB3 /* DefaultView.xib in Resources */,
 				34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */,
 				347B37FD15098D6500D88034 /* Checkmark.png in Resources */,
 				347B37FE15098D6500D88034 /* Checkmark@2x.png in Resources */,
@@ -692,9 +699,7 @@
 				34EC1154150AD1730015B2CD /* Users@2x.png in Resources */,
 				34AEB777150D0201005F2B96 /* UserListTableViewCell.xib in Resources */,
 				34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */,
-				34D464D715561BB600856E46 /* SettingsView.xib in Resources */,
 				34DB44F1155707C200C955A5 /* SettingsTextCell.xib in Resources */,
-				3482C1BB155C7E9200415794 /* BookmarkView.xib in Resources */,
 				3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */,
 				3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */,
 				0DBD205C15B4D10B00D86B6C /* UIButton_Gray.png in Resources */,
@@ -737,6 +742,10 @@
 				0DEF00A615BB937A00289AEB /* alert-window@2x.png in Resources */,
 				0DC0FE7615BBAD5C009610D1 /* Cog.png in Resources */,
 				0DC0FE7815BBADF0009610D1 /* Cog@2x.png in Resources */,
+				0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */,
+				0DD4C0DE15BCDAAB0030069F /* SettingsView.xib in Resources */,
+				0DD4C0E115BCDAB60030069F /* BookmarkView.xib in Resources */,
+				0DD4C0E415BCDAC80030069F /* DefaultView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,12 +800,45 @@
 				0DEF007415BB922700289AEB /* BlockAlertView.m in Sources */,
 				0DEF007515BB922700289AEB /* BlockBackground.m in Sources */,
 				0DEF007615BB922700289AEB /* BlockTextPromptAlertView.m in Sources */,
+				0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DD4C0DA15BCDA9E0030069F /* en */,
+			);
+			name = UserInfoView.xib;
+			sourceTree = "<group>";
+		};
+		0DD4C0DC15BCDAAB0030069F /* SettingsView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DD4C0DD15BCDAAB0030069F /* en */,
+			);
+			name = SettingsView.xib;
+			sourceTree = "<group>";
+		};
+		0DD4C0DF15BCDAB60030069F /* BookmarkView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DD4C0E015BCDAB60030069F /* en */,
+			);
+			name = BookmarkView.xib;
+			sourceTree = "<group>";
+		};
+		0DD4C0E215BCDAC80030069F /* DefaultView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DD4C0E315BCDAC80030069F /* en */,
+			);
+			name = DefaultView.xib;
+			sourceTree = "<group>";
+		};
 		34838FC114F3456D0064B619 /* ServerListView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

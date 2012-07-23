@@ -29,6 +29,7 @@
 #import "UserListViewController.h"
 
 #import "BlockAlertView.h"
+#import "BlockTextPromptAlertView.h"
 
 @interface ChatViewController (private)
     - (void)animateKeyboardReturnToOriginalPosition;
@@ -138,21 +139,33 @@
 {
     BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Connection Options" message:@""];
     
-    // Disconnect from the server.
+    // Disconnect
     [alert setDestructiveButtonWithTitle:@"Disconnect" block:^{
         [self disconnect];
     }];
     
-    // Cancel.
+    // Close
     [alert setCancelButtonWithTitle:@"Cancel" block:nil];
     
-    // Send a broadcast.
+    // Set Topic
+//    [alert addButtonWithTitle:@"Set Topic" block:^{
+//        BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Set Topic"
+//                                                                             message:@""
+//                                                                         defaultText:serverTopic.text];
+//        // Set Topic: Cancel
+//        [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
+//        
+//        // Set Topic: Save
+//        [prompt setCancelButtonWithTitle:@"Save" block:^{
+//            [self.connection setTopic:@"" forChannel:@""];
+//        }];
+//        
+//        [prompt show];
+//    }];
+    
+    // Send Broadcast
 //    [alert addButtonWithTitle:@"Send Broadcast" block:nil];
     
-    // Set the server topic.
-//    [alert addButtonWithTitle:@"Set Server Topic" block:nil];
-    
-    // Show the alert.
     [alert show];
 }
 
@@ -379,16 +392,16 @@
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
 {
     // Initial connection.
-    if (serverTopic == nil) {
-//        NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
+    if (serverTopic.text == nil) {
+        NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
     }
 
     // Subsequent topic changes, so we should notify the user.
     else {
-//        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
+        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
     }
 
-    [serverTopic setText:topic];
+    serverTopic.text = topic;
 }
 
 /*
