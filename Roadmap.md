@@ -3,8 +3,7 @@
 * Add a message sending indicator.
 * Display a disclosure arrow while editing the server list, if possible.
 * Swipe to hide keyboard on bookmark screen.
-* Editing a bookmark seems to forget the password.
-* Disable option menu when send a chat message.
+* Disable option menu when sending a chat message.
 
 # Version 0.9
 * View User Info:

@@ -146,10 +146,14 @@
         [bookmark setObject:@"" forKey:@"UserLogin"];
     }
     
-    // If the current field is the password field, create a SHA1 hash.
     if (textField == userPassField && ![userPassField.text isEqualToString:@""]) {
+        // If the current field is the password field, create a SHA1 hash.
         [bookmark setObject:[userPassField.text SHA1Value] forKey:@"UserPass"];
+    } else if (![userPassField.text isEqualToString:@""]) {
+        // If this is not the password field and we already have a SHA1'd password, use it.
+        [bookmark setObject:userPassField.text forKey:@"UserPass"];
     } else {
+        // In all other cases, the password should be a blank string.
         [bookmark setObject:@"" forKey:@"UserPass"];
     }
     
