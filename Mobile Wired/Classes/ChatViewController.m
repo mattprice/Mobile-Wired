@@ -393,12 +393,16 @@
 {
     // Initial connection.
     if (serverTopic.text == nil) {
+#ifdef DEBUG
         NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
+#endif
     }
 
     // Subsequent topic changes, so we should notify the user.
     else {
+#ifdef DEBUG
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
+#endif
     }
 
     serverTopic.text = topic;
