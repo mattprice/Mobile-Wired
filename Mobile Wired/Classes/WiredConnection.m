@@ -773,14 +773,15 @@
         } while ((childElement = childElement->nextSibling));
     }
     
-    else if ([rootName isEqualToString:@"wired.chat.user_list"] ||
+    else if ([rootName isEqualToString:@"wired.chat.user_list"]   ||
              [rootName isEqualToString:@"wired.chat.user_status"] ||
-             [rootName isEqualToString:@"wired.chat.user_join"]) {
+             [rootName isEqualToString:@"wired.chat.user_join"]   ||
+             [rootName isEqualToString:@"wired.user.info"]) {
         NSLog(@"Received info about a user in the channel.");
         
         NSString *userID = @"", *channel = @"1";
         NSData *userIcon;
-        NSDate *idleTime;
+        NSDate *loginTime, *idleTime;
         UIColor *userColor;
         NSMutableDictionary *channelInfo, *userInfo, *tempInfo = [NSMutableDictionary dictionary];
         
@@ -831,6 +832,11 @@
                 [tempInfo setValue:userColor forKey:@"wired.account.color"];
             }
             
+            else if ([childName isEqualToString:@"wired.user.login_time"]) {
+                loginTime = [NSDate dateWithTimeIntervalSince1970:[[TBXML textForElement:childElement] intValue]];
+                [tempInfo setValue:loginTime forKey:@"wired.user.login_time"];
+            }
+            
             else if ([childName isEqualToString:@"wired.user.idle_time"]) {
                 idleTime = [NSDate dateWithTimeIntervalSince1970:[[TBXML textForElement:childElement] intValue]];
                 [tempInfo setValue:idleTime forKey:@"wired.user.idle_time"];
@@ -841,6 +847,12 @@
                 [tempInfo setValue:childValue forKey:childName];
             }
         } while ((childElement = childElement->nextSibling));
+        
+        // If this was a request for a specific user, return the user info and exit.
+        if ([rootName isEqualToString:@"wired.user.info"]) {
+            [delegate didReceiveUserInfo:tempInfo];
+            return;
+        }
         
         // If we have existing channel data saved, be sure not to overwrite it.
         channelInfo = [userList objectForKey:channel];
@@ -1093,34 +1105,6 @@
         nick = [[[userList objectForKey:@"1"] objectForKey:userID] objectForKey:@"wired.user.nick"];
         
         [delegate didReceiveBroadcast:message fromNick:nick withID:userID];
-    }
-    
-    else if ([rootName isEqualToString:@"wired.user.info"]) {
-        NSLog(@"Received user info.");
-        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-        NSDate *idleTime, *loginTime;
-        
-        do {
-            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
-            childValue = [TBXML textForElement:childElement];
-            
-            if ([childName isEqualToString:@"wired.user.login_time"]) {
-                loginTime = [NSDate dateWithTimeIntervalSince1970:[childValue intValue]];
-                [userInfo setValue:loginTime forKey:@"wired.user.login_time"];
-            }
-            
-            else if ([childName isEqualToString:@"wired.user.idle_time"]) {
-                idleTime = [NSDate dateWithTimeIntervalSince1970:[childValue intValue]];
-                [userInfo setValue:idleTime forKey:@"wired.user.idle_time"];
-            }
-            
-            else {
-                [userInfo setObject:childValue forKey:childName];
-            }
-            
-        } while ((childElement = childElement->nextSibling));
-        
-        [delegate didReceiveUserInfo:userInfo];
     }
     
     else {
