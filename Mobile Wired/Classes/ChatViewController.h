@@ -60,5 +60,6 @@
 - (void)new:(NSInteger)indexRow;
 - (Boolean)isConnected;
 - (IBAction)sendButtonPressed:(id)sender;
+- (void)getInfoForUser:(NSString *)userID;
 
 @end

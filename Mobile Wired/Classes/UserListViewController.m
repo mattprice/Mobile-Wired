@@ -26,10 +26,12 @@
 
 #import "UserListViewController.h"
 #import "UserListTableViewCell.h"
+#import "ChatViewController.h"
+#import "IIViewDeckController.h"
 
 @implementation UserListViewController
 
-@synthesize userListArray;
+@synthesize chatView, userListArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,6 +66,30 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark -
+#pragma mark ViewDeck Delegate Methods
+- (IIViewDeckController *)topViewDeckController
+{
+    return self.viewDeckController.viewDeckController;
+}
+
+- (BOOL)viewDeckControllerWillOpenRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated
+{
+    self.topViewDeckController.rightLedge = 22;
+    
+    return YES;
+}
+
+- (BOOL)viewDeckControllerWillCloseRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated
+{
+    self.topViewDeckController.rightLedge = 44;
+    
+    return YES;
+}
+
+#pragma mark -
+#pragma mark TableView Actions
 
 - (void)setUserList:(NSDictionary *)userList
 {
@@ -142,23 +168,18 @@
     }
     
     cell.avatar.image = [UIImage imageWithData:[currentUser objectForKey:@"wired.user.icon"]];
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSDictionary *currentUser = [userListArray objectAtIndex:[indexPath row]];
-//    
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-//                                                    message:[NSString stringWithFormat:@"You selected %@!",[currentUser objectForKey:@"wired.user.nick"]]
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"OK"
-//                                          otherButtonTitles:nil];
-//    [alert show];
-//    
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *currentUser = [userListArray objectAtIndex:[indexPath row]];
+    
+    [chatView getInfoForUser:[currentUser objectForKey:@"wired.user.id"]];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 @end

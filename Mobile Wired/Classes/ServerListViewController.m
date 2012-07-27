@@ -318,6 +318,7 @@
                         // Bookmark is complete and we don't have a saved controller.
                         ChatViewController *controller = [ChatViewController new];
                         controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+                        controller.userListView.chatView = controller;
                         [controller new:selectedIndex];
 
                         // Save the controller for later and then open it.

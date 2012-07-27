@@ -26,10 +26,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class ChatViewController;
+
 @interface UserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+    ChatViewController *chatView;
     NSMutableArray *userListArray;
 }
 
+@property (strong, nonatomic) ChatViewController *chatView;
 @property (strong, nonatomic) NSMutableArray *userListArray;
 
 - (void)setUserList:(NSDictionary *)userList;

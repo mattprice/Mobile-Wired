@@ -25,18 +25,15 @@
 //
 
 #import "UserInfoViewController.h"
-
-@interface UserInfoViewController ()
-
-@end
+#import "UserListTableViewCell.h"
 
 @implementation UserInfoViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil userInfo:(NSDictionary *)info
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        userInfo = info;
     }
     return self;
 }
@@ -51,6 +48,69 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+#pragma mark TableView Data Sources
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UserListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"UserListTableViewCell" owner:nil options:nil];
+        
+        for (id currentObject in topLevelObjects) {
+            if([currentObject isKindOfClass:[UserListTableViewCell class]]) {
+                cell = (UserListTableViewCell *)currentObject;
+                break;
+            }
+        }
+    }
+
+    // Center the nickname if there's no status.
+    if ( [[userInfo objectForKey:@"wired.user.status"] isEqualToString:@""] ) {
+        cell.nickLabel.text = @"";
+        cell.statusLabel.text = @"";
+        
+        cell.onlyNickLabel.text = [userInfo objectForKey:@"wired.user.nick"];
+        cell.onlyNickLabel.textColor = [userInfo objectForKey:@"wired.account.color"];
+    } else {
+        cell.onlyNickLabel.text = @"";
+        
+        cell.nickLabel.text = [userInfo objectForKey:@"wired.user.nick"];
+        cell.nickLabel.textColor = [userInfo objectForKey:@"wired.account.color"];
+        cell.statusLabel.text = [userInfo objectForKey:@"wired.user.status"];
+    }
+    
+    // Fade information about idle users
+    if ( [[userInfo objectForKey:@"wired.user.idle"] isEqualToString:@"1"] ) {
+        cell.nickLabel.alpha = 0.3;
+        cell.onlyNickLabel.alpha = 0.3;
+        cell.statusLabel.alpha = 0.4;
+        cell.avatar.alpha = 0.5;
+    } else {
+        cell.nickLabel.alpha = 1;
+        cell.onlyNickLabel.alpha = 1;
+        cell.statusLabel.alpha = 1;
+        cell.avatar.alpha = 1;
+    }
+    
+    cell.avatar.image = [UIImage imageWithData:[userInfo objectForKey:@"wired.user.icon"]];
+    
+    return cell;
 }
 
 @end

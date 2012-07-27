@@ -27,6 +27,7 @@
 #import "ChatViewController.h"
 #import "IIViewDeckController.h"
 #import "UserListViewController.h"
+#import "UserInfoViewController.h"
 
 #import "BlockAlertView.h"
 #import "BlockTextPromptAlertView.h"
@@ -63,6 +64,14 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark -
+#pragma mark ViewDeck Delegate Methods
+- (BOOL)viewDeckControllerWillCloseRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated {
+    [(IIViewDeckController *)self.viewDeckController.rightController closeLeftView];
+    
+    return YES;
 }
 
 #pragma mark -
@@ -115,6 +124,9 @@
     [self.connection disconnect];
 }
 
+
+#pragma mark -
+#pragma mark UI Actions
 - (IBAction)sendButtonPressed:(id)sender
 {
     // Send the message.
@@ -135,8 +147,16 @@
     return YES;
 }
 
+- (void)getInfoForUser:(NSString *)userID
+{
+    [self.connection getInfoForUser:userID];
+}
+
 - (void)openOptionsMenu
 {
+    // Dismiss the keyboard.
+    [self.view endEditing:YES];
+    
     BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Connection Options" message:@""];
     
     // Disconnect
@@ -203,12 +223,17 @@
  *
  * This method is called when we receive specifically requested information about a user.
  *
- * TODO: Need to implement a UIView that displays this information when requested.
- *
  */
 - (void)didReceiveUserInfo:(NSDictionary *)info
 {
+    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView" bundle:nil userInfo:info];
+
+    IIViewDeckController* secondDeck =  [[IIViewDeckController alloc] initWithCenterViewController:self.userListView
+                                                                               rightViewController:infoController];
     
+    secondDeck.rightLedge = 66;
+    self.viewDeckController.rightController = secondDeck;
+    [(IIViewDeckController *)self.viewDeckController.rightController openRightViewAnimated:YES];
 }
 
 /*
