@@ -3,12 +3,23 @@
 Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
 
 ## Download Instructions
+
 1. Checkout the repository and download all the required submodules:
     * `$ git clone --recursive https://github.com/mattprice/Mobile-Wired.git`
 2. Make a copy of the sample TestFlightTokens file:
     * `$ cd Mobile-Wired/Mobile\ Wired/ && cp TestFlightTokens-Sample.h TestFlightTokens.h`
 3. Compile using Xcode or the command line:
     * `$ cd .. && xcodebuild`
+
+## Changelog
+
+| **Version** | **Build** | **Changes** |
+| :---------: | :-------: | :---------- |
+|    0.8.1    |    174    | <ul><li>Fixed a bug that caused passwords to occasionally be forgotten.</li><li>Added the ability to disconnect from a server.</li><li>Added prettier, custom alerts.</li></ul> |
+|    0.8      |    168    | <ul><li>Roughly a half a billion changes.</li><li>The first fully functioning public beta of Mobile Wired.</li></ul> |
+|    0.6      |    70     | <ul><li>Mobile Wired UI was rewritten from the ground up to support a new interface inspired by Path 2.0 and Facebook.</li></ul> |
+|    0.5.1    |           | <ul><li>Fixed crashing on pre-iOS 5 devices due to a bug in Beta 5 of the iOS 5 SDK.</li><li>New application icon and loading screen.</li></ul> |
+|    0.5      |           | <ul><li>Initial beta release.</li></ul> |
 
 ## External Resources
 
