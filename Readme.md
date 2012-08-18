@@ -33,7 +33,7 @@ Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr
 
 [BlockAlerts]: https://github.com/Lyc0s/BlockAlertsAnd-ActionSheets
 [GCDAsyncSocket]: https://github.com/robbiehanson/CocoaAsyncSocket
-[IIViewDeckController]: https://github.com/Inferis/ViewDeck*
+[IIViewDeckController]: https://github.com/Inferis/ViewDeck
 [MBProgressHUD]: https://github.com/jdg/MBProgressHUD
 [PrettyKit]: https://github.com/vicpenap/PrettyKit
 [TBXML]: https://github.com/71squared/TBXML
