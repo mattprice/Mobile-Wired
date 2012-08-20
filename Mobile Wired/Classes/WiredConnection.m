@@ -643,6 +643,7 @@
     rootName = [TBXML valueOfAttributeNamed:@"name" forElement:rootElement];
     childElement = rootElement->firstChild;
     
+#pragma mark Handshake
     if ([rootName isEqualToString:@"p7.handshake.server_handshake"]) {
         NSLog(@"Received handshake.");
         
@@ -668,7 +669,8 @@
             }
         } while ((childElement = childElement->nextSibling));
     }
-    
+
+#pragma mark Compatibility Check
     else if ([rootName isEqualToString:@"p7.compatibility_check.status"]) {
         NSLog(@"Received compatibility status.");
         
@@ -687,6 +689,7 @@
         } while ((childElement = childElement->nextSibling));
     }
     
+#pragma mark Server Info
     else if ([rootName isEqualToString:@"wired.server_info"]) {
         NSLog(@"Received server info.");
         NSData *serverBanner;
@@ -715,6 +718,7 @@
         [delegate didReceiveServerInfo:serverInfo];
     }
     
+#pragma mark Login Successful
     else if ([rootName isEqualToString:@"wired.login"]) {
         NSLog(@"Login was successful.");
         
@@ -730,24 +734,29 @@
         [delegate didLoginSuccessfully];
     }
     
+#pragma mark Account Priviledges
     else if ([rootName isEqualToString:@"wired.account.privileges"]) {
         NSLog(@"Received account priviledges.");
     }
     
+#pragma mark Okay
     else if ([rootName isEqualToString:@"wired.okay"]) {
         // We should really keep up with what command this refers to.
         NSLog(@"The last command was successful.");
     }
     
+#pragma mark Ping Request
     else if ([rootName isEqualToString:@"wired.send_ping"]) {
         NSLog(@"Received ping request.");
         [self sendPingReply];
     }
     
+#pragma mark Ping Reply
     else if ([rootName isEqualToString:@"wired.ping"]) {
         NSLog(@"Received ping reply.");
     }
     
+#pragma mark Wired Error
     else if ([rootName isEqualToString:@"wired.error"]) {
         
         do {
@@ -773,6 +782,10 @@
         } while ((childElement = childElement->nextSibling));
     }
     
+#pragma mark User List (Partial)
+#pragma mark User Status
+#pragma mark User Joined
+#pragma mark User Info
     else if ([rootName isEqualToString:@"wired.chat.user_list"]   ||
              [rootName isEqualToString:@"wired.chat.user_status"] ||
              [rootName isEqualToString:@"wired.chat.user_join"]   ||
@@ -889,6 +902,7 @@
         [delegate setUserList:userList forChannel:channel];
     }
     
+#pragma mark User Icon
     else if ([rootName isEqualToString:@"wired.chat.user_icon"]) {
         NSLog(@"Received new icon for user.");
         NSString *userID = @"0", *channel = @"1";
@@ -913,6 +927,7 @@
         [delegate setUserList:userList forChannel:channel];
     }
     
+#pragma mark User Left
     else if ([rootName isEqualToString:@"wired.chat.user_leave"]) {
         NSLog(@"User has left the channel.");
         NSString *userID = @"0", *nick = @"Unknown", *channel = @"1";
@@ -938,6 +953,7 @@
         [delegate setUserList:userList forChannel:channel];
     }
     
+#pragma mark User Kicked
     else if ([rootName isEqualToString:@"wired.chat.user_kick"]) {
         NSLog(@"User was kicked from channel.");
         NSString *userID = @"0", *kickerUserID = @"0", *channel = @"1", *reason = @"";
@@ -969,6 +985,7 @@
         [delegate userWasKicked:nick withID:userID byUser:kicker forReason:reason forChannel:channel];
     }
     
+#pragma mark User List (Done)
     else if ([rootName isEqualToString:@"wired.chat.user_list.done"]) {
         NSLog(@"Finished receiving a list of users in the channel.");
         NSString *channel = @"1";
@@ -992,6 +1009,7 @@
         }
     }
     
+#pragma mark Chat Topic
     else if ([rootName isEqualToString:@"wired.chat.topic"]) {
         NSLog(@"Received channel topic.");
         NSString *topic = @"", *nick = @"Unknown", *channel = @"1";
@@ -1015,6 +1033,7 @@
         [delegate didReceiveTopic:topic fromNick:nick forChannel:channel];
     }
     
+#pragma mark Chat Message
     else if ([rootName isEqualToString:@"wired.chat.say"]) {
         NSLog(@"Received a chat message.");
         NSString *message = @"", *userID = @"0", *nick = @"Unknown", *channel = @"1";
@@ -1040,6 +1059,7 @@
         [delegate didReceiveChatMessage:message fromNick:nick withID:userID forChannel:channel];
     }
     
+#pragma mark Chat Emote
     else if ([rootName isEqualToString:@"wired.chat.me"]) {
         NSLog(@"Received an emote.");
         NSString *message = @"", *userID = @"0", *nick = @"Unknown", *channel = @"1";
@@ -1065,6 +1085,7 @@
         [delegate didReceiveEmote:message fromNick:nick withID:userID forChannel:channel];
     }
     
+#pragma mark Private Message
     else if ([rootName isEqualToString:@"wired.message.message"]) {
         NSLog(@"Received a message.");
         NSString *message = @"", *userID = @"0", *nick = @"Unknown";
@@ -1086,6 +1107,7 @@
         [delegate didReceiveMessage:message fromNick:nick withID:userID];
     }
     
+#pragma mark Broadcast
     else if ([rootName isEqualToString:@"wired.message.broadcast"]) {
         NSLog(@"Received a broadcast.");
         NSString *message = @"", *userID = @"0", *nick = @"Unknown";
@@ -1107,8 +1129,12 @@
         [delegate didReceiveBroadcast:message fromNick:nick withID:userID];
     }
     
+#pragma mark Everything Else
     else {
-        NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSString *prettyXML = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        prettyXML = [prettyXML stringByReplacingOccurrencesOfString:@"<p7:field" withString:@"\n\t<p7:field"];
+        prettyXML = [prettyXML stringByReplacingOccurrencesOfString:@"</p7:message>" withString:@"\n</p7:message>"];
+        NSLog(@"\n%@",prettyXML);
     }
     
     [self readData];
