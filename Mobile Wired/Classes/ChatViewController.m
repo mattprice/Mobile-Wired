@@ -69,7 +69,7 @@
 #pragma mark -
 #pragma mark ViewDeck Delegate Methods
 - (BOOL)viewDeckControllerWillCloseRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated {
-    [(IIViewDeckController *)self.viewDeckController.rightController closeLeftView];
+    [(IIViewDeckController *)self.viewDeckController.rightController closeRightView];
     
     return YES;
 }
@@ -228,12 +228,12 @@
 {
     UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView" bundle:nil userInfo:info];
 
-    IIViewDeckController* secondDeck =  [[IIViewDeckController alloc] initWithCenterViewController:self.userListView
-                                                                               rightViewController:infoController];
-    
-    secondDeck.rightLedge = 66;
-    self.viewDeckController.rightController = secondDeck;
-    [(IIViewDeckController *)self.viewDeckController.rightController openRightViewAnimated:YES];
+    // Nested ViewDeckControllers!
+    // This controller already exists (AppDelegate.m) but we need to set up its right-most view.
+    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
+    rightView.rightController = infoController;
+    rightView.rightLedge = 66;
+    [rightView openRightViewAnimated:YES];
 }
 
 /*
@@ -620,7 +620,8 @@
     [super viewWillAppear:animated];
     
     // Enable sliding to see the user list.
-    self.viewDeckController.rightController = self.userListView;
+    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
+    rightView.centerController = self.userListView;
     
     // Be sure we know which keyboard is selected.
     [[NSNotificationCenter defaultCenter] addObserver:self

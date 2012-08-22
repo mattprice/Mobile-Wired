@@ -71,8 +71,12 @@
     // Setup all the possible views.
     serverListView = [[ServerListViewController alloc] initWithNibName:@"ServerListView" bundle:nil];
     
-    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:nil
-                                                                                    leftViewController:serverListView];
+    IIViewDeckController *futureController = [[IIViewDeckController alloc] initWithCenterViewController:nil
+                                                                                    rightViewController:nil];
+    
+    IIViewDeckController *deckController =  [[IIViewDeckController alloc] initWithCenterViewController:nil
+                                                                                    leftViewController:serverListView
+                                                                                   rightViewController:futureController];
     
     deckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractive;
     
