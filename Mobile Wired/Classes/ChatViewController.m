@@ -641,8 +641,8 @@
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidHide:)
-                                                 name:UIKeyboardDidHideNotification
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
                                                object:nil];
 }
 
@@ -712,10 +712,10 @@
     }
 }
 
-- (void)keyboardDidHide:(NSNotification *)notification
+- (void)keyboardWillHide:(NSNotification *)notification
 {
     // Adjust the accessory view.
-    [self adjustAccessoryView];
+    [self animateKeyboardOffscreen];
 }
 
 - (void)adjustAccessoryView

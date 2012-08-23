@@ -1,9 +1,8 @@
-## 7/22 Notes
+## 8/22 Notes
 * Add a connection status message for downloading the UserList.
 * Add a message sending indicator.
 * Display a disclosure arrow while editing the server list, if possible.
 * Swipe to hide keyboard on bookmark screen.
-* Disable option menu when sending a chat message.
 * Clicking on a server that's reconnecting might force a completely new connection. Need to test.
 
 ## Version 0.9
@@ -26,7 +25,6 @@
 
 ## Version 1.1
 * Sort the server list by connection status (default) and manually.
-* When selecting text/link, keyboard disappears before the text field moves down.
 * Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).
 * Make the UITextField expand for long chat messages.
 
