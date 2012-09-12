@@ -38,16 +38,16 @@
     int badgeCount;
     
     NSDictionary *bookmark;
+    NSString *serverTopic;
     
     IBOutlet PrettyNavigationBar *navigationBar;
     IBOutlet PrettyToolbar *toolBar;
-    IBOutlet UITextView *serverTopic;
     
     IBOutlet UITextView *chatTextView;
-    IBOutlet UITextField* chatTextField;
+    IBOutlet UITextField *chatTextField;
     IBOutlet UIView *accessoryView;
     
-    UIView* keyboard;
+    UIView *keyboard;
     UIPanGestureRecognizer *panRecognizer;
     int originalKeyboardY;
     int lastLocation;

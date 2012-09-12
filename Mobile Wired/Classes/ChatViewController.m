@@ -168,20 +168,25 @@
     [alert setCancelButtonWithTitle:@"Cancel" block:nil];
     
     // Set Topic
-//    [alert addButtonWithTitle:@"Set Topic" block:^{
-//        BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Set Topic"
-//                                                                             message:@""
-//                                                                         defaultText:serverTopic.text];
-//        // Set Topic: Cancel
-//        [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
-//        
-//        // Set Topic: Save
-//        [prompt setCancelButtonWithTitle:@"Save" block:^{
-//            [self.connection setTopic:@"" forChannel:@""];
-//        }];
-//        
-//        [prompt show];
-//    }];
+    // TODO: Need to see if you have permission to change the topic.
+    [alert addButtonWithTitle:@"Set Topic" block:^{
+        BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Set Topic"
+                                                                             message:@""
+                                                                         defaultText:serverTopic];
+        
+        // Set Topic: Cancel
+        [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
+        
+        // Set Topic: Save
+        [prompt setCancelButtonWithTitle:@"Save" block:^{
+            [self.connection setTopic:prompt.textField.text forChannel:@"1"];
+        }];
+        
+        // By default, the text field is set to auto-capitalize each word.
+        prompt.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        
+        [prompt show];
+    }];
     
     // Send Broadcast
 //    [alert addButtonWithTitle:@"Send Broadcast" block:nil];
@@ -417,7 +422,7 @@
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
 {
     // Initial connection.
-    if (serverTopic.text == nil) {
+    if (serverTopic == nil || [topic isEqualToString:@""]) {
 #ifdef DEBUG
         NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
 #endif
@@ -428,9 +433,16 @@
 #ifdef DEBUG
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
 #endif
+
+        NSMutableString *chatText = [chatTextView.text mutableCopy];
+        
+        [chatText appendFormat:@"<<< %@ changed topic to %@ >>>\n",nick,topic];
+        
+        chatTextView.text = chatText;
+        [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
     }
 
-    serverTopic.text = topic;
+    serverTopic = topic;
 }
 
 /*
@@ -445,7 +457,7 @@
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
     
-    [chatText appendFormat:@"%@: %@\n", nick, message];
+    [chatText appendFormat:@"%@: %@\n",nick,message];
     
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
@@ -702,12 +714,15 @@
     
     // We can't access the UIKeyboard through the SDK we have to use a UIView.
     // See discussion http://www.iphonedevsdk.com/forum/iphone-sdk-development/6573-howto-customize-uikeyboard.html
-    UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
-    for (int i = 0; i < [tempWindow.subviews count]; i++) {
-        UIView *possibleKeyboard = [tempWindow.subviews objectAtIndex:i];
-        if([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"] == YES){
-            keyboard = possibleKeyboard;
-            return;
+    NSArray *windowList = [[UIApplication sharedApplication] windows];
+    for (int k = 0; k < [windowList count]; k++) {
+        UIWindow *tempWindow = [windowList objectAtIndex:k];
+        for (int i = 0; i < [tempWindow.subviews count]; i++) {
+            UIView *possibleKeyboard = [tempWindow.subviews objectAtIndex:i];
+            if([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"] == YES) {
+                keyboard = possibleKeyboard;
+                return;
+            }
         }
     }
 }
@@ -771,6 +786,9 @@
                           delay:0
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
+                        // Keyboard doesn't ever seem to be set. This returns 0.
+                         NSLog(@"keyboard.window.frame.size.height: %f",keyboard.window.frame.size.height);
+                         
                          // Pan the keyboard up/down.
                          CGRect newFrame = keyboard.frame;
                          newFrame.origin.y = keyboard.window.frame.size.height;

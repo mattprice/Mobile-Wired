@@ -1,5 +1,4 @@
-## 8/22 Notes
-* Add a connection status message for downloading the UserList.
+## 9/12 Notes
 * Add a message sending indicator.
 * Display a disclosure arrow while editing the server list, if possible.
 * Swipe to hide keyboard on bookmark screen.
@@ -10,7 +9,7 @@
     * Kick
     * Ban
 * ChatView Cog Menu:
-    * View or set server topic.
+    * View server topic.
     * View or send broadcasts.
 
 ## Version 0.95
