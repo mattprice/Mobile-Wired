@@ -397,6 +397,9 @@
     
     if ([version isEqualToString:@"2.0b55"])
         resource = @"WiredSpec_2.0b55";
+
+    else if ([version isEqualToString:@"2.0b53"])
+        resource = @"WiredSpec_2.0b53";
     
     else if ([version isEqualToString:@"2.0b51"])
         resource = @"WiredSpec_2.0b51";
@@ -776,7 +779,10 @@
                 }
                 
                 else {
-                    NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                    NSString *prettyXML = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    prettyXML = [prettyXML stringByReplacingOccurrencesOfString:@"<p7:field" withString:@"\n\t<p7:field"];
+                    prettyXML = [prettyXML stringByReplacingOccurrencesOfString:@"</p7:message>" withString:@"\n</p7:message>"];
+                    NSLog(@"\n%@",prettyXML);
                 }
             }
         } while ((childElement = childElement->nextSibling));
