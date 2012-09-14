@@ -471,7 +471,9 @@
  */
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
-//    NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
+#ifdef DEBUG
+    NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
+#endif
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
     
@@ -487,15 +489,19 @@
  * Message could be from anyone, including yourself. Be sure not to send a push notification
  * if the message was from yourself.
  *
- * TODO: Don't send notification if message is from yourself.
- *
  */
 - (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
 {
-//    NSLog(@"%@ (%@) : %@",nick,userID,message);
+#ifdef DEBUG
+    NSLog(@"%@ (%@) : %@",nick,userID,message);
+#endif
     
-    NSString *title = [NSString stringWithFormat:@"%@ from %@", @"Message", nick];
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:title message:message];
+    // Don't send notification if message is from yourself.
+    if (userID == [connection myUserID])
+        return;
+    
+    NSString *tMessage = [NSString stringWithFormat:@"%@: %@", nick, message];
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Message Recevied" message:tMessage];
     [alert setCancelButtonWithTitle:@"Close" block:^{}];
     [alert show];
 }
@@ -508,10 +514,12 @@
  */
 - (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
 {
-//    NSLog(@"%@ (%@) : %@",nick,userID,message);
+#ifdef DEBUG
+    NSLog(@"%@ (%@) : %@",nick,userID,message);
+#endif
     
-    NSString *title = [NSString stringWithFormat:@"%@ from %@", @"Broadcast", nick];
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:title message:message];
+    NSString *tMessage = [NSString stringWithFormat:@"%@: %@", nick, message];
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Broadcast Received" message:tMessage];
     [alert setCancelButtonWithTitle:@"Close" block:^{}];
     [alert show];
 }
@@ -524,7 +532,9 @@
  */
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
-//    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
+#ifdef DEBUG
+    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
+#endif
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
     
@@ -542,7 +552,9 @@
  */
 - (void)userJoined:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
-//    NSLog(@"<<< %@ has joined >>>",nick);
+#ifdef DEBUG
+    NSLog(@"<<< %@ has joined >>>",nick);
+#endif
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
     
@@ -560,7 +572,9 @@
  */
 - (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick forChannel:(NSString *)channel
 {
-//    NSLog(@"<<< %@ is now known as %@ >>>",oldNick,newNick);
+#ifdef DEBUG
+    NSLog(@"<<< %@ is now known as %@ >>>",oldNick,newNick);
+#endif
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
     
@@ -578,7 +592,9 @@
  */
 - (void)userLeft:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
-//    NSLog(@"<<< %@ has left >>>",nick);
+#ifdef DEBUG
+    NSLog(@"<<< %@ has left >>>",nick);
+#endif
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
     
@@ -600,7 +616,9 @@
  */
 - (void)userWasKicked:(NSString *)nick withID:(NSString *)userID byUser:(NSString *)kicker forReason:(NSString *)reason forChannel:(NSString *)channel
 {
-//    NSLog(@"<<< %@ was kicked by %@ (%@) >>>",nick,kicker,reason);
+#ifdef DEBUG
+    NSLog(@"<<< %@ was kicked by %@ (%@) >>>",nick,kicker,reason);
+#endif
     
     NSMutableString *chatText = [chatTextView.text mutableCopy];
 
@@ -615,7 +633,6 @@
     
     // Rejoin the channel if we were the one kicked.
     if ([userID isEqualToString:self.connection.myUserID]) {
-        
         [self willReconnect];
         [self.connection joinChannel:@"1"];
     }
@@ -720,7 +737,8 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    if (keyboard) return;
+    if (keyboard)
+        return;
     
     // We can't access the UIKeyboard through the SDK we have to use a UIView.
     // See discussion http://www.iphonedevsdk.com/forum/iphone-sdk-development/6573-howto-customize-uikeyboard.html
@@ -796,9 +814,6 @@
                           delay:0
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
-                        // Keyboard doesn't ever seem to be set. This returns 0.
-                         NSLog(@"keyboard.window.frame.size.height: %f",keyboard.window.frame.size.height);
-                         
                          // Pan the keyboard up/down.
                          CGRect newFrame = keyboard.frame;
                          newFrame.origin.y = keyboard.window.frame.size.height;
@@ -815,11 +830,13 @@
 - (void)animateKeyboardReturnToOriginalPosition
 {
     [UIView beginAnimations:nil context:NULL];
+    
     // Pan the keyboard up/down.
     CGRect newFrame = keyboard.frame;
     newFrame.origin.y = originalKeyboardY;
     [keyboard setFrame: newFrame];
     [self adjustAccessoryView];
+    
     [UIView commitAnimations];
 }
 
