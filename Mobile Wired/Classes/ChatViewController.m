@@ -189,7 +189,25 @@
     }];
     
     // Send Broadcast
-//    [alert addButtonWithTitle:@"Send Broadcast" block:nil];
+    // TODO: Need to see if you have permission to send broadcasts.
+    [alert addButtonWithTitle:@"Send Broadcast" block:^{
+        BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Send Broadcast"
+                                                                             message:@""
+                                                                         defaultText:@""];
+        
+        // Broadcast: Cancel
+        [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
+        
+        // Broadcast: Send
+        [prompt setCancelButtonWithTitle:@"Send" block:^{
+            [self.connection sendBroadcast:prompt.textField.text];
+        }];
+        
+        // By default, the text field is set to auto-capitalize each word.
+        prompt.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        
+        [prompt show];
+    }];
     
     [alert show];
 }
@@ -476,14 +494,10 @@
 {
 //    NSLog(@"%@ (%@) : %@",nick,userID,message);
     
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    localNotification.alertBody = [NSString stringWithFormat:@"%@: %@",nick,message];
-    localNotification.soundName = UILocalNotificationDefaultSoundName;
-    
-    self.badgeCount++;
-    localNotification.applicationIconBadgeNumber = self.badgeCount;
-    
-    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    NSString *title = [NSString stringWithFormat:@"%@ from %@", @"Message", nick];
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:title message:message];
+    [alert setCancelButtonWithTitle:@"Close" block:^{}];
+    [alert show];
 }
 
 /*
@@ -496,14 +510,10 @@
 {
 //    NSLog(@"%@ (%@) : %@",nick,userID,message);
     
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    localNotification.alertBody = [NSString stringWithFormat:@"%@: %@",nick,message];
-    localNotification.soundName = UILocalNotificationDefaultSoundName;
-    
-    self.badgeCount++;
-    localNotification.applicationIconBadgeNumber = self.badgeCount;
-    
-    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    NSString *title = [NSString stringWithFormat:@"%@ from %@", @"Broadcast", nick];
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:title message:message];
+    [alert setCancelButtonWithTitle:@"Close" block:^{}];
+    [alert show];
 }
 
 /*

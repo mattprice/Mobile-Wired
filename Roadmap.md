@@ -10,7 +10,6 @@
     * Ban
 * ChatView Cog Menu:
     * View server topic.
-    * View or send broadcasts.
 
 ## Version 0.95
 * Send and receive PMs.
