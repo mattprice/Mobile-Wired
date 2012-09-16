@@ -120,41 +120,41 @@
     // Create a dictionary to store the bookmark in.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
     if (serverHostField.text) {
-        [bookmark setObject:serverHostField.text forKey:@"ServerHost"];
+        [bookmark setValue:serverHostField.text forKey:@"ServerHost"];
     } else {
-        [bookmark setObject:@"" forKey:@"ServerHost"];
+        [bookmark setValue:@"" forKey:@"ServerHost"];
     }
     
     if (serverNameField.text) {
-        [bookmark setObject:serverNameField.text forKey:@"ServerName"];
+        [bookmark setValue:serverNameField.text forKey:@"ServerName"];
     } else {
-        [bookmark setObject:@"" forKey:@"ServerName"];
+        [bookmark setValue:@"" forKey:@"ServerName"];
     }
     
     // Set placeholder text for the server name field on each change.
     serverNameField.placeholder = serverHostField.text;
     
     if (serverPortField.text) {
-        [bookmark setObject:serverPortField.text forKey:@"ServerPort"];
+        [bookmark setValue:serverPortField.text forKey:@"ServerPort"];
     } else {
-        [bookmark setObject:@"" forKey:@"ServerPort"];
+        [bookmark setValue:@"" forKey:@"ServerPort"];
     }
     
     if (userLoginField.text) {
-        [bookmark setObject:userLoginField.text forKey:@"UserLogin"];
+        [bookmark setValue:userLoginField.text forKey:@"UserLogin"];
     } else {
-        [bookmark setObject:@"" forKey:@"UserLogin"];
+        [bookmark setValue:@"" forKey:@"UserLogin"];
     }
     
     if (textField == userPassField && ![userPassField.text isEqualToString:@""]) {
         // If the current field is the password field, create a SHA1 hash.
-        [bookmark setObject:[userPassField.text SHA1Value] forKey:@"UserPass"];
+        [bookmark setValue:[userPassField.text SHA1Value] forKey:@"UserPass"];
     } else if (![userPassField.text isEqualToString:@""]) {
         // If this is not the password field and we already have a SHA1'd password, use it.
-        [bookmark setObject:userPassField.text forKey:@"UserPass"];
+        [bookmark setValue:userPassField.text forKey:@"UserPass"];
     } else {
         // In all other cases, the password should be a blank string.
-        [bookmark setObject:@"" forKey:@"UserPass"];
+        [bookmark setValue:@"" forKey:@"UserPass"];
     }
     
     // Store the new bookmark list.
