@@ -107,8 +107,8 @@
 {
     NSLog(@"Sending login information...");
     
-    user = (![user isEqualToString:@""]) ? user : @"guest";
-    password = (![password isEqualToString:@""]) ? password : @"da39a3ee5e6b4b0d3255bfef95601890afd80709";
+    user = ([user length] > 0) ? user : @"guest";
+    password = ([password length] > 0) ? password : @"da39a3ee5e6b4b0d3255bfef95601890afd80709";
     
     // Send the user login information to the Wired server.
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
