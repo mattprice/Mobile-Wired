@@ -3,6 +3,7 @@
 * Display a disclosure arrow while editing the server list, if possible.
 * Swipe to hide keyboard on bookmark screen.
 * Clicking on a server that's reconnecting might force a completely new connection. Need to test.
+* Can swipe to the left on the bookmark view, showing a black background, or the previous user list view.
 
 ## Version 0.9
 * View User Info:
@@ -22,7 +23,7 @@
 * <<< Notification messages >>> should be colored red.
 
 ## Version 1.1
-* Sort the server list by connection status (default) and manually.
+* Sort the server list by connection status then manually/name (default).
 * Improve animations when resizing UITableViews (ex, BookmarkView and ChatView).
 * Make the UITextField expand for long chat messages.
 

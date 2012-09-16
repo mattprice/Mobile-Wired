@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D12846515BA501400CB6522 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D12846315BA501400CB6522 /* libTestFlight.a */; };
+		0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */; };
 		0DA7A76F15BA44B20013DDFB /* GrayDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76515BA44AF0013DDFB /* GrayDot.png */; };
 		0DA7A77015BA44B20013DDFB /* GrayDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76615BA44B00013DDFB /* GrayDot@2x.png */; };
 		0DA7A77115BA44B20013DDFB /* GreenDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76715BA44B00013DDFB /* GreenDot.png */; };
@@ -114,6 +115,7 @@
 		0D12846315BA501400CB6522 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "Mobile Wired/Classes/TestFlight/libTestFlight.a"; sourceTree = "<group>"; };
 		0D12846415BA501400CB6522 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "Mobile Wired/Classes/TestFlight/TestFlight.h"; sourceTree = "<group>"; };
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
+		0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b53.xml; path = Resources/WiredSpec_2.0b53.xml; sourceTree = "<group>"; };
 		0DA7A76515BA44AF0013DDFB /* GrayDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GrayDot.png; path = "Mobile Wired/Resources/Images/GrayDot.png"; sourceTree = SOURCE_ROOT; };
 		0DA7A76615BA44B00013DDFB /* GrayDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GrayDot@2x.png"; path = "Mobile Wired/Resources/Images/GrayDot@2x.png"; sourceTree = SOURCE_ROOT; };
 		0DA7A76715BA44B00013DDFB /* GreenDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenDot.png; path = "Mobile Wired/Resources/Images/GreenDot.png"; sourceTree = SOURCE_ROOT; };
@@ -612,6 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */,
+				0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */,
 				3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */,
 				34FC5C82135B4D150049C737 /* P7 Specification.xml */,
 				34FC5C80135B493D0049C737 /* Connection Dump.xml */,
@@ -746,6 +749,7 @@
 				0DD4C0DE15BCDAAB0030069F /* SettingsView.xib in Resources */,
 				0DD4C0E115BCDAB60030069F /* BookmarkView.xib in Resources */,
 				0DD4C0E415BCDAC80030069F /* DefaultView.xib in Resources */,
+				0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
