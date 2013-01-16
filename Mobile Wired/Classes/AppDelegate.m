@@ -82,6 +82,25 @@
     
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
+    
+    // Fade out the splash screen image.
+    // The image is shifted 20 pixels down from where it should be, so correct its position.
+    UIImageView *splashImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
+    CGRect frame = CGRectMake(splashImage.frame.origin.x,
+                               splashImage.frame.origin.y - 20,
+                               splashImage.frame.size.width,
+                               splashImage.frame.size.height);
+    [splashImage setFrame:frame];
+    [self.window.rootViewController.view addSubview:splashImage];
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         splashImage.alpha = 0;
+                     }
+                     completion:^(BOOL finished) {
+                         [splashImage removeFromSuperview];
+                     }];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
