@@ -255,7 +255,7 @@
     // This controller already exists (AppDelegate.m) but we need to set up its right-most view.
     IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
     rightView.rightController = infoController;
-    rightView.rightLedge = 66;
+    rightView.rightSize = 66;
     [rightView openRightViewAnimated:YES];
 }
 

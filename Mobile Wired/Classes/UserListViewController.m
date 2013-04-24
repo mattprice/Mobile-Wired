@@ -76,14 +76,14 @@
 
 - (BOOL)viewDeckControllerWillOpenRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated
 {
-    self.topViewDeckController.rightLedge = 22;
+    self.topViewDeckController.rightSize = 22;
     
     return YES;
 }
 
 - (BOOL)viewDeckControllerWillCloseRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated
 {
-    self.topViewDeckController.rightLedge = 44;
+    self.topViewDeckController.rightSize = 44;
     
     return YES;
 }

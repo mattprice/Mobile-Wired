@@ -51,7 +51,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // Start out by opening the left view.
-    self.viewDeckController.leftLedge = -10;
+    self.viewDeckController.leftSize = -10;
     [self.viewDeckController openLeftViewAnimated:NO];
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
     
@@ -357,14 +357,14 @@
     // Re-enable panning and open the center view.
     if (shouldPan) {
         self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-        [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller) {
+        [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL completed) {
             // If this is the first item we've opened after launch then we need to resize
             // the server list window and change the  left ledge size.
             CGRect frame = self.mainTableView.frame;
             frame.size.width = 275.0;
             self.mainTableView.frame = frame;
             
-            self.viewDeckController.leftLedge = 44.0;
+            self.viewDeckController.leftSize = 44.0;
         }];
     }
 }
