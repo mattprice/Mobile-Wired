@@ -19,6 +19,7 @@
 		0DA7A77615BA44B20013DDFB /* RedDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76C15BA44B10013DDFB /* RedDot@2x.png */; };
 		0DA7A77715BA44B20013DDFB /* YellowDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76D15BA44B10013DDFB /* YellowDot.png */; };
 		0DA7A77815BA44B20013DDFB /* YellowDot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DA7A76E15BA44B20013DDFB /* YellowDot@2x.png */; };
+		0DA8B04C17277CFE008297ED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA8B04B17277CFE008297ED /* QuartzCore.framework */; };
 		0DBD205C15B4D10B00D86B6C /* UIButton_Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */; };
 		0DBD205D15B4D10B00D86B6C /* UIButton_Gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */; };
 		0DBD205E15B4D10B00D86B6C /* UIButton_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBD205815B4D10B00D86B6C /* UIButton_Green.png */; };
@@ -76,7 +77,6 @@
 		347B380015098D6500D88034 /* Error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FC15098D6500D88034 /* Error@2x.png */; };
 		3482C1A9155C6C5D00415794 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3482C1A8155C6C5D00415794 /* Security.framework */; };
 		3482C1AA155C6C6E00415794 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE43C1359690000A24C01 /* CFNetwork.framework */; };
-		3482C1AD155C6DCD00415794 /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482C1AC155C6DCD00415794 /* WrapController.m */; };
 		3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482C1B8155C7E9200415794 /* BookmarkViewController.m */; };
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
 		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };
@@ -126,6 +126,7 @@
 		0DA7A76C15BA44B10013DDFB /* RedDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "RedDot@2x.png"; path = "Mobile Wired/Resources/Images/RedDot@2x.png"; sourceTree = SOURCE_ROOT; };
 		0DA7A76D15BA44B10013DDFB /* YellowDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowDot.png; path = "Mobile Wired/Resources/Images/YellowDot.png"; sourceTree = SOURCE_ROOT; };
 		0DA7A76E15BA44B20013DDFB /* YellowDot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YellowDot@2x.png"; path = "Mobile Wired/Resources/Images/YellowDot@2x.png"; sourceTree = SOURCE_ROOT; };
+		0DA8B04B17277CFE008297ED /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0DBD205615B4D10B00D86B6C /* UIButton_Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButton_Gray.png; path = "Mobile Wired/Resources/Images/UIButton_Gray.png"; sourceTree = SOURCE_ROOT; };
 		0DBD205715B4D10B00D86B6C /* UIButton_Gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIButton_Gray@2x.png"; path = "Mobile Wired/Resources/Images/UIButton_Gray@2x.png"; sourceTree = SOURCE_ROOT; };
 		0DBD205815B4D10B00D86B6C /* UIButton_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButton_Green.png; path = "Mobile Wired/Resources/Images/UIButton_Green.png"; sourceTree = SOURCE_ROOT; };
@@ -196,8 +197,6 @@
 		347B37FB15098D6500D88034 /* Error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Error.png; path = "Mobile Wired/Resources/Images/Error.png"; sourceTree = SOURCE_ROOT; };
 		347B37FC15098D6500D88034 /* Error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Error@2x.png"; path = "Mobile Wired/Resources/Images/Error@2x.png"; sourceTree = SOURCE_ROOT; };
 		3482C1A8155C6C5D00415794 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		3482C1AB155C6DCD00415794 /* WrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WrapController.h; path = ViewDeck/WrapController.h; sourceTree = "<group>"; };
-		3482C1AC155C6DCD00415794 /* WrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WrapController.m; path = ViewDeck/WrapController.m; sourceTree = "<group>"; };
 		3482C1B7155C7E9200415794 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookmarkViewController.h; path = Classes/BookmarkViewController.h; sourceTree = "<group>"; };
 		3482C1B8155C7E9200415794 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookmarkViewController.m; path = Classes/BookmarkViewController.m; sourceTree = "<group>"; };
 		34838FA814F32BA80064B619 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserListViewController.h; path = Classes/UserListViewController.h; sourceTree = "<group>"; };
@@ -256,6 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DA8B04C17277CFE008297ED /* QuartzCore.framework in Frameworks */,
 				34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */,
 				34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */,
 				34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */,
@@ -367,8 +367,6 @@
 			children = (
 				34FB815C14F71FDE001780E4 /* IIViewDeckController.h */,
 				34FB815D14F71FDE001780E4 /* IIViewDeckController.m */,
-				3482C1AB155C6DCD00415794 /* WrapController.h */,
-				3482C1AC155C6DCD00415794 /* WrapController.m */,
 			);
 			name = ViewDeck;
 			path = Classes/ViewDeck;
@@ -476,6 +474,7 @@
 		34EBE3B313594F7A00A24C01 = {
 			isa = PBXGroup;
 			children = (
+				0DA8B04B17277CFE008297ED /* QuartzCore.framework */,
 				3431FF5F136C93ED00EDB8D8 /* Roadmap.md */,
 				34EBE3CA13594F7B00A24C01 /* Wired Classes */,
 				3440CD061366188E0046955F /* Categories */,
@@ -798,7 +797,6 @@
 				34DB44ED155705E500C955A5 /* SettingsTextCell.m in Sources */,
 				34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */,
 				34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */,
-				3482C1AD155C6DCD00415794 /* WrapController.m in Sources */,
 				3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */,
 				0DEF007315BB922700289AEB /* BlockActionSheet.m in Sources */,
 				0DEF007415BB922700289AEB /* BlockAlertView.m in Sources */,
