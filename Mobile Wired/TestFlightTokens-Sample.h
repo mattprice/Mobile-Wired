@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-// If you want to use TestFlight logging, uncomment and set the TestFlight SDK token below.
-// You can find the token at https://testflightapp.com/dashboard/team/edit/ under "Team Token".
+// If you want to use TestFlight logging, uncomment and set the TestFlight App Token below.
+// Learn more at http://blog.testflightapp.com/post/41214846362/apps-app-tokens
 
-#define TF_TEAM_TOKEN @"YOUR_TEAM_TOKEN_HERE"
+// #define TF_APP_TOKEN @"YOUR_APP_TOKEN_HERE"
