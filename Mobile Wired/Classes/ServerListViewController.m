@@ -251,7 +251,7 @@
     }
 
     // Section 1 is settings.
-    return UITableViewCellAccessoryNone;
+    return UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

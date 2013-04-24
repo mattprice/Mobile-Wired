@@ -174,7 +174,7 @@
 {
     [UIView animateWithDuration:0.25
                           delay:0
-                        options:UIViewAnimationCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          // Resize the main UITableView.
                          self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,
@@ -226,7 +226,7 @@
 {
     [UIView animateWithDuration:.25
                           delay:0
-                        options:UIViewAnimationCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          // Resize the main UITableView.
                          self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,

@@ -710,7 +710,7 @@
     // Move the textField out of the keyboard's way.
     [UIView animateWithDuration:0.25
                           delay:0
-                        options:UIViewAnimationCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          accessoryView.frame = CGRectMake(0.0,
                                                           200.0,
@@ -812,7 +812,7 @@
 {
     [UIView animateWithDuration:0.25
                           delay:0
-                        options:UIViewAnimationCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          // Pan the keyboard up/down.
                          CGRect newFrame = keyboard.frame;
