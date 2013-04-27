@@ -1,16 +1,5 @@
 ## 9/12 Notes
 * Add a message sending indicator.
-* Display a disclosure arrow while editing the server list, if possible.
-* Swipe to hide keyboard on bookmark screen.
-* Clicking on a server that's reconnecting might force a completely new connection. Need to test.
-* Can swipe to the left on the bookmark view, showing a black background, or the previous user list view.
-
-## Version 0.9
-* View User Info:
-    * Kick
-    * Ban
-* ChatView Cog Menu:
-    * View server topic.
 
 ## Version 0.95
 * Send and receive PMs.
