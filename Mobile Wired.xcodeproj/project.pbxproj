@@ -474,7 +474,6 @@
 		34EBE3B313594F7A00A24C01 = {
 			isa = PBXGroup;
 			children = (
-				0DA8B04B17277CFE008297ED /* QuartzCore.framework */,
 				3431FF5F136C93ED00EDB8D8 /* Roadmap.md */,
 				34EBE3CA13594F7B00A24C01 /* Wired Classes */,
 				3440CD061366188E0046955F /* Categories */,
@@ -497,12 +496,13 @@
 			isa = PBXGroup;
 			children = (
 				0D12846215BA4DF300CB6522 /* TestFlight */,
-				34EBE3C413594F7B00A24C01 /* Foundation.framework */,
-				34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */,
-				34EBE3C213594F7B00A24C01 /* UIKit.framework */,
 				34EBE43C1359690000A24C01 /* CFNetwork.framework */,
+				34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */,
+				34EBE3C413594F7B00A24C01 /* Foundation.framework */,
 				34FC5C8C135BB3430049C737 /* libz.dylib */,
+				0DA8B04B17277CFE008297ED /* QuartzCore.framework */,
 				3482C1A8155C6C5D00415794 /* Security.framework */,
+				34EBE3C213594F7B00A24C01 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

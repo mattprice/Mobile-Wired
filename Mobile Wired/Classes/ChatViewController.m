@@ -69,6 +69,7 @@
 #pragma mark -
 #pragma mark ViewDeck Delegate Methods
 - (BOOL)viewDeckControllerWillCloseRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated {
+    // Close the UserInfoView whenever the User List is closed.
     [(IIViewDeckController *)self.viewDeckController.rightController closeRightView];
     
     return YES;

@@ -48,8 +48,10 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     // Start out by opening the left view.
     self.viewDeckController.leftSize = -10;
     [self.viewDeckController openLeftViewAnimated:NO];
@@ -59,11 +61,6 @@
     CGRect frame = self.mainTableView.frame;
     frame.size.width = self.view.frame.size.width;
     self.mainTableView.frame = frame;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
     
     // Create an array to eventually store connections in.
     currentConnections = [NSMutableDictionary dictionary];
