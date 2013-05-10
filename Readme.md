@@ -1,6 +1,8 @@
-## About
+# Mobile Wired
 
-Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
+Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
+
+[![Build Status](https://travis-ci.org/mattprice/Mobile-Wired.png)](https://travis-ci.org/mattprice/Mobile-Wired)
 
 ## Download Instructions
 
@@ -39,7 +41,7 @@ Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr
 [TBXML]: https://github.com/71squared/TBXML
 [TestFlight SDK]: https://testflightapp.com/sdk/
 
-## MIT License (MIT)
+## License (MIT)
 
 Copyright (c) 2012 Matthew Price, http://mattprice.me/ <br>
 Copyright (c) 2012 Ember Code, http://embercode.com/
