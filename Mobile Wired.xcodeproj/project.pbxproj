@@ -890,8 +890,8 @@
 			children = (
 			);
 			name = MainWindow.xib;
-			path = "/Users/matthew/Dropbox/Projects/Mobile Wired/Mobile Wired/Resources/en.lproj";
-			sourceTree = "<absolute>";
+			path = /Resources/en.lproj;
+			sourceTree = "<group>";
 		};
 		34EBE41B1359565100A24C01 /* ChatView.xib */ = {
 			isa = PBXVariantGroup;
@@ -923,7 +923,6 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -948,7 +947,6 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
