@@ -21,6 +21,7 @@ end
 
 def buildAndLogScheme(scheme)
   result = compile(scheme)
+  Signal.trap('EXIT') { exit result }
   log(scheme, result)
 end
 
