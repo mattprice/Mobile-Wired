@@ -80,6 +80,10 @@
     
     deckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractive;
     
+    // Let each ViewDeck subcontroller receive delegate calls.
+    deckController.delegateMode = IIViewDeckDelegateAndSubControllers;
+    futureController.delegateMode = IIViewDeckDelegateAndSubControllers;
+    
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
     
