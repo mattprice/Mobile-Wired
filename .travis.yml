@@ -1,2 +1,3 @@
 language: objective-c
+before_script: cp 'Mobile Wired/TestFlightTokens-Sample.h' 'Mobile Wired/TestFlightTokens.h'
 script: rake build --trace
