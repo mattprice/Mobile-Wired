@@ -68,12 +68,17 @@
 
 #pragma mark -
 #pragma mark ViewDeck Delegate Methods
-- (BOOL)viewDeckControllerWillCloseRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated
+- (IIViewDeckController *)userListViewController
+{
+    return (IIViewDeckController *)self.viewDeckController.rightController;
+}
+
+- (void)viewDeckController:(IIViewDeckController*)viewDeckController didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
 {
     // Close the UserInfoView whenever the User List is closed.
-    [(IIViewDeckController *)self.viewDeckController.rightController closeRightView];
-    
-    return YES;
+    if ( viewDeckSide == IIViewDeckRightSide ) {
+        [self.userListViewController closeRightView];
+    }
 }
 
 #pragma mark -

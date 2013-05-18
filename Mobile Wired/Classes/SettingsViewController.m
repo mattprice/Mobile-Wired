@@ -94,7 +94,9 @@
 #pragma mark -
 #pragma mark View Deck Delegates
 
-- (void)viewDeckControllerDidShowCenterView:(IIViewDeckController*)viewDeckController animated:(BOOL)animated
+- (void)viewDeckController:(IIViewDeckController*)viewDeckController
+ didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide
+                  animated:(BOOL)animated
 {
     // Store the current nickname and status.
     oldNick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];

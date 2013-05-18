@@ -74,18 +74,19 @@
     return self.viewDeckController.viewDeckController;
 }
 
-- (BOOL)viewDeckControllerWillOpenRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated
+- (void)viewDeckController:(IIViewDeckController*)viewDeckController willOpenViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
 {
-    self.topViewDeckController.rightSize = 22;
-    
-    return YES;
+    if ( viewDeckSide == IIViewDeckRightSide ) {
+        self.topViewDeckController.rightSize = 22;
+    }
 }
 
-- (BOOL)viewDeckControllerWillCloseRightView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated
+- (void)viewDeckController:(IIViewDeckController*)viewDeckController willCloseViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
 {
-    self.topViewDeckController.rightSize = 44;
+    if ( viewDeckSide == IIViewDeckRightSide ) {
+        self.topViewDeckController.rightSize = 44;
+    }
     
-    return YES;
 }
 
 #pragma mark -
