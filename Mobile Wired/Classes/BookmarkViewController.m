@@ -80,6 +80,19 @@
 }
 
 #pragma mark -
+#pragma mark ViewDeck Delegates
+
+- (BOOL)viewDeckController:(IIViewDeckController*)viewDeckController shouldOpenViewSide:(IIViewDeckSide)viewDeckSide
+{
+    // Don't let users swipe to the right view it's either empty or a user list.
+    if ( viewDeckSide == IIViewDeckRightSide ) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+#pragma mark -
 #pragma mark Table View Actions
 
 - (void)didPressReset

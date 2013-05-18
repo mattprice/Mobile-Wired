@@ -68,6 +68,7 @@
 
 #pragma mark -
 #pragma mark ViewDeck Delegate Methods
+
 - (IIViewDeckController *)userListViewController
 {
     return (IIViewDeckController *)self.viewDeckController.rightController;
@@ -134,6 +135,7 @@
 
 #pragma mark -
 #pragma mark UI Actions
+
 - (IBAction)sendButtonPressed:(id)sender
 {
     // Send the message.

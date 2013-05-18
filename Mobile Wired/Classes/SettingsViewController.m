@@ -92,7 +92,7 @@
 }
 
 #pragma mark -
-#pragma mark View Deck Delegates
+#pragma mark ViewDeck Delegates
 
 - (void)viewDeckController:(IIViewDeckController*)viewDeckController
  didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide
@@ -101,6 +101,16 @@
     // Store the current nickname and status.
     oldNick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
     oldStatus = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
+}
+
+- (BOOL)viewDeckController:(IIViewDeckController*)viewDeckController shouldOpenViewSide:(IIViewDeckSide)viewDeckSide
+{
+    // Don't let users swipe to the right view it's either empty or a user list.
+    if ( viewDeckSide == IIViewDeckRightSide ) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark -
