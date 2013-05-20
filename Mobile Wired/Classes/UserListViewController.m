@@ -28,10 +28,11 @@
 #import "UserListTableViewCell.h"
 #import "ChatViewController.h"
 #import "IIViewDeckController.h"
+#import "WiredConnection.h"
 
 @implementation UserListViewController
 
-@synthesize chatView, userListArray;
+@synthesize userListArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,6 +73,13 @@
 - (IIViewDeckController *)topViewDeckController
 {
     return self.viewDeckController.viewDeckController;
+}
+
+- (WiredConnection *)connection
+{
+    ChatViewController *chatController = (ChatViewController *)self.topViewDeckController.centerController;
+    
+    return chatController.connection;
 }
 
 - (void)viewDeckController:(IIViewDeckController*)viewDeckController willOpenViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
@@ -169,7 +177,16 @@
     }
     
     cell.avatar.image = [UIImage imageWithData:[currentUser objectForKey:@"wired.user.icon"]];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    // Display a disclosure indicator if the user has permission to view user info.
+    if ( [[self.connection getMyPermissions] objectForKey:@"wired.account.user.get_info"] ) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+
+    // If the user doesn't have permission, don't let them select the UITableViewCells.
+    else {
+        cell.userInteractionEnabled = NO;
+    }
     
     return cell;
 }
@@ -177,9 +194,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *currentUser = [userListArray objectAtIndex:[indexPath row]];
-    
-    [chatView getInfoForUser:[currentUser objectForKey:@"wired.user.id"]];
-    
+
+    [self.connection getInfoForUser:[currentUser objectForKey:@"wired.user.id"]];
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
