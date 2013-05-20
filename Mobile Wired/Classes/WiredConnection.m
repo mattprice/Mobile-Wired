@@ -172,6 +172,11 @@
     return [[userList objectForKey:@"1"] objectForKey:myUserID];
 }
 
+- (NSDictionary *)getMyPermissions
+{
+    return myPermissions;
+}
+
 - (void)getInfoForUser:(NSString *)userID
 {
     NSLog(@"Requesting info for user: %@...", userID);
@@ -740,11 +745,18 @@
 #pragma mark Account Priviledges
     else if ([rootName isEqualToString:@"wired.account.privileges"]) {
         NSLog(@"Received account priviledges.");
+        
+        do {
+            childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
+            childValue = [TBXML textForElement:childElement];
+            
+            [myPermissions setValue:childValue forKey:childName];
+        } while ((childElement = childElement->nextSibling));
     }
     
 #pragma mark Okay
     else if ([rootName isEqualToString:@"wired.okay"]) {
-        // We should really keep up with what command this refers to.
+        // TODO: We should really keep up with what command this refers to.
         NSLog(@"The last command was successful.");
     }
     

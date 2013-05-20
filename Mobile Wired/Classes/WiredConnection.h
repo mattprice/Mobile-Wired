@@ -37,6 +37,7 @@
     
     NSMutableDictionary *userList;
     NSMutableDictionary *serverInfo;
+    NSMutableDictionary *myPermissions;
     NSString *myUserID;
     
     Boolean isConnected;
@@ -65,6 +66,7 @@
 
 #pragma mark Connection Information
 - (NSDictionary *)getMyUserInfo;
+- (NSDictionary *)getMyPermissions;
 - (void)getInfoForUser:(NSString *)userID;
 
 #pragma mark Channel Commands
