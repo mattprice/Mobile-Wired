@@ -746,12 +746,16 @@
     else if ([rootName isEqualToString:@"wired.account.privileges"]) {
         NSLog(@"Received account priviledges.");
         
+        NSMutableDictionary *tempInfo = [NSMutableDictionary dictionary];
+        
         do {
             childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
             childValue = [TBXML textForElement:childElement];
             
-            [myPermissions setValue:childValue forKey:childName];
+            [tempInfo setValue:childValue forKey:childName];
         } while ((childElement = childElement->nextSibling));
+        
+        myPermissions = tempInfo;
     }
     
 #pragma mark Okay

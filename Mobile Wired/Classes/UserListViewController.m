@@ -179,7 +179,7 @@
     cell.avatar.image = [UIImage imageWithData:[currentUser objectForKey:@"wired.user.icon"]];
     
     // Display a disclosure indicator if the user has permission to view user info.
-    if ( [[self.connection getMyPermissions] objectForKey:@"wired.account.user.get_info"] ) {
+    if ( [[[self.connection getMyPermissions] objectForKey:@"wired.account.user.get_info"] boolValue] ) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
