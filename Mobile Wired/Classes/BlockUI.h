@@ -7,6 +7,21 @@
 #ifndef BlockUI_h
 #define BlockUI_h
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+#define NSTextAlignmentCenter       UITextAlignmentCenter
+#define NSLineBreakByWordWrapping   UILineBreakModeWordWrap
+#define NSLineBreakByClipping       UILineBreakModeClip
+
+#endif
+
+#ifndef IOS_LESS_THAN_6
+#define IOS_LESS_THAN_6 !([[[UIDevice currentDevice] systemVersion] compare:@"6.0" options:NSNumericSearch] != NSOrderedAscending)
+
+#endif
+
+#define NeedsLandscapePhoneTweaks (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) && UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
+
+
 // Action Sheet constants
 
 #define kActionSheetBounce              10
@@ -31,8 +46,8 @@
 // Alert View constants
 
 #define kAlertViewBounce                12
-#define kAlertViewBorder                10
-#define kAlertButtonHeight              40
+#define kAlertViewBorder                (NeedsLandscapePhoneTweaks ? 5 : 10)
+#define kAlertButtonHeight              (NeedsLandscapePhoneTweaks ? 35 : 44)
 
 #define kAlertViewTitleFont             [UIFont boldSystemFontOfSize:18]
 #define kAlertViewTitleTextColor        [UIColor colorWithWhite:244.0/255.0 alpha:1.0]
@@ -50,10 +65,10 @@
 #define kAlertViewButtonShadowOffset    CGSizeMake(0, -1)
 
 #define kAlertViewBackground            @"alert-window.png"
+#define kAlertViewBackgroundLandscape   @"alert-window-landscape.png"
 #define kAlertDefaultButtonImage        @"alert-black-button.png"
 #define kAlertCancelButtonImage         @"alert-gray-button.png"
 #define kAlertDestructiveButtonImage    @"alert-red-button.png"
-
-#define kAlertViewBackgroundCapHeight   36
+#define kAlertViewBackgroundCapHeight   38
 
 #endif

@@ -1,6 +1,6 @@
 [submodule "Mobile Wired/Classes/TBXML"]
 	path = Mobile Wired/Classes/TBXML
-	url = https://github.com/71squared/TBXML
+	url = https://github.com/71squared/TBXML.git
 [submodule "Mobile Wired/Classes/GCDAsyncSocket"]
 	path = Mobile Wired/Classes/GCDAsyncSocket
 	url = https://github.com/robbiehanson/CocoaAsyncSocket.git
@@ -15,4 +15,4 @@
 	url = https://github.com/vicpenap/PrettyKit.git
 [submodule "Mobile Wired/Classes/BlockAlerts"]
 	path = Mobile Wired/Classes/BlockAlerts
-	url = https://github.com/Lyc0s/BlockAlertsAnd-ActionSheets.git
+	url = https://github.com/gpambrozio/BlockAlertsAnd-ActionSheets.git
