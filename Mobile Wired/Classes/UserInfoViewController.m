@@ -118,8 +118,6 @@
         
         cell.avatar.image = [UIImage imageWithData:[userInfo objectForKey:@"wired.user.icon"]];
         
-        NSLog(@"%@",[userInfo description]);
-        
         return cell;
     }
     
