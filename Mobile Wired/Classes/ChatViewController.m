@@ -173,52 +173,54 @@
         [self disconnect];
     }];
     
-    // Close
+    // Cancel
     [alert setCancelButtonWithTitle:@"Cancel" block:nil];
     
     // Set Topic
-    // TODO: Need to see if you have permission to change the topic.
-    [alert addButtonWithTitle:@"Set Topic" block:^{
-        BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Set Topic"
-                                                                             message:@""
-                                                                         defaultText:serverTopic];
-        
-        // Set Topic: Cancel
-        [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
-        
-        // Set Topic: Save
-        __weak BlockTextPromptAlertView *weakPrompt = prompt;
-        [prompt setCancelButtonWithTitle:@"Save" block:^{
-            [self.connection setTopic:weakPrompt.textField.text forChannel:@"1"];
+    if ( [[[self.connection getMyPermissions] objectForKey:@"wired.account.chat.set_topic"] boolValue] ) {
+        [alert addButtonWithTitle:@"Set Topic" block:^{
+            BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Set Topic"
+                                                                                 message:@""
+                                                                             defaultText:serverTopic];
+            
+            // Set Topic: Cancel
+            [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
+            
+            // Set Topic: Save
+            __weak BlockTextPromptAlertView *weakPrompt = prompt;
+            [prompt setCancelButtonWithTitle:@"Save" block:^{
+                [self.connection setTopic:weakPrompt.textField.text forChannel:@"1"];
+            }];
+            
+            // By default, the text field is set to auto-capitalize each word.
+            prompt.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+            
+            [prompt show];
         }];
-        
-        // By default, the text field is set to auto-capitalize each word.
-        prompt.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
-        
-        [prompt show];
-    }];
+    }
     
     // Send Broadcast
-    // TODO: Need to see if you have permission to send broadcasts.
-    [alert addButtonWithTitle:@"Send Broadcast" block:^{
-        BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Send Broadcast"
-                                                                             message:@""
-                                                                         defaultText:@""];
-        
-        // Broadcast: Cancel
-        [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
-        
-        // Broadcast: Send
-        __weak BlockTextPromptAlertView *weakPrompt = prompt;
-        [prompt setCancelButtonWithTitle:@"Send" block:^{
-            [self.connection sendBroadcast:weakPrompt.textField.text];
+    if ( [[[self.connection getMyPermissions] objectForKey:@"wired.account.message.broadcast"] boolValue] ) {
+        [alert addButtonWithTitle:@"Send Broadcast" block:^{
+            BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Send Broadcast"
+                                                                                 message:@""
+                                                                             defaultText:@""];
+            
+            // Broadcast: Cancel
+            [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
+            
+            // Broadcast: Send
+            __weak BlockTextPromptAlertView *weakPrompt = prompt;
+            [prompt setCancelButtonWithTitle:@"Send" block:^{
+                [self.connection sendBroadcast:weakPrompt.textField.text];
+            }];
+            
+            // By default, the text field is set to auto-capitalize each word.
+            prompt.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+            
+            [prompt show];
         }];
-        
-        // By default, the text field is set to auto-capitalize each word.
-        prompt.textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
-        
-        [prompt show];
-    }];
+    }
     
     [alert show];
 }
