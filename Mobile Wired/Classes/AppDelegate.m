@@ -46,8 +46,8 @@
     // Add the TestFlight SDK.
 #ifndef DEBUG
     #ifdef TF_APP_TOKEN
-        [TestFlight takeOff:TF_APP_TOKEN];
         [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+        [TestFlight takeOff:TF_APP_TOKEN];
     #endif
 #endif
     
