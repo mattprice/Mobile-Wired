@@ -1052,6 +1052,13 @@
             }
         } while ((childElement = childElement->nextSibling));
         
+        // The channel topic needs to be XML decoded before notifying the delegate.
+        topic = [[[[[topic stringByReplacingOccurrencesOfString: @"&amp;" withString: @"&"]
+                       stringByReplacingOccurrencesOfString: @"&quot;" withString: @"\""]
+                      stringByReplacingOccurrencesOfString: @"&#39;" withString: @"'"]
+                     stringByReplacingOccurrencesOfString: @"&gt;" withString: @">"]
+                    stringByReplacingOccurrencesOfString: @"&lt;" withString: @"<"];
+        
         [delegate didReceiveTopic:topic fromNick:nick forChannel:channel];
     }
     
