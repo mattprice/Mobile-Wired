@@ -26,7 +26,7 @@ xcodebuild
 * [TBXML][]                — Super-fast, lightweight, easy to use XML parser.
 * [TestFlight SDK][]       — Remote crash logging and in-app updates for beta testers.
 
-[BlockAlerts]:             https://github.com/Lyc0s/BlockAlertsAnd-ActionSheets
+[BlockAlerts]:             https://github.com/gpambrozio/BlockAlertsAnd-ActionSheets
 [GCDAsyncSocket]:          https://github.com/robbiehanson/CocoaAsyncSocket
 [IIViewDeckController]:    https://github.com/Inferis/ViewDeck
 [MBProgressHUD]:           https://github.com/jdg/MBProgressHUD
