@@ -442,9 +442,9 @@
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 @"Wired Client",  @"wired.info.application.name",
                                 @"2.0",           @"wired.info.application.version",
-                                @"248",           @"wired.info.application.build",
+                                @"268",           @"wired.info.application.build",
                                 @"Mac OS X",      @"wired.info.os.name",
-                                @"10.8",          @"wired.info.os.version",
+                                @"10.8.3",        @"wired.info.os.version",
                                 @"x86_64",        @"wired.info.arch",
                                 @"false",         @"wired.info.supports_rsrc",
                                 nil];
