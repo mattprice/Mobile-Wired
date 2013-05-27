@@ -25,13 +25,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class ChatViewController;
+#import "WiredConnection.h"
 
 @interface UserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+    WiredConnection *connection;
     NSMutableArray *userListArray;
 }
 
+@property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) NSMutableArray *userListArray;
 
 - (void)setUserList:(NSDictionary *)userList;

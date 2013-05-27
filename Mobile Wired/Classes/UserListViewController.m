@@ -28,11 +28,10 @@
 #import "UserListTableViewCell.h"
 #import "ChatViewController.h"
 #import "IIViewDeckController.h"
-#import "WiredConnection.h"
 
 @implementation UserListViewController
 
-@synthesize userListArray;
+@synthesize connection, userListArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -73,13 +72,6 @@
 - (IIViewDeckController *)topViewDeckController
 {
     return self.viewDeckController.viewDeckController;
-}
-
-- (WiredConnection *)connection
-{
-    ChatViewController *chatController = (ChatViewController *)self.topViewDeckController.centerController;
-    
-    return chatController.connection;
 }
 
 - (void)viewDeckController:(IIViewDeckController*)viewDeckController willOpenViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated

@@ -145,6 +145,7 @@
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
     [self.connection connectToServer:[bookmark valueForKey:@"ServerHost"] onPort:[[bookmark valueForKey:@"ServerPort"] integerValue]];
+    userListView.connection = self.connection;
 }
 
 - (void)disconnect
