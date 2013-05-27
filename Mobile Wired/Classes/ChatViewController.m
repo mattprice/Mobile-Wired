@@ -51,6 +51,12 @@
     // This gets removed once the keyboard disappears.
     panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     panRecognizer.delegate = self;
+    
+    // Register to listen for NSUserDefaults changes.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(defaultsChanged:)
+                                                 name:NSUserDefaultsDidChangeNotification
+                                               object:nil];
 }
 
 - (void)viewDidUnload
@@ -64,6 +70,22 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)defaultsChanged:(NSNotification *)notification {
+    // NSUserDefaultsDidChangeNotification doesn't actually let us know what changed
+    // so just tell the server about anything that could have possibly updated.
+    // Wired for Mac, and Mobile Wired, both do comparisons locally before notifying users anyway.
+    [self.connection setNick:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"]];
+//    [self.connection setIcon:nil];
+    [self.connection setStatus:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"]];
+}
+
+- (void)dealloc
+{
+    // Remove any NSNotificationCenter observers, otherwise the app
+    // will crash if we receive a notification after dealloc'ing.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -

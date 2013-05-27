@@ -84,7 +84,7 @@
 
 - (BOOL)viewDeckController:(IIViewDeckController*)viewDeckController shouldOpenViewSide:(IIViewDeckSide)viewDeckSide
 {
-    // Don't let users swipe to the right view it's either empty or a user list.
+    // Don't let users swipe to the right side. It's either empty or a user list.
     if ( viewDeckSide == IIViewDeckRightSide ) {
         return NO;
     } else {
