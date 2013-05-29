@@ -132,6 +132,7 @@
 {
     // Create a dictionary to store the bookmark in.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
+    
     if (serverHostField.text) {
         [bookmark setValue:serverHostField.text forKey:@"ServerHost"];
     } else {
@@ -168,6 +169,18 @@
     } else {
         // In all other cases, the password should be a blank string.
         [bookmark setValue:@"" forKey:@"UserPass"];
+    }
+    
+    if (userNickField.text) {
+        [bookmark setValue:userNickField.text forKey:@"UserNick"];
+    } else {
+        [bookmark setValue:@"" forKey:@"UserNick"];
+    }
+    
+    if (userStatusField.text) {
+        [bookmark setValue:userStatusField.text forKey:@"UserStatus"];
+    } else {
+        [bookmark setValue:@"" forKey:@"UserStatus"];
     }
     
     // Store the new bookmark list.
@@ -273,7 +286,11 @@
         return 2;
     }
     
-    // Delete Button
+    // Settings
+    else if (section == 2) {
+        return 2;
+    }
+    
     return 0;
 }
 
@@ -287,6 +304,10 @@
         return @"Login Info";
     }
 
+    else if (section == 2) {
+        return @"Settings";
+    }
+    
     else {
         return @"";
     }
@@ -416,27 +437,44 @@
         }
     }
     
-    // Delete Button
+    // Settings
     else if ([indexPath section] == 2) {
-        // Create the button.
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(9, 0, 302, 45);
-        
-        // Set the button title.
-        [button setTitle:@"Delete Bookmark" forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
-        button.titleLabel.shadowColor = [UIColor colorWithWhite:0.8 alpha:0.3];
-        button.titleLabel.shadowOffset = CGSizeMake(0, -1);
-        
-        // Set the button background image.
-        UIImage *buttonImage = [UIImage imageNamed:@"UIButton_Red.png"];
-        [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-        
-        // Set the button action.
-        [button addTarget:self action:@selector(deleteBookmark) forControlEvents:UIControlEventTouchUpInside];
-        
-        // Add the button as a subview.
-        [cell addSubview:button];
+        switch ([indexPath row]) {
+            case 0:
+                cell.settingName.text = @"Nick";
+                userNickField = cell.settingValue;
+                
+                if (bookmark != nil) {
+                    oldUserNick = [bookmark objectForKey:@"UserNick"];
+                    cell.settingValue.text = oldUserNick;
+                } else {
+                    cell.settingValue.text = @"";
+                }
+                
+                cell.settingValue.placeholder = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
+                
+                break;
+                
+            case 1:
+                cell.settingName.text = @"Status";
+                userStatusField = cell.settingValue;
+                
+                if (bookmark != nil) {
+                    oldUserStatus = [bookmark objectForKey:@"UserStatus"];
+                    cell.settingValue.text = oldUserStatus;
+                } else {
+                    cell.settingValue.text = @"";
+                }
+                
+                cell.settingValue.placeholder = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
+                
+                break;
+                
+            default:
+                cell.settingName.text = @"Name";
+                cell.settingValue.text = @"Value";
+                break;
+        }
     }
     
     return cell;

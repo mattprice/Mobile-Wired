@@ -73,12 +73,21 @@
 }
 
 - (void)defaultsChanged:(NSNotification *)notification {
-    // NSUserDefaultsDidChangeNotification doesn't actually let us know what changed
-    // so just tell the server about anything that could have possibly updated.
-    // Wired for Mac, and Mobile Wired, both do comparisons locally before notifying users anyway.
-    [self.connection setNick:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"]];
+    // NSUserDefaultsDidChangeNotification doesn't let us know what changed so just tell the server
+    // about anything that could have possibly updated.
+    NSString *nick = [bookmark valueForKey:@"UserNick"];
+    if ([nick isEqualToString:@""]) {
+        nick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
+    }
+    
+    NSString *status = [bookmark valueForKey:@"UserStatus"];
+    if ([status isEqualToString:@""]) {
+        status = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
+    }
+    
+    [self.connection setNick:nick];
+    [self.connection setStatus:status];
 //    [self.connection setIcon:nil];
-    [self.connection setStatus:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"]];
 }
 
 - (void)dealloc
@@ -270,10 +279,20 @@
     
     // Update the progress HUD.
     progressHUD.labelText = @"Logging In";
+
+    NSString *nick = [bookmark valueForKey:@"UserNick"];
+    if ([nick isEqualToString:@""]) {
+        nick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
+    }
     
-    [self.connection setNick:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"]];
+    NSString *status = [bookmark valueForKey:@"UserStatus"];
+    if ([status isEqualToString:@""]) {
+        status = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
+    }
+    
+    [self.connection setNick:nick];
+    [self.connection setStatus:status];
     [self.connection setIcon:nil];
-    [self.connection setStatus:[[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"]];
     [self.connection sendLogin:[bookmark valueForKey:@"UserLogin"] withPassword:[bookmark valueForKey:@"UserPass"]];
 }
 

@@ -46,6 +46,11 @@
     UITextField *userPassField;
     NSString *oldUserLogin;
     NSString *oldUserPass;
+    
+    UITextField *userNickField;
+    UITextField *userStatusField;
+    NSString *oldUserNick;
+    NSString *oldUserStatus;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
