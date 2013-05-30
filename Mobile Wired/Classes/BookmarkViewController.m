@@ -289,6 +289,7 @@
     // Settings
     else if (section == 2) {
         return 2;
+//        return 3;
     }
     
     return 0;
@@ -306,6 +307,18 @@
 
     else if (section == 2) {
         return @"Settings";
+    }
+    
+    else {
+        return @"";
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if (section == 2) {
+        return @"";
+//        return @"To enable notifications, all messages must be routed through our server.";
     }
     
     else {
@@ -468,6 +481,18 @@
                 
                 cell.settingValue.placeholder = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
                 
+                break;
+                
+            case 2:
+                cell.settingName.text = @"Notifications";
+                cell.settingName.textColor = [UIColor grayColor];
+                cell.settingName.alpha = 0.6;
+                
+                cell.settingValue.text = @"Disabled";
+                cell.settingValue.textColor = [UIColor grayColor];
+                cell.settingValue.enabled = NO;
+                cell.settingValue.alpha = 0.6;
+
                 break;
                 
             default:
