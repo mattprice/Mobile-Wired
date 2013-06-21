@@ -419,6 +419,10 @@
                 if (bookmark != nil) {
                     oldUserLogin = [bookmark objectForKey:@"UserLogin"];
                     cell.settingValue.text = oldUserLogin;
+                    
+//                    cell.settingValue.enabled = NO;
+//                    cell.settingValue.textColor = [UIColor grayColor];
+//                    cell.settingName.textColor = [UIColor grayColor];
                 } else {
                     cell.settingValue.text = @"";
                 }
@@ -435,6 +439,10 @@
                     oldUserPass = [bookmark objectForKey:@"UserPass"];
                     cell.settingValue.secureTextEntry = YES;
                     cell.settingValue.text = oldUserPass;
+                    
+//                    cell.settingValue.enabled = NO;
+//                    cell.settingValue.textColor = [UIColor grayColor];
+//                    cell.settingName.textColor = [UIColor grayColor];
                 } else {
                     cell.settingValue.text = @"";
                 }
