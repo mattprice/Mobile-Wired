@@ -63,7 +63,7 @@
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedBefore"];
         
-        [[NSUserDefaults standardUserDefaults] setObject:[NSArray array] forKey:@"Bookmarks"];
+        [[NSUserDefaults standardUserDefaults] setObject:@[] forKey:@"Bookmarks"];
         
         [[NSUserDefaults standardUserDefaults] synchronize];
     }

@@ -66,7 +66,7 @@
     currentConnections = [NSMutableDictionary dictionary];
     
     // Create the navigation bar.
-    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
+    navigationBar.items = @[[[UINavigationItem alloc] init]];
     navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
                                                                                style:UIBarButtonItemStylePlain
                                                                               target:self
@@ -88,7 +88,7 @@
         
         // Remove the "Add Bookmark" button. It only exists if there are other bookmarks.
         if ([serverBookmarks count] > 0) {
-            NSArray *paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
+            NSArray *paths = @[[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
             [self.mainTableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
         }
     }
@@ -103,7 +103,7 @@
         
         // Insert the "Add Bookmark" button, but only if other bookmarks exist.
         if ([serverBookmarks count] > 0) {
-            NSArray *paths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
+            NSArray *paths = @[[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
             [self.mainTableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
         }
     }
@@ -174,18 +174,18 @@
         // Everything else is a real bookmark!
         else {
             // Get info about the current row's bookmark.
-            NSDictionary *currentBookmark = [serverBookmarks objectAtIndex:[indexPath row]];
+            NSDictionary *currentBookmark = serverBookmarks[[indexPath row]];
             
             // If there's no Server Name, try using the Server Host.
-            if ([[currentBookmark objectForKey:@"ServerName"] isEqualToString:@""]) {
-                cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerHost"];
+            if ([currentBookmark[@"ServerName"] isEqualToString:@""]) {
+                cell.bookmarkLabel.text = currentBookmark[@"ServerHost"];
             } else {
-                cell.bookmarkLabel.text = [currentBookmark objectForKey:@"ServerName"];
+                cell.bookmarkLabel.text = currentBookmark[@"ServerName"];
             }
             
             // Set the status image.
 //            NSString *indexString = [NSString stringWithFormat:@"%d", [indexPath row]];
-//            if ([currentConnections objectForKey:indexString]) {
+//            if (currentConnections[indexString]) {
 //                cell.statusImage.image = [UIImage imageNamed:@"GreenDot.png"];
 //            } else {
 //                cell.statusImage.image = [UIImage imageNamed:@"GrayDot.png"];
@@ -268,8 +268,8 @@
         else {
             // Check on the connection status.
             Boolean isConnected = false;
-            if ([currentConnections objectForKey:indexString]) {
-                ChatViewController *object = [currentConnections objectForKey:indexString];
+            if (currentConnections[indexString]) {
+                ChatViewController *object = currentConnections[indexString];
                 isConnected = object.isConnected;
             }
                         
@@ -296,18 +296,18 @@
                 // Check for an existing saved controller.
                 if (!isConnected) {
                     // Get info about the current bookmark.
-                    NSMutableDictionary *currentBookmark = [[serverBookmarks objectAtIndex:selectedIndex] mutableCopy];
+                    NSMutableDictionary *currentBookmark = [serverBookmarks[selectedIndex] mutableCopy];
                     
                     // Check to make sure the bookmark is complete.
-                    if (![[currentBookmark objectForKey:@"ServerHost"] isEqualToString:@""]) {
+                    if (![currentBookmark[@"ServerHost"] isEqualToString:@""]) {
                         // Bookmark is complete and we don't have a saved controller.
                         ChatViewController *controller = [ChatViewController new];
                         controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
                         [controller new:selectedIndex];
 
                         // Save the controller for later and then open it.
-                        [currentConnections setObject:controller forKey:indexString];
-                        self.viewDeckController.centerController = [currentConnections objectForKey:indexString];
+                        currentConnections[indexString] = controller;
+                        self.viewDeckController.centerController = currentConnections[indexString];
                     }
                     
                     // Display an alert if there's no server address.
@@ -324,7 +324,7 @@
                 
                 // Open the saved ChatViewController object.
                 else {
-                    self.viewDeckController.centerController = [currentConnections objectForKey:indexString];
+                    self.viewDeckController.centerController = currentConnections[indexString];
                 }
             }
         }
@@ -362,14 +362,14 @@
          [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
          [[NSUserDefaults standardUserDefaults] synchronize];
          
-         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
          
          [TestFlight passCheckpoint:@"Deleted Bookmark"];
      }
      
      else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Add a row to the data source.
-        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
          
         [TestFlight passCheckpoint:@"Added Bookmark"];
      }

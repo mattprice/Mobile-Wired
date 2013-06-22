@@ -89,22 +89,22 @@
         }
 
         // Center the nickname if there's no status.
-        if ( [[userInfo objectForKey:@"wired.user.status"] isEqualToString:@""] ) {
+        if ( [userInfo[@"wired.user.status"] isEqualToString:@""] ) {
             cell.nickLabel.text = @"";
             cell.statusLabel.text = @"";
             
-            cell.onlyNickLabel.text = [userInfo objectForKey:@"wired.user.nick"];
-            cell.onlyNickLabel.textColor = [userInfo objectForKey:@"wired.account.color"];
+            cell.onlyNickLabel.text = userInfo[@"wired.user.nick"];
+            cell.onlyNickLabel.textColor = userInfo[@"wired.account.color"];
         } else {
             cell.onlyNickLabel.text = @"";
             
-            cell.nickLabel.text = [userInfo objectForKey:@"wired.user.nick"];
-            cell.nickLabel.textColor = [userInfo objectForKey:@"wired.account.color"];
-            cell.statusLabel.text = [userInfo objectForKey:@"wired.user.status"];
+            cell.nickLabel.text = userInfo[@"wired.user.nick"];
+            cell.nickLabel.textColor = userInfo[@"wired.account.color"];
+            cell.statusLabel.text = userInfo[@"wired.user.status"];
         }
         
         // Fade information about idle users
-        if ( [[userInfo objectForKey:@"wired.user.idle"] isEqualToString:@"1"] ) {
+        if ( [userInfo[@"wired.user.idle"] isEqualToString:@"1"] ) {
             cell.nickLabel.alpha = 0.3;
             cell.onlyNickLabel.alpha = 0.3;
             cell.statusLabel.alpha = 0.4;
@@ -116,7 +116,7 @@
             cell.avatar.alpha = 1;
         }
         
-        cell.avatar.image = [UIImage imageWithData:[userInfo objectForKey:@"wired.user.icon"]];
+        cell.avatar.image = [UIImage imageWithData:userInfo[@"wired.user.icon"]];
         
         return cell;
     }
@@ -132,27 +132,27 @@
         }
         
         NSString *version = [NSString stringWithFormat:@"%@ %@ (%@) on %@ %@ (%@)",
-                             [userInfo objectForKey:@"wired.info.application.name"],
-                             [userInfo objectForKey:@"wired.info.application.version"],
-                             [userInfo objectForKey:@"wired.info.application.build"],
-                             [userInfo objectForKey:@"wired.info.os.name"],
-                             [userInfo objectForKey:@"wired.info.os.version"],
-                             [userInfo objectForKey:@"wired.info.arch"]];
+                             userInfo[@"wired.info.application.name"],
+                             userInfo[@"wired.info.application.version"],
+                             userInfo[@"wired.info.application.build"],
+                             userInfo[@"wired.info.os.name"],
+                             userInfo[@"wired.info.os.version"],
+                             userInfo[@"wired.info.arch"]];
         
         switch ([indexPath row]) {
             case 0:
                 cell.textLabel.text = @"Login";
-                cell.detailTextLabel.text = [userInfo objectForKey:@"wired.user.login"];
+                cell.detailTextLabel.text = userInfo[@"wired.user.login"];
                 break;
                 
             case 1:
                 cell.textLabel.text = @"Address";
-                cell.detailTextLabel.text = [userInfo objectForKey:@"wired.user.ip"];
+                cell.detailTextLabel.text = userInfo[@"wired.user.ip"];
                 break;
                 
             case 2:
                 cell.textLabel.text = @"Host";
-                cell.detailTextLabel.text = [userInfo objectForKey:@"wired.user.host"];
+                cell.detailTextLabel.text = userInfo[@"wired.user.host"];
                 break;
                 
             case 3:
@@ -162,12 +162,12 @@
 
             case 4:
                 cell.textLabel.text = @"Login Time";
-                cell.detailTextLabel.text = [[userInfo objectForKey:@"wired.user.login_time"] description];
+                cell.detailTextLabel.text = [userInfo[@"wired.user.login_time"] description];
                 break;
                 
             case 5:
                 cell.textLabel.text = @"Idle Time";
-                cell.detailTextLabel.text = [[userInfo objectForKey:@"wired.user.idle_time"] description];
+                cell.detailTextLabel.text = [userInfo[@"wired.user.idle_time"] description];
                 break;
                 
             default:

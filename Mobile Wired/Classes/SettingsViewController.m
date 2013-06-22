@@ -46,7 +46,7 @@
     [super viewDidLoad];
     
     // Create the navigation bar.
-    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
+    navigationBar.items = @[[[UINavigationItem alloc] init]];
     [navigationBar setTitle:@"Settings"];
 
     // Create the reset button.

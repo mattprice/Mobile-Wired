@@ -79,10 +79,8 @@
 {
     NSLog(@"Attempting to disconnect from server...");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                myUserID, @"wired.user.id",
-                                @"",      @"wired.user.disconnect_message",
-                                nil];
+    NSDictionary *parameters = @{@"wired.user.id": myUserID,
+                                 @"wired.user.disconnect_message": @""};
     [self sendTransaction:@"wired.user.disconnect_user" withParameters:parameters];
     
     // Alert the delegate that we're disconnectiong.
@@ -111,10 +109,8 @@
     password = ([password length] > 0) ? password : @"da39a3ee5e6b4b0d3255bfef95601890afd80709";
     
     // Send the user login information to the Wired server.
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                user,     @"wired.user.login",
-                                password, @"wired.user.password",
-                                nil];
+    NSDictionary *parameters = @{@"wired.user.login": user,
+                                @"wired.user.password": password};
     [self sendTransaction:@"wired.send_login" withParameters:parameters];
     [self readData];
 }
@@ -124,7 +120,7 @@
 //    NSLog(@"Attempting to change nick to: %@...", nick);
     NSLog(@"Attempting to change nick.");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:nick forKey:@"wired.user.nick"];
+    NSDictionary *parameters = @{@"wired.user.nick": nick};
     [self sendTransaction:@"wired.user.set_nick" withParameters:parameters];
     [self readData];
 }
@@ -134,7 +130,7 @@
 //    NSLog(@"Attempting to change status to: %@...", status);
     NSLog(@"Attempting to change status.");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:status forKey:@"wired.user.status"];
+    NSDictionary *parameters = @{@"wired.user.status": status};
     [self sendTransaction:@"wired.user.set_status" withParameters:parameters];
     [self readData];
 }
@@ -151,7 +147,7 @@
         base64 = [NSString encodeBase64WithData:icon];
     }
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:base64 forKey:@"wired.user.icon"];
+    NSDictionary *parameters = @{@"wired.user.icon": base64};
     [self sendTransaction:@"wired.user.set_icon" withParameters:parameters];
     [self readData];
 }
@@ -160,7 +156,7 @@
 {
     NSLog(@"Attempting to set user idle...");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:@"YES" forKey:@"wired.user.idle"];
+    NSDictionary *parameters = @{@"wired.user.idle": @"YES"};
     [self sendTransaction:@"wired.user.set_idle" withParameters:parameters];
     [self readData];
 }
@@ -169,7 +165,7 @@
 
 - (NSDictionary *)getMyUserInfo
 {
-    return [[userList objectForKey:@"1"] objectForKey:myUserID];
+    return userList[@"1"][myUserID];
 }
 
 - (NSDictionary *)getMyPermissions
@@ -181,7 +177,7 @@
 {
     NSLog(@"Requesting info for user: %@...", userID);
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:userID forKey:@"wired.user.id"];
+    NSDictionary *parameters = @{@"wired.user.id": userID};
     [self sendTransaction:@"wired.user.get_info" withParameters:parameters];
     [self readData];
 }
@@ -205,7 +201,7 @@
     [userList removeObjectForKey:channel];
     
     // Attempt to join the channel.
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:channel forKey:@"wired.chat.id"];
+    NSDictionary *parameters = @{@"wired.chat.id": channel};
     [self sendTransaction:@"wired.chat.join_chat" withParameters:parameters];
     [self readData];
 }
@@ -214,7 +210,7 @@
 {
     NSLog(@"Attempting to leave channel %@...",channel);
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:channel forKey:@"wired.chat.id"];
+    NSDictionary *parameters = @{@"wired.chat.id": channel};
     [self sendTransaction:@"wired.chat.leave_chat" withParameters:parameters];
     [self readData];
 }
@@ -232,10 +228,8 @@
 {
     NSLog(@"Attempting to set topic for channel %@...",channel);
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                channel, @"wired.chat.id",
-                                topic,   @"wired.chat.topic.topic",
-                                nil];
+    NSDictionary *parameters = @{@"wired.chat.id": channel,
+                                @"wired.chat.topic.topic": topic};
     [self sendTransaction:@"wired.chat.set_topic" withParameters:parameters];
     [self readData];
 }
@@ -287,10 +281,8 @@
     else {
         NSLog(@"Attempting to send chat message...");
         
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    channel, @"wired.chat.id",
-                                    message, @"wired.chat.say",
-                                    nil];
+        NSDictionary *parameters = @{@"wired.chat.id": channel,
+                                    @"wired.chat.say": message};
         [self sendTransaction:@"wired.chat.send_say" withParameters:parameters];
         [self readData];
     }
@@ -300,10 +292,8 @@
 {
     NSLog(@"Attempting to send emote...");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                channel, @"wired.chat.id",
-                                message, @"wired.chat.me",
-                                nil];
+    NSDictionary *parameters = @{@"wired.chat.id": channel,
+                                @"wired.chat.me": message};
     [self sendTransaction:@"wired.chat.send_me" withParameters:parameters];
     [self readData];
 }
@@ -312,10 +302,8 @@
 {
     NSLog(@"Attempting to message...");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                userID,  @"wired.user.id",
-                                message, @"wired.message.message",
-                                nil];
+    NSDictionary *parameters = @{@"wired.user.id": userID,
+                                @"wired.message.message": message};
     [self sendTransaction:@"wired.message.send_message" withParameters:parameters];
     [self readData];
 }
@@ -324,7 +312,7 @@
 {
     NSLog(@"Attempting to send broadcast...");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:message forKey:@"wired.message.broadcast"];
+    NSDictionary *parameters = @{@"wired.message.broadcast": message};
     [self sendTransaction:@"wired.message.send_broadcast" withParameters:parameters];
     [self readData];
 }
@@ -333,11 +321,9 @@
 {
     NSLog(@"Attempting to kick user...");
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                channel, @"wired.chat.id",
-                                userID,  @"wired.user.id",
-                                message, @"wired.user.disconnect_message",
-                                nil];
+    NSDictionary *parameters = @{@"wired.chat.id": channel,
+                                @"wired.user.id": userID,
+                                @"wired.user.disconnect_message": message};
     [self sendTransaction:@"wired.chat.kick_user" withParameters:parameters];
     [self readData];
 }
@@ -370,11 +356,11 @@
         [dateFormatter setTimeZone:GMT];
         
         NSString *dateString = [dateFormatter stringFromDate:expiration];
-        [parameters setObject:dateString forKey:@"wired.banlist.expiration_date"];
+        parameters[@"wired.banlist.expiration_date"] = dateString;
     }
     
-    [parameters setObject:userID  forKey:@"wired.user.id"];
-    [parameters setObject:message forKey:@"wired.user.disconnect_message"];
+    parameters[@"wired.user.id"] = userID;
+    parameters[@"wired.user.disconnect_message"] = message;
     
     [self sendTransaction:@"wired.user.ban_user" withParameters:parameters];
     [self readData];
@@ -398,7 +384,7 @@
     
     // Send the correct WiredSpec XML file depending on what version the server is.
     // TODO: There's probably a better way of handling multiple server versions but this works for now.
-    NSString *resource, *version = [serverInfo objectForKey:@"p7.handshake.protocol.version"];
+    NSString *resource, *version = serverInfo[@"p7.handshake.protocol.version"];
     
     if ([version isEqualToString:@"2.0b55"])
         resource = @"WiredSpec_2.0b55";
@@ -422,7 +408,7 @@
 //                 stringByReplacingOccurrencesOfString: @">" withString: @"&gt;"]
 //                stringByReplacingOccurrencesOfString: @"<" withString: @"&lt;"];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObject:contents forKey:@"p7.compatibility_check.specification"];
+    NSDictionary *parameters = @{@"p7.compatibility_check.specification": contents};
     [self sendTransaction:@"p7.compatibility_check.specification" withParameters:parameters];
     [self readData];
 }
@@ -449,17 +435,15 @@
                                 @"false",         @"wired.info.supports_rsrc",
                                 nil];
 #else
-    NSString *CFBundleVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-    NSString *CFBundleBuild = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"Mobile Wired",  @"wired.info.application.name",
-                                CFBundleVersion,  @"wired.info.application.version",
-                                CFBundleBuild,    @"wired.info.application.build",
-                                [[UIDevice currentDevice] systemName],    @"wired.info.os.name",
-                                [[UIDevice currentDevice] systemVersion], @"wired.info.os.version",
-                                [[UIDevice currentDevice] model],         @"wired.info.arch",
-                                @"false",         @"wired.info.supports_rsrc",
-                                nil];
+    NSString *CFBundleVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    NSString *CFBundleBuild = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+    NSDictionary *parameters = @{@"wired.info.application.name": @"Mobile Wired",
+                                @"wired.info.application.version": CFBundleVersion,
+                                @"wired.info.application.build": CFBundleBuild,
+                                @"wired.info.os.name": [[UIDevice currentDevice] systemName],
+                                @"wired.info.os.version": [[UIDevice currentDevice] systemVersion],
+                                @"wired.info.arch": [[UIDevice currentDevice] model],
+                                @"wired.info.supports_rsrc": @"false"};
 #endif
     
     [self sendTransaction:@"wired.client_info" withParameters:parameters];
@@ -530,11 +514,9 @@
     
     // Start sending Wired connection info.
     NSLog(@"Sending Wired handshake...");
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"1.0",   @"p7.handshake.version",
-                                @"Wired", @"p7.handshake.protocol.name",
-                                @"2.0",   @"p7.handshake.protocol.version",
-                                nil];
+    NSDictionary *parameters = @{@"p7.handshake.version": @"1.0",
+                                @"p7.handshake.protocol.name": @"Wired",
+                                @"p7.handshake.protocol.version": @"2.0"};
     [self sendTransaction:@"p7.handshake.client_handshake" withParameters:parameters];
     [self readData];
 }
@@ -548,8 +530,7 @@
     
     // Don't validate the certificate chain. This is insecure, but we
     // don't know the Wired server's SSL certificate in advance.
-    [settings setObject:[NSNumber numberWithBool:NO]
-                 forKey:(NSString *)kCFStreamSSLValidatesCertificateChain];
+    settings[(NSString *)kCFStreamSSLValidatesCertificateChain] = @NO;
     
     [socket startTLS:settings];
 }
@@ -606,7 +587,7 @@
     if (parameters != nil) {
         for(id aParameter in parameters) {
             NSString *key = aParameter;
-            NSString *value = [parameters valueForKey:key];
+            NSString *value = parameters[key];
             [generatedXML appendString:[NSString stringWithFormat:@"<p7:field name=\"%@\">%@</p7:field>",key,value]];
         }
     }
@@ -718,7 +699,7 @@
             
             else {
                 childValue = [TBXML textForElement:childElement];
-                [serverInfo setObject:childValue forKey:childName];
+                serverInfo[childName] = childValue;
             }
             
         } while ((childElement = childElement->nextSibling));
@@ -890,21 +871,21 @@
         }
         
         // If we have existing channel data saved, be sure not to overwrite it.
-        channelInfo = [userList objectForKey:channel];
+        channelInfo = userList[channel];
         if (channelInfo == nil) {
             channelInfo = [NSMutableDictionary dictionary];
         }
         
         // If we don't have data for the user already then create a new NSDictionary.
-        userInfo = [channelInfo objectForKey:userID];
+        userInfo = channelInfo[userID];
         if (userInfo == nil) {
             userInfo = [NSMutableDictionary dictionary];
         }
         
         // Check existing users for name changes.
         else {
-            NSString *oldNick = [userInfo objectForKey:@"wired.user.nick"];
-            NSString *newNick = [tempInfo objectForKey:@"wired.user.nick"];
+            NSString *oldNick = userInfo[@"wired.user.nick"];
+            NSString *newNick = tempInfo[@"wired.user.nick"];
             
             if (![oldNick isEqualToString:newNick]) {
                 [delegate userChangedNick:oldNick toNick:newNick forChannel:channel];
@@ -913,7 +894,7 @@
         
         // If the user just joined then notify the delegate.
         if ([rootName isEqualToString:@"wired.chat.user_join"]) {
-            [delegate userJoined:[tempInfo objectForKey:@"wired.user.nick"] withID:userID forChannel:channel];
+            [delegate userJoined:tempInfo[@"wired.user.nick"] withID:userID forChannel:channel];
         }
         
         [userInfo addEntriesFromDictionary:tempInfo];
@@ -943,9 +924,9 @@
         } while ((childElement = childElement->nextSibling));
         
         // Update the user's icon.
-        NSMutableDictionary *userInfo = [[userList objectForKey:channel] objectForKey:userID];
-        [userInfo setObject:userIcon forKey:@"wired.user.icon"];
-        [[userList objectForKey:channel] setObject:userInfo forKey:userID];
+        NSMutableDictionary *userInfo = userList[channel][userID];
+        userInfo[@"wired.user.icon"] = userIcon;
+        userList[channel][userID] = userInfo;
         [delegate setUserList:userList forChannel:channel];
     }
     
@@ -966,10 +947,10 @@
             }
         } while ((childElement = childElement->nextSibling));
         
-        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        nick = userList[channel][userID][@"wired.user.nick"];
         
         // Remove the user from the user list.
-        [[userList objectForKey:channel] removeObjectForKey:userID];
+        [userList[channel] removeObjectForKey:userID];
         
         [delegate userLeft:nick withID:userID forChannel:channel];
         [delegate setUserList:userList forChannel:channel];
@@ -1001,8 +982,8 @@
             }
         } while ((childElement = childElement->nextSibling));
         
-        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
-        kicker = [[[userList objectForKey:channel] objectForKey:kickerUserID] objectForKey:@"wired.user.nick"];
+        nick = userList[channel][userID][@"wired.user.nick"];
+        kicker = userList[channel][kickerUserID][@"wired.user.nick"];
         
         [delegate userWasKicked:nick withID:userID byUser:kicker forReason:reason forChannel:channel];
     }
@@ -1083,7 +1064,7 @@
             }
         } while ((childElement = childElement->nextSibling));
         
-        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        nick = userList[channel][userID][@"wired.user.nick"];
         
         [delegate didReceiveChatMessage:message fromNick:nick withID:userID forChannel:channel];
     }
@@ -1109,7 +1090,7 @@
             }
         } while ((childElement = childElement->nextSibling));
         
-        nick = [[[userList objectForKey:channel] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        nick = userList[channel][userID][@"wired.user.nick"];
         
         [delegate didReceiveEmote:message fromNick:nick withID:userID forChannel:channel];
     }
@@ -1131,7 +1112,7 @@
             }
         } while ((childElement = childElement->nextSibling));
         
-        nick = [[[userList objectForKey:@"1"] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        nick = userList[@"1"][userID][@"wired.user.nick"];
         
         [delegate didReceiveMessage:message fromNick:nick withID:userID];
     }
@@ -1153,7 +1134,7 @@
             }
         } while ((childElement = childElement->nextSibling));
         
-        nick = [[[userList objectForKey:@"1"] objectForKey:userID] objectForKey:@"wired.user.nick"];
+        nick = userList[@"1"][userID][@"wired.user.nick"];
         
         [delegate didReceiveBroadcast:message fromNick:nick withID:userID];
     }

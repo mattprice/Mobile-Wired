@@ -63,12 +63,12 @@
     // NSUserDefaultsDidChangeNotification doesn't let us know what changed so we tell the server
     // about anything that could have possibly updated.
     
-    NSString *nick = [bookmark valueForKey:@"UserNick"];
+    NSString *nick = bookmark[@"UserNick"];
     if ([nick isEqualToString:@""]) {
         nick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
     }
     
-    NSString *status = [bookmark valueForKey:@"UserStatus"];
+    NSString *status = bookmark[@"UserStatus"];
     if ([status isEqualToString:@""]) {
         status = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
     }
@@ -107,7 +107,7 @@
 - (void)new:(NSInteger)indexRow
 {
     // Create the navigation bar.
-    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
+    navigationBar.items = @[[[UINavigationItem alloc] init]];
     
     // Create a progress HUD.
     if (!progressHUD) {
@@ -117,7 +117,7 @@
     }
     
     // Connect to the bookmark.
-    bookmark = [[[NSUserDefaults standardUserDefaults] valueForKey:@"Bookmarks"] objectAtIndex:indexRow];
+    bookmark = [[NSUserDefaults standardUserDefaults] valueForKey:@"Bookmarks"][indexRow];
     [self connect];
 }
 
@@ -141,7 +141,7 @@
     // Create a new WiredConnection.
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
-    [self.connection connectToServer:[bookmark valueForKey:@"ServerHost"] onPort:[[bookmark valueForKey:@"ServerPort"] integerValue]];
+    [self.connection connectToServer:bookmark[@"ServerHost"] onPort:[bookmark[@"ServerPort"] integerValue]];
     userListView.connection = self.connection;
 }
 
@@ -197,7 +197,7 @@
     [alert setCancelButtonWithTitle:@"Cancel" block:nil];
     
     // Set Topic
-    if ( [[[self.connection getMyPermissions] objectForKey:@"wired.account.chat.set_topic"] boolValue] ) {
+    if ( [[self.connection getMyPermissions][@"wired.account.chat.set_topic"] boolValue] ) {
         [alert addButtonWithTitle:@"Set Topic" block:^{
             BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Set Topic"
                                                                                  message:@""
@@ -220,7 +220,7 @@
     }
     
     // Send Broadcast
-    if ( [[[self.connection getMyPermissions] objectForKey:@"wired.account.message.broadcast"] boolValue] ) {
+    if ( [[self.connection getMyPermissions][@"wired.account.message.broadcast"] boolValue] ) {
         [alert addButtonWithTitle:@"Send Broadcast" block:^{
             BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Send Broadcast"
                                                                                  message:@""
@@ -259,7 +259,7 @@
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
     // Customize the bar title and buttons.
-    [navigationBar setTitle:[self.connection.serverInfo objectForKey:@"wired.info.name"]];
+    [navigationBar setTitle:self.connection.serverInfo[@"wired.info.name"]];
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cog.png"]
                                                                                 style:UIBarButtonItemStyleBordered
                                                                                target:self
@@ -269,7 +269,7 @@
     progressHUD.labelText = @"Logging In";
     
     [self loadConnectionSettings];
-    [self.connection sendLogin:[bookmark valueForKey:@"UserLogin"] withPassword:[bookmark valueForKey:@"UserPass"]];
+    [self.connection sendLogin:bookmark[@"UserLogin"] withPassword:bookmark[@"UserPass"]];
 }
 
 /*
@@ -336,7 +336,7 @@
     
     // Report the connection to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Connected to %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
+    [chatText appendFormat:@"<<< Connected to %@ >>>\n",self.connection.serverInfo[@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
     
@@ -376,7 +376,7 @@
     
     // Report the disconnect to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
+    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",self.connection.serverInfo[@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
@@ -397,7 +397,7 @@
     
     // Report the disconnect to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
+    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",self.connection.serverInfo[@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
@@ -414,7 +414,7 @@
 {
     // Report the disconnect to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Reconnecting to %@ in %@ seconds >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"], delay];
+    [chatText appendFormat:@"<<< Reconnecting to %@ in %@ seconds >>>\n",self.connection.serverInfo[@"wired.info.name"], delay];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];   
 }
@@ -431,7 +431,7 @@
 {
     // Report the disconnect to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Disconnected from %@:%@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"], error.description];
+    [chatText appendFormat:@"<<< Disconnected from %@:%@ >>>\n",self.connection.serverInfo[@"wired.info.name"], error.description];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
     
@@ -454,7 +454,7 @@
     
     // Report the disconnect to chat.
     NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Reconnected to %@ >>>\n",[self.connection.serverInfo objectForKey:@"wired.info.name"]];
+    [chatText appendFormat:@"<<< Reconnected to %@ >>>\n",self.connection.serverInfo [@"wired.info.name"]];
     chatTextView.text = chatText;
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
     
@@ -775,9 +775,9 @@
     // See discussion http://www.iphonedevsdk.com/forum/iphone-sdk-development/6573-howto-customize-uikeyboard.html
     NSArray *windowList = [[UIApplication sharedApplication] windows];
     for (int k = 0; k < [windowList count]; k++) {
-        UIWindow *tempWindow = [windowList objectAtIndex:k];
+        UIWindow *tempWindow = windowList[k];
         for (int i = 0; i < [tempWindow.subviews count]; i++) {
-            UIView *possibleKeyboard = [tempWindow.subviews objectAtIndex:i];
+            UIView *possibleKeyboard = (tempWindow.subviews)[i];
             if([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"] == YES) {
                 keyboard = possibleKeyboard;
                 return;

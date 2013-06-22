@@ -51,7 +51,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldWasSelected:) name:UITextFieldTextDidBeginEditingNotification object:nil];
     
     // Create the navigation bar.
-    navigationBar.items = [NSArray arrayWithObject:[[UINavigationItem alloc] init]];
+    navigationBar.items = @[[[UINavigationItem alloc] init]];
     [navigationBar setTitle:@"Edit Bookmark"];
     
     // Create the reset button.
@@ -118,57 +118,29 @@
 
 - (void)saveBookmark:(UITextField *)textField
 {
-    // Create a dictionary to store the bookmark in.
-    NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
-    
-    if (serverHostField.text) {
-        [bookmark setValue:serverHostField.text forKey:@"ServerHost"];
-    } else {
-        [bookmark setValue:@"" forKey:@"ServerHost"];
-    }
-    
-    if (serverNameField.text) {
-        [bookmark setValue:serverNameField.text forKey:@"ServerName"];
-    } else {
-        [bookmark setValue:@"" forKey:@"ServerName"];
-    }
-    
     // Set placeholder text for the server name field on each change.
     serverNameField.placeholder = serverHostField.text;
     
-    if (serverPortField.text) {
-        [bookmark setValue:serverPortField.text forKey:@"ServerPort"];
-    } else {
-        [bookmark setValue:@"" forKey:@"ServerPort"];
-    }
+    // Create a dictionary to store the bookmark in.
+    NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
     
-    if (userLoginField.text) {
-        [bookmark setValue:userLoginField.text forKey:@"UserLogin"];
-    } else {
-        [bookmark setValue:@"" forKey:@"UserLogin"];
-    }
+    bookmark[@"ServerHost"] = (serverHostField.text) ? serverHostField.text : @"";
+    bookmark[@"ServerName"] = (serverNameField.text) ? serverNameField.text : @"";
+    bookmark[@"ServerPort"] = (serverPortField.text) ? serverPortField.text : @"";
+    bookmark[@"UserNick"]   = (userNickField.text)   ? userNickField.text   : @"";
+    bookmark[@"UserStatus"] = (userStatusField.text) ? userStatusField.text : @"";
+    bookmark[@"UserLogin"]  = (userLoginField.text)  ? userLoginField.text  : @"";
     
+    // Storing the password requires a little more effort because of SHA1 hashing.
     if (textField == userPassField && ![userPassField.text isEqualToString:@""]) {
         // If the current field is the password field, create a SHA1 hash.
-        [bookmark setValue:[userPassField.text SHA1Value] forKey:@"UserPass"];
+        bookmark[@"UserPass"] = [userPassField.text SHA1Value];
     } else if (![userPassField.text isEqualToString:@""]) {
         // If this is not the password field and we already have a SHA1'd password, use it.
-        [bookmark setValue:userPassField.text forKey:@"UserPass"];
+        bookmark[@"UserPass"] = userPassField.text;
     } else {
         // In all other cases, the password should be a blank string.
-        [bookmark setValue:@"" forKey:@"UserPass"];
-    }
-    
-    if (userNickField.text) {
-        [bookmark setValue:userNickField.text forKey:@"UserNick"];
-    } else {
-        [bookmark setValue:@"" forKey:@"UserNick"];
-    }
-    
-    if (userStatusField.text) {
-        [bookmark setValue:userStatusField.text forKey:@"UserStatus"];
-    } else {
-        [bookmark setValue:@"" forKey:@"UserStatus"];
+        bookmark[@"UserPass"] = @"";
     }
     
     // Store the new bookmark list.
@@ -339,7 +311,7 @@
     // Ex: If we have 4 bookmarks, the highest bookmark index is 3. Add Bookmark is index 4.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
     if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] count] != serverList.selectedIndex ) {
-        bookmark = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] objectAtIndex:serverList.selectedIndex];
+        bookmark = [[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"][serverList.selectedIndex];
     }
 
     // Server Info
@@ -350,13 +322,13 @@
                 serverNameField = cell.settingValue;
                 
                 if (bookmark != nil) {
-                    oldServerName = [bookmark objectForKey:@"ServerName"];
+                    oldServerName = bookmark[@"ServerName"];
                     cell.settingValue.text = oldServerName;
                 } else {
                     cell.settingValue.text = @"";
                 }
                 
-                cell.settingValue.placeholder = [bookmark objectForKey:@"ServerHost"];
+                cell.settingValue.placeholder = bookmark[@"ServerHost"];
                 
                 break;
                 
@@ -366,7 +338,7 @@
                 serverHostField = cell.settingValue;
                 
                 if (bookmark != nil) {
-                    oldServerHost = [bookmark objectForKey:@"ServerHost"];
+                    oldServerHost = bookmark[@"ServerHost"];
                     cell.settingValue.text = oldServerHost;
                 } else {
                     cell.settingValue.text = @"";
@@ -380,7 +352,7 @@
                 serverPortField = cell.settingValue;
                 
                 if (bookmark != nil) {
-                    oldServerPort = [bookmark objectForKey:@"ServerPort"];
+                    oldServerPort = bookmark[@"ServerPort"];
                     cell.settingValue.text = oldServerPort;
                 } else {
                     cell.settingValue.text = @"";
@@ -405,7 +377,7 @@
                 userLoginField = cell.settingValue;
                 
                 if (bookmark != nil) {
-                    oldUserLogin = [bookmark objectForKey:@"UserLogin"];
+                    oldUserLogin = bookmark[@"UserLogin"];
                     cell.settingValue.text = oldUserLogin;
                     
 //                    cell.settingValue.enabled = NO;
@@ -424,7 +396,7 @@
                 userPassField = cell.settingValue;
                 
                 if (bookmark != nil) {
-                    oldUserPass = [bookmark objectForKey:@"UserPass"];
+                    oldUserPass = bookmark[@"UserPass"];
                     cell.settingValue.secureTextEntry = YES;
                     cell.settingValue.text = oldUserPass;
                     
@@ -454,7 +426,7 @@
                 userNickField = cell.settingValue;
                 
                 if (bookmark != nil) {
-                    oldUserNick = [bookmark objectForKey:@"UserNick"];
+                    oldUserNick = bookmark[@"UserNick"];
                     cell.settingValue.text = oldUserNick;
                 } else {
                     cell.settingValue.text = @"";
@@ -469,7 +441,7 @@
                 userStatusField = cell.settingValue;
                 
                 if (bookmark != nil) {
-                    oldUserStatus = [bookmark objectForKey:@"UserStatus"];
+                    oldUserStatus = bookmark[@"UserStatus"];
                     cell.settingValue.text = oldUserStatus;
                 } else {
                     cell.settingValue.text = @"";
