@@ -207,9 +207,9 @@
             [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
             
             // Set Topic: Save
-            __weak BlockTextPromptAlertView *weakPrompt = prompt;
+            __block BlockTextPromptAlertView *blockPrompt = prompt;
             [prompt setCancelButtonWithTitle:@"Save" block:^{
-                [self.connection setTopic:weakPrompt.textField.text forChannel:@"1"];
+                [self.connection setTopic:blockPrompt.textField.text forChannel:@"1"];
             }];
             
             // By default, the text field is set to auto-capitalize each word.
@@ -230,9 +230,9 @@
             [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
             
             // Broadcast: Send
-            __weak BlockTextPromptAlertView *weakPrompt = prompt;
+            __block BlockTextPromptAlertView *blockPrompt = prompt;
             [prompt setCancelButtonWithTitle:@"Send" block:^{
-                [self.connection sendBroadcast:weakPrompt.textField.text];
+                [self.connection sendBroadcast:blockPrompt.textField.text];
             }];
             
             // By default, the text field is set to auto-capitalize each word.
