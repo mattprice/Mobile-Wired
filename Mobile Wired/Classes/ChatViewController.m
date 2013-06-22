@@ -201,7 +201,7 @@
         [alert addButtonWithTitle:@"Set Topic" block:^{
             BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Set Topic"
                                                                                  message:@""
-                                                                             defaultText:serverTopic];
+                                                                             defaultText:self->serverTopic];
             
             // Set Topic: Cancel
             [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
@@ -743,15 +743,15 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         accessoryView.frame = CGRectMake(0.0,
-                                                          200.0,
-                                                          accessoryView.frame.size.width,
-                                                          accessoryView.frame.size.height);
-                         chatTextView.frame = CGRectMake(chatTextView.frame.origin.x,
-                                                         chatTextView.frame.origin.y,
-                                                         chatTextView.frame.size.width,
-                                                         155.0);
-                         [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+                         self->accessoryView.frame = CGRectMake(0.0,
+                                                                200.0,
+                                                                self->accessoryView.frame.size.width,
+                                                                self->accessoryView.frame.size.height);
+                         self->chatTextView.frame = CGRectMake(self->chatTextView.frame.origin.x,
+                                                               self->chatTextView.frame.origin.y,
+                                                               self->chatTextView.frame.size.width,
+                                                               155.0);
+                         [self->chatTextView scrollRangeToVisible:NSMakeRange([self->chatTextView.text length], 0)];
                      }
      
                      completion:^(BOOL finished){
@@ -846,15 +846,15 @@
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          // Pan the keyboard up/down.
-                         CGRect newFrame = keyboard.frame;
-                         newFrame.origin.y = keyboard.window.frame.size.height;
-                         [keyboard setFrame: newFrame];
+                         CGRect newFrame = self->keyboard.frame;
+                         newFrame.origin.y = self->keyboard.window.frame.size.height;
+                         [self->keyboard setFrame: newFrame];
                          [self adjustAccessoryView];
                      }
      
                      completion:^(BOOL finished){
-                         keyboard.hidden = YES;
-                         [chatTextField resignFirstResponder];
+                         self->keyboard.hidden = YES;
+                         [self->chatTextField resignFirstResponder];
                      }];
 }
 
