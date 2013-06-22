@@ -70,8 +70,8 @@
 		3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */; };
 		3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */; };
-		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker"; }; };
-		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker"; }; };
+		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker -fno-objc-arc"; }; };
+		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker -fno-objc-arc"; }; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		347B37FD15098D6500D88034 /* Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37F915098D6500D88034 /* Checkmark.png */; };
 		347B37FE15098D6500D88034 /* Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FA15098D6500D88034 /* Checkmark@2x.png */; };
@@ -83,7 +83,7 @@
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
 		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };
 		34838FC314F3456D0064B619 /* ServerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34838FC114F3456D0064B619 /* ServerListView.xib */; };
-		348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F5C2414FC63A800F76AAC /* MBProgressHUD.m */; };
+		348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F5C2414FC63A800F76AAC /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34A562C1154A1CA60012CF26 /* PrettyToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A562C0154A1CA60012CF26 /* PrettyToolbar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34A5A0F0136B74270022272F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EE136B74270022272F /* Default.png */; };
 		34A5A0F1136B74270022272F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EF136B74270022272F /* Default@2x.png */; };
@@ -109,7 +109,7 @@
 		34EC1154150AD1730015B2CD /* Users@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EC1152150AD1730015B2CD /* Users@2x.png */; };
 		34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */; };
 		34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */; };
-		34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FB815D14F71FDE001780E4 /* IIViewDeckController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker"; }; };
+		34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FB815D14F71FDE001780E4 /* IIViewDeckController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker -fno-objc-arc"; }; };
 		34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FC5C8C135BB3430049C737 /* libz.dylib */; };
 /* End PBXBuildFile section */
 

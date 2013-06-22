@@ -31,7 +31,7 @@
     IBOutlet UIImageView *statusImage;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *bookmarkLabel;
-@property (nonatomic, retain) IBOutlet UIImageView *statusImage;
+@property (nonatomic, strong) IBOutlet UILabel *bookmarkLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *statusImage;
 
 @end

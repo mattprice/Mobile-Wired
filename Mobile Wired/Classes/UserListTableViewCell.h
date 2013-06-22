@@ -31,6 +31,6 @@
     IBOutlet UIImageView *avatar;
 }
 
-@property (nonatomic, retain) IBOutlet UIImageView *avatar;
-@property (nonatomic, retain) IBOutlet UILabel *nickLabel, *onlyNickLabel, *statusLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *avatar;
+@property (nonatomic, strong) IBOutlet UILabel *nickLabel, *onlyNickLabel, *statusLabel;
 @end

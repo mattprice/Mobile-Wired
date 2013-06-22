@@ -31,7 +31,7 @@
     IBOutlet UITextField *settingValue;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *settingName;
-@property (nonatomic, retain) IBOutlet UITextField *settingValue;
+@property (nonatomic, strong) IBOutlet UILabel *settingName;
+@property (nonatomic, strong) IBOutlet UITextField *settingValue;
 
 @end
