@@ -950,7 +950,7 @@
         nick = userList[channel][userID][@"wired.user.nick"];
         
         // Remove the user from the user list.
-        [userList[channel] removeObjectForKey:userID];
+        [(NSMutableDictionary *)userList[channel] removeObjectForKey:userID];
         
         [delegate userLeft:nick withID:userID forChannel:channel];
         [delegate setUserList:userList forChannel:channel];

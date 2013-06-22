@@ -310,7 +310,7 @@
     // equal the number of saved bookmarks is if we are creating a new bookmark.
     // Ex: If we have 4 bookmarks, the highest bookmark index is 3. Add Bookmark is index 4.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
-    if ( [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] count] != serverList.selectedIndex ) {
+    if ( [(NSDictionary *)[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] count] != serverList.selectedIndex ) {
         bookmark = [[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"][serverList.selectedIndex];
     }
 
