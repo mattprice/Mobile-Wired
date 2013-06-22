@@ -59,19 +59,6 @@
                                                object:nil];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 - (void)loadConnectionSettings {
     // NSUserDefaultsDidChangeNotification doesn't let us know what changed so we tell the server
     // about anything that could have possibly updated.

@@ -2,18 +2,16 @@
 
 Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
 
-[![Build Status](https://travis-ci.org/mattprice/Mobile-Wired.png)](https://travis-ci.org/mattprice/Mobile-Wired)
+<!-- [![Build Status](https://travis-ci.org/mattprice/Mobile-Wired.png)](https://travis-ci.org/mattprice/Mobile-Wired) -->
 
 ## Download Instructions
+Mobile Wired is currently being developed for iOS 7 using the newest Xcode Developer Preview. Attempt using other versions at your own risk.
 ```bash
 # Checkout the repository and download all the required submodules:
 git clone https://github.com/mattprice/Mobile-Wired.git && cd Mobile-Wired
 
 # Make a copy of the sample TestFlightTokens file.
 cp 'Mobile Wired/TestFlightTokens-Sample.h' 'Mobile Wired/TestFlightTokens.h'
-
-# Compile using Xcode or the command line
-xcodebuild
 ```
 
 ## External Resources
