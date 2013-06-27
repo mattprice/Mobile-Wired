@@ -88,17 +88,15 @@
     self.window.rootViewController = deckController;
     
     // Fade out the splash screen image.
-    // The image is shifted 20 pixels down from where it should be, so correct its position.
-    // TODO: If this 20px is related to the status bar then we should calculate its height programmatically.
     UIImageView *splashImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
     CGRect frame = CGRectMake(splashImage.frame.origin.x,
-                               splashImage.frame.origin.y - 20,
+                               splashImage.frame.origin.y,
                                splashImage.frame.size.width,
                                splashImage.frame.size.height);
     [splashImage setFrame:frame];
     [self.window.rootViewController.view addSubview:splashImage];
     
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:0.3
                      animations:^{
                          splashImage.alpha = 0;
                      }
