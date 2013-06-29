@@ -99,6 +99,8 @@
     userLoginField.text = oldUserLogin;
     userPassField.text = oldUserPass;
     
+    [pushSettingSwitch setOn:oldPushSetting animated:YES];
+    
     [self saveBookmark];
 }
 
@@ -124,12 +126,13 @@
     // Create a dictionary to store the bookmark in.
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
     
-    bookmark[@"ServerHost"] = (serverHostField.text) ? serverHostField.text : @"";
-    bookmark[@"ServerName"] = (serverNameField.text) ? serverNameField.text : @"";
-    bookmark[@"ServerPort"] = (serverPortField.text) ? serverPortField.text : @"";
-    bookmark[@"UserNick"]   = (userNickField.text)   ? userNickField.text   : @"";
-    bookmark[@"UserStatus"] = (userStatusField.text) ? userStatusField.text : @"";
-    bookmark[@"UserLogin"]  = (userLoginField.text)  ? userLoginField.text  : @"";
+    bookmark[@"ServerHost"]    = (serverHostField.text) ? serverHostField.text : @"";
+    bookmark[@"ServerName"]    = (serverNameField.text) ? serverNameField.text : @"";
+    bookmark[@"ServerPort"]    = (serverPortField.text) ? serverPortField.text : @"";
+    bookmark[@"UserNick"]      = (userNickField.text)   ? userNickField.text   : @"";
+    bookmark[@"UserStatus"]    = (userStatusField.text) ? userStatusField.text : @"";
+    bookmark[@"UserLogin"]     = (userLoginField.text)  ? userLoginField.text  : @"";
+    bookmark[@"Notifications"] = [NSNumber numberWithBool:pushSettingSwitch.on];
     
     // Storing the password requires a little more effort because of SHA1 hashing.
     if (textField == userPassField && ![userPassField.text isEqualToString:@""]) {
@@ -208,6 +211,11 @@
     return YES;
 }
 
+- (void)controlValueChanged:(UIControl *)sender
+{
+    [self saveBookmark];
+}
+
 - (void)adjustMainTableView
 {
     [UIView animateWithDuration:.25
@@ -248,8 +256,8 @@
     
     // Settings
     else if (section == 2) {
-        return 2;
-//        return 3;
+//        return 2;
+        return 3;
     }
     
     return 0;
@@ -277,8 +285,8 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     if (section == 2) {
-        return @"";
-//        return @"To enable notifications, all messages must be routed through our server.";
+//        return @"";
+        return @"To enable notifications, all messages must be routed through our server.";
     }
     
     else {
@@ -452,16 +460,26 @@
                 break;
                 
             case 2:
+            {
                 cell.settingName.text = @"Notifications";
-                cell.settingName.textColor = [UIColor grayColor];
-                cell.settingName.alpha = 0.6;
+                cell.settingValue.text = @"";
+            
+                // The size components of the CGRect are ignored by UISwitch.
+                UISwitch *settingSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0,0,0,0)];
+                [settingSwitch addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
+            
+                cell.accessoryView = settingSwitch;
+                pushSettingSwitch = settingSwitch;
                 
-                cell.settingValue.text = @"Disabled";
-                cell.settingValue.textColor = [UIColor grayColor];
-                cell.settingValue.enabled = NO;
-                cell.settingValue.alpha = 0.6;
-
+                if (bookmark != nil) {
+                    oldPushSetting = [bookmark[@"Notifications"] boolValue];
+                    [pushSettingSwitch setOn:oldPushSetting animated:NO];
+                } else {
+                    [pushSettingSwitch setOn:NO animated:NO];
+                }
+            
                 break;
+            }
                 
             default:
                 cell.settingName.text = @"Name";

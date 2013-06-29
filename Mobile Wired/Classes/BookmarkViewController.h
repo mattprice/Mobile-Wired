@@ -36,21 +36,23 @@
     ServerListViewController *serverList;
 
     UITextField *serverNameField;
-    UITextField *serverHostField;
-    UITextField *serverPortField;
     NSString *oldServerName;
+    UITextField *serverHostField;
     NSString *oldServerHost;
+    UITextField *serverPortField;
     NSString *oldServerPort;
         
     UITextField *userLoginField;
-    UITextField *userPassField;
     NSString *oldUserLogin;
+    UITextField *userPassField;
     NSString *oldUserPass;
     
     UITextField *userNickField;
-    UITextField *userStatusField;
     NSString *oldUserNick;
+    UITextField *userStatusField;
     NSString *oldUserStatus;
+    UISwitch *pushSettingSwitch;
+    Boolean oldPushSetting;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
