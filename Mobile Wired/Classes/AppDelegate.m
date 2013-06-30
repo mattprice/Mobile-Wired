@@ -87,6 +87,9 @@
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
     
+    // Register for remote notifications.
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    
     // Fade out the splash screen image.
     UIImageView *splashImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
     CGRect frame = CGRectMake(splashImage.frame.origin.x,
@@ -108,14 +111,32 @@
     return YES;
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken
+{
+    NSString *hexToken = [[[[devToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                                   stringByReplacingOccurrencesOfString:@">" withString:@""]
+                                  stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"Device token: %@", hexToken);
+    
+//    self.registered = YES;
+//    [self sendProviderDeviceToken:hexToken];
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
+{
+    NSLog(@"Error registering for remote notifications. Error: %@", err);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
     /*
-     Sent whenever we receive a notification while the application is currently open.
+     Sent whenever we receive a remote notification.
      */
     
-    chatView.badgeCount = 0;
-    application.applicationIconBadgeNumber = 0;
+    NSLog(@"*** Received a push notification: %@", [userInfo description]);
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -147,9 +168,6 @@
      Restart any tasks that were paused (or not yet started) while the application was inactive.
      If the application was previously in the background, optionally refresh the user interface.
      */
-    
-    chatView.badgeCount = 0;
-    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
