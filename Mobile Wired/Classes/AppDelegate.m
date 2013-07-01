@@ -125,7 +125,7 @@
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
 {
-    NSLog(@"Error registering for remote notifications. Error: %@", err);
+    NSLog(@"Error registering remote notifications. Error: %@", err);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
