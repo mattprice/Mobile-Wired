@@ -41,7 +41,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Set the status bar style
-    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     
     // Add the TestFlight SDK.
 #ifndef DEBUG
