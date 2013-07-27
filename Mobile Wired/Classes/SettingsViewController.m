@@ -151,39 +151,50 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    SettingsTextCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SettingsTextCell" owner:nil options:nil];
-        
-        for (id currentObject in topLevelObjects) {
-            if([currentObject isKindOfClass:[SettingsTextCell class]]) {
-                cell = (SettingsTextCell *)currentObject;
-                break;
-            }
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
     switch ([indexPath row]) {
         case 0:
-            cell.settingName.text = @"Nick";
-            cell.settingValue.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
-            nickField = cell.settingValue;
+        {
+            cell.textLabel.text = @"Nick";
+        
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(120, 20, 150, 20)];
+            textField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
+            
+            cell.accessoryView = textField;
+            nickField = textField;
+            
             break;
+        }
             
         case 1:
-            cell.settingName.text = @"Status";
-            cell.settingValue.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
-            statusField = cell.settingValue;
+        {
+            cell.textLabel.text = @"Status";
+            
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(120, 20, 150, 20)];
+            textField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
+            
+            cell.accessoryView = textField;
+            statusField = textField;
+            
             break;
+        }
             
         default:
-            cell.settingName.text = @"Name";
-            cell.settingValue.text = @"Value";
+        {
+            cell.textLabel.text = @"Name";
+        
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(120, 20, 150, 20)];
+            textField.text = @"Value";
+
+            cell.accessoryView = textField;
+        
             break;
+        }
     }
-    
-    cell.settingValue.delegate = self;
     
     return cell;
 }
