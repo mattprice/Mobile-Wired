@@ -91,8 +91,10 @@
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
     
-    // Register for remote notifications.
+#if !TARGET_IPHONE_SIMULATOR
+    // Register for remote notifications, but only if we're not in the Simulator.
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+#endif
     
     // Fade out the splash screen image.
     UIImageView *splashImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
