@@ -84,6 +84,10 @@
     deckController.delegateMode = IIViewDeckDelegateAndSubControllers;
     futureController.delegateMode = IIViewDeckDelegateAndSubControllers;
     
+    // Enable the parallax scrolling effect.
+    deckController.parallaxAmount = 0.3;
+    futureController.parallaxAmount = 0.3;
+    
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
     
