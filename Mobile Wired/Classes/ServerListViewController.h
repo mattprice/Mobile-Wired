@@ -25,14 +25,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PrettyNavigationBar+Defaults.h"
 
 @interface ServerListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray *serverBookmarks;
     NSMutableDictionary *currentConnections;
     NSUInteger selectedIndex;
     
-    IBOutlet PrettyNavigationBar *navigationBar;
+    IBOutlet UINavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
 }
 

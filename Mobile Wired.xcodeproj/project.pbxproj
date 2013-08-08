@@ -66,8 +66,6 @@
 		3440CCFF136611B00046955F /* MobileWired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CCFE136611B00046955F /* MobileWired@2x.png */; };
 		3440CD03136611EE0046955F /* MobileWired.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD02136611EE0046955F /* MobileWired.png */; };
 		3440CD05136613EF0046955F /* DefaultUserIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3440CD04136613EF0046955F /* DefaultUserIcon.png */; };
-		3450D0B91548DBA700D320AE /* PrettyDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450D0B61548DBA700D320AE /* PrettyDrawing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */; };
 		3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */; };
 		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker -fno-objc-arc"; }; };
@@ -84,7 +82,6 @@
 		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };
 		34838FC314F3456D0064B619 /* ServerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34838FC114F3456D0064B619 /* ServerListView.xib */; };
 		348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F5C2414FC63A800F76AAC /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		34A562C1154A1CA60012CF26 /* PrettyToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A562C0154A1CA60012CF26 /* PrettyToolbar.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34A5A0F0136B74270022272F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EE136B74270022272F /* Default.png */; };
 		34A5A0F1136B74270022272F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EF136B74270022272F /* Default@2x.png */; };
 		34AEB777150D0201005F2B96 /* UserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34AEB775150D0201005F2B96 /* UserListTableViewCell.xib */; };
@@ -107,8 +104,6 @@
 		34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4271359569B00A24C01 /* ChatViewController.m */; };
 		34EC1153150AD1730015B2CD /* Users.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EC1151150AD1730015B2CD /* Users.png */; };
 		34EC1154150AD1730015B2CD /* Users@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EC1152150AD1730015B2CD /* Users@2x.png */; };
-		34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */; };
-		34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */; };
 		34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FB815D14F71FDE001780E4 /* IIViewDeckController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker -fno-objc-arc"; }; };
 		34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FC5C8C135BB3430049C737 /* libz.dylib */; };
 /* End PBXBuildFile section */
@@ -184,10 +179,6 @@
 		3440CCFE136611B00046955F /* MobileWired@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MobileWired@2x.png"; path = "Mobile Wired/Resources/Images/MobileWired@2x.png"; sourceTree = SOURCE_ROOT; };
 		3440CD02136611EE0046955F /* MobileWired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MobileWired.png; path = "Mobile Wired/Resources/Images/MobileWired.png"; sourceTree = SOURCE_ROOT; };
 		3440CD04136613EF0046955F /* DefaultUserIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DefaultUserIcon.png; path = "Mobile Wired/Resources/Images/DefaultUserIcon.png"; sourceTree = SOURCE_ROOT; };
-		3450D0B51548DBA700D320AE /* PrettyDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyDrawing.h; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyDrawing.h"; sourceTree = "<group>"; };
-		3450D0B61548DBA700D320AE /* PrettyDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyDrawing.m; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyDrawing.m"; sourceTree = "<group>"; };
-		3450D0B71548DBA700D320AE /* PrettyNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyNavigationBar.h; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyNavigationBar.h"; sourceTree = "<group>"; };
-		3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyNavigationBar.m; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyNavigationBar.m"; sourceTree = "<group>"; };
 		3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b51.xml; path = Resources/WiredSpec_2.0b51.xml; sourceTree = "<group>"; };
 		3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b55.xml; path = Resources/WiredSpec_2.0b55.xml; sourceTree = "<group>"; };
 		345FC70614F467C0004D2A7B /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBXML.m; path = "TBXML-Code/TBXML.m"; sourceTree = "<group>"; };
@@ -210,8 +201,6 @@
 		34838FC214F3456D0064B619 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ServerListView.xib; sourceTree = "<group>"; };
 		348F5C2314FC63A800F76AAC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Classes/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		348F5C2414FC63A800F76AAC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Classes/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
-		34A562BF154A1CA60012CF26 /* PrettyToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyToolbar.h; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyToolbar.h"; sourceTree = "<group>"; };
-		34A562C0154A1CA60012CF26 /* PrettyToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyToolbar.m; path = "Mobile Wired/Classes/PrettyKit/PrettyKit/PrettyToolbar.m"; sourceTree = "<group>"; };
 		34A5A0EE136B74270022272F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Mobile Wired/Resources/Images/Default.png"; sourceTree = SOURCE_ROOT; };
 		34A5A0EF136B74270022272F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Mobile Wired/Resources/Images/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		34AEB776150D0201005F2B96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = UserListTableViewCell.xib; sourceTree = "<group>"; };
@@ -243,10 +232,6 @@
 		34EBE43C1359690000A24C01 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		34EC1151150AD1730015B2CD /* Users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Users.png; path = "Mobile Wired/Resources/Images/Users.png"; sourceTree = SOURCE_ROOT; };
 		34EC1152150AD1730015B2CD /* Users@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Users@2x.png"; path = "Mobile Wired/Resources/Images/Users@2x.png"; sourceTree = SOURCE_ROOT; };
-		34EE4FBA1558579400F5B508 /* PrettyNavigationBar+Defaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PrettyNavigationBar+Defaults.h"; path = "Mobile Wired/Classes/Categories/PrettyNavigationBar+Defaults.h"; sourceTree = "<group>"; };
-		34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PrettyNavigationBar+Defaults.m"; path = "Mobile Wired/Classes/Categories/PrettyNavigationBar+Defaults.m"; sourceTree = "<group>"; };
-		34EE4FBD1558593300F5B508 /* PrettyToolbar+Defaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PrettyToolbar+Defaults.h"; path = "Mobile Wired/Classes/Categories/PrettyToolbar+Defaults.h"; sourceTree = "<group>"; };
-		34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PrettyToolbar+Defaults.m"; path = "Mobile Wired/Classes/Categories/PrettyToolbar+Defaults.m"; sourceTree = "<group>"; };
 		34FB815C14F71FDE001780E4 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIViewDeckController.h; path = ViewDeck/IIViewDeckController.h; sourceTree = "<group>"; };
 		34FB815D14F71FDE001780E4 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIViewDeckController.m; path = ViewDeck/IIViewDeckController.m; sourceTree = "<group>"; };
 		34FC5C80135B493D0049C737 /* Connection Dump.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Connection Dump.xml"; sourceTree = SOURCE_ROOT; };
@@ -385,26 +370,8 @@
 				3439EC5C14F31D0A00362097 /* NSString+Base64.m */,
 				3439EC5D14F31D0A00362097 /* NSString+Hashes.h */,
 				3439EC5E14F31D0A00362097 /* NSString+Hashes.m */,
-				34EE4FBA1558579400F5B508 /* PrettyNavigationBar+Defaults.h */,
-				34EE4FBB1558579400F5B508 /* PrettyNavigationBar+Defaults.m */,
-				34EE4FBD1558593300F5B508 /* PrettyToolbar+Defaults.h */,
-				34EE4FBE1558593300F5B508 /* PrettyToolbar+Defaults.m */,
 			);
 			name = Categories;
-			sourceTree = "<group>";
-		};
-		3450D0B31548DB7B00D320AE /* PrettyKit */ = {
-			isa = PBXGroup;
-			children = (
-				3450D0B51548DBA700D320AE /* PrettyDrawing.h */,
-				3450D0B61548DBA700D320AE /* PrettyDrawing.m */,
-				3450D0B71548DBA700D320AE /* PrettyNavigationBar.h */,
-				3450D0B81548DBA700D320AE /* PrettyNavigationBar.m */,
-				34A562BF154A1CA60012CF26 /* PrettyToolbar.h */,
-				34A562C0154A1CA60012CF26 /* PrettyToolbar.m */,
-			);
-			name = PrettyKit;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		3482C1B6155C7E1B00415794 /* Bookmark */ = {
@@ -594,7 +561,6 @@
 				34EBE42D1359676E00A24C01 /* GCDAsyncSocket */,
 				34FC5C85135BB2A30049C737 /* TBXML */,
 				348F5C2114FC638800F76AAC /* MBProgressHUD */,
-				3450D0B31548DB7B00D320AE /* PrettyKit */,
 				3439EC6114F3264300362097 /* ViewDeck */,
 			);
 			name = "External Classes";
@@ -798,13 +764,8 @@
 				348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */,
 				34AEB77A150D0210005F2B96 /* UserListTableViewCell.m in Sources */,
 				34AEB77D150D02D6005F2B96 /* ServerListTableViewCell.m in Sources */,
-				3450D0B91548DBA700D320AE /* PrettyDrawing.m in Sources */,
-				3450D0BA1548DBA700D320AE /* PrettyNavigationBar.m in Sources */,
-				34A562C1154A1CA60012CF26 /* PrettyToolbar.m in Sources */,
 				34D464D615561BB600856E46 /* SettingsViewController.m in Sources */,
 				34DB44ED155705E500C955A5 /* SettingsTextCell.m in Sources */,
-				34EE4FBC1558579400F5B508 /* PrettyNavigationBar+Defaults.m in Sources */,
-				34EE4FBF1558593300F5B508 /* PrettyToolbar+Defaults.m in Sources */,
 				3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */,
 				0DEF007315BB922700289AEB /* BlockActionSheet.m in Sources */,
 				0DEF007415BB922700289AEB /* BlockAlertView.m in Sources */,

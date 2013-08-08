@@ -52,7 +52,7 @@
     
     // Create the navigation bar.
     navigationBar.items = @[[[UINavigationItem alloc] init]];
-    [navigationBar setTitle:@"Edit Bookmark"];
+    [[navigationBar topItem] setTitle:@"Edit Bookmark"];
     
     // Create the reset button.
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset"

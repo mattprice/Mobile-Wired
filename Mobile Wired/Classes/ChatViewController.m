@@ -259,7 +259,7 @@
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
     // Customize the bar title and buttons.
-    [navigationBar setTitle:self.connection.serverInfo[@"wired.info.name"]];
+    [[navigationBar topItem] setTitle:self.connection.serverInfo[@"wired.info.name"]];
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cog.png"]
                                                                                 style:UIBarButtonItemStyleBordered
                                                                                target:self

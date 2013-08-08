@@ -26,11 +26,10 @@
 
 #import <UIKit/UIKit.h>
 #import "IIViewDeckController.h"
-#import "PrettyNavigationBar+Defaults.h"
 #import "ServerListViewController.h"
 
 @interface BookmarkViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, IIViewDeckControllerDelegate, UITableViewDataSource> {
-    IBOutlet PrettyNavigationBar *navigationBar;
+    IBOutlet UINavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
     
     ServerListViewController *serverList;

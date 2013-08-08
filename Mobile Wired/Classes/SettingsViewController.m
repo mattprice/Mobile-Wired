@@ -47,7 +47,7 @@
     
     // Create the navigation bar.
     navigationBar.items = @[[[UINavigationItem alloc] init]];
-    [navigationBar setTitle:@"Settings"];
+    [[navigationBar topItem] setTitle:@"Settings"];
 
     // Create the reset button.
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset"

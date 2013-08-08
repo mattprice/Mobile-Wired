@@ -28,8 +28,6 @@
 #import "WiredConnection.h"
 #import "UserListViewController.h"
 #import "MBProgressHUD.h"
-#import "PrettyNavigationBar+Defaults.h"
-#import "PrettyToolbar+Defaults.h"
 
 @interface ChatViewController : UIViewController <WiredConnectionDelegate, MBProgressHUDDelegate, UIGestureRecognizerDelegate> {
     WiredConnection *connection;
@@ -40,8 +38,8 @@
     NSDictionary *bookmark;
     NSString *serverTopic;
     
-    IBOutlet PrettyNavigationBar *navigationBar;
-    IBOutlet PrettyToolbar *toolBar;
+    IBOutlet UINavigationBar *navigationBar;
+    IBOutlet UIToolbar *toolBar;
     
     IBOutlet UITextView *chatTextView;
     IBOutlet UITextField *chatTextField;

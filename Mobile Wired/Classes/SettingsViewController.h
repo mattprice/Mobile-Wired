@@ -26,10 +26,9 @@
 
 #import <UIKit/UIKit.h>
 #import "IIViewDeckController.h"
-#import "PrettyNavigationBar+Defaults.h"
 
 @interface SettingsViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, IIViewDeckControllerDelegate, UITableViewDataSource> {
-    IBOutlet PrettyNavigationBar *navigationBar;
+    IBOutlet UINavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
     
     UITextField *nickField;
