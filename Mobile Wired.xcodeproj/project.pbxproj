@@ -69,7 +69,7 @@
 		3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */; };
 		3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */; };
 		345FC70714F467C0004D2A7B /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70614F467C0004D2A7B /* TBXML.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker -fno-objc-arc"; }; };
-		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker -fno-objc-arc"; }; };
+		345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 345FC70A14F468DC004D2A7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-checker"; }; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		347B37FD15098D6500D88034 /* Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37F915098D6500D88034 /* Checkmark.png */; };
 		347B37FE15098D6500D88034 /* Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347B37FA15098D6500D88034 /* Checkmark@2x.png */; };
