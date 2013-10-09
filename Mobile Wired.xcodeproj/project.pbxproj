@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D12846515BA501400CB6522 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D12846315BA501400CB6522 /* libTestFlight.a */; };
 		0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */; };
+		0D79DAD41805F883002F3249 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D79DAD31805F883002F3249 /* Default-568h@2x.png */; };
 		0D895F53174B117400351954 /* alert-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D895F49174B117400351954 /* alert-black-button.png */; };
 		0D895F54174B117400351954 /* alert-black-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D895F4A174B117400351954 /* alert-black-button@2x.png */; };
 		0D895F55174B117400351954 /* alert-gray-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D895F4B174B117400351954 /* alert-gray-button.png */; };
@@ -113,6 +114,7 @@
 		0D12846415BA501400CB6522 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "Mobile Wired/Classes/TestFlight/TestFlight.h"; sourceTree = "<group>"; };
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b53.xml; path = Resources/WiredSpec_2.0b53.xml; sourceTree = "<group>"; };
+		0D79DAD31805F883002F3249 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Mobile Wired/Resources/Images/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		0D895F49174B117400351954 /* alert-black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alert-black-button.png"; path = "Mobile Wired/Resources/Images/alert-black-button.png"; sourceTree = SOURCE_ROOT; };
 		0D895F4A174B117400351954 /* alert-black-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alert-black-button@2x.png"; path = "Mobile Wired/Resources/Images/alert-black-button@2x.png"; sourceTree = SOURCE_ROOT; };
 		0D895F4B174B117400351954 /* alert-gray-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "alert-gray-button.png"; path = "Mobile Wired/Resources/Images/alert-gray-button.png"; sourceTree = SOURCE_ROOT; };
@@ -533,6 +535,7 @@
 				3440CD04136613EF0046955F /* DefaultUserIcon.png */,
 				34A5A0EE136B74270022272F /* Default.png */,
 				34A5A0EF136B74270022272F /* Default@2x.png */,
+				0D79DAD31805F883002F3249 /* Default-568h@2x.png */,
 				347B37FB15098D6500D88034 /* Error.png */,
 				347B37FC15098D6500D88034 /* Error@2x.png */,
 				3440CD02136611EE0046955F /* MobileWired.png */,
@@ -687,6 +690,7 @@
 				0DA7A77115BA44B20013DDFB /* GreenDot.png in Resources */,
 				0DA7A77215BA44B20013DDFB /* GreenDot@2x.png in Resources */,
 				0DA7A77315BA44B20013DDFB /* OrangeDot.png in Resources */,
+				0D79DAD41805F883002F3249 /* Default-568h@2x.png in Resources */,
 				0DA7A77415BA44B20013DDFB /* OrangeDot@2x.png in Resources */,
 				0DA7A77515BA44B20013DDFB /* RedDot.png in Resources */,
 				0DA7A77615BA44B20013DDFB /* RedDot@2x.png in Resources */,
