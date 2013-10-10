@@ -137,6 +137,11 @@
 #pragma mark -
 #pragma mark Table View Data Sources
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
     return 1;
@@ -156,44 +161,34 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(70, 20, 200, 20)];
+    
     switch ([indexPath row]) {
         case 0:
-        {
             cell.textLabel.text = @"Nick";
-        
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(120, 20, 150, 20)];
-            textField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
-            
             cell.accessoryView = textField;
             nickField = textField;
-            
+
+            textField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
+        
             break;
-        }
             
         case 1:
-        {
             cell.textLabel.text = @"Status";
-            
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(120, 20, 150, 20)];
-            textField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
-            
             cell.accessoryView = textField;
             statusField = textField;
+        
+            textField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
             
             break;
-        }
             
         default:
-        {
             cell.textLabel.text = @"Name";
-        
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(120, 20, 150, 20)];
-            textField.text = @"Value";
-
             cell.accessoryView = textField;
         
+            textField.text = @"Value";
+        
             break;
-        }
     }
     
     return cell;
