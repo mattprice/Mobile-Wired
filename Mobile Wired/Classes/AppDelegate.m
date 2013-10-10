@@ -46,7 +46,7 @@
     // Add the TestFlight SDK.
 #ifndef DEBUG
     #ifdef TF_APP_TOKEN
-        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueItdentifier]];
         [TestFlight takeOff:TF_APP_TOKEN];
     #endif
 #endif
@@ -82,7 +82,9 @@
     
     // Let each ViewDeck subcontroller receive delegate calls.
     deckController.delegateMode = IIViewDeckDelegateAndSubControllers;
+    deckController.delegate = self;
     futureController.delegateMode = IIViewDeckDelegateAndSubControllers;
+    futureController.delegate = self;
     
     // Enable the parallax scrolling effect.
     deckController.parallaxAmount = 0.3;
@@ -96,27 +98,21 @@
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
 #endif
     
-    // Fade out the splash screen image.
-    UIImageView *splashImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
-    CGRect frame = CGRectMake(splashImage.frame.origin.x,
-                               splashImage.frame.origin.y,
-                               splashImage.frame.size.width,
-                               splashImage.frame.size.height);
-    [splashImage setFrame:frame];
-    [self.window.rootViewController.view addSubview:splashImage];
-    
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         splashImage.alpha = 0;
-                     }
-                     completion:^(BOOL finished) {
-                         [splashImage removeFromSuperview];
-                     }];
-    
     [self.window makeKeyAndVisible];
     return YES;
 }
 
+- (void)viewDeckController:(IIViewDeckController *)viewDeckController applyShadow:(CALayer *)shadowLayer withBounds:(CGRect)rect
+{
+    shadowLayer.masksToBounds = NO;
+    shadowLayer.shadowRadius = 5;
+    shadowLayer.shadowOpacity = 0.35;
+    shadowLayer.shadowOffset = CGSizeZero;
+    shadowLayer.shadowPath = [[UIBezierPath bezierPathWithRect:rect] CGPath];
+}
+
+#pragma mark -
+#pragma mark Push Notifications
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken
 {
     NSString *hexToken = [[[[devToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""]
@@ -143,7 +139,8 @@
     NSLog(@"*** Received a push notification: %@", [userInfo description]);
 }
 
-
+#pragma mark -
+#pragma mark Backgrounding Notifications
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*

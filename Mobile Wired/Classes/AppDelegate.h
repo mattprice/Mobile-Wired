@@ -25,13 +25,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
+#import "IIViewDeckController.h"
 
 @class ChatViewController;
 @class UserListViewController;
 @class ServerListViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, AVAudioPlayerDelegate> {
+@interface AppDelegate : UIResponder <UIApplicationDelegate, IIViewDeckControllerDelegate> {
     IBOutlet UIWindow *window;
 
     ServerListViewController *serverListView;
