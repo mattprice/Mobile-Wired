@@ -49,8 +49,8 @@
     
     // Create UIGestureRecognizer for sliding the keyboard down.
     // This gets removed once the keyboard disappears.
-    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
-    panRecognizer.delegate = self;
+//    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+//    panRecognizer.delegate = self;
     
     // Register to listen for NSUserDefaults changes.
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -719,7 +719,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     // Add the UIGestureRecognizer to the view.
-    [self.view addGestureRecognizer:panRecognizer];
+//    [self.view addGestureRecognizer:panRecognizer];
     
     // Disable panning view while typing.
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
@@ -728,7 +728,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // Remove the UIGestureRecognizer so that you can swipe left/right again.
-    [self.view removeGestureRecognizer:panRecognizer];
+//    [self.view removeGestureRecognizer:panRecognizer];
     
     // Re-enable panning of view.
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
@@ -741,16 +741,17 @@
     // Move the textField out of the keyboard's way.
     [UIView animateWithDuration:0.25
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
+                         // TODO: Don't hardcode the height.
                          self->accessoryView.frame = CGRectMake(0.0,
-                                                                200.0,
+                                                                308.0,
                                                                 self->accessoryView.frame.size.width,
                                                                 self->accessoryView.frame.size.height);
                          self->chatTextView.frame = CGRectMake(self->chatTextView.frame.origin.x,
                                                                self->chatTextView.frame.origin.y,
                                                                self->chatTextView.frame.size.width,
-                                                               155.0);
+                                                               263.0);
                          [self->chatTextView scrollRangeToVisible:NSMakeRange([self->chatTextView.text length], 0)];
                      }
      
@@ -795,16 +796,18 @@
 - (void)adjustAccessoryView
 {
     // Pan the accessory view up/down.
+    // TODO: Don't hardcode the Y Origin.
     accessoryView.frame = CGRectMake(0.0,
-                                     keyboard.frame.origin.y - 64,
+                                     keyboard.frame.origin.y - 44,
                                      accessoryView.frame.size.width,
                                      accessoryView.frame.size.height);
     
     // Lengthen the chat view.
+    // TODO: Don't hardcode the height.
     chatTextView.frame = CGRectMake(chatTextView.frame.origin.x,
                                     chatTextView.frame.origin.y,
                                     chatTextView.frame.size.width,
-                                    accessoryView.frame.origin.y - 45);
+                                    accessoryView.frame.origin.y - 25);
     [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
 }
 
@@ -843,7 +846,7 @@
 {
     [UIView animateWithDuration:0.25
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          // Pan the keyboard up/down.
                          CGRect newFrame = self->keyboard.frame;
