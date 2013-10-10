@@ -166,10 +166,11 @@
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          // Resize the main UITableView.
+                         // TODO: Don't hardcode the height.
                          self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,
                                                                self.mainTableView.frame.origin.y,
                                                                self.mainTableView.frame.size.width,
-                                                               200.0);
+                                                               308.0);
                          
                          // Scroll the table view to the selected text field.
                          UITextField *textField = [notification object];
@@ -223,10 +224,11 @@
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          // Resize the main UITableView.
+                         // TODO: Don't hardcode the height.
                          self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,
                                                                self.mainTableView.frame.origin.y,
                                                                self.mainTableView.frame.size.width,
-                                                               416.0);
+                                                               524.0);
                      }
      
                      completion:^(BOOL finished){
@@ -236,6 +238,11 @@
 
 #pragma mark -
 #pragma mark Table View Data Sources
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
@@ -286,7 +293,7 @@
 {
     if (section == 2) {
 //        return @"";
-        return @"To enable notifications, all messages must be routed through our server.";
+        return @"To enable offline notifications, all messages must be routed through our server.";
     }
     
     else {
@@ -298,21 +305,14 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    SettingsTextCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SettingsTextCell" owner:nil options:nil];
-        
-        for (id currentObject in topLevelObjects) {
-            if([currentObject isKindOfClass:[SettingsTextCell class]]) {
-                cell = (SettingsTextCell *)currentObject;
-                break;
-            }
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
     // Set the UITextField's delegate.
-    cell.settingValue.delegate = self;
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(70, 20, 200, 20)];
+    textField.delegate = self;
     
     // Because selectedIndex starts counting at 0, the only time it will ever
     // equal the number of saved bookmarks is if we are creating a new bookmark.
@@ -326,53 +326,58 @@
     if ([indexPath section] == 0) {
         switch ([indexPath row]) {
             case 0:
-                cell.settingName.text = @"Name";
-                serverNameField = cell.settingValue;
-                
+                cell.textLabel.text = @"Name";
+                cell.accessoryView = textField;
+                serverNameField = textField;
+            
                 if (bookmark != nil) {
                     oldServerName = bookmark[@"ServerName"];
-                    cell.settingValue.text = oldServerName;
+                    textField.text = oldServerName;
                 } else {
-                    cell.settingValue.text = @"";
+                    textField.text = @"";
                 }
                 
-                cell.settingValue.placeholder = bookmark[@"ServerHost"];
+                textField.placeholder = bookmark[@"ServerName"];
                 
                 break;
                 
             case 1:
-                cell.settingName.text = @"Host";
-                cell.settingValue.keyboardType = UIKeyboardTypeURL;
-                serverHostField = cell.settingValue;
-                
+                cell.textLabel.text = @"Host";
+                cell.accessoryView = textField;
+                serverHostField = textField;
+
                 if (bookmark != nil) {
                     oldServerHost = bookmark[@"ServerHost"];
-                    cell.settingValue.text = oldServerHost;
+                    textField.text = oldServerHost;
                 } else {
-                    cell.settingValue.text = @"";
+                    textField.text = @"";
                 }
+                
+                textField.keyboardType = UIKeyboardTypeURL;
+                textField.autocorrectionType = UITextAutocorrectionTypeNo;
+                textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                textField.placeholder = bookmark[@"ServerHost"];
                 
                 break;
                 
             case 2:
-                cell.settingName.text = @"Port";
-                cell.settingValue.keyboardType = UIKeyboardTypeNumberPad;
-                serverPortField = cell.settingValue;
-                
+                cell.textLabel.text = @"Port";
+                cell.accessoryView = textField;
+                serverPortField = textField;
+            
                 if (bookmark != nil) {
                     oldServerPort = bookmark[@"ServerPort"];
-                    cell.settingValue.text = oldServerPort;
+                    textField.text = oldServerPort;
                 } else {
-                    cell.settingValue.text = @"";
+                    textField.text = @"";
                 }
                 
-                cell.settingValue.placeholder = @"4871";
-                
+                textField.keyboardType = UIKeyboardTypeNumberPad;
+                textField.placeholder = @"4871";
+            
                 break;
                 
             default:
-                cell.settingName.text = @"Name";
-                cell.settingValue.text = @"Value";
                 break;
         }
     }
@@ -381,47 +386,53 @@
     else if ([indexPath section] == 1) {
         switch ([indexPath row]) {
             case 0:
-                cell.settingName.text = @"Login";
-                userLoginField = cell.settingValue;
+                cell.textLabel.text = @"Login";
+                cell.accessoryView = textField;
+                userLoginField = textField;
                 
                 if (bookmark != nil) {
                     oldUserLogin = bookmark[@"UserLogin"];
-                    cell.settingValue.text = oldUserLogin;
+                    textField.text = oldUserLogin;
                     
-//                    cell.settingValue.enabled = NO;
-//                    cell.settingValue.textColor = [UIColor grayColor];
-//                    cell.settingName.textColor = [UIColor grayColor];
+//                    textField.enabled = NO;
+//                    textField.textColor = [UIColor grayColor];
+//                    cell.textLabel.textColor = [UIColor grayColor];
                 } else {
-                    cell.settingValue.text = @"";
+                    textField.text = @"";
                 }
                 
-                cell.settingValue.placeholder = @"guest";
+                textField.autocorrectionType = UITextAutocorrectionTypeNo;
+                textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                textField.placeholder = @"guest";
                 
                 break;
                 
             case 1:
-                cell.settingName.text = @"Pass";
-                userPassField = cell.settingValue;
+                cell.textLabel.text = @"Pass";
+                cell.accessoryView = textField;
+                userPassField = textField;
                 
                 if (bookmark != nil) {
                     oldUserPass = bookmark[@"UserPass"];
-                    cell.settingValue.secureTextEntry = YES;
-                    cell.settingValue.text = oldUserPass;
+                    textField.secureTextEntry = YES;
+                    textField.text = oldUserPass;
                     
-//                    cell.settingValue.enabled = NO;
-//                    cell.settingValue.textColor = [UIColor grayColor];
-//                    cell.settingName.textColor = [UIColor grayColor];
+//                    textField.enabled = NO;
+//                    textField.textColor = [UIColor grayColor];
+//                    cell.textLabel.textColor = [UIColor grayColor];
                 } else {
-                    cell.settingValue.text = @"";
+                    textField.text = @"";
                 }
                 
-                cell.settingValue.placeholder = @"none";
+                textField.autocorrectionType = UITextAutocorrectionTypeNo;
+                textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                textField.placeholder = @"none";
                 
                 break;
                 
             default:
-                cell.settingName.text = @"Name";
-                cell.settingValue.text = @"Value";
+                cell.textLabel.text = @"Name";
+                textField.text = @"Value";
                 break;
         }
     }
@@ -430,44 +441,44 @@
     else if ([indexPath section] == 2) {
         switch ([indexPath row]) {
             case 0:
-                cell.settingName.text = @"Nick";
-                userNickField = cell.settingValue;
+                cell.textLabel.text = @"Nick";
+                cell.accessoryView = textField;
+                userNickField = textField;
                 
                 if (bookmark != nil) {
                     oldUserNick = bookmark[@"UserNick"];
-                    cell.settingValue.text = oldUserNick;
+                    textField.text = oldUserNick;
                 } else {
-                    cell.settingValue.text = @"";
+                    textField.text = @"";
                 }
                 
-                cell.settingValue.placeholder = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
+                textField.placeholder = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
                 
                 break;
                 
             case 1:
-                cell.settingName.text = @"Status";
-                userStatusField = cell.settingValue;
+                cell.textLabel.text = @"Status";
+                cell.accessoryView = textField;
+                userStatusField = textField;
                 
                 if (bookmark != nil) {
                     oldUserStatus = bookmark[@"UserStatus"];
-                    cell.settingValue.text = oldUserStatus;
+                    textField.text = oldUserStatus;
                 } else {
-                    cell.settingValue.text = @"";
+                    textField.text = @"";
                 }
                 
-                cell.settingValue.placeholder = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
+                textField.placeholder = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
                 
                 break;
                 
             case 2:
             {
-                cell.settingName.text = @"Notifications";
-                cell.settingValue.text = @"";
-            
                 // The size components of the CGRect are ignored by UISwitch.
-                UISwitch *settingSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0,0,0,0)];
+                UISwitch *settingSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
                 [settingSwitch addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
             
+                cell.textLabel.text = @"Notifications";
                 cell.accessoryView = settingSwitch;
                 pushSettingSwitch = settingSwitch;
                 
@@ -480,10 +491,9 @@
             
                 break;
             }
-                
+            
             default:
-                cell.settingName.text = @"Name";
-                cell.settingValue.text = @"Value";
+                cell.textLabel.text = @"Name";
                 break;
         }
     }
