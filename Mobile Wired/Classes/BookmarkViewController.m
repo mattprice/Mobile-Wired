@@ -26,7 +26,6 @@
 
 #import "BookmarkViewController.h"
 #import "IIViewDeckController.h"
-#import "SettingsTextCell.h"
 #import "NSString+Hashes.h"
 
 @implementation BookmarkViewController

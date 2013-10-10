@@ -25,7 +25,6 @@
 //
 
 #import "SettingsViewController.h"
-#import "SettingsTextCell.h"
 #import "IIViewDeckController.h"
 
 @implementation SettingsViewController
