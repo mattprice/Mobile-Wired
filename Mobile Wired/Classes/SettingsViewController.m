@@ -160,7 +160,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
+    // Create a UITextField and set its delegate.
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(70, 20, 200, 20)];
+    textField.delegate = self;
     
     switch ([indexPath row]) {
         case 0:
