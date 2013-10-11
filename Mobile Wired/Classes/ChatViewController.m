@@ -51,12 +51,6 @@
     // This gets removed once the keyboard disappears.
 //    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
 //    panRecognizer.delegate = self;
-    
-    // Register to listen for NSUserDefaults changes.
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loadConnectionSettings)
-                                                 name:NSUserDefaultsDidChangeNotification
-                                               object:nil];
 }
 
 - (void)loadConnectionSettings {
@@ -689,6 +683,12 @@
 {
     [super viewWillAppear:animated];
     
+    // Register to listen for NSUserDefaults changes.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadConnectionSettings)
+                                                 name:NSUserDefaultsDidChangeNotification
+                                               object:nil];
+    
     // Enable sliding to see the user list.
     IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
     rightView.centerController = self.userListView;
@@ -714,6 +714,16 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // Remove any NSNotificationCenter observers, otherwise the app
+    // will crash if we receive a notification after dealloc'ing, or
+    // when swapping to another view.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
