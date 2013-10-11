@@ -117,20 +117,16 @@
     return YES;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     // Disable panning view while typing.
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
-    
-    return YES;
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // Re-enable panning of view.
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-    
-    return YES;
 }
 
 #pragma mark -

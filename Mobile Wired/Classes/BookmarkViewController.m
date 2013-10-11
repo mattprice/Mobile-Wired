@@ -47,7 +47,7 @@
     [super viewDidLoad];
     
     // Register an event for when a keyboard pops up
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textfieldWasSelected:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldWasSelected:) name:UITextFieldTextDidBeginEditingNotification object:nil];
     
     // Create the navigation bar.
     navigationBar.items = @[[[UINavigationItem alloc] init]];
@@ -61,7 +61,7 @@
     
     // Notify us when the keyboard is hidden.
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(adjustMainTableView:)
+                                             selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 }
@@ -158,7 +158,7 @@
 #pragma mark -
 #pragma mark Text Field Delegates
 
-- (void)textfieldWasSelected:(NSNotification *)notification
+- (void)textFieldWasSelected:(NSNotification *)notification
 {
     [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
@@ -189,26 +189,21 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    
-    // Re-enable panning of view.
-    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-    
-    return YES;
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    // Disable panning view while typing.
-    self.viewDeckController.panningMode = IIViewDeckNoPanning;
-    
-    return YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
     [self saveBookmark:textField];
     
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    // Disable panning view while typing.
+    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    // Re-enable panning of view.
+    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
 }
 
 - (void)notificationSettingChanged:(UIControl *)sender
@@ -216,7 +211,7 @@
     [self saveBookmark];
 }
 
-- (void)adjustMainTableView:(NSNotification *)notification
+- (void)keyboardWillHide:(NSNotification *)notification
 {
     [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
@@ -227,7 +222,7 @@
                          self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x,
                                                                self.mainTableView.frame.origin.y,
                                                                self.mainTableView.frame.size.width,
-                                                               524.0);
+                                                               [[UIScreen mainScreen] bounds].size.height - 44);
                      }
      
                      completion:^(BOOL finished){

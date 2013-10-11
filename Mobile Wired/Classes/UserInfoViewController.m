@@ -141,22 +141,22 @@
         
         switch ([indexPath row]) {
             case 0:
-                cell.textLabel.text = @"Login";
+                cell.textLabel.text = @"Username";
                 cell.detailTextLabel.text = userInfo[@"wired.user.login"];
                 break;
                 
             case 1:
-                cell.textLabel.text = @"Address";
+                cell.textLabel.text = @"IP Address";
                 cell.detailTextLabel.text = userInfo[@"wired.user.ip"];
                 break;
                 
             case 2:
-                cell.textLabel.text = @"Host";
+                cell.textLabel.text = @"Hostname";
                 cell.detailTextLabel.text = userInfo[@"wired.user.host"];
                 break;
                 
             case 3:
-                cell.textLabel.text = @"Version";
+                cell.textLabel.text = @"Client Version";
                 cell.detailTextLabel.text = version;
                 break;
 

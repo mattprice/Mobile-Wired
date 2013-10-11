@@ -46,11 +46,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Create UIGestureRecognizer for sliding the keyboard down.
-    // This gets removed once the keyboard disappears.
-//    panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
-//    panRecognizer.delegate = self;
 }
 
 - (void)loadConnectionSettings {
@@ -693,23 +688,12 @@
     IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
     rightView.centerController = self.userListView;
     
-    // Be sure we know which keyboard is selected.
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textfieldWasSelected:)
-                                                 name:UITextFieldTextDidBeginEditingNotification
-                                               object:nil];
-    
     // Register an event for when a keyboard pops up.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
@@ -728,40 +712,40 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    // Add the UIGestureRecognizer to the view.
-//    [self.view addGestureRecognizer:panRecognizer];
-    
     // Disable panning view while typing.
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    // Remove the UIGestureRecognizer so that you can swipe left/right again.
-//    [self.view removeGestureRecognizer:panRecognizer];
-    
     // Re-enable panning of view.
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
 }
 
-- (void)textfieldWasSelected:(NSNotification *)notification
+- (void)keyboardWillShow:(NSNotification *)notification
 {
-    chatTextField = notification.object;
-    
+    CGRect keyboardFrame = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
     // Move the textField out of the keyboard's way.
     [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
                         options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
                      animations:^{
-                         // TODO: Don't hardcode the height.
+                         // Pan the accessory view down.
                          self->accessoryView.frame = CGRectMake(0.0,
-                                                                308.0,
+                                                                keyboardFrame.origin.y - 44,
                                                                 self->accessoryView.frame.size.width,
                                                                 self->accessoryView.frame.size.height);
+                         // Resize the chat view.
                          self->chatTextView.frame = CGRectMake(self->chatTextView.frame.origin.x,
                                                                self->chatTextView.frame.origin.y,
                                                                self->chatTextView.frame.size.width,
-                                                               263.0);
+                                                               self->accessoryView.frame.origin.y - 45);
+                         
+                         // TODO: The chatTextView doesn't actually get its height modified...?
+//                         NSLog(@"ChatTextView Should Be: %f", self->accessoryView.frame.origin.y - 45);
+//                         NSLog(@"ChatTextView Is:        %f", self->chatTextView.frame.size.height);
+                         
                          [self->chatTextView scrollRangeToVisible:NSMakeRange([self->chatTextView.text length], 0)];
                      }
      
@@ -770,118 +754,31 @@
                      }];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    // We have to hide the keyboard to remove the animation for it sliding down.
-    // This is where we start displaying it again.
-    keyboard.hidden = NO;
-}
-
-- (void)keyboardDidShow:(NSNotification *)notification
-{
-    if (keyboard)
-        return;
-    
-    // We can't access the UIKeyboard through the SDK we have to use a UIView.
-    // See discussion http://www.iphonedevsdk.com/forum/iphone-sdk-development/6573-howto-customize-uikeyboard.html
-    NSArray *windowList = [[UIApplication sharedApplication] windows];
-    for (int k = 0; k < [windowList count]; k++) {
-        UIWindow *tempWindow = windowList[k];
-        for (int i = 0; i < [tempWindow.subviews count]; i++) {
-            UIView *possibleKeyboard = (tempWindow.subviews)[i];
-            if([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"] == YES) {
-                keyboard = possibleKeyboard;
-                return;
-            }
-        }
-    }
-}
-
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     // Adjust the accessory view.
-    [self animateKeyboardOffscreen:notification];
-}
-
-- (void)adjustAccessoryView
-{
-    // Pan the accessory view up/down.
-    // TODO: Don't hardcode the Y Origin.
-    accessoryView.frame = CGRectMake(0.0,
-                                     keyboard.frame.origin.y - 44,
-                                     accessoryView.frame.size.width,
-                                     accessoryView.frame.size.height);
-    
-    // Lengthen the chat view.
-    // TODO: Don't hardcode the height.
-    chatTextView.frame = CGRectMake(chatTextView.frame.origin.x,
-                                    chatTextView.frame.origin.y,
-                                    chatTextView.frame.size.width,
-                                    accessoryView.frame.origin.y - 25);
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
-}
-
-- (void)panGesture:(UIPanGestureRecognizer *)gestureRecognizer
-{
-    CGPoint location = [gestureRecognizer locationInView:self.view];
-    CGPoint velocity = [gestureRecognizer velocityInView:self.view];
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        originalKeyboardY = keyboard.frame.origin.y;
-    }
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        if (velocity.y > 0) {
-            [self animateKeyboardOffscreen];
-        } else{
-            [self animateKeyboardReturnToOriginalPosition];
-        }
-        return;
-    }
-    
-    CGFloat spaceAboveKeyboard = self.view.bounds.size.height - (keyboard.frame.size.height + chatTextField.frame.size.height) + 20.0f;
-    if (location.y < spaceAboveKeyboard ) {
-        return;
-    }
-    
-    CGRect newFrame = keyboard.frame;
-    CGFloat newY = originalKeyboardY + (location.y - spaceAboveKeyboard);
-    newY = MAX(newY, originalKeyboardY);
-    newFrame.origin.y = newY;
-    [keyboard setFrame: newFrame];
-    [self adjustAccessoryView];
-}
-
-- (void)animateKeyboardOffscreen:(NSNotification *)notification
-{
     [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
                         options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
                      animations:^{
-                         // Pan the keyboard up/down.
-                         CGRect newFrame = self->keyboard.frame;
-                         newFrame.origin.y = self->keyboard.window.frame.size.height;
-                         [self->keyboard setFrame: newFrame];
-                         [self adjustAccessoryView];
+                         // Pan the accessory view down.
+                         self->accessoryView.frame = CGRectMake(0.0,
+                                                                [[UIScreen mainScreen] bounds].size.height - 44,
+                                                                self->accessoryView.frame.size.width,
+                                                                self->accessoryView.frame.size.height);
+                         
+                         // Resize the chat view.
+                         self->chatTextView.frame = CGRectMake(self->chatTextView.frame.origin.x,
+                                                               self->chatTextView.frame.origin.y,
+                                                               self->chatTextView.frame.size.width,
+                                                               self->accessoryView.frame.origin.y - 45);
+                         
+                         [self->chatTextView scrollRangeToVisible:NSMakeRange([self->chatTextView.text length], 0)];
                      }
      
                      completion:^(BOOL finished){
-                         self->keyboard.hidden = YES;
-                         [self->chatTextField resignFirstResponder];
+                         // Do nothing.
                      }];
-}
-
-- (void)animateKeyboardReturnToOriginalPosition
-{
-    [UIView beginAnimations:nil context:NULL];
-    
-    // Pan the keyboard up/down.
-    CGRect newFrame = keyboard.frame;
-    newFrame.origin.y = originalKeyboardY;
-    [keyboard setFrame: newFrame];
-    [self adjustAccessoryView];
-    
-    [UIView commitAnimations];
 }
 
 @end
