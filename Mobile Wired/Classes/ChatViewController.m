@@ -93,7 +93,7 @@
     return (IIViewDeckController *)self.viewDeckController.rightController;
 }
 
-- (void)viewDeckController:(IIViewDeckController*)viewDeckController didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
+- (void)viewDeckController:(IIViewDeckController *)viewDeckController didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
 {
     // Close the UserInfoView whenever the User List is closed.
     if ( viewDeckSide == IIViewDeckRightSide ) {
@@ -739,9 +739,9 @@
     chatTextField = notification.object;
     
     // Move the textField out of the keyboard's way.
-    [UIView animateWithDuration:0.25
+    [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseIn
+                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
                      animations:^{
                          // TODO: Don't hardcode the height.
                          self->accessoryView.frame = CGRectMake(0.0,
@@ -790,7 +790,7 @@
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     // Adjust the accessory view.
-    [self animateKeyboardOffscreen];
+    [self animateKeyboardOffscreen:notification];
 }
 
 - (void)adjustAccessoryView
@@ -842,11 +842,11 @@
     [self adjustAccessoryView];
 }
 
-- (void)animateKeyboardOffscreen
+- (void)animateKeyboardOffscreen:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.25
+    [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseIn
+                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
                      animations:^{
                          // Pan the keyboard up/down.
                          CGRect newFrame = self->keyboard.frame;

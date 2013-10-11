@@ -61,7 +61,7 @@
     
     // Notify us when the keyboard is hidden.
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(adjustMainTableView)
+                                             selector:@selector(adjustMainTableView:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 }
@@ -131,7 +131,7 @@
     bookmark[@"UserNick"]      = (userNickField.text)   ? userNickField.text   : @"";
     bookmark[@"UserStatus"]    = (userStatusField.text) ? userStatusField.text : @"";
     bookmark[@"UserLogin"]     = (userLoginField.text)  ? userLoginField.text  : @"";
-    bookmark[@"Notifications"] = [NSNumber numberWithBool:pushSettingSwitch.on];
+    bookmark[@"Notifications"] = @(pushSettingSwitch.on);
     
     // Storing the password requires a little more effort because of SHA1 hashing.
     if (textField == userPassField && ![userPassField.text isEqualToString:@""]) {
@@ -160,9 +160,9 @@
 
 - (void)textfieldWasSelected:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.25
+    [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseInOut
+                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
                      animations:^{
                          // Resize the main UITableView.
                          // TODO: Don't hardcode the height.
@@ -211,16 +211,16 @@
     return YES;
 }
 
-- (void)controlValueChanged:(UIControl *)sender
+- (void)notificationSettingChanged:(UIControl *)sender
 {
     [self saveBookmark];
 }
 
-- (void)adjustMainTableView
+- (void)adjustMainTableView:(NSNotification *)notification
 {
-    [UIView animateWithDuration:.25
+    [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseInOut
+                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
                      animations:^{
                          // Resize the main UITableView.
                          // TODO: Don't hardcode the height.
@@ -262,7 +262,6 @@
     
     // Settings
     else if (section == 2) {
-//        return 2;
         return 3;
     }
     
@@ -291,7 +290,6 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     if (section == 2) {
-//        return @"";
         return @"To enable offline notifications, all messages must be routed through our server.";
     }
     
@@ -309,7 +307,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-    // Set the UITextField's delegate.
+    // Create a UITextField and set its delegate.
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(70, 20, 200, 20)];
     textField.delegate = self;
     
@@ -475,7 +473,7 @@
             {
                 // The size components of the CGRect are ignored by UISwitch.
                 UISwitch *settingSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-                [settingSwitch addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
+                [settingSwitch addTarget:self action:@selector(notificationSettingChanged:) forControlEvents:UIControlEventValueChanged];
             
                 cell.textLabel.text = @"Notifications";
                 cell.accessoryView = settingSwitch;
