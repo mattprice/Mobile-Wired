@@ -553,14 +553,14 @@
     // Initial connection.
     if (serverTopic == nil || [topic isEqualToString:@""]) {
 #ifdef DEBUG
-        NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
+        NSLog(@"Channel #%@ topic: %@ (set by %@)", channel, topic, nick);
 #endif
     }
     
     // Subsequent topic changes, so we should notify the user.
     else {
 #ifdef DEBUG
-        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
+        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>", channel, nick, topic);
 #endif
         
         NSString *message = [NSString stringWithFormat:@"<<< %@ changed topic to %@ >>>\n", nick, topic];
@@ -579,7 +579,7 @@
 - (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
 #ifdef DEBUG
-    NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
+    NSLog(@"%@ | %@ (%@) : %@", channel, nick, userID, message);
 #endif
     
     [self addMessageToView:message fromID:userID];
@@ -617,7 +617,7 @@
 - (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
 {
 #ifdef DEBUG
-    NSLog(@"%@ (%@) : %@",nick,userID,message);
+    NSLog(@"%@ (%@) : %@", nick, userID, message);
 #endif
     
     NSString *tMessage = [NSString stringWithFormat:@"%@: %@", nick, message];
@@ -635,7 +635,7 @@
 - (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
 #ifdef DEBUG
-    NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
+    NSLog(@"%@ | %@ (%@) %@", channel, nick, userID, message);
 #endif
     
     
@@ -651,7 +651,7 @@
 - (void)userJoined:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
 #ifdef DEBUG
-    NSLog(@"<<< %@ has joined >>>",nick);
+    NSLog(@"<<< %@ has joined >>>", nick);
 #endif
     
     NSString *message = [NSString stringWithFormat:@"<<< %@ has joined >>>\n", nick];
@@ -667,7 +667,7 @@
 - (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick forChannel:(NSString *)channel
 {
 #ifdef DEBUG
-    NSLog(@"<<< %@ is now known as %@ >>>",oldNick,newNick);
+    NSLog(@"<<< %@ is now known as %@ >>>", oldNick, newNick);
 #endif
     
     NSString *message = [NSString stringWithFormat:@"<<< %@ is now known as %@ >>>\n", oldNick, newNick];
@@ -683,7 +683,7 @@
 - (void)userLeft:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
 {
 #ifdef DEBUG
-    NSLog(@"<<< %@ has left >>>",nick);
+    NSLog(@"<<< %@ has left >>>", nick);
 #endif
     
     NSString *message = [NSString stringWithFormat:@"<<< %@ has left >>>\n", nick];
@@ -703,7 +703,7 @@
 - (void)userWasKicked:(NSString *)nick withID:(NSString *)userID byUser:(NSString *)kicker forReason:(NSString *)reason forChannel:(NSString *)channel
 {
 #ifdef DEBUG
-    NSLog(@"<<< %@ was kicked by %@ (%@) >>>",nick,kicker,reason);
+    NSLog(@"<<< %@ was kicked by %@ (%@) >>>", nick, kicker, reason);
 #endif
     
     NSString *message;
@@ -788,13 +788,14 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    CGRect keyboardFrame = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
     // Move the textField out of the keyboard's way.
+    // TODO: This animation doesn't match the keyboard's animation perfectly.
     [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
                         options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
                      animations:^{
+                         CGRect keyboardFrame = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
+                         
                          self->accessoryView.frame = CGRectMake(0.0,
                                                                 keyboardFrame.origin.y - 44,
                                                                 self->accessoryView.frame.size.width,
