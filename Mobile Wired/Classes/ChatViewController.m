@@ -256,6 +256,12 @@
     
     [chatMessages addObject:newMessage];
     [chatTableView reloadData];
+    
+    // Scroll to the new message.
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
+    [self->chatTableView scrollToRowAtIndexPath:indexPath
+                               atScrollPosition:UITableViewScrollPositionBottom
+                                       animated:YES];
 }
 
 - (void)addEmoteToView:(NSString *)emote fromID:(NSString *)userID
@@ -266,6 +272,12 @@
     
     [chatMessages addObject:newMessage];
     [chatTableView reloadData];
+    
+    // Scroll to the new message.
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
+    [self->chatTableView scrollToRowAtIndexPath:indexPath
+                               atScrollPosition:UITableViewScrollPositionBottom
+                                       animated:YES];
 }
 
 - (void)addSystemMessageToView:(NSString *)message
@@ -275,6 +287,12 @@
     
     [chatMessages addObject:newMessage];
     [chatTableView reloadData];
+    
+    // Scroll to the new message.
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
+    [self->chatTableView scrollToRowAtIndexPath:indexPath
+                               atScrollPosition:UITableViewScrollPositionBottom
+                                       animated:YES];
 }
 
 #pragma mark -
@@ -782,23 +800,21 @@
                                                                 keyboardFrame.origin.y - 44,
                                                                 self->accessoryView.frame.size.width,
                                                                 self->accessoryView.frame.size.height);
-                         // Resize the chat view.
-//                         self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
-//                                                                self->chatTableView.frame.origin.y,
-//                                                                self->chatTableView.frame.size.width,
-//                                                                self->accessoryView.frame.origin.y - 45);
-                         
-                         self->chatTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, keyboardFrame.size.height + 45);
-                         
-                         // TODO: The chatTableView doesn't actually get its height modified...?
-                         //                         NSLog(@"chatTableView Should Be: %f", self->accessoryView.frame.origin.y - 45);
-                         //                         NSLog(@"chatTableView Is:        %f", self->chatTableView.frame.size.height);
-
-                         // TODO: Scroll to bottom of chatTableView.
                      }
      
                      completion:^(BOOL finished){
-                         // Do nothing.
+                         // Resize the chat view.
+                         // NOTE: I'm not sure why I have to resize the chatTableView under this block...
+                         self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
+                                                                self->chatTableView.frame.origin.y,
+                                                                self->chatTableView.frame.size.width,
+                                                                self->accessoryView.frame.origin.y - 45);
+                         
+                         // Scroll to bottom of chatTableView.
+                         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
+                         [self->chatTableView scrollToRowAtIndexPath:indexPath
+                                                    atScrollPosition:UITableViewScrollPositionBottom
+                                                            animated:YES];
                      }];
 }
 
@@ -814,20 +830,21 @@
                                                                 [[UIScreen mainScreen] bounds].size.height - 44,
                                                                 self->accessoryView.frame.size.width,
                                                                 self->accessoryView.frame.size.height);
-                         
-                         // Resize the chat view.
-                         self->chatTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-                         
-//                         self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
-//                                                                self->chatTableView.frame.origin.y,
-//                                                                self->chatTableView.frame.size.width,
-//                                                                self->accessoryView.frame.origin.y - 45);
-                         
-                         // TODO: Scroll to bottom of chatTableView.
                      }
      
                      completion:^(BOOL finished){
-                         // Do nothing.
+                         // Resize the chat view.
+                         // NOTE: I'm not sure why I have to resize the chatTableView under this block...
+                         self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
+                                                                self->chatTableView.frame.origin.y,
+                                                                self->chatTableView.frame.size.width,
+                                                                self->accessoryView.frame.origin.y - 45);
+                         
+                         // Scroll to bottom of chatTableView.
+                         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
+                         [self->chatTableView scrollToRowAtIndexPath:indexPath
+                                                    atScrollPosition:UITableViewScrollPositionBottom
+                                                            animated:YES];
                      }];
 }
 
