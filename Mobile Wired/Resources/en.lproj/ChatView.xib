@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4511" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4511" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3745"/>
@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                <navigationBar contentMode="scaleToFill" id="8">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textAttributes key="titleTextAttributes">
@@ -30,7 +30,7 @@
                         <navigationItem id="30"/>
                     </items>
                 </navigationBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bqk-a7-WK8">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bqk-a7-WK8">
                     <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,11 +39,11 @@
                         <outlet property="delegate" destination="-1" id="yEi-5G-07Z"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51">
+                <view contentMode="scaleToFill" id="51">
                     <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42">
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="42">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <items>
@@ -67,27 +67,9 @@
                         </toolbar>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="42" secondAttribute="bottom" id="75I-ZU-jwQ"/>
-                        <constraint firstItem="42" firstAttribute="leading" secondItem="51" secondAttribute="leading" id="TAC-3u-5jc"/>
-                        <constraint firstAttribute="trailing" secondItem="42" secondAttribute="trailing" id="c9J-t2-de6"/>
-                        <constraint firstItem="42" firstAttribute="top" secondItem="51" secondAttribute="top" id="nJN-Ab-yEv"/>
-                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="51" secondAttribute="bottom" id="1Gp-nT-TnM"/>
-                <constraint firstAttribute="trailing" secondItem="bqk-a7-WK8" secondAttribute="trailing" id="6O0-eB-ReD"/>
-                <constraint firstItem="8" firstAttribute="trailing" secondItem="bqk-a7-WK8" secondAttribute="trailing" id="83p-wG-4dO"/>
-                <constraint firstItem="8" firstAttribute="top" secondItem="1" secondAttribute="top" id="Pw8-LJ-uJn"/>
-                <constraint firstItem="bqk-a7-WK8" firstAttribute="trailing" secondItem="51" secondAttribute="trailing" id="ROp-S6-jpS"/>
-                <constraint firstItem="8" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="SQB-K2-lMe"/>
-                <constraint firstItem="bqk-a7-WK8" firstAttribute="top" secondItem="8" secondAttribute="bottom" id="Wqc-8g-Nbt"/>
-                <constraint firstItem="bqk-a7-WK8" firstAttribute="leading" secondItem="51" secondAttribute="leading" id="gOR-oF-p82"/>
-                <constraint firstItem="bqk-a7-WK8" firstAttribute="centerY" secondItem="1" secondAttribute="centerY" id="p0A-aO-XEL"/>
-                <constraint firstItem="8" firstAttribute="leading" secondItem="bqk-a7-WK8" secondAttribute="leading" id="wDZ-aQ-aba"/>
-            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

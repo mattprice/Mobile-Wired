@@ -795,16 +795,11 @@
                           delay:0
                         options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
                      animations:^{
-                         // Pan the accessory view down.
                          self->accessoryView.frame = CGRectMake(0.0,
                                                                 keyboardFrame.origin.y - 44,
                                                                 self->accessoryView.frame.size.width,
                                                                 self->accessoryView.frame.size.height);
-                     }
-     
-                     completion:^(BOOL finished){
-                         // Resize the chat view.
-                         // NOTE: I'm not sure why I have to resize the chatTableView under this block...
+                         
                          self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
                                                                 self->chatTableView.frame.origin.y,
                                                                 self->chatTableView.frame.size.width,
@@ -815,6 +810,10 @@
                          [self->chatTableView scrollToRowAtIndexPath:indexPath
                                                     atScrollPosition:UITableViewScrollPositionBottom
                                                             animated:YES];
+                     }
+     
+                     completion:^(BOOL finished){
+                         // Do nothing.
                      }];
 }
 
@@ -830,11 +829,8 @@
                                                                 [[UIScreen mainScreen] bounds].size.height - 44,
                                                                 self->accessoryView.frame.size.width,
                                                                 self->accessoryView.frame.size.height);
-                     }
-     
-                     completion:^(BOOL finished){
+                         
                          // Resize the chat view.
-                         // NOTE: I'm not sure why I have to resize the chatTableView under this block...
                          self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
                                                                 self->chatTableView.frame.origin.y,
                                                                 self->chatTableView.frame.size.width,
@@ -845,6 +841,10 @@
                          [self->chatTableView scrollToRowAtIndexPath:indexPath
                                                     atScrollPosition:UITableViewScrollPositionBottom
                                                             animated:YES];
+                     }
+     
+                     completion:^(BOOL finished){
+                         // Do nothing.
                      }];
 }
 
