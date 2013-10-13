@@ -715,8 +715,6 @@
 {
     [self.userListView setUserList:userList];
     [self.userListView.tableView setNeedsDisplay];
-    
-    NSLog(@"%@", [[self.connection userList] description]);
 }
 
 #pragma mark -
