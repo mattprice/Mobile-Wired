@@ -25,22 +25,30 @@
 //
 
 #import "ChatViewController.h"
+
 #import "IIViewDeckController.h"
-#import "UserListViewController.h"
 #import "UserInfoViewController.h"
+#import "UserListViewController.h"
 
 #import "BlockAlertView.h"
 #import "BlockTextPromptAlertView.h"
 
-@interface ChatViewController (private)
-    - (void)animateKeyboardReturnToOriginalPosition;
-    - (void)animateKeyboardOffscreen;
+@implementation ChatMessage
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.message = @"";
+        self.nick = @"";
+    }
+    
+    return self;
+}
+
 @end
 
 @implementation ChatViewController
-
-@synthesize connection = _connection;
-@synthesize userListView, badgeCount;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -105,6 +113,9 @@
         [self.view addSubview:progressHUD];
     }
     
+    // Initialize the message list.
+    chatMessages = [NSMutableArray new];
+    
     // Connect to the bookmark.
     bookmark = [[NSUserDefaults standardUserDefaults] valueForKey:@"Bookmarks"][indexRow];
     [self connect];
@@ -131,7 +142,7 @@
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
     [self.connection connectToServer:bookmark[@"ServerHost"] onPort:[bookmark[@"ServerPort"] integerValue]];
-    userListView.connection = self.connection;
+    self.userListView.connection = self.connection;
 }
 
 - (void)disconnect
@@ -235,6 +246,72 @@
 }
 
 #pragma mark -
+#pragma mark UITableView Helper Methods
+
+- (void)addMessageToView:(NSString *)message fromID:(NSString *)userID
+{
+    ChatMessage *newMessage = [ChatMessage new];
+    newMessage.message = message;
+    newMessage.nick = [self.connection userList][@"1"][userID][@"wired.user.nick"];
+    
+    [chatMessages addObject:newMessage];
+    [chatTableView reloadData];
+}
+
+- (void)addEmoteToView:(NSString *)emote fromID:(NSString *)userID
+{
+    ChatMessage *newMessage = [ChatMessage new];
+    newMessage.message = emote;
+    newMessage.nick = [self.connection userList][@"1"][userID][@"wired.user.nick"];
+    
+    [chatMessages addObject:newMessage];
+    [chatTableView reloadData];
+}
+
+- (void)addSystemMessageToView:(NSString *)message
+{
+    ChatMessage *newMessage = [ChatMessage new];
+    newMessage.message = message;
+    
+    [chatMessages addObject:newMessage];
+    [chatTableView reloadData];
+}
+
+#pragma mark -
+#pragma mark UITableView Data Sources
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [chatMessages count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    ChatMessage *message = [chatMessages objectAtIndex:[indexPath row]];
+    cell.textLabel.text = message.nick;
+    cell.detailTextLabel.text = message.message;
+    
+    return cell;
+}
+
+#pragma mark -
 #pragma mark Wired Delegate Methods
 
 /*
@@ -269,8 +346,10 @@
  */
 - (void)didReceiveUserInfo:(NSDictionary *)info
 {
-    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView" bundle:nil userInfo:info];
-
+    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView"
+                                                                                      bundle:nil
+                                                                                    userInfo:info];
+    
     // Nested ViewDeckControllers!
     // This controller already exists (AppDelegate.m) but we need to set up its right-most view.
     IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
@@ -324,10 +403,9 @@
     [progressHUD hide:YES afterDelay:2];
     
     // Report the connection to chat.
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Connected to %@ >>>\n",self.connection.serverInfo[@"wired.info.name"]];
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    NSString *message = [NSString stringWithFormat:@"<<< Connected to %@ >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"]];
+    [self addSystemMessageToView:message];
     
     [TestFlight passCheckpoint:@"Connected to Server"];
 }
@@ -364,10 +442,9 @@
     [progressHUD show:YES];
     
     // Report the disconnect to chat.
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",self.connection.serverInfo[@"wired.info.name"]];
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@ >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"]];
+    [self addSystemMessageToView:message];
 }
 
 /*
@@ -385,10 +462,9 @@
     [progressHUD show:YES];
     
     // Report the disconnect to chat.
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Disconnected from %@ >>>\n",self.connection.serverInfo[@"wired.info.name"]];
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@ >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"]];
+    [self addSystemMessageToView:message];
 }
 
 /*
@@ -402,10 +478,9 @@
 - (void)willReconnectDelayed:(NSString *)delay
 {
     // Report the disconnect to chat.
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Reconnecting to %@ in %@ seconds >>>\n",self.connection.serverInfo[@"wired.info.name"], delay];
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];   
+    NSString *message = [NSString stringWithFormat:@"<<< Reconnecting to %@ in %@ seconds >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"], delay];
+    [self addSystemMessageToView:message];
 }
 
 /*
@@ -419,10 +494,9 @@
 - (void)willReconnectDelayed:(NSString *)delay withError:(NSError *)error
 {
     // Report the disconnect to chat.
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Disconnected from %@:%@ >>>\n",self.connection.serverInfo[@"wired.info.name"], error.description];
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@:%@ >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"], error.description];
+    [self addSystemMessageToView:message];
     
     [self willReconnectDelayed:delay];
 }
@@ -442,10 +516,9 @@
     [progressHUD hide:YES afterDelay:2];
     
     // Report the disconnect to chat.
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    [chatText appendFormat:@"<<< Reconnected to %@ >>>\n",self.connection.serverInfo [@"wired.info.name"]];
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    NSString *message = [NSString stringWithFormat:@"<<< Reconnected to %@ >>>\n",
+                         self.connection.serverInfo [@"wired.info.name"]];
+    [self addSystemMessageToView:message];
     
     [TestFlight passCheckpoint:@"Reconnected to Server"];
 }
@@ -465,21 +538,17 @@
         NSLog(@"Channel #%@ topic: %@ (set by %@)",channel,topic,nick);
 #endif
     }
-
+    
     // Subsequent topic changes, so we should notify the user.
     else {
 #ifdef DEBUG
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>",channel,nick,topic);
 #endif
-
-        NSMutableString *chatText = [chatTextView.text mutableCopy];
         
-        [chatText appendFormat:@"<<< %@ changed topic to %@ >>>\n",nick,topic];
-        
-        chatTextView.text = chatText;
-        [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+        NSString *message = [NSString stringWithFormat:@"<<< %@ changed topic to %@ >>>\n", nick, topic];
+        [self addSystemMessageToView:message];
     }
-
+    
     serverTopic = topic;
 }
 
@@ -495,12 +564,7 @@
     NSLog(@"%@ | %@ (%@) : %@",channel,nick,userID,message);
 #endif
     
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    
-    [chatText appendFormat:@"%@: %@\n",nick,message];
-    
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    [self addMessageToView:message fromID:userID];
 }
 
 /*
@@ -517,7 +581,7 @@
 #endif
     
     // Don't send notification if message is from yourself.
-    if (userID == [connection myUserID])
+    if (userID == [self.connection myUserID])
         return;
     
     NSString *tMessage = [NSString stringWithFormat:@"%@: %@", nick, message];
@@ -556,12 +620,8 @@
     NSLog(@"%@ | %@ (%@) %@",channel,nick,userID,message);
 #endif
     
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
     
-    [chatText appendFormat:@"*** %@ %@\n",nick,message];
-    
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    [self addEmoteToView:message fromID:userID];
 }
 
 /*
@@ -576,12 +636,8 @@
     NSLog(@"<<< %@ has joined >>>",nick);
 #endif
     
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    
-    [chatText appendFormat:@"<<< %@ has joined >>>\n",nick];
-    
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    NSString *message = [NSString stringWithFormat:@"<<< %@ has joined >>>\n", nick];
+    [self addSystemMessageToView:message];
 }
 
 /*
@@ -596,12 +652,8 @@
     NSLog(@"<<< %@ is now known as %@ >>>",oldNick,newNick);
 #endif
     
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    
-    [chatText appendFormat:@"<<< %@ is now known as %@ >>>\n",oldNick,newNick];
-    
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];    
+    NSString *message = [NSString stringWithFormat:@"<<< %@ is now known as %@ >>>\n", oldNick, newNick];
+    [self addSystemMessageToView:message];
 }
 
 /*
@@ -616,12 +668,8 @@
     NSLog(@"<<< %@ has left >>>",nick);
 #endif
     
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-    
-    [chatText appendFormat:@"<<< %@ has left >>>\n",nick];
-    
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    NSString *message = [NSString stringWithFormat:@"<<< %@ has left >>>\n", nick];
+    [self addSystemMessageToView:message];
 }
 
 /*
@@ -640,16 +688,14 @@
     NSLog(@"<<< %@ was kicked by %@ (%@) >>>",nick,kicker,reason);
 #endif
     
-    NSMutableString *chatText = [chatTextView.text mutableCopy];
-
+    NSString *message;
     if ([reason isEqualToString:@""]) {
-        [chatText appendFormat:@"<<< %@ was kicked by %@ >>>\n",nick,kicker];
+        message = [NSString stringWithFormat:@"<<< %@ was kicked by %@ >>>\n", nick, kicker];
     } else {
-        [chatText appendFormat:@"<<< %@ was kicked by %@ (%@) >>>\n",nick,kicker,reason];        
+        message = [NSString stringWithFormat:@"<<< %@ was kicked by %@ (%@) >>>\n", nick, kicker, reason];
     }
     
-    chatTextView.text = chatText;
-    [chatTextView scrollRangeToVisible:NSMakeRange([chatTextView.text length], 0)];
+    [self addSystemMessageToView:message];
     
     // Rejoin the channel if we were the one kicked.
     if ([userID isEqualToString:self.connection.myUserID]) {
@@ -667,8 +713,10 @@
  */
 - (void)setUserList:(NSDictionary *)userList forChannel:(NSString *)channel
 {
-    [userListView setUserList:userList];
-    [userListView.tableView setNeedsDisplay];
+    [self.userListView setUserList:userList];
+    [self.userListView.tableView setNeedsDisplay];
+    
+    NSLog(@"%@", [[self.connection userList] description]);
 }
 
 #pragma mark -
@@ -693,7 +741,7 @@
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
@@ -725,7 +773,7 @@
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGRect keyboardFrame = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
+    
     // Move the textField out of the keyboard's way.
     [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
@@ -737,16 +785,18 @@
                                                                 self->accessoryView.frame.size.width,
                                                                 self->accessoryView.frame.size.height);
                          // Resize the chat view.
-                         self->chatTextView.frame = CGRectMake(self->chatTextView.frame.origin.x,
-                                                               self->chatTextView.frame.origin.y,
-                                                               self->chatTextView.frame.size.width,
-                                                               self->accessoryView.frame.origin.y - 45);
+//                         self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
+//                                                                self->chatTableView.frame.origin.y,
+//                                                                self->chatTableView.frame.size.width,
+//                                                                self->accessoryView.frame.origin.y - 45);
                          
-                         // TODO: The chatTextView doesn't actually get its height modified...?
-//                         NSLog(@"ChatTextView Should Be: %f", self->accessoryView.frame.origin.y - 45);
-//                         NSLog(@"ChatTextView Is:        %f", self->chatTextView.frame.size.height);
+                         self->chatTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, keyboardFrame.size.height + 45);
                          
-                         [self->chatTextView scrollRangeToVisible:NSMakeRange([self->chatTextView.text length], 0)];
+                         // TODO: The chatTableView doesn't actually get its height modified...?
+                         //                         NSLog(@"chatTableView Should Be: %f", self->accessoryView.frame.origin.y - 45);
+                         //                         NSLog(@"chatTableView Is:        %f", self->chatTableView.frame.size.height);
+
+                         // TODO: Scroll to bottom of chatTableView.
                      }
      
                      completion:^(BOOL finished){
@@ -768,12 +818,14 @@
                                                                 self->accessoryView.frame.size.height);
                          
                          // Resize the chat view.
-                         self->chatTextView.frame = CGRectMake(self->chatTextView.frame.origin.x,
-                                                               self->chatTextView.frame.origin.y,
-                                                               self->chatTextView.frame.size.width,
-                                                               self->accessoryView.frame.origin.y - 45);
+                         self->chatTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
                          
-                         [self->chatTextView scrollRangeToVisible:NSMakeRange([self->chatTextView.text length], 0)];
+//                         self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
+//                                                                self->chatTableView.frame.origin.y,
+//                                                                self->chatTableView.frame.size.width,
+//                                                                self->accessoryView.frame.origin.y - 45);
+                         
+                         // TODO: Scroll to bottom of chatTableView.
                      }
      
                      completion:^(BOOL finished){

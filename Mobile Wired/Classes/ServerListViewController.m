@@ -27,10 +27,11 @@
 #import "ServerListViewController.h"
 #import "ServerListTableViewCell.h"
 
-#import "IIViewDeckController.h"
-#import "SettingsViewController.h"
 #import "BookmarkViewController.h"
 #import "ChatViewController.h"
+#import "IIViewDeckController.h"
+#import "SettingsViewController.h"
+#import "UserListViewController.h"
 
 #import "BlockAlertView.h"
 

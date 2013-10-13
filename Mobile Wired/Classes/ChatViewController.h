@@ -25,35 +25,33 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WiredConnection.h"
-#import "UserListViewController.h"
 #import "MBProgressHUD.h"
+#import "WiredConnection.h"
 
-@interface ChatViewController : UIViewController <WiredConnectionDelegate, MBProgressHUDDelegate, UIGestureRecognizerDelegate> {
-    WiredConnection *connection;
-    MBProgressHUD *progressHUD;
-    UserListViewController *userListView;
-    int badgeCount;
-    
+@class UserListViewController;
+
+@interface ChatMessage : NSObject;
+@property (strong, nonatomic) NSString *nick;
+@property (strong, nonatomic) NSString *message;
+
+@end
+
+@interface ChatViewController : UIViewController <MBProgressHUDDelegate, WiredConnectionDelegate, UIGestureRecognizerDelegate> {
     NSDictionary *bookmark;
+    MBProgressHUD *progressHUD;
     NSString *serverTopic;
     
     IBOutlet UINavigationBar *navigationBar;
     IBOutlet UIToolbar *toolBar;
     
-    IBOutlet UITextView *chatTextView;
+    NSMutableArray *chatMessages;
+    IBOutlet UITableView *chatTableView;
     IBOutlet UITextField *chatTextField;
     IBOutlet UIView *accessoryView;
-    
-    UIView *keyboard;
-    UIPanGestureRecognizer *panRecognizer;
-    int originalKeyboardY;
-    int lastLocation;
 }
 
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) UserListViewController *userListView;
-@property (nonatomic) int badgeCount;
 
 - (void)new:(NSInteger)indexRow;
 - (Boolean)isConnected;
