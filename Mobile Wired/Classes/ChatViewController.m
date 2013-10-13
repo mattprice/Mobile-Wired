@@ -40,7 +40,7 @@
     self = [super init];
     if (self) {
         self.message = @"";
-        self.nick = @"";
+        self.userID = @"";
     }
     
     return self;
@@ -252,7 +252,7 @@
 {
     ChatMessage *newMessage = [ChatMessage new];
     newMessage.message = message;
-    newMessage.nick = [self.connection userList][@"1"][userID][@"wired.user.nick"];
+    newMessage.userID = userID;
     
     [chatMessages addObject:newMessage];
     [chatTableView reloadData];
@@ -268,7 +268,7 @@
 {
     ChatMessage *newMessage = [ChatMessage new];
     newMessage.message = emote;
-    newMessage.nick = [self.connection userList][@"1"][userID][@"wired.user.nick"];
+    newMessage.userID = userID;
     
     [chatMessages addObject:newMessage];
     [chatTableView reloadData];
@@ -323,8 +323,18 @@
     }
     
     ChatMessage *message = [chatMessages objectAtIndex:[indexPath row]];
-    cell.textLabel.text = message.nick;
+    NSDictionary *currentUser = [self.connection userList][@"1"][message.userID];
+    UIImage *userImage = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
+    
+    // Make the user image into a circle.
+//    UIGraphicsBeginImageContextWithOptions(userImage.size, NO, 0);
+//    [[UIBezierPath bezierPathWithRoundedRect:(CGRect){CGPointZero, userImage.size} cornerRadius:15.0] addClip];
+//    [userImage drawInRect:(CGRect){CGPointZero, userImage.size}];
+//    userImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+    
     cell.detailTextLabel.text = message.message;
+    cell.imageView.image = userImage;
     
     return cell;
 }

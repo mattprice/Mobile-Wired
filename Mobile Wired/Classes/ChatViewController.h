@@ -31,7 +31,7 @@
 @class UserListViewController;
 
 @interface ChatMessage : NSObject;
-@property (strong, nonatomic) NSString *nick;
+@property (strong, nonatomic) NSString *userID;
 @property (strong, nonatomic) NSString *message;
 
 @end
