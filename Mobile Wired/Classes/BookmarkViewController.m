@@ -136,7 +136,7 @@
     // Storing the password requires a little more effort because of SHA1 hashing.
     if (textField == userPassField && ![userPassField.text isEqualToString:@""]) {
         // If the current field is the password field, create a SHA1 hash.
-        bookmark[@"UserPass"] = [userPassField.text SHA1Value];
+        bookmark[@"UserPass"] = ([userPassField.text SHA1Value]) ? [userPassField.text SHA1Value] : @"";
     } else if (![userPassField.text isEqualToString:@""]) {
         // If this is not the password field and we already have a SHA1'd password, use it.
         bookmark[@"UserPass"] = userPassField.text;
