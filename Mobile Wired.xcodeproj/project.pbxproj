@@ -85,8 +85,6 @@
 		348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F5C2414FC63A800F76AAC /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34A5A0F0136B74270022272F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EE136B74270022272F /* Default.png */; };
 		34A5A0F1136B74270022272F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A5A0EF136B74270022272F /* Default@2x.png */; };
-		34AEB77D150D02D6005F2B96 /* ServerListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB77C150D02D6005F2B96 /* ServerListTableViewCell.m */; };
-		34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */; };
 		34CBE9A41505AF49000FBF2C /* Default.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34CBE9A31505AF49000FBF2C /* Default.mp3 */; };
 		34D464D615561BB600856E46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D464D415561BB600856E46 /* SettingsViewController.m */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
@@ -201,9 +199,6 @@
 		348F5C2414FC63A800F76AAC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Classes/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		34A5A0EE136B74270022272F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Mobile Wired/Resources/Images/Default.png"; sourceTree = SOURCE_ROOT; };
 		34A5A0EF136B74270022272F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Mobile Wired/Resources/Images/Default@2x.png"; sourceTree = SOURCE_ROOT; };
-		34AEB77B150D02D6005F2B96 /* ServerListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerListTableViewCell.h; path = Classes/ServerListTableViewCell.h; sourceTree = "<group>"; };
-		34AEB77C150D02D6005F2B96 /* ServerListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerListTableViewCell.m; path = Classes/ServerListTableViewCell.m; sourceTree = "<group>"; };
-		34AEB77F150D03E0005F2B96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ServerListTableViewCell.xib; sourceTree = "<group>"; };
 		34CBE9A31505AF49000FBF2C /* Default.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Default.mp3; sourceTree = "<group>"; };
 		34D464D315561BB600856E46 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Classes/SettingsViewController.h; sourceTree = "<group>"; };
 		34D464D415561BB600856E46 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Classes/SettingsViewController.m; sourceTree = "<group>"; };
@@ -404,9 +399,6 @@
 				34838FAD14F32C640064B619 /* ServerListViewController.h */,
 				34838FAE14F32C640064B619 /* ServerListViewController.m */,
 				34838FC114F3456D0064B619 /* ServerListView.xib */,
-				34AEB77B150D02D6005F2B96 /* ServerListTableViewCell.h */,
-				34AEB77C150D02D6005F2B96 /* ServerListTableViewCell.m */,
-				34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */,
 			);
 			name = "Server List";
 			sourceTree = "<group>";
@@ -658,7 +650,6 @@
 				347B380015098D6500D88034 /* Error@2x.png in Resources */,
 				34EC1153150AD1730015B2CD /* Users.png in Resources */,
 				34EC1154150AD1730015B2CD /* Users@2x.png in Resources */,
-				34AEB780150D03E0005F2B96 /* ServerListTableViewCell.xib in Resources */,
 				3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */,
 				3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */,
 				0DBD205C15B4D10B00D86B6C /* UIButton_Gray.png in Resources */,
@@ -748,7 +739,6 @@
 				345FC70B14F468DC004D2A7B /* GCDAsyncSocket.m in Sources */,
 				34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */,
 				348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */,
-				34AEB77D150D02D6005F2B96 /* ServerListTableViewCell.m in Sources */,
 				34D464D615561BB600856E46 /* SettingsViewController.m in Sources */,
 				3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */,
 				0DEF007315BB922700289AEB /* BlockActionSheet.m in Sources */,
@@ -800,15 +790,6 @@
 				34838FC214F3456D0064B619 /* en */,
 			);
 			name = ServerListView.xib;
-			path = Resources/en.lproj;
-			sourceTree = "<group>";
-		};
-		34AEB77E150D03E0005F2B96 /* ServerListTableViewCell.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				34AEB77F150D03E0005F2B96 /* en */,
-			);
-			name = ServerListTableViewCell.xib;
 			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};

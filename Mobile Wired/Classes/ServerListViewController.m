@@ -25,8 +25,6 @@
 //
 
 #import "ServerListViewController.h"
-#import "ServerListTableViewCell.h"
-
 #import "BookmarkViewController.h"
 #import "ChatViewController.h"
 #import "IIViewDeckController.h"
@@ -145,31 +143,23 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    ServerListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"ServerListTableViewCell" owner:nil options:nil];
-        
-        for (id currentObject in topLevelObjects) {
-            if([currentObject isKindOfClass:[ServerListTableViewCell class]]) {
-                cell = (ServerListTableViewCell *)currentObject;
-                break;
-            }
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
     // Section 0 is for server bookmarks.
     if ([indexPath section] == 0) {
         // If we don't have any bookmarks display an "Add Bookmark" button.
         if ([serverBookmarks count] == 0) {
-            cell.bookmarkLabel.text = @"Add Bookmark";
+            cell.textLabel.text = @"Add Bookmark";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
         // Else, if we're editing, then bookmark count is the "Add Bookmark" item.
         // This is because indices are 0 based, but array count is not.
         else if ([indexPath row] == [serverBookmarks count]) {
-            cell.bookmarkLabel.text = @"Add Bookmark";
+            cell.textLabel.text = @"Add Bookmark";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
@@ -180,17 +170,17 @@
             
             // If there's no Server Name, try using the Server Host.
             if ([currentBookmark[@"ServerName"] isEqualToString:@""]) {
-                cell.bookmarkLabel.text = currentBookmark[@"ServerHost"];
+                cell.textLabel.text = currentBookmark[@"ServerHost"];
             } else {
-                cell.bookmarkLabel.text = currentBookmark[@"ServerName"];
+                cell.textLabel.text = currentBookmark[@"ServerName"];
             }
             
             // Set the status image.
 //            NSString *indexString = [NSString stringWithFormat:@"%d", [indexPath row]];
 //            if (currentConnections[indexString]) {
-//                cell.statusImage.image = [UIImage imageNamed:@"GreenDot.png"];
+//                cell.imageView.image = [UIImage imageNamed:@"GreenDot.png"];
 //            } else {
-//                cell.statusImage.image = [UIImage imageNamed:@"GrayDot.png"];
+//                cell.imageView.image = [UIImage imageNamed:@"GrayDot.png"];
 //            }
             
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -200,7 +190,7 @@
     
     // Section 1 is settings.
     else if ([indexPath section] == 1) {
-        cell.bookmarkLabel.text = @"Settings";
+        cell.textLabel.text = @"Settings";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
