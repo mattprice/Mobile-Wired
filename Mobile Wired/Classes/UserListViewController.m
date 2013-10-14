@@ -25,13 +25,10 @@
 //
 
 #import "UserListViewController.h"
-#import "UserListTableViewCell.h"
 #import "ChatViewController.h"
 #import "IIViewDeckController.h"
 
 @implementation UserListViewController
-
-@synthesize connection, userListArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,12 +42,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView reloadData];
+    [self.mainTableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.tableView reloadData];
+    [self.mainTableView reloadData];
     
     [TestFlight passCheckpoint:@"Viewed User List"];
 }
@@ -65,6 +62,7 @@
 - (void)viewDeckController:(IIViewDeckController*)viewDeckController willOpenViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
 {
     if ( viewDeckSide == IIViewDeckRightSide ) {
+        // TODO: Use a global #define to set this.
         self.topViewDeckController.rightSize = 22;
     }
 }
@@ -72,6 +70,7 @@
 - (void)viewDeckController:(IIViewDeckController*)viewDeckController willCloseViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
 {
     if ( viewDeckSide == IIViewDeckRightSide ) {
+        // TODO: Use a global #define to set this.
         self.topViewDeckController.rightSize = 44;
     }
     
@@ -85,24 +84,23 @@
     // User lists are organized into channels; save only channel 1.
     self.userListArray = [[userList[@"1"] allValues] mutableCopy];
     
-    // Sort the user list by user ID, which increments each time someone connects.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"wired.user.id" ascending:YES];
-    [self.userListArray sortUsingDescriptors:@[sortDescriptor]];
-    [self.tableView reloadData];
+    // Sort the user list by status and then by username.
+    NSSortDescriptor *idleSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"wired.user.idle" ascending:YES];
+    NSSortDescriptor *nickSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"wired.user.nick" ascending:YES];
+    [self.userListArray sortUsingDescriptors:@[idleSortDescriptor, nickSortDescriptor]];
     
-    // Reload the TableView
-    [self.tableView reloadData];
+    [self.mainTableView reloadData];
 }
 
 #pragma mark -
 #pragma mark TableView Data Sources
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of Users in the list.
     return [self.userListArray count];
@@ -112,57 +110,36 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UserListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"UserListTableViewCell" owner:nil options:nil];
-        
-        for (id currentObject in topLevelObjects) {
-            if([currentObject isKindOfClass:[UserListTableViewCell class]]) {
-                cell = (UserListTableViewCell *)currentObject;
-                break;
-            }
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Get info about the current row's user
-    NSDictionary *currentUser = userListArray[[indexPath row]];
+    NSDictionary *currentUser = self.userListArray[[indexPath row]];
     
-    // Center the nickname if there's no status.
-    if ( [currentUser[@"wired.user.status"] isEqualToString:@""] ) {
-        cell.nickLabel.text = @"";
-        cell.statusLabel.text = @"";
-        
-        cell.onlyNickLabel.text = currentUser[@"wired.user.nick"];
-        cell.onlyNickLabel.textColor = currentUser[@"wired.account.color"];
-    } else {
-        cell.onlyNickLabel.text = @"";
-        
-        cell.nickLabel.text = currentUser[@"wired.user.nick"];
-        cell.nickLabel.textColor = currentUser[@"wired.account.color"];
-        cell.statusLabel.text = currentUser[@"wired.user.status"];
-    }
+    cell.textLabel.text = currentUser[@"wired.user.nick"];
+    cell.textLabel.textColor = currentUser[@"wired.account.color"];
+    cell.detailTextLabel.text = currentUser[@"wired.user.status"];
     
     // Fade information about idle users
     if ( [currentUser[@"wired.user.idle"] isEqualToString:@"1"] ) {
-        cell.nickLabel.alpha = 0.3;
-        cell.onlyNickLabel.alpha = 0.3;
-        cell.statusLabel.alpha = 0.4;
-        cell.avatar.alpha = 0.5;
+        cell.textLabel.alpha = 0.3;
+        cell.detailTextLabel.alpha = 0.4;
+        cell.imageView.alpha = 0.5;
     } else {
-        cell.nickLabel.alpha = 1;
-        cell.onlyNickLabel.alpha = 1;
-        cell.statusLabel.alpha = 1;
-        cell.avatar.alpha = 1;
+        cell.textLabel.alpha = 1;
+        cell.detailTextLabel.alpha = 1;
+        cell.imageView.alpha = 1;
     }
     
-    cell.avatar.image = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
+    cell.imageView.image = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
     
     // Display a disclosure indicator if the user has permission to view user info.
     if ( [[self.connection getMyPermissions][@"wired.account.user.get_info"] boolValue] ) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-
+    
     // If the user doesn't have permission, don't let them select the UITableViewCells.
     else {
         cell.userInteractionEnabled = NO;
@@ -173,10 +150,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *currentUser = userListArray[[indexPath row]];
-
+    NSDictionary *currentUser = self.userListArray[[indexPath row]];
+    
     [self.connection getInfoForUser:currentUser[@"wired.user.id"]];
-
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

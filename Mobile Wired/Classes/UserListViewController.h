@@ -27,13 +27,11 @@
 #import <UIKit/UIKit.h>
 #import "WiredConnection.h"
 
-@interface UserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
-    WiredConnection *connection;
-    NSMutableArray *userListArray;
-}
+@interface UserListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>;
 
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) NSMutableArray *userListArray;
+@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 
 - (void)setUserList:(NSDictionary *)userList;
 

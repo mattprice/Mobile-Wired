@@ -259,9 +259,9 @@
     
     // Scroll to the new message.
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
-    [self->chatTableView scrollToRowAtIndexPath:indexPath
-                               atScrollPosition:UITableViewScrollPositionBottom
-                                       animated:YES];
+    [chatTableView scrollToRowAtIndexPath:indexPath
+                         atScrollPosition:UITableViewScrollPositionBottom
+                                 animated:YES];
 }
 
 - (void)addEmoteToView:(NSString *)emote fromID:(NSString *)userID
@@ -275,9 +275,9 @@
     
     // Scroll to the new message.
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
-    [self->chatTableView scrollToRowAtIndexPath:indexPath
-                               atScrollPosition:UITableViewScrollPositionBottom
-                                       animated:YES];
+    [chatTableView scrollToRowAtIndexPath:indexPath
+                         atScrollPosition:UITableViewScrollPositionBottom
+                                 animated:YES];
 }
 
 - (void)addSystemMessageToView:(NSString *)message
@@ -290,9 +290,9 @@
     
     // Scroll to the new message.
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
-    [self->chatTableView scrollToRowAtIndexPath:indexPath
-                               atScrollPosition:UITableViewScrollPositionBottom
-                                       animated:YES];
+    [chatTableView scrollToRowAtIndexPath:indexPath
+                         atScrollPosition:UITableViewScrollPositionBottom
+                                 animated:YES];
 }
 
 #pragma mark -
@@ -742,7 +742,7 @@
 - (void)setUserList:(NSDictionary *)userList forChannel:(NSString *)channel
 {
     [self.userListView setUserList:userList];
-    [self.userListView.tableView setNeedsDisplay];
+    [self.userListView.mainTableView setNeedsDisplay];
 }
 
 #pragma mark -
@@ -802,7 +802,7 @@
     // TODO: This animation doesn't match the keyboard's animation perfectly.
     [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
-                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
+                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] integerValue]
                      animations:^{
                          CGRect keyboardFrame = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
                          
@@ -833,7 +833,7 @@
     // Adjust the accessory view.
     [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
                           delay:0
-                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] doubleValue]
+                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] integerValue]
                      animations:^{
                          // Pan the accessory view down.
                          self->accessoryView.frame = CGRectMake(0.0,

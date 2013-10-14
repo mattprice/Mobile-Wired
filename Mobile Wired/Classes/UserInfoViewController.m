@@ -25,7 +25,6 @@
 //
 
 #import "UserInfoViewController.h"
-#import "UserListTableViewCell.h"
 
 @implementation UserInfoViewController
 
@@ -73,50 +72,29 @@
 {
     // Section 0 is General Info.
     if ([indexPath section] == 0) {
-        static NSString *CellIdentifier = @"UserCell";
+        static NSString *CellIdentifier = @"Cell";
         
-        UserListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"UserListTableViewCell" owner:nil options:nil];
-            
-            for (id currentObject in topLevelObjects) {
-                if([currentObject isKindOfClass:[UserListTableViewCell class]]) {
-                    cell = (UserListTableViewCell *)currentObject;
-                    cell.backgroundView.backgroundColor = [UIColor clearColor];
-                    break;
-                }
-            }
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
-
-        // Center the nickname if there's no status.
-        if ( [userInfo[@"wired.user.status"] isEqualToString:@""] ) {
-            cell.nickLabel.text = @"";
-            cell.statusLabel.text = @"";
-            
-            cell.onlyNickLabel.text = userInfo[@"wired.user.nick"];
-            cell.onlyNickLabel.textColor = userInfo[@"wired.account.color"];
-        } else {
-            cell.onlyNickLabel.text = @"";
-            
-            cell.nickLabel.text = userInfo[@"wired.user.nick"];
-            cell.nickLabel.textColor = userInfo[@"wired.account.color"];
-            cell.statusLabel.text = userInfo[@"wired.user.status"];
-        }
+        
+        cell.textLabel.text = userInfo[@"wired.user.nick"];
+        cell.textLabel.textColor = userInfo[@"wired.account.color"];
+        cell.detailTextLabel.text = userInfo[@"wired.user.status"];
         
         // Fade information about idle users
         if ( [userInfo[@"wired.user.idle"] isEqualToString:@"1"] ) {
-            cell.nickLabel.alpha = 0.3;
-            cell.onlyNickLabel.alpha = 0.3;
-            cell.statusLabel.alpha = 0.4;
-            cell.avatar.alpha = 0.5;
+            cell.textLabel.alpha = 0.3;
+            cell.detailTextLabel.alpha = 0.4;
+            cell.imageView.alpha = 0.5;
         } else {
-            cell.nickLabel.alpha = 1;
-            cell.onlyNickLabel.alpha = 1;
-            cell.statusLabel.alpha = 1;
-            cell.avatar.alpha = 1;
+            cell.textLabel.alpha = 1;
+            cell.detailTextLabel.alpha = 1;
+            cell.imageView.alpha = 1;
         }
         
-        cell.avatar.image = [UIImage imageWithData:userInfo[@"wired.user.icon"]];
+        cell.imageView.image = [UIImage imageWithData:userInfo[@"wired.user.icon"]];
         
         return cell;
     }

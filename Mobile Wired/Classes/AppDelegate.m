@@ -87,8 +87,8 @@
     futureController.delegate = self;
     
     // Enable the parallax scrolling effect.
-    deckController.parallaxAmount = 0.3;
-    futureController.parallaxAmount = 0.3;
+    deckController.parallaxAmount = 0.5;
+    futureController.parallaxAmount = 0.5;
     
     // Override point for customization after application launch.
     self.window.rootViewController = deckController;
@@ -105,7 +105,7 @@
 - (void)viewDeckController:(IIViewDeckController *)viewDeckController applyShadow:(CALayer *)shadowLayer withBounds:(CGRect)rect
 {
     shadowLayer.masksToBounds = NO;
-    shadowLayer.shadowRadius = 5;
+    shadowLayer.shadowRadius = 5.0;
     shadowLayer.shadowOpacity = 0.35;
     shadowLayer.shadowOffset = CGSizeZero;
     shadowLayer.shadowPath = [[UIBezierPath bezierPathWithRect:rect] CGPath];

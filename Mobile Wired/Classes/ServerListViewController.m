@@ -54,7 +54,8 @@
     [super viewDidLoad];
     
     // Start out by opening the left view.
-    self.viewDeckController.leftSize = -10;
+    // TODO: Use a global #define to set this.
+    self.viewDeckController.leftSize = -5.0 * 2.0;
     [self.viewDeckController openLeftViewAnimated:NO];
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
     
@@ -344,11 +345,11 @@
         self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
         [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL completed) {
             // If this is the first item we've opened after launch then we need to resize
-            // the server list window and change the  left ledge size.
+            // the server list window and change the left ledge size.
+            // TODO: Use a global #define to set this.
             CGRect frame = self.mainTableView.frame;
-            frame.size.width = 275.0;
+            frame.size.width = frame.size.width - 44.0;
             self.mainTableView.frame = frame;
-            
             self.viewDeckController.leftSize = 44.0;
         }];
     }
