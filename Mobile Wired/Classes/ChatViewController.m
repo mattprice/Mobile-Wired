@@ -322,7 +322,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    ChatMessage *message = [chatMessages objectAtIndex:[indexPath row]];
+    ChatMessage *message = chatMessages[[indexPath row]];
     NSDictionary *currentUser = [self.connection userList][@"1"][message.userID];
     UIImage *userImage = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
     
