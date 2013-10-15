@@ -258,7 +258,7 @@
     [chatTableView reloadData];
     
     // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chatMessages count]-1 inSection:0];
     [chatTableView scrollToRowAtIndexPath:indexPath
                          atScrollPosition:UITableViewScrollPositionBottom
                                  animated:YES];
@@ -274,7 +274,7 @@
     [chatTableView reloadData];
     
     // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chatMessages count]-1 inSection:0];
     [chatTableView scrollToRowAtIndexPath:indexPath
                          atScrollPosition:UITableViewScrollPositionBottom
                                  animated:YES];
@@ -289,7 +289,7 @@
     [chatTableView reloadData];
     
     // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chatMessages count]-1 inSection:0];
     [chatTableView scrollToRowAtIndexPath:indexPath
                          atScrollPosition:UITableViewScrollPositionBottom
                                  animated:YES];
@@ -322,6 +322,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
+    // Setting the numberOfLines to 0 means the UILabel will use as many lines as necessary.
+    cell.detailTextLabel.numberOfLines = 0;
+    
     ChatMessage *message = chatMessages[[indexPath row]];
     NSDictionary *currentUser = [self.connection userList][@"1"][message.userID];
     UIImage *userImage = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
@@ -337,6 +340,26 @@
     cell.imageView.image = userImage;
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ChatMessage *message = chatMessages[[indexPath row]];
+    UILabel *label = [UILabel new];
+    
+    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:label.font, NSFontAttributeName, nil];
+    
+    CGRect frame = [message.message boundingRectWithSize: CGSizeMake(tableView.frame.size.width, 20000.0)
+                                      options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                   attributes:attributesDictionary
+                                      context:nil];
+    
+    // Animate the height of the UITableViewCell.
+    [tableView beginUpdates];
+    [tableView endUpdates];
+    
+    // User icons are 32px. With 5px of top and bottom padding, the minimum cell height should be 42.
+    return (frame.size.height > 42) ? frame.size.height : 42;
 }
 
 #pragma mark -
