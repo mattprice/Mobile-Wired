@@ -338,7 +338,7 @@
             // the server list window and change the left ledge size.
             // TODO: Use a global #define to set this.
             CGRect frame = self.mainTableView.frame;
-            frame.size.width = frame.size.width - 44.0;
+            frame.size.width = [[UIScreen mainScreen] bounds].size.width - 44.0;
             self.mainTableView.frame = frame;
             self.viewDeckController.leftSize = 44.0;
         }];
