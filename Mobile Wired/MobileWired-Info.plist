@@ -10,13 +10,6 @@
 	<array/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>MobileWired@2x.png</string>
-		<string>MobileWired.png</string>
-	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.embercode.MobileWired</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -45,9 +38,5 @@
 	<array/>
 	<key>UTImportedTypeDeclarations</key>
 	<array/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>audio</string>
-	</array>
 </dict>
 </plist>
