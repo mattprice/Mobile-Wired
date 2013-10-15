@@ -346,17 +346,16 @@
 {
     ChatMessage *message = chatMessages[[indexPath row]];
     UILabel *label = [UILabel new];
-    
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:label.font, NSFontAttributeName, nil];
-    
-    CGRect frame = [message.message boundingRectWithSize: CGSizeMake(tableView.frame.size.width, 20000.0)
+
+    CGRect frame = [message.message boundingRectWithSize:CGSizeMake(tableView.frame.size.width, 20000.0)
                                       options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
                                    attributes:attributesDictionary
                                       context:nil];
     
     // Animate the height of the UITableViewCell.
-    [tableView beginUpdates];
-    [tableView endUpdates];
+//    [tableView beginUpdates];
+//    [tableView endUpdates];
     
     // User icons are 32px. With 5px of top and bottom padding, the minimum cell height should be 42.
     return (frame.size.height > 42) ? frame.size.height : 42;
