@@ -10,6 +10,7 @@
 		0D12846515BA501400CB6522 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D12846315BA501400CB6522 /* libTestFlight.a */; };
 		0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1838A1180DC8E000FD6AC1 /* Images.xcassets */; };
 		0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */; };
+		0D7F6C2118D14E8F000E94EA /* UIImage+MWKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F6C2018D14E8F000E94EA /* UIImage+MWKit.m */; };
 		0DA8B04C17277CFE008297ED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA8B04B17277CFE008297ED /* QuartzCore.framework */; };
 		0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D515BCD8960030069F /* UserInfoViewController.m */; };
 		0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */; };
@@ -55,6 +56,8 @@
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0D1838A1180DC8E000FD6AC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
 		0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b53.xml; path = Resources/WiredSpec_2.0b53.xml; sourceTree = "<group>"; };
+		0D7F6C1F18D14E8F000E94EA /* UIImage+MWKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+MWKit.h"; path = "Mobile Wired/Classes/Categories/UIImage+MWKit.h"; sourceTree = "<group>"; };
+		0D7F6C2018D14E8F000E94EA /* UIImage+MWKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MWKit.m"; path = "Mobile Wired/Classes/Categories/UIImage+MWKit.m"; sourceTree = "<group>"; };
 		0DA8B04B17277CFE008297ED /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0DC0FE6015BB991C009610D1 /* BlockUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlockUI.h; path = Classes/BlockUI.h; sourceTree = "<group>"; };
 		0DD4C0D415BCD8960030069F /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = Classes/UserInfoViewController.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				3439EC5C14F31D0A00362097 /* NSString+Base64.m */,
 				3439EC5D14F31D0A00362097 /* NSString+Hashes.h */,
 				3439EC5E14F31D0A00362097 /* NSString+Hashes.m */,
+				0D7F6C1F18D14E8F000E94EA /* UIImage+MWKit.h */,
+				0D7F6C2018D14E8F000E94EA /* UIImage+MWKit.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 				34FB815E14F71FDE001780E4 /* IIViewDeckController.m in Sources */,
 				348F5C2514FC63A800F76AAC /* MBProgressHUD.m in Sources */,
 				34D464D615561BB600856E46 /* SettingsViewController.m in Sources */,
+				0D7F6C2118D14E8F000E94EA /* UIImage+MWKit.m in Sources */,
 				3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */,
 				0DEF007315BB922700289AEB /* BlockActionSheet.m in Sources */,
 				0DEF007415BB922700289AEB /* BlockAlertView.m in Sources */,

@@ -29,6 +29,7 @@
 #import "IIViewDeckController.h"
 #import "UserInfoViewController.h"
 #import "UserListViewController.h"
+#import "UIImage+MWKit.h"
 
 #import "BlockAlertView.h"
 #import "BlockTextPromptAlertView.h"
@@ -328,16 +329,26 @@
     ChatMessage *message = chatMessages[[indexPath row]];
     NSDictionary *currentUser = [self.connection userList][@"1"][message.userID];
     UIImage *userImage = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
+    NSString *username = currentUser[@"wired.user.nick"];
     
-    // Make the user image into a circle.
-//    UIGraphicsBeginImageContextWithOptions(userImage.size, NO, 0);
-//    [[UIBezierPath bezierPathWithRoundedRect:(CGRect){CGPointZero, userImage.size} cornerRadius:15.0] addClip];
-//    [userImage drawInRect:(CGRect){CGPointZero, userImage.size}];
-//    userImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-    
-    cell.detailTextLabel.text = message.message;
+    // Resize the user image and make it circular.
+    CGFloat size = 32.0;
+    userImage = [userImage scaleToSize:CGSizeMake(size, size)];
+    userImage = [userImage withCornerRadius:size/2];
     cell.imageView.image = userImage;
+
+    // Set a border around the user image.
+    UIColor *borderColor = [UIColor colorWithWhite:0.0 alpha:0.525];
+    cell.imageView.layer.borderColor = borderColor.CGColor;
+    cell.imageView.layer.borderWidth = 0.5;
+    cell.imageView.layer.cornerRadius = size/2;
+    
+    // Set the font sizes.
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0];
+    
+    cell.textLabel.text = username;
+    cell.detailTextLabel.text = message.message;
     
     return cell;
 }
