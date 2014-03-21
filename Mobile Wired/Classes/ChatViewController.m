@@ -334,17 +334,17 @@
     // Resize the user image and make it circular.
     CGFloat size = 32.0;
     userImage = [userImage scaleToSize:CGSizeMake(size, size)];
-    userImage = [userImage withCornerRadius:size/2];
+//    userImage = [userImage withCornerRadius:size/2];
     cell.imageView.image = userImage;
 
     // Set a border around the user image.
-    UIColor *borderColor = [UIColor colorWithWhite:0.0 alpha:0.525];
-    cell.imageView.layer.borderColor = borderColor.CGColor;
-    cell.imageView.layer.borderWidth = 0.5;
+//    UIColor *borderColor = [UIColor colorWithWhite:0.0 alpha:0.525];
+//    cell.imageView.layer.borderColor = borderColor.CGColor;
+//    cell.imageView.layer.borderWidth = 0.5;
     cell.imageView.layer.cornerRadius = size/2;
     
     // Set the font sizes.
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:13.0];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0];
     
     cell.textLabel.text = username;
@@ -356,20 +356,22 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ChatMessage *message = chatMessages[[indexPath row]];
-    UILabel *label = [UILabel new];
-    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:label.font, NSFontAttributeName, nil];
 
+    // Calculate the message height.
+    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [UIFont systemFontOfSize:14.0], NSFontAttributeName, nil];
     CGRect frame = [message.message boundingRectWithSize:CGSizeMake(tableView.frame.size.width, 20000.0)
-                                      options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                   attributes:attributesDictionary
-                                      context:nil];
+                                                    options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                 attributes:attributesDictionary
+                                                    context:nil];
     
     // Animate the height of the UITableViewCell.
 //    [tableView beginUpdates];
 //    [tableView endUpdates];
     
-    // User icons are 32px. With 5px of top and bottom padding, the minimum cell height should be 42.
-    return (frame.size.height > 42) ? frame.size.height : 42;
+    // User icons are 32px. With 10px of top and bottom padding, the minimum cell height should be 52.
+    CGFloat height = frame.size.height;
+    return (height > 52) ? height : 52;
 }
 
 #pragma mark -

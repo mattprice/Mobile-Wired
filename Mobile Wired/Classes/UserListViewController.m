@@ -137,15 +137,15 @@
     
     // Resize the user image and make it circular.
     CGFloat size = 32.0;
-    UIImage *image =[UIImage imageWithData:currentUser[@"wired.user.icon"]];
+    UIImage *image = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
     image = [image scaleToSize:CGSizeMake(size, size)];
-    image = [image withCornerRadius:size/2];
+//    image = [image withCornerRadius:size/2];
     cell.imageView.image = image;
     
     // Set a border around the user image.
-    UIColor *borderColor = [UIColor colorWithWhite:0.0 alpha:0.525];
-    cell.imageView.layer.borderColor = borderColor.CGColor;
-    cell.imageView.layer.borderWidth = 0.5;
+//    UIColor *borderColor = [UIColor colorWithWhite:0.0 alpha:0.525];
+//    cell.imageView.layer.borderColor = borderColor.CGColor;
+//    cell.imageView.layer.borderWidth = 0.5;
     cell.imageView.layer.cornerRadius = size/2;
     
     // Display a disclosure indicator if the user has permission to view user info.
