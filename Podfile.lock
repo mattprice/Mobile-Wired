@@ -1,0 +1,27 @@
+PODS:
+  - BlockAlertsAnd-ActionSheets (1.0.6):
+    - BlockAlertsAnd-ActionSheets/TableAlertView
+  - BlockAlertsAnd-ActionSheets/TableAlertView (1.0.6)
+  - CocoaAsyncSocket (7.3.5)
+  - MBProgressHUD (0.8)
+  - TBXML (1.5)
+  - TestFlightSDK (3.0.2)
+  - ViewDeck (2.3.1)
+
+DEPENDENCIES:
+  - BlockAlertsAnd-ActionSheets (~> 1.0)
+  - CocoaAsyncSocket (~> 7.3)
+  - MBProgressHUD (~> 0.8)
+  - TBXML (~> 1.5)
+  - TestFlightSDK (~> 3.0)
+  - ViewDeck (~> 2.3)
+
+SPEC CHECKSUMS:
+  BlockAlertsAnd-ActionSheets: 2f9d02f0c57b1789b7db3406ffad72a67f01ad83
+  CocoaAsyncSocket: 45bdbbc1c0a5ed0640ff4c42af325ba43a2f099a
+  MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
+  TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
+  TestFlightSDK: 0c24c533748d0d84bfe7a3cb6036fa79124d84ee
+  ViewDeck: 654a493fc83928892ce483dea08a5302180aafce
+
+COCOAPODS: 0.33.1
