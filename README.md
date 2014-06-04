@@ -2,40 +2,47 @@
 
 Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
 
-<!-- [![Build Status](https://travis-ci.org/mattprice/Mobile-Wired.png)](https://travis-ci.org/mattprice/Mobile-Wired) -->
-
 ## Download Instructions
-Mobile Wired is currently being developed for iOS 7 using the newest Xcode Developer Preview. Attempt using other versions at your own risk.
-```bash
-# Checkout the repository and download all the required submodules:
+Mobile Wired is being developed for iOS 8 using the latest Xcode 6 Developer Preview. We do not currently use Swift, but we may in the future, so I cannot guarantee that this project will work with older Xcode versions.
+
+We use CocoaPods for dependency management. If you do not have it installed you can find instructions on the [CocoaPods website](http://cocoapods.org).
+
+```shell
+# Checkout the repository.
 git clone https://github.com/mattprice/Mobile-Wired.git && cd Mobile-Wired
 
 # Make a copy of the sample TestFlightTokens file.
 cp 'Mobile Wired/TestFlightTokens-Sample.h' 'Mobile Wired/TestFlightTokens.h'
+
+# Install CocoaPod dependencies.
+pod install
+
+# Always open the Xcode workspace instead of the project file.
+open Mobile\ Wired.xcworkspace
 ```
 
 ## External Resources
 
-* [BlockAlerts][]          — UIAlertView and UIActionSheet replacements inspired by TweetBot.
-* [GCDAsyncSocket][]       — Asynchronous socket networking library.
-* [IIViewDeckController][] — Sliding views as found in the Path 2.0 or Facebook iOS apps.
-* [MBProgressHUD][]        — Class for displaying a translucent HUD with an indicator and/or labels.
-* [PrettyKit][]            — Widgets and UIKit subclasses that gives you deeper UIKit customization.
-* [TBXML][]                — Super-fast, lightweight, easy to use XML parser.
-* [TestFlight SDK][]       — Remote crash logging and in-app updates for beta testers.
+|          Name          |                   Description                   |
+| :--------------------- | :---------------------------------------------- |
+| [BlockAlerts][]        | UIAlertView and UIActionSheet replacements      |
+| [GCDAsyncSocket][]     | Asynchronous socket networking library          |
+| [MMDrawerController][] | A lightweight drawer navigation controller      |
+| [MBProgressHUD][]      | Translucent HUD with an indicator and/or labels |
+| [TBXML][]              | Super-fast, lightweight, easy to use XML parser |
+| [TestFlight][]         | Remote crash logging and in-app updates         |
 
-[BlockAlerts]:             https://github.com/gpambrozio/BlockAlertsAnd-ActionSheets
-[GCDAsyncSocket]:          https://github.com/robbiehanson/CocoaAsyncSocket
-[IIViewDeckController]:    https://github.com/Inferis/ViewDeck
-[MBProgressHUD]:           https://github.com/jdg/MBProgressHUD
-[PrettyKit]:               https://github.com/vicpenap/PrettyKit
-[TBXML]:                   https://github.com/71squared/TBXML
-[TestFlight SDK]:          https://testflightapp.com/sdk/
+[BlockAlerts]:        https://github.com/gpambrozio/BlockAlertsAnd-ActionSheets
+[GCDAsyncSocket]:     https://github.com/robbiehanson/CocoaAsyncSocket
+[MMDrawerController]: https://github.com/mutualmobile/MMDrawerController
+[MBProgressHUD]:      https://github.com/jdg/MBProgressHUD
+[TBXML]:              https://github.com/71squared/TBXML
+[TestFlight]:         https://testflightapp.com/sdk/
 
 ## License (MIT)
 
-Copyright (c) 2012 Matthew Price, http://mattprice.me/ <br>
-Copyright (c) 2012 Ember Code, http://embercode.com/
+Copyright (c) 2014 Matthew Price, http://mattprice.me/ <br>
+Copyright (c) 2014 Ember Code, http://embercode.com/
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
