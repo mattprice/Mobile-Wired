@@ -4,8 +4,8 @@
 
 #import <Availability.h>
 
-#ifndef __IPHONE_5_0
-    #warning "This project uses features only available in iPhone SDK 5.0 and later."
+#ifndef __IPHONE_7_0
+    #warning "This project uses features only available in iPhone SDK 7.0 and later."
 #endif
 
 #ifdef __OBJC__
@@ -14,9 +14,6 @@
     #import <CoreData/CoreData.h>
     #import "TestFlight.h"
 #endif
-
-// TBXML checks for this but it's not defined in anything we import.
-#define ARC_ENABLED 1
 
 // If we're not debugging, swap all NSLogs over to TestFlight.
 #ifndef DEBUG

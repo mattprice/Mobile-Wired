@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D12846515BA501400CB6522 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D12846315BA501400CB6522 /* libTestFlight.a */; };
 		0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1838A1180DC8E000FD6AC1 /* Images.xcassets */; };
 		0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */; };
 		0D7F6C2118D14E8F000E94EA /* UIImage+MWKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F6C2018D14E8F000E94EA /* UIImage+MWKit.m */; };
@@ -44,8 +43,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D12846315BA501400CB6522 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = "Mobile Wired/Classes/TestFlight/libTestFlight.a"; sourceTree = "<group>"; };
-		0D12846415BA501400CB6522 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "Mobile Wired/Classes/TestFlight/TestFlight.h"; sourceTree = "<group>"; };
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0D1838A1180DC8E000FD6AC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
 		0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b53.xml; path = Resources/WiredSpec_2.0b53.xml; sourceTree = "<group>"; };
@@ -111,7 +108,6 @@
 				3482C1AA155C6C6E00415794 /* CFNetwork.framework in Frameworks */,
 				3482C1A9155C6C5D00415794 /* Security.framework in Frameworks */,
 				34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */,
-				0D12846515BA501400CB6522 /* libTestFlight.a in Frameworks */,
 				78AA702D4B884034AE657FBD /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,15 +115,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D12846215BA4DF300CB6522 /* TestFlight */ = {
-			isa = PBXGroup;
-			children = (
-				0D12846315BA501400CB6522 /* libTestFlight.a */,
-				0D12846415BA501400CB6522 /* TestFlight.h */,
-			);
-			name = TestFlight;
-			sourceTree = "<group>";
-		};
 		3440CD061366188E0046955F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,7 +195,6 @@
 		34EBE3C113594F7B00A24C01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0D12846215BA4DF300CB6522 /* TestFlight */,
 				34EBE43C1359690000A24C01 /* CFNetwork.framework */,
 				34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */,
 				34EBE3C413594F7B00A24C01 /* Foundation.framework */,
@@ -611,10 +597,6 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Mobile Wired/Classes/TestFlight\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -646,10 +628,6 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "Mobile Wired/MobileWired-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Mobile Wired/Classes/TestFlight\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
