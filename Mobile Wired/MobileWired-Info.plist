@@ -28,8 +28,8 @@
 	<string>0.9</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSMainNibFile</key>
-	<string>DefaultView</string>
+	<key>UIMainStoryboardFile</key>
+	<string>MobileWired</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

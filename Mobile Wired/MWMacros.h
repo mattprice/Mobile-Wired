@@ -1,5 +1,5 @@
 //
-//  main.m
+//  MWMacros.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,14 +23,17 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+// Storyboard ID's
+#define kMWMainStoryboard               @"MobileWired"
+#define kMWDrawerController             @"MWDrawerController"
+#define kMWBookmarksViewController      @"MWBookmarksViewController"
+#define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
+#define kMWUserListViewController       @"UserListViewController"
+#define kMWSettingsViewController       @"SettingsViewController"
+#define kMWChatViewController           @"ChatViewController"
 
-#import "MWAppDelegate.h"
-
-int main(int argc, char *argv[])
-{
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MWAppDelegate class]));
-    }
-}
+// If we're not debugging, swap all NSLogs over to TestFlight.
+#ifndef DEBUG
+    #define NSLog TFLog
+#endif
 

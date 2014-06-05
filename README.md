@@ -3,6 +3,7 @@
 Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
 
 ## Download Instructions
+
 Mobile Wired is being developed for iOS 8 using the latest Xcode 6 Developer Preview. We do not currently use Swift, but we may in the future, so I cannot guarantee that this project will work with older Xcode versions.
 
 We use CocoaPods for dependency management. If you do not have it installed you can find instructions on the [CocoaPods website](http://cocoapods.org).
@@ -41,8 +42,7 @@ open Mobile\ Wired.xcworkspace
 
 ## License (MIT)
 
-Copyright (c) 2014 Matthew Price, http://mattprice.me/ <br>
-Copyright (c) 2014 Ember Code, http://embercode.com/
+Copyright (c) 2014 Matthew Price, http://mattprice.me/
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

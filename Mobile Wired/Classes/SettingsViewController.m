@@ -25,7 +25,6 @@
 //
 
 #import "SettingsViewController.h"
-#import "IIViewDeckController.h"
 
 @implementation SettingsViewController
 
@@ -81,24 +80,24 @@
 #pragma mark -
 #pragma mark ViewDeck Delegates
 
-- (void)viewDeckController:(IIViewDeckController*)viewDeckController
- didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide
-                  animated:(BOOL)animated
-{
-    // Store the current nickname and status.
-    oldNick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
-    oldStatus = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
-}
-
-- (BOOL)viewDeckController:(IIViewDeckController*)viewDeckController shouldOpenViewSide:(IIViewDeckSide)viewDeckSide
-{
-    // Don't let users swipe to the right side. It's either empty or a user list.
-    if ( viewDeckSide == IIViewDeckRightSide ) {
-        return NO;
-    } else {
-        return YES;
-    }
-}
+//- (void)viewDeckController:(IIViewDeckController*)viewDeckController
+// didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide
+//                  animated:(BOOL)animated
+//{
+//    // Store the current nickname and status.
+//    oldNick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
+//    oldStatus = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
+//}
+//
+//- (BOOL)viewDeckController:(IIViewDeckController*)viewDeckController shouldOpenViewSide:(IIViewDeckSide)viewDeckSide
+//{
+//    // Don't let users swipe to the right side. It's either empty or a user list.
+//    if ( viewDeckSide == IIViewDeckRightSide ) {
+//        return NO;
+//    } else {
+//        return YES;
+//    }
+//}
 
 #pragma mark -
 #pragma mark Text Field Delegates
@@ -120,13 +119,13 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     // Disable panning view while typing.
-    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+//    self.viewDeckController.panningMode = IIViewDeckNoPanning;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // Re-enable panning of view.
-    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+//    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
 }
 
 #pragma mark -

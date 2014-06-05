@@ -1,5 +1,5 @@
 //
-//  main.m
+//  MWDrawerController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,14 +23,8 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "MMDrawerController.h"
 
-#import "MWAppDelegate.h"
+@interface MWDrawerController : MMDrawerController
 
-int main(int argc, char *argv[])
-{
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MWAppDelegate class]));
-    }
-}
-
+@end

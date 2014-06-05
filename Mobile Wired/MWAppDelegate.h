@@ -1,5 +1,5 @@
 //
-//  main.m
+//  MWAppDelegate.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -25,12 +25,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "MWAppDelegate.h"
+@class ChatViewController;
+@class UserListViewController;
+@class MWBookmarksViewController;
 
-int main(int argc, char *argv[])
-{
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MWAppDelegate class]));
-    }
-}
+@interface MWAppDelegate : UIResponder <UIApplicationDelegate>
 
+@property (strong, nonatomic) UIWindow *window;
+
+@end

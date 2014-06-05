@@ -1,5 +1,5 @@
 //
-//  main.m
+//  MWBookmarksViewController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -25,12 +25,18 @@
 
 #import <UIKit/UIKit.h>
 
-#import "MWAppDelegate.h"
-
-int main(int argc, char *argv[])
-{
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MWAppDelegate class]));
-    }
+@interface MWBookmarksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    NSMutableArray *serverBookmarks;
+    NSMutableDictionary *currentConnections;
+    NSUInteger selectedIndex;
+    
+    IBOutlet UINavigationBar *navigationBar;
+    IBOutlet UITableView *mainTableView;
 }
 
+@property (strong, nonatomic) NSMutableArray *serverBookmarks;
+@property (nonatomic) NSUInteger selectedIndex;
+
+@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
+
+@end

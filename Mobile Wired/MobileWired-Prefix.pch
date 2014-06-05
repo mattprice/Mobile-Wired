@@ -4,18 +4,17 @@
 
 #import <Availability.h>
 
-#ifndef __IPHONE_7_0
-    #warning "This project uses features only available in iPhone SDK 7.0 and later."
+#ifndef __IPHONE_5_0
+    #warning "This project uses features only available in iPhone SDK 5.0 and later."
 #endif
 
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
-    #import "TestFlight.h"
-#endif
 
-// If we're not debugging, swap all NSLogs over to TestFlight.
-#ifndef DEBUG
-    #define NSLog TFLog
+    #import "TestFlight.h"
+
+    #import "MWMacros.h"
+    #import "MWDrawerController.h"
 #endif

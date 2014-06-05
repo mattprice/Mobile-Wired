@@ -1,5 +1,5 @@
 //
-//  main.m
+//  MWBookmarkSettingsController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -24,13 +24,36 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MWBookmarksViewController.h"
 
-#import "MWAppDelegate.h"
+@interface MWBookmarkSettingsController : UIViewController <UITableViewDelegate, UITextFieldDelegate, UITableViewDataSource> {
+    IBOutlet UINavigationBar *navigationBar;
+    IBOutlet UITableView *mainTableView;
+    
+    MWBookmarksViewController *serverList;
 
-int main(int argc, char *argv[])
-{
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MWAppDelegate class]));
-    }
+    UITextField *serverNameField;
+    NSString *oldServerName;
+    UITextField *serverHostField;
+    NSString *oldServerHost;
+    UITextField *serverPortField;
+    NSString *oldServerPort;
+        
+    UITextField *userLoginField;
+    NSString *oldUserLogin;
+    UITextField *userPassField;
+    NSString *oldUserPass;
+    
+    UITextField *userNickField;
+    NSString *oldUserNick;
+    UITextField *userStatusField;
+    NSString *oldUserStatus;
+    UISwitch *pushSettingSwitch;
+    Boolean oldPushSetting;
 }
 
+@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
+
+@property (strong, nonatomic) MWBookmarksViewController *serverList;
+
+@end

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D0B50E5180CDF8200198D07 /* MobileWired.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */; };
+		0D113DB11942651C0056E5D3 /* MWBookmarkSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB01942651C0056E5D3 /* MWBookmarkSettingsController.m */; };
+		0D113DB4194265360056E5D3 /* MWBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB3194265360056E5D3 /* MWBookmarksViewController.m */; };
+		0D113DB719426B430056E5D3 /* MWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB619426B430056E5D3 /* MWAppDelegate.m */; };
+		0D113DBA19426D160056E5D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D113DB919426D160056E5D3 /* README.md */; };
 		0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1838A1180DC8E000FD6AC1 /* Images.xcassets */; };
 		0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */; };
 		0D7F6C2118D14E8F000E94EA /* UIImage+MWKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F6C2018D14E8F000E94EA /* UIImage+MWKit.m */; };
@@ -14,8 +19,7 @@
 		0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D515BCD8960030069F /* UserInfoViewController.m */; };
 		0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */; };
 		0DD4C0DE15BCDAAB0030069F /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0DC15BCDAAB0030069F /* SettingsView.xib */; };
-		0DD4C0E115BCDAB60030069F /* BookmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0DF15BCDAB60030069F /* BookmarkView.xib */; };
-		0DD4C0E415BCDAC80030069F /* DefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0E215BCDAC80030069F /* DefaultView.xib */; };
+		0DFF15091941420000294943 /* MWDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF15081941420000294943 /* MWDrawerController.m */; };
 		3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5C14F31D0A00362097 /* NSString+Base64.m */; };
 		3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5E14F31D0A00362097 /* NSString+Hashes.m */; };
 		3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */; };
@@ -23,10 +27,7 @@
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		3482C1A9155C6C5D00415794 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3482C1A8155C6C5D00415794 /* Security.framework */; };
 		3482C1AA155C6C6E00415794 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE43C1359690000A24C01 /* CFNetwork.framework */; };
-		3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482C1B8155C7E9200415794 /* BookmarkViewController.m */; };
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
-		34838FB014F32C640064B619 /* ServerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FAE14F32C640064B619 /* ServerListViewController.m */; };
-		34838FC314F3456D0064B619 /* ServerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34838FC114F3456D0064B619 /* ServerListView.xib */; };
 		34D464D615561BB600856E46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D464D415561BB600856E46 /* SettingsViewController.m */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
@@ -36,13 +37,20 @@
 		34EBE403135951A700A24C01 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3FE135951A700A24C01 /* MainWindow.xib */; };
 		34EBE4211359565100A24C01 /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41B1359565100A24C01 /* ChatView.xib */; };
 		34EBE4231359565100A24C01 /* UserListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41F1359565100A24C01 /* UserListView.xib */; };
-		34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4251359569B00A24C01 /* AppDelegate.m */; };
 		34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4271359569B00A24C01 /* ChatViewController.m */; };
 		34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FC5C8C135BB3430049C737 /* libz.dylib */; };
 		78AA702D4B884034AE657FBD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F702BD2F4204C49977D2E93 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D0B50E4180CDF8200198D07 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = MobileWired.storyboard; sourceTree = "<group>"; };
+		0D113DAF1942651C0056E5D3 /* MWBookmarkSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWBookmarkSettingsController.h; path = "View Controllers/MWBookmarkSettingsController.h"; sourceTree = "<group>"; };
+		0D113DB01942651C0056E5D3 /* MWBookmarkSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWBookmarkSettingsController.m; path = "View Controllers/MWBookmarkSettingsController.m"; sourceTree = "<group>"; };
+		0D113DB2194265360056E5D3 /* MWBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWBookmarksViewController.h; path = "View Controllers/MWBookmarksViewController.h"; sourceTree = "<group>"; };
+		0D113DB3194265360056E5D3 /* MWBookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWBookmarksViewController.m; path = "View Controllers/MWBookmarksViewController.m"; sourceTree = "<group>"; };
+		0D113DB519426B430056E5D3 /* MWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWAppDelegate.h; sourceTree = "<group>"; };
+		0D113DB619426B430056E5D3 /* MWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWAppDelegate.m; sourceTree = "<group>"; };
+		0D113DB919426D160056E5D3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0D1838A1180DC8E000FD6AC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
 		0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b53.xml; path = Resources/WiredSpec_2.0b53.xml; sourceTree = "<group>"; };
@@ -53,10 +61,11 @@
 		0DD4C0D515BCD8960030069F /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = Classes/UserInfoViewController.m; sourceTree = "<group>"; };
 		0DD4C0DA15BCDA9E0030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/UserInfoView.xib; sourceTree = "<group>"; };
 		0DD4C0DD15BCDAAB0030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/SettingsView.xib; sourceTree = "<group>"; };
-		0DD4C0E015BCDAB60030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/BookmarkView.xib; sourceTree = "<group>"; };
-		0DD4C0E315BCDAC80030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = DefaultView.xib; sourceTree = "<group>"; };
+		0DFF15071941420000294943 /* MWDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWDrawerController.h; path = Classes/MWDrawerController.h; sourceTree = "<group>"; };
+		0DFF15081941420000294943 /* MWDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWDrawerController.m; path = Classes/MWDrawerController.m; sourceTree = "<group>"; };
+		0DFF150A194147C100294943 /* MWMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWMacros.h; sourceTree = "<group>"; };
 		2F702BD2F4204C49977D2E93 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3431FF5F136C93ED00EDB8D8 /* Roadmap.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Roadmap.md; sourceTree = "<group>"; };
+		3431FF5F136C93ED00EDB8D8 /* ROADMAP.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = ROADMAP.md; sourceTree = "<group>"; };
 		3439EC5B14F31D0A00362097 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Mobile Wired/Classes/Categories/NSString+Base64.h"; sourceTree = "<group>"; };
 		3439EC5C14F31D0A00362097 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Mobile Wired/Classes/Categories/NSString+Base64.m"; sourceTree = "<group>"; };
 		3439EC5D14F31D0A00362097 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Hashes.h"; path = "Mobile Wired/Classes/Categories/NSString+Hashes.h"; sourceTree = "<group>"; };
@@ -66,13 +75,8 @@
 		3477029D135A026100F91A8B /* WiredConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WiredConnection.h; path = Classes/WiredConnection.h; sourceTree = "<group>"; };
 		3477029E135A026200F91A8B /* WiredConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WiredConnection.m; path = Classes/WiredConnection.m; sourceTree = "<group>"; };
 		3482C1A8155C6C5D00415794 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		3482C1B7155C7E9200415794 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookmarkViewController.h; path = Classes/BookmarkViewController.h; sourceTree = "<group>"; };
-		3482C1B8155C7E9200415794 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookmarkViewController.m; path = Classes/BookmarkViewController.m; sourceTree = "<group>"; };
 		34838FA814F32BA80064B619 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserListViewController.h; path = Classes/UserListViewController.h; sourceTree = "<group>"; };
 		34838FA914F32BA80064B619 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserListViewController.m; path = Classes/UserListViewController.m; sourceTree = "<group>"; };
-		34838FAD14F32C640064B619 /* ServerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerListViewController.h; path = Classes/ServerListViewController.h; sourceTree = "<group>"; };
-		34838FAE14F32C640064B619 /* ServerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerListViewController.m; path = Classes/ServerListViewController.m; sourceTree = "<group>"; };
-		34838FC214F3456D0064B619 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ServerListView.xib; sourceTree = "<group>"; };
 		34D464D315561BB600856E46 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Classes/SettingsViewController.h; sourceTree = "<group>"; };
 		34D464D415561BB600856E46 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Classes/SettingsViewController.m; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,13 +89,9 @@
 		34EBE3FD135951A700A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		34EBE41C1359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ChatView.xib; sourceTree = "<group>"; };
 		34EBE4201359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = UserListView.xib; sourceTree = "<group>"; };
-		34EBE4241359569B00A24C01 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
-		34EBE4251359569B00A24C01 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
 		34EBE4261359569B00A24C01 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = Classes/ChatViewController.h; sourceTree = "<group>"; };
 		34EBE4271359569B00A24C01 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = Classes/ChatViewController.m; sourceTree = "<group>"; };
 		34EBE43C1359690000A24C01 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		34FC5C80135B493D0049C737 /* Connection Dump.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Connection Dump.xml"; sourceTree = SOURCE_ROOT; };
-		34FC5C82135B4D150049C737 /* P7 Specification.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "P7 Specification.xml"; sourceTree = SOURCE_ROOT; };
 		34FC5C8C135BB3430049C737 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3C0413468ACF4A42A3A1EFD9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +115,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D113DB819426CBB0056E5D3 /* WiredConnection */ = {
+			isa = PBXGroup;
+			children = (
+				3477029D135A026100F91A8B /* WiredConnection.h */,
+				3477029E135A026200F91A8B /* WiredConnection.m */,
+				34FC5C84135B4D790049C737 /* Specifications */,
+			);
+			name = WiredConnection;
+			path = "Mobile Wired";
+			sourceTree = "<group>";
+		};
+		0DFF14FD19412B6E00294943 /* Chat View */ = {
+			isa = PBXGroup;
+			children = (
+				34EBE4261359569B00A24C01 /* ChatViewController.h */,
+				34EBE4271359569B00A24C01 /* ChatViewController.m */,
+				34EBE41B1359565100A24C01 /* ChatView.xib */,
+			);
+			name = "Chat View";
+			sourceTree = "<group>";
+		};
 		3440CD061366188E0046955F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,14 +149,13 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		3482C1B6155C7E1B00415794 /* Bookmark */ = {
+		3482C1B6155C7E1B00415794 /* Bookmark Settings */ = {
 			isa = PBXGroup;
 			children = (
-				3482C1B7155C7E9200415794 /* BookmarkViewController.h */,
-				3482C1B8155C7E9200415794 /* BookmarkViewController.m */,
-				0DD4C0DF15BCDAB60030069F /* BookmarkView.xib */,
+				0D113DAF1942651C0056E5D3 /* MWBookmarkSettingsController.h */,
+				0D113DB01942651C0056E5D3 /* MWBookmarkSettingsController.m */,
 			);
-			name = Bookmark;
+			name = "Bookmark Settings";
 			sourceTree = "<group>";
 		};
 		34AEB770150CFDCD005F2B96 /* User List */ = {
@@ -151,31 +171,32 @@
 			name = "User List";
 			sourceTree = "<group>";
 		};
-		34AEB772150CFDE1005F2B96 /* Server List */ = {
+		34AEB772150CFDE1005F2B96 /* Bookmarks List */ = {
 			isa = PBXGroup;
 			children = (
-				34838FAD14F32C640064B619 /* ServerListViewController.h */,
-				34838FAE14F32C640064B619 /* ServerListViewController.m */,
-				34838FC114F3456D0064B619 /* ServerListView.xib */,
+				0D113DB2194265360056E5D3 /* MWBookmarksViewController.h */,
+				0D113DB3194265360056E5D3 /* MWBookmarksViewController.m */,
 			);
-			name = "Server List";
+			name = "Bookmarks List";
 			sourceTree = "<group>";
 		};
-		34DB44EE155705F200C955A5 /* Settings */ = {
+		34DB44EE155705F200C955A5 /* Global Settings */ = {
 			isa = PBXGroup;
 			children = (
 				34D464D315561BB600856E46 /* SettingsViewController.h */,
 				34D464D415561BB600856E46 /* SettingsViewController.m */,
 				0DD4C0DC15BCDAAB0030069F /* SettingsView.xib */,
 			);
-			name = Settings;
+			name = "Global Settings";
 			sourceTree = "<group>";
 		};
 		34EBE3B313594F7A00A24C01 = {
 			isa = PBXGroup;
 			children = (
-				3431FF5F136C93ED00EDB8D8 /* Roadmap.md */,
-				34EBE3CA13594F7B00A24C01 /* Wired Classes */,
+				0D113DB919426D160056E5D3 /* README.md */,
+				3431FF5F136C93ED00EDB8D8 /* ROADMAP.md */,
+				34EBE3CA13594F7B00A24C01 /* Mobile Wired */,
+				0D113DB819426CBB0056E5D3 /* WiredConnection */,
 				3440CD061366188E0046955F /* Categories */,
 				34EBE3CB13594F7B00A24C01 /* Supporting Files */,
 				34EBE3C113594F7B00A24C01 /* Frameworks */,
@@ -207,17 +228,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		34EBE3CA13594F7B00A24C01 /* Wired Classes */ = {
+		34EBE3CA13594F7B00A24C01 /* Mobile Wired */ = {
 			isa = PBXGroup;
 			children = (
-				34EBE43E135969A100A24C01 /* View Controllers */,
-				3477029D135A026100F91A8B /* WiredConnection.h */,
-				3477029E135A026200F91A8B /* WiredConnection.m */,
-				34EBE4241359569B00A24C01 /* AppDelegate.h */,
-				34EBE4251359569B00A24C01 /* AppDelegate.m */,
+				0DFF15071941420000294943 /* MWDrawerController.h */,
+				0DFF15081941420000294943 /* MWDrawerController.m */,
+				0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */,
+				34AEB772150CFDE1005F2B96 /* Bookmarks List */,
+				3482C1B6155C7E1B00415794 /* Bookmark Settings */,
+				34DB44EE155705F200C955A5 /* Global Settings */,
+				0DFF14FD19412B6E00294943 /* Chat View */,
+				34AEB770150CFDCD005F2B96 /* User List */,
+				0DFF150A194147C100294943 /* MWMacros.h */,
+				0D113DB519426B430056E5D3 /* MWAppDelegate.h */,
+				0D113DB619426B430056E5D3 /* MWAppDelegate.m */,
 				0D12846615BA54C700CB6522 /* TestFlightTokens.h */,
 			);
-			name = "Wired Classes";
 			path = "Mobile Wired";
 			sourceTree = "<group>";
 		};
@@ -225,8 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				0D1838A1180DC8E000FD6AC1 /* Images.xcassets */,
-				34EBE3FB135951A700A24C01 /* Interface Builder */,
-				34FC5C84135B4D790049C737 /* Wired Specs */,
+				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
 				34EBE3F61359515F00A24C01 /* MobileWired-Info.plist */,
 				34EBE3F71359515F00A24C01 /* MobileWired-Prefix.pch */,
 				34EBE3D113594F7B00A24C01 /* main.m */,
@@ -235,40 +260,14 @@
 			path = "Mobile Wired";
 			sourceTree = "<group>";
 		};
-		34EBE3FB135951A700A24C01 /* Interface Builder */ = {
-			isa = PBXGroup;
-			children = (
-				0DD4C0E215BCDAC80030069F /* DefaultView.xib */,
-				34EBE3FC135951A700A24C01 /* InfoPlist.strings */,
-			);
-			name = "Interface Builder";
-			path = Resources/en.lproj;
-			sourceTree = "<group>";
-		};
-		34EBE43E135969A100A24C01 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				34EBE4261359569B00A24C01 /* ChatViewController.h */,
-				34EBE4271359569B00A24C01 /* ChatViewController.m */,
-				34EBE41B1359565100A24C01 /* ChatView.xib */,
-				3482C1B6155C7E1B00415794 /* Bookmark */,
-				34AEB772150CFDE1005F2B96 /* Server List */,
-				34DB44EE155705F200C955A5 /* Settings */,
-				34AEB770150CFDCD005F2B96 /* User List */,
-			);
-			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		34FC5C84135B4D790049C737 /* Wired Specs */ = {
+		34FC5C84135B4D790049C737 /* Specifications */ = {
 			isa = PBXGroup;
 			children = (
 				3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */,
 				0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */,
 				3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */,
-				34FC5C82135B4D150049C737 /* P7 Specification.xml */,
-				34FC5C80135B493D0049C737 /* Connection Dump.xml */,
 			);
-			name = "Wired Specs";
+			name = Specifications;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,7 +299,9 @@
 		34EBE3B513594F7A00A24C01 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MW;
 				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Ember Code";
 				TargetAttributes = {
 					34EBE3BD13594F7A00A24C01 = {
 						DevelopmentTeam = DL2J7C6ZBQ;
@@ -333,15 +334,14 @@
 				34EBE403135951A700A24C01 /* MainWindow.xib in Resources */,
 				34EBE4211359565100A24C01 /* ChatView.xib in Resources */,
 				34EBE4231359565100A24C01 /* UserListView.xib in Resources */,
-				34838FC314F3456D0064B619 /* ServerListView.xib in Resources */,
 				3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */,
 				3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */,
+				0D113DBA19426D160056E5D3 /* README.md in Resources */,
 				0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */,
 				0DD4C0DE15BCDAAB0030069F /* SettingsView.xib in Resources */,
 				0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */,
-				0DD4C0E115BCDAB60030069F /* BookmarkView.xib in Resources */,
-				0DD4C0E415BCDAC80030069F /* DefaultView.xib in Resources */,
 				0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */,
+				0D0B50E5180CDF8200198D07 /* MobileWired.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,17 +399,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DFF15091941420000294943 /* MWDrawerController.m in Sources */,
 				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
-				34EBE42A1359569B00A24C01 /* AppDelegate.m in Sources */,
 				34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */,
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
 				3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */,
 				3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */,
 				34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */,
-				34838FB014F32C640064B619 /* ServerListViewController.m in Sources */,
 				34D464D615561BB600856E46 /* SettingsViewController.m in Sources */,
+				0D113DB4194265360056E5D3 /* MWBookmarksViewController.m in Sources */,
+				0D113DB719426B430056E5D3 /* MWAppDelegate.m in Sources */,
 				0D7F6C2118D14E8F000E94EA /* UIImage+MWKit.m in Sources */,
-				3482C1BA155C7E9200415794 /* BookmarkViewController.m in Sources */,
+				0D113DB11942651C0056E5D3 /* MWBookmarkSettingsController.m in Sources */,
 				0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +418,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D0B50E4180CDF8200198D07 /* en */,
+			);
+			name = MobileWired.storyboard;
+			path = Resources/en.lproj;
+			sourceTree = "<group>";
+		};
 		0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -433,37 +443,13 @@
 			name = SettingsView.xib;
 			sourceTree = "<group>";
 		};
-		0DD4C0DF15BCDAB60030069F /* BookmarkView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0DD4C0E015BCDAB60030069F /* en */,
-			);
-			name = BookmarkView.xib;
-			sourceTree = "<group>";
-		};
-		0DD4C0E215BCDAC80030069F /* DefaultView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0DD4C0E315BCDAC80030069F /* en */,
-			);
-			name = DefaultView.xib;
-			sourceTree = "<group>";
-		};
-		34838FC114F3456D0064B619 /* ServerListView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				34838FC214F3456D0064B619 /* en */,
-			);
-			name = ServerListView.xib;
-			path = Resources/en.lproj;
-			sourceTree = "<group>";
-		};
 		34EBE3FC135951A700A24C01 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				34EBE3FD135951A700A24C01 /* en */,
 			);
 			name = InfoPlist.strings;
+			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};
 		34EBE3FE135951A700A24C01 /* MainWindow.xib */ = {
@@ -514,7 +500,6 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -553,7 +538,6 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

@@ -26,7 +26,6 @@
 
 #import "ChatViewController.h"
 
-#import "IIViewDeckController.h"
 #import "UserInfoViewController.h"
 #import "UserListViewController.h"
 #import "UIImage+MWKit.h"
@@ -83,24 +82,22 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark -
-#pragma mark ViewDeck Delegate Methods
+#pragma mark - Drawer Controller
 
-- (IIViewDeckController *)userListViewController
-{
-    return (IIViewDeckController *)self.viewDeckController.rightController;
-}
+//- (IIViewDeckController *)userListViewController
+//{
+//    return (IIViewDeckController *)self.viewDeckController.rightController;
+//}
+//
+//- (void)viewDeckController:(IIViewDeckController *)viewDeckController didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
+//{
+//    // Close the UserInfoView whenever the User List is closed.
+//    if ( viewDeckSide == IIViewDeckRightSide ) {
+//        [self.userListViewController closeRightView];
+//    }
+//}
 
-- (void)viewDeckController:(IIViewDeckController *)viewDeckController didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
-{
-    // Close the UserInfoView whenever the User List is closed.
-    if ( viewDeckSide == IIViewDeckRightSide ) {
-        [self.userListViewController closeRightView];
-    }
-}
-
-#pragma mark -
-#pragma mark Wired Connection Methods
+#pragma mark - Wired Connection
 
 - (void)new:(NSInteger)indexRow
 {
@@ -154,8 +151,7 @@
 }
 
 
-#pragma mark -
-#pragma mark UI Actions
+#pragma mark - UI Actions
 
 - (IBAction)sendButtonPressed:(id)sender
 {
@@ -246,8 +242,7 @@
     [alert show];
 }
 
-#pragma mark -
-#pragma mark UITableView Helper Methods
+#pragma mark - UITableView Helpers
 
 - (void)addMessageToView:(NSString *)message fromID:(NSString *)userID
 {
@@ -296,8 +291,7 @@
                                  animated:YES];
 }
 
-#pragma mark -
-#pragma mark UITableView Data Sources
+#pragma mark - UITableView Data Sources
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -374,8 +368,7 @@
     return (height > 52) ? height : 52;
 }
 
-#pragma mark -
-#pragma mark Wired Delegate Methods
+#pragma mark - Wired Connection Delegates
 
 /*
  * Connection to server was successful.
@@ -415,10 +408,10 @@
     
     // Nested ViewDeckControllers!
     // This controller already exists (AppDelegate.m) but we need to set up its right-most view.
-    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
-    rightView.rightController = infoController;
-    rightView.rightSize = 66;
-    [rightView openRightViewAnimated:YES];
+//    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
+//    rightView.rightController = infoController;
+//    rightView.rightSize = 66;
+//    [rightView openRightViewAnimated:YES];
 }
 
 /*
@@ -780,8 +773,7 @@
     [self.userListView.mainTableView setNeedsDisplay];
 }
 
-#pragma mark -
-#pragma mark Sliding Keyboard Methods
+#pragma mark - Sliding Keyboard
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -794,8 +786,8 @@
                                                object:nil];
     
     // Enable sliding to see the user list.
-    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
-    rightView.centerController = self.userListView;
+//    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
+//    rightView.centerController = self.userListView;
     
     // Register an event for when a keyboard pops up.
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -811,7 +803,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     
     // Remove any NSNotificationCenter observers, otherwise the app
     // will crash if we receive a notification after dealloc'ing, or
@@ -822,13 +814,13 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     // Disable panning view while typing.
-    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+//    self.viewDeckController.panningMode = IIViewDeckNoPanning;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // Re-enable panning of view.
-    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+//    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification

@@ -27,7 +27,6 @@
 #import "UserListViewController.h"
 
 #import "ChatViewController.h"
-#import "IIViewDeckController.h"
 #import "UIImage+MWKit.h"
 
 @implementation UserListViewController
@@ -49,33 +48,10 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self.mainTableView reloadData];
     
     [TestFlight passCheckpoint:@"Viewed User List"];
-}
-
-#pragma mark -
-#pragma mark ViewDeck Delegate Methods
-- (IIViewDeckController *)topViewDeckController
-{
-    return self.viewDeckController.viewDeckController;
-}
-
-- (void)viewDeckController:(IIViewDeckController*)viewDeckController willOpenViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
-{
-    if ( viewDeckSide == IIViewDeckRightSide ) {
-        // TODO: Use a global #define to set this.
-        self.topViewDeckController.rightSize = 22;
-    }
-}
-
-- (void)viewDeckController:(IIViewDeckController*)viewDeckController willCloseViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
-{
-    if ( viewDeckSide == IIViewDeckRightSide ) {
-        // TODO: Use a global #define to set this.
-        self.topViewDeckController.rightSize = 44;
-    }
-    
 }
 
 #pragma mark -

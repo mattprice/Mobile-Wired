@@ -25,9 +25,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IIViewDeckController.h"
 
-@interface SettingsViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, IIViewDeckControllerDelegate, UITableViewDataSource> {
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, UITableViewDataSource> {
     IBOutlet UINavigationBar *navigationBar;
     IBOutlet UITableView *mainTableView;
     
