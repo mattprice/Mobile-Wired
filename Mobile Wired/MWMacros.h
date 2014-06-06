@@ -25,9 +25,11 @@
 
 // Storyboard ID's
 #define kMWMainStoryboard               @"MobileWired"
-#define kMWDrawerController             @"MWDrawerController"
+#define kMWLeftNavigationController     @"MMLeftNavigationController"
 #define kMWBookmarksViewController      @"MWBookmarksViewController"
 #define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
+
+#define kMWDrawerController             @"MWDrawerController"
 #define kMWUserListViewController       @"UserListViewController"
 #define kMWSettingsViewController       @"SettingsViewController"
 #define kMWChatViewController           @"ChatViewController"

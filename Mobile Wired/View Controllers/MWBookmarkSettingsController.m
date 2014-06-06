@@ -141,7 +141,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // Reload the server list view.
-    [serverList.mainTableView reloadData];
+    [serverList.tableView reloadData];
 }
 
 #pragma mark -

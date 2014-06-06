@@ -25,18 +25,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MWBookmarksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface MWBookmarksViewController : UITableViewController {
     NSMutableArray *serverBookmarks;
     NSMutableDictionary *currentConnections;
     NSUInteger selectedIndex;
-    
-    IBOutlet UINavigationBar *navigationBar;
-    IBOutlet UITableView *mainTableView;
 }
 
 @property (strong, nonatomic) NSMutableArray *serverBookmarks;
 @property (nonatomic) NSUInteger selectedIndex;
-
-@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 
 @end

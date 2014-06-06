@@ -56,11 +56,27 @@
                             <outlet property="delegate" destination="KBB-b1-OvA" id="8M0-7D-IlQ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="dzx-B5-gzW"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80s-rD-kga" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-124" y="-292"/>
+            <point key="canvasLocation" x="324" y="-292"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ou6-wI-aC5">
+            <objects>
+                <navigationController storyboardIdentifier="MMLeftNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tuk-Xe-rP8" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6kn-g5-2ru">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="KBB-b1-OvA" kind="relationship" relationship="rootViewController" id="rZF-kO-QWp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pzB-bG-3zL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-116" y="-292"/>
         </scene>
         <!--Bookmark Settings Controller-->
         <scene sceneID="st8-d3-hHH">
