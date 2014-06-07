@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Jfd-qW-83W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="tuk-Xe-rP8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Drawer Controller-->
-        <scene sceneID="Wr6-Pg-Bla">
-            <objects>
-                <viewController storyboardIdentifier="MWDrawerController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jfd-qW-83W" customClass="MWDrawerController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gFF-Wf-iAh"/>
-                        <viewControllerLayoutGuide type="bottom" id="ecY-DG-mIG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zDu-Td-Laj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tWh-YL-2tW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-537" y="-292"/>
-        </scene>
-        <!--Bookmarks View Controller-->
+        <!--Bookmarks View Controller - Bookmarks-->
         <scene sceneID="3Ml-dI-oBo">
             <objects>
                 <viewController storyboardIdentifier="MWBookmarksViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KBB-b1-OvA" customClass="MWBookmarksViewController" sceneMemberID="viewController">
@@ -33,16 +14,17 @@
                         <color key="backgroundColor" red="0.91764706370000004" green="0.91764706370000004" blue="0.91764706370000004" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MWBookmarksCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MWBookmarksCell" id="DeT-GQ-myx">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MWBookmarksCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MWBookmarksCell" editingAccessoryType="disclosureIndicator" textLabel="KK9-93-efD" style="IBUITableViewCellStyleDefault" id="DeT-GQ-myx">
                                 <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DeT-GQ-myx" id="iZl-Ue-cKf">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcM-cT-BCo">
-                                            <rect key="frame" x="20" y="11" width="33" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KK9-93-efD">
+                                            <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -56,12 +38,12 @@
                             <outlet property="delegate" destination="KBB-b1-OvA" id="8M0-7D-IlQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="dzx-B5-gzW"/>
+                    <navigationItem key="navigationItem" title="Bookmarks" id="dzx-B5-gzW"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80s-rD-kga" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="324" y="-292"/>
+            <point key="canvasLocation" x="-162" y="-514"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ou6-wI-aC5">
@@ -76,7 +58,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzB-bG-3zL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-116" y="-292"/>
+            <point key="canvasLocation" x="-602" y="-514"/>
         </scene>
         <!--Bookmark Settings Controller-->
         <scene sceneID="st8-d3-hHH">
@@ -91,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUv-Yp-2KW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-124" y="389"/>
+            <point key="canvasLocation" x="-610" y="167"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -31,6 +31,12 @@
 
 #import "BlockAlertView.h"
 
+NS_ENUM(NSInteger, MWDrawerTableSections) {
+    kBookmarksSection = 0,
+    kSettingsSection,
+    kNumberOfSections
+};
+
 @implementation MWBookmarksViewController
 
 @synthesize serverBookmarks, selectedIndex;
@@ -53,7 +59,6 @@
     // Create an array to eventually store connections in.
     currentConnections = [NSMutableDictionary dictionary];
 
-    [[self navigationItem] setTitle:@"Bookmarks"];
     [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
 
 }
@@ -83,65 +88,53 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return kNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Section 0 is for server bookmarks.
-    if (section == 0) {
-        // If we don't have any bookmarks display an "Add Bookmark" button.
-        serverBookmarks = [[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"];
-        if ([serverBookmarks count] == 0) {
+    switch (section) {
+        case kBookmarksSection:
+            // If we're editing or don't have any bookmarks, display an "Add Bookmark" button.
+            serverBookmarks = [[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"];
+            if (self.tableView.editing || [serverBookmarks count] == 0) {
+                return [serverBookmarks count]+1;
+            }
+
+            return [serverBookmarks count];
+            break;
+
+        case kSettingsSection:
             return 1;
-        }
+            break;
 
-        // If we're editing, include an extra space for an "Add Bookmark" button.
-        else if (self.tableView.editing) {
-            return [serverBookmarks count]+1;
-        }
-
-        return [serverBookmarks count];
+        default:
+            return 0;
+            break;
     }
-
-    // Section 1 is settings.
-    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MWBookmarksCell"];
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    }
+    switch ([indexPath section]) {
+        case kBookmarksSection:
+        {
+            // If we're editing, or don't have any bookmarks, display an "Add Bookmark" button.
+            if ([indexPath row] >= [serverBookmarks count]) {
+                cell.textLabel.text = @"Add Bookmark";
+                break;
+            }
 
-    // Section 0 is for server bookmarks.
-    if ([indexPath section] == 0) {
-        // If we don't have any bookmarks display an "Add Bookmark" button.
-        if ([serverBookmarks count] == 0) {
-            cell.textLabel.text = @"Add Bookmark";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-
-        // Else, if we're editing, then bookmark count is the "Add Bookmark" item.
-        // This is because indices are 0 based, but array count is not.
-        else if ([indexPath row] == [serverBookmarks count]) {
-            cell.textLabel.text = @"Add Bookmark";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-
-        // Everything else is a real bookmark!
-        else {
-            // Get info about the current row's bookmark.
-            NSDictionary *currentBookmark = serverBookmarks[[indexPath row]];
+            // Everything else is a bookmark.
+            NSDictionary *bookmark = serverBookmarks[[indexPath row]];
 
             // If there's no Server Name, try using the Server Host.
-            if ([currentBookmark[@"ServerName"] isEqualToString:@""]) {
-                cell.textLabel.text = currentBookmark[@"ServerHost"];
+            if ([bookmark[@"ServerName"] isEqualToString:@""]) {
+                cell.textLabel.text = bookmark[@"ServerHost"];
             } else {
-                cell.textLabel.text = currentBookmark[@"ServerName"];
+                cell.textLabel.text = bookmark[@"ServerName"];
             }
 
             // Set the status image.
@@ -151,16 +144,15 @@
 //            } else {
 //                cell.imageView.image = [UIImage imageNamed:@"GrayDot.png"];
 //            }
-
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-    }
+            break;
 
+        case kSettingsSection:
+            cell.textLabel.text = @"Settings";
+            break;
 
-    // Section 1 is settings.
-    else if ([indexPath section] == 1) {
-        cell.textLabel.text = @"Settings";
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        default:
+            break;
     }
 
     return cell;
@@ -168,36 +160,64 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Section 0 is for server bookmarks.
-    if ([indexPath section] == 0) {
-        return YES;
-    }
+    switch ([indexPath section]) {
+        case kBookmarksSection:
+            return YES;
+            break;
 
-    // Section 1 is the settings.
-    return NO;
+        case kSettingsSection:
+            return NO;
+            break;
+
+        default:
+            return NO;
+            break;
+    }
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Section 0 is for server bookmarks
-    if ([indexPath section] == 0) {
-        // If we don't have any bookmarks, the only thing is an "Add Bookmark" button.
-        if ([serverBookmarks count] == 0) {
-            return UITableViewCellEditingStyleInsert;
-        }
+    switch ([indexPath section]) {
+        case kBookmarksSection:
+            // If we're editing, or don't have any bookmarks, this is an "Add Bookmark" button.
+            if ([indexPath row] >= [serverBookmarks count]) {
+                return UITableViewCellEditingStyleInsert;
+            }
 
-        // Else, if we're editing, then bookmark count is the "Add Bookmark" item.
-        // This is because indices are 0 based, but an array count is not.
-        else if ([indexPath row] == [serverBookmarks count]) {
-            return UITableViewCellEditingStyleInsert;
-        }
+            // Everything else is a bookmark.
+            return UITableViewCellEditingStyleDelete;
+            break;
 
-        // Everything else is a real bookmark!
-        return UITableViewCellEditingStyleDelete;
+        case kSettingsSection:
+            return UITableViewCellEditingStyleNone;
+            break;
+
+        default:
+            return UITableViewCellEditingStyleNone;
+            break;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source.
+        NSMutableArray *savedBookmarks = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] mutableCopy];
+        [savedBookmarks removeObjectAtIndex:[indexPath row]];
+        [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+        [TestFlight passCheckpoint:@"Deleted Bookmark"];
     }
 
-    // Section 1 is settings.
-    return UITableViewCellEditingStyleNone;
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Add a row to the data source.
+        [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+        [TestFlight passCheckpoint:@"Added Bookmark"];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -208,24 +228,15 @@
     selectedIndex = [indexPath row];
     NSString *indexString = [NSString stringWithFormat:@"%lu",(unsigned long)selectedIndex];
 
-    // Section 0 is for server bookmarks.
-    if ([indexPath section] == 0) {
-        // If we don't have any bookmarks, the only thing is an "Add Bookmark" button.
-        if ([serverBookmarks count] == 0) {
+    if ([indexPath section] == kBookmarksSection) {
+        // If we're editing, or don't have any bookmarks, this is an "Add Bookmark" button.
+        if (selectedIndex >= [serverBookmarks count]) {
 //            self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
 //            BookmarkViewController *bookmarkView = (BookmarkViewController *)self.viewDeckController.centerController;
 //            bookmarkView.serverList = self;
         }
 
-        // Else, if we're editing, then bookmark count is the "Add Bookmark" item.
-        // This is because indices are 0 based, but an array count is not.
-        else if (selectedIndex == [serverBookmarks count]) {
-//            self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
-//            BookmarkViewController *bookmarkView = (BookmarkViewController *)self.viewDeckController.centerController;
-//            bookmarkView.serverList = self;
-        }
-
-        // Else, this is actually a bookmark!
+        // Else, this is a bookmark.
         else {
             // Check on the connection status.
             Boolean isConnected = false;
@@ -291,8 +302,7 @@
         }
     }
 
-    // Section 1 is settings.
-    else if ([indexPath section] == 1) {
+    else if ([indexPath section] == kSettingsSection) {
 //        self.viewDeckController.centerController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
     }
 
@@ -313,27 +323,5 @@
 //        }];
     }
 }
-
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
-     if (editingStyle == UITableViewCellEditingStyleDelete) {
-         // Delete the row from the data source
-         NSMutableArray *savedBookmarks = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] mutableCopy];
-         [savedBookmarks removeObjectAtIndex:[indexPath row]];
-         [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
-         [[NSUserDefaults standardUserDefaults] synchronize];
-
-         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
-         [TestFlight passCheckpoint:@"Deleted Bookmark"];
-     }
-
-     else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Add a row to the data source.
-        [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
-        [TestFlight passCheckpoint:@"Added Bookmark"];
-     }
- }
 
 @end
