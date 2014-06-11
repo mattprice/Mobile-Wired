@@ -47,16 +47,13 @@
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedBefore"])
     {
         NSLog(@"Setting up user defaults for the first time.");
-        
-        [[NSUserDefaults standardUserDefaults] setObject:@"Melman" forKey:@"UserNick"];
-        
+
         NSString *defaultStatus = [NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]];
+
+        [[NSUserDefaults standardUserDefaults] setObject:@"Mobile Wired User" forKey:@"UserNick"];
         [[NSUserDefaults standardUserDefaults] setObject:defaultStatus forKey:@"UserStatus"];
-        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedBefore"];
-        
         [[NSUserDefaults standardUserDefaults] setObject:@[] forKey:@"Bookmarks"];
-        
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
