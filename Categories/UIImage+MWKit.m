@@ -1,5 +1,5 @@
 //
-//  MWMacros.h
+//  UIImage+MWKit.m
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,23 +23,34 @@
 //  THE SOFTWARE.
 //
 
-// Storyboard Views
-#define kMWMainStoryboard               @"MobileWired"
-#define kMWLeftNavigationController     @"MMLeftNavigationController"
-#define kMWBookmarksViewController      @"MWBookmarksViewController"
-#define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
-#define kMWSettingsViewController       @"MWSettingsViewController"
+#import "UIImage+MWKit.h"
 
-// Storyboard Seques
-#define kMWBookmarkSettingsSeque        @"MWBookmarkSettingsSeque"
-#define kMWSettingsSeque                @"MWSettingsSeque"
+@implementation UIImage (MWKit)
 
-//#define kMWDrawerController             @"MWDrawerController"
-//#define kMWUserListViewController       @"UserListViewController"
-//#define kMWChatViewController           @"ChatViewController"
+- (UIImage *)scaleToSize:(CGSize)newSize
+{
+    UIImage *image = self;
+    
+    UIGraphicsBeginImageContextWithOptions(newSize, 1.0f, 0.0f);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
 
-// If we're not debugging, swap all NSLogs over to TestFlight.
-#ifndef DEBUG
-    #define NSLog TFLog
-#endif
 
+- (UIImage *)withCornerRadius:(float)radius
+{
+    UIImage *image = self;
+    
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+    [[UIBezierPath bezierPathWithRoundedRect:(CGRect){CGPointZero, image.size} cornerRadius:radius] addClip];
+    [image drawInRect:(CGRect){CGPointZero, image.size}];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+@end

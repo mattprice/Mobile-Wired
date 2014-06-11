@@ -1,8 +1,8 @@
 //
-//  MWMacros.h
+//  UITableView+Subviews.m
 //  Mobile Wired
 //
-//  Copyright (c) 2014 Matthew Price, http://mattprice.me/
+//  Copyright (c) 2014 James Barrow, http://pigonahill.com/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,23 +23,36 @@
 //  THE SOFTWARE.
 //
 
-// Storyboard Views
-#define kMWMainStoryboard               @"MobileWired"
-#define kMWLeftNavigationController     @"MMLeftNavigationController"
-#define kMWBookmarksViewController      @"MWBookmarksViewController"
-#define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
-#define kMWSettingsViewController       @"MWSettingsViewController"
+#import "UITableView+Subviews.h"
 
-// Storyboard Seques
-#define kMWBookmarkSettingsSeque        @"MWBookmarkSettingsSeque"
-#define kMWSettingsSeque                @"MWSettingsSeque"
+@implementation UITableView (Subviews)
 
-//#define kMWDrawerController             @"MWDrawerController"
-//#define kMWUserListViewController       @"UserListViewController"
-//#define kMWChatViewController           @"ChatViewController"
+- (NSIndexPath *)indexPathForCellContainingView:(UIView *)view
+{
+    NSIndexPath *indexPath = nil;
 
-// If we're not debugging, swap all NSLogs over to TestFlight.
-#ifndef DEBUG
-    #define NSLog TFLog
-#endif
+    for (int section = 0; section < [self numberOfSections]; section++) {
+        for (int row = 0; row < [self numberOfRowsInSection:section]; row++) {
+            UITableViewCell *cell = [self cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
 
+            for (UIView *subview in [[cell contentView] subviews]) {
+                if (subview == view) {
+                    indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+                    break;
+                }
+            }
+            
+            if (indexPath) {
+                break;
+            }
+        }
+        
+        if (indexPath) {
+            break;
+        }
+    }
+    
+    return indexPath;
+}
+
+@end

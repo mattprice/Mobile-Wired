@@ -1,9 +1,8 @@
 //
-//  UIImage+MWKit.m
+//  UIImage+MWKit.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
-//  Copyright (c) 2014 Ember Code, http://embercode.com/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,34 +23,11 @@
 //  THE SOFTWARE.
 //
 
-#import "UIImage+MWKit.h"
+#import <UIKit/UIKit.h>
 
-@implementation UIImage (MWKit)
+@interface UIImage (MWKit)
 
-- (UIImage *)scaleToSize:(CGSize)newSize
-{
-    UIImage *image = self;
-    
-    UIGraphicsBeginImageContextWithOptions(newSize, 1.0f, 0.0f);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
-
-- (UIImage *)withCornerRadius:(float)radius
-{
-    UIImage *image = self;
-    
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
-    [[UIBezierPath bezierPathWithRoundedRect:(CGRect){CGPointZero, image.size} cornerRadius:radius] addClip];
-    [image drawInRect:(CGRect){CGPointZero, image.size}];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
+- (UIImage *)scaleToSize:(CGSize)newSize;
+- (UIImage *)withCornerRadius:(float)radius;
 
 @end

@@ -1,9 +1,8 @@
 //
-//  UIImage+MWKit.h
+//  NSString+Hashes.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
-//  Copyright (c) 2014 Ember Code, http://embercode.com/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +23,10 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface UIImage (MWKit)
+@interface NSString (Hashes)
 
-- (UIImage *)scaleToSize:(CGSize)newSize;
-- (UIImage *)withCornerRadius:(float)radius;
+- (NSString *)SHA1Value;
 
 @end

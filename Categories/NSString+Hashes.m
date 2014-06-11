@@ -1,5 +1,5 @@
 //
-//  MWMacros.h
+//  NSString+Hashes.m
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,23 +23,26 @@
 //  THE SOFTWARE.
 //
 
-// Storyboard Views
-#define kMWMainStoryboard               @"MobileWired"
-#define kMWLeftNavigationController     @"MMLeftNavigationController"
-#define kMWBookmarksViewController      @"MWBookmarksViewController"
-#define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
-#define kMWSettingsViewController       @"MWSettingsViewController"
+#import "NSString+Hashes.h"
+#import <CommonCrypto/CommonHMAC.h>
 
-// Storyboard Seques
-#define kMWBookmarkSettingsSeque        @"MWBookmarkSettingsSeque"
-#define kMWSettingsSeque                @"MWSettingsSeque"
+@implementation NSString (Hashes)
 
-//#define kMWDrawerController             @"MWDrawerController"
-//#define kMWUserListViewController       @"UserListViewController"
-//#define kMWChatViewController           @"ChatViewController"
+- (NSString *)SHA1Value
+{
+    NSString *string = self;
+    const char *cString = [string UTF8String];
+    unsigned char result[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1(cString, strlen(cString), result);
+    NSString *newString = [NSString  stringWithFormat:
+                           @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+                           result[0], result[1], result[2], result[3], result[4],
+                           result[5], result[6], result[7], result[8], result[9],
+                           result[10], result[11], result[12], result[13], result[14],
+                           result[15], result[16], result[17], result[18], result[19] ];
+    newString = [newString lowercaseString];
+    
+    return newString;
+}
 
-// If we're not debugging, swap all NSLogs over to TestFlight.
-#ifndef DEBUG
-    #define NSLog TFLog
-#endif
-
+@end

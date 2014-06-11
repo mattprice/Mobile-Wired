@@ -26,7 +26,7 @@
 #import "MWBookmarksViewController.h"
 #import "MWBookmarkSettingsController.h"
 #import "ChatViewController.h"
-#import "SettingsViewController.h"
+#import "MWSettingsViewController.h"
 #import "UserListViewController.h"
 
 #import "BlockAlertView.h"
@@ -63,27 +63,6 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 
 }
 
-#pragma mark - TableView Actions
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animate
-{
-    [super setEditing:editing animated:animate];
-
-    if (self.tableView.editing) {
-        // Insert the "Add Bookmark" button, but only if other bookmarks exist.
-        if ([serverBookmarks count] > 0) {
-            NSArray *paths = @[[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
-            [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
-        }
-    } else {
-        // Remove the "Add Bookmark" button. It only exists if there are other bookmarks.
-        if ([serverBookmarks count] > 0) {
-            NSArray *paths = @[[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
-            [self.tableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
-        }
-    }
-}
-
 #pragma mark - TableView Data Sources
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -116,7 +95,7 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MWBookmarksCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MWBookmarkCell"];
 
     switch ([indexPath section]) {
         case kBookmarksSection:
@@ -220,6 +199,27 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
     }
 }
 
+#pragma mark - TableView Actions
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate
+{
+    [super setEditing:editing animated:animate];
+
+    if (self.tableView.editing) {
+        // Insert the "Add Bookmark" button, but only if other bookmarks exist.
+        if ([serverBookmarks count] > 0) {
+            NSArray *paths = @[[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
+            [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
+        }
+    } else {
+        // Remove the "Add Bookmark" button. It only exists if there are other bookmarks.
+        if ([serverBookmarks count] > 0) {
+            NSArray *paths = @[[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
+            [self.tableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
+        }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Boolean shouldPan = true;
@@ -303,7 +303,7 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
     }
 
     else if ([indexPath section] == kSettingsSection) {
-//        self.viewDeckController.centerController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
+        [self performSegueWithIdentifier:kMWSettingsSeque sender:self];
     }
 
     // Clear selection after pressing.

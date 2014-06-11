@@ -13,22 +13,23 @@
 		0D113DB719426B430056E5D3 /* MWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB619426B430056E5D3 /* MWAppDelegate.m */; };
 		0D113DBA19426D160056E5D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D113DB919426D160056E5D3 /* README.md */; };
 		0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1838A1180DC8E000FD6AC1 /* Images.xcassets */; };
+		0D640C7B194758DB0069F108 /* MWSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7A194758DB0069F108 /* MWSettingsViewController.m */; };
+		0D640C7F19475D910069F108 /* MWTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7E19475D910069F108 /* MWTextFieldCell.m */; };
+		0D640C82194767CA0069F108 /* UITableView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C81194767CA0069F108 /* UITableView+Subviews.m */; };
+		0D640C89194769120069F108 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C84194769120069F108 /* NSString+Base64.m */; };
+		0D640C8A194769120069F108 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C86194769120069F108 /* NSString+Hashes.m */; };
+		0D640C8B194769120069F108 /* UIImage+MWKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C88194769120069F108 /* UIImage+MWKit.m */; };
 		0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */; };
-		0D7F6C2118D14E8F000E94EA /* UIImage+MWKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F6C2018D14E8F000E94EA /* UIImage+MWKit.m */; };
 		0DA8B04C17277CFE008297ED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA8B04B17277CFE008297ED /* QuartzCore.framework */; };
 		0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D515BCD8960030069F /* UserInfoViewController.m */; };
 		0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */; };
-		0DD4C0DE15BCDAAB0030069F /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0DC15BCDAAB0030069F /* SettingsView.xib */; };
 		0DFF15091941420000294943 /* MWDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF15081941420000294943 /* MWDrawerController.m */; };
-		3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5C14F31D0A00362097 /* NSString+Base64.m */; };
-		3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3439EC5E14F31D0A00362097 /* NSString+Hashes.m */; };
 		3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */; };
 		3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */; };
 		3477029F135A026200F91A8B /* WiredConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3477029E135A026200F91A8B /* WiredConnection.m */; };
 		3482C1A9155C6C5D00415794 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3482C1A8155C6C5D00415794 /* Security.framework */; };
 		3482C1AA155C6C6E00415794 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE43C1359690000A24C01 /* CFNetwork.framework */; };
 		34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34838FA914F32BA80064B619 /* UserListViewController.m */; };
-		34D464D615561BB600856E46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D464D415561BB600856E46 /* SettingsViewController.m */; };
 		34EBE3C313594F7B00A24C01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C213594F7B00A24C01 /* UIKit.framework */; };
 		34EBE3C513594F7B00A24C01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C413594F7B00A24C01 /* Foundation.framework */; };
 		34EBE3C713594F7B00A24C01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EBE3C613594F7B00A24C01 /* CoreGraphics.framework */; };
@@ -53,23 +54,28 @@
 		0D113DB919426D160056E5D3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0D1838A1180DC8E000FD6AC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
+		0D640C79194758DB0069F108 /* MWSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWSettingsViewController.h; path = "View Controllers/MWSettingsViewController.h"; sourceTree = "<group>"; };
+		0D640C7A194758DB0069F108 /* MWSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWSettingsViewController.m; path = "View Controllers/MWSettingsViewController.m"; sourceTree = "<group>"; };
+		0D640C7D19475D910069F108 /* MWTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTextFieldCell.h; sourceTree = "<group>"; };
+		0D640C7E19475D910069F108 /* MWTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWTextFieldCell.m; sourceTree = "<group>"; };
+		0D640C80194767CA0069F108 /* UITableView+Subviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+Subviews.h"; path = "Categories/UITableView+Subviews.h"; sourceTree = "<group>"; };
+		0D640C81194767CA0069F108 /* UITableView+Subviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Subviews.m"; path = "Categories/UITableView+Subviews.m"; sourceTree = "<group>"; };
+		0D640C83194769120069F108 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Categories/NSString+Base64.h"; sourceTree = "<group>"; };
+		0D640C84194769120069F108 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Categories/NSString+Base64.m"; sourceTree = "<group>"; };
+		0D640C85194769120069F108 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Hashes.h"; path = "Categories/NSString+Hashes.h"; sourceTree = "<group>"; };
+		0D640C86194769120069F108 /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Hashes.m"; path = "Categories/NSString+Hashes.m"; sourceTree = "<group>"; };
+		0D640C87194769120069F108 /* UIImage+MWKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+MWKit.h"; path = "Categories/UIImage+MWKit.h"; sourceTree = "<group>"; };
+		0D640C88194769120069F108 /* UIImage+MWKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MWKit.m"; path = "Categories/UIImage+MWKit.m"; sourceTree = "<group>"; };
 		0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b53.xml; path = Resources/WiredSpec_2.0b53.xml; sourceTree = "<group>"; };
-		0D7F6C1F18D14E8F000E94EA /* UIImage+MWKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+MWKit.h"; path = "Mobile Wired/Classes/Categories/UIImage+MWKit.h"; sourceTree = "<group>"; };
-		0D7F6C2018D14E8F000E94EA /* UIImage+MWKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MWKit.m"; path = "Mobile Wired/Classes/Categories/UIImage+MWKit.m"; sourceTree = "<group>"; };
 		0DA8B04B17277CFE008297ED /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0DD4C0D415BCD8960030069F /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = Classes/UserInfoViewController.h; sourceTree = "<group>"; };
 		0DD4C0D515BCD8960030069F /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = Classes/UserInfoViewController.m; sourceTree = "<group>"; };
 		0DD4C0DA15BCDA9E0030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/UserInfoView.xib; sourceTree = "<group>"; };
-		0DD4C0DD15BCDAAB0030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/SettingsView.xib; sourceTree = "<group>"; };
 		0DFF15071941420000294943 /* MWDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWDrawerController.h; path = Classes/MWDrawerController.h; sourceTree = "<group>"; };
 		0DFF15081941420000294943 /* MWDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWDrawerController.m; path = Classes/MWDrawerController.m; sourceTree = "<group>"; };
 		0DFF150A194147C100294943 /* MWMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWMacros.h; sourceTree = "<group>"; };
 		2F702BD2F4204C49977D2E93 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3431FF5F136C93ED00EDB8D8 /* ROADMAP.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = ROADMAP.md; sourceTree = "<group>"; };
-		3439EC5B14F31D0A00362097 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Mobile Wired/Classes/Categories/NSString+Base64.h"; sourceTree = "<group>"; };
-		3439EC5C14F31D0A00362097 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Mobile Wired/Classes/Categories/NSString+Base64.m"; sourceTree = "<group>"; };
-		3439EC5D14F31D0A00362097 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Hashes.h"; path = "Mobile Wired/Classes/Categories/NSString+Hashes.h"; sourceTree = "<group>"; };
-		3439EC5E14F31D0A00362097 /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Hashes.m"; path = "Mobile Wired/Classes/Categories/NSString+Hashes.m"; sourceTree = "<group>"; };
 		3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b51.xml; path = Resources/WiredSpec_2.0b51.xml; sourceTree = "<group>"; };
 		3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b55.xml; path = Resources/WiredSpec_2.0b55.xml; sourceTree = "<group>"; };
 		3477029D135A026100F91A8B /* WiredConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WiredConnection.h; path = Classes/WiredConnection.h; sourceTree = "<group>"; };
@@ -77,8 +83,6 @@
 		3482C1A8155C6C5D00415794 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		34838FA814F32BA80064B619 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserListViewController.h; path = Classes/UserListViewController.h; sourceTree = "<group>"; };
 		34838FA914F32BA80064B619 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserListViewController.m; path = Classes/UserListViewController.m; sourceTree = "<group>"; };
-		34D464D315561BB600856E46 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Classes/SettingsViewController.h; sourceTree = "<group>"; };
-		34D464D415561BB600856E46 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Classes/SettingsViewController.m; sourceTree = "<group>"; };
 		34EBE3BE13594F7B00A24C01 /* Mobile Wired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Wired.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34EBE3C213594F7B00A24C01 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		34EBE3C413594F7B00A24C01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +130,15 @@
 			path = "Mobile Wired";
 			sourceTree = "<group>";
 		};
+		0D640C7C19475D910069F108 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0D640C7D19475D910069F108 /* MWTextFieldCell.h */,
+				0D640C7E19475D910069F108 /* MWTextFieldCell.m */,
+			);
+			path = "Table View Cells";
+			sourceTree = "<group>";
+		};
 		0DFF14FD19412B6E00294943 /* Chat View */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,12 +152,14 @@
 		3440CD061366188E0046955F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				3439EC5B14F31D0A00362097 /* NSString+Base64.h */,
-				3439EC5C14F31D0A00362097 /* NSString+Base64.m */,
-				3439EC5D14F31D0A00362097 /* NSString+Hashes.h */,
-				3439EC5E14F31D0A00362097 /* NSString+Hashes.m */,
-				0D7F6C1F18D14E8F000E94EA /* UIImage+MWKit.h */,
-				0D7F6C2018D14E8F000E94EA /* UIImage+MWKit.m */,
+				0D640C83194769120069F108 /* NSString+Base64.h */,
+				0D640C84194769120069F108 /* NSString+Base64.m */,
+				0D640C85194769120069F108 /* NSString+Hashes.h */,
+				0D640C86194769120069F108 /* NSString+Hashes.m */,
+				0D640C87194769120069F108 /* UIImage+MWKit.h */,
+				0D640C88194769120069F108 /* UIImage+MWKit.m */,
+				0D640C80194767CA0069F108 /* UITableView+Subviews.h */,
+				0D640C81194767CA0069F108 /* UITableView+Subviews.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -183,9 +198,8 @@
 		34DB44EE155705F200C955A5 /* Global Settings */ = {
 			isa = PBXGroup;
 			children = (
-				34D464D315561BB600856E46 /* SettingsViewController.h */,
-				34D464D415561BB600856E46 /* SettingsViewController.m */,
-				0DD4C0DC15BCDAAB0030069F /* SettingsView.xib */,
+				0D640C79194758DB0069F108 /* MWSettingsViewController.h */,
+				0D640C7A194758DB0069F108 /* MWSettingsViewController.m */,
 			);
 			name = "Global Settings";
 			sourceTree = "<group>";
@@ -231,6 +245,9 @@
 		34EBE3CA13594F7B00A24C01 /* Mobile Wired */ = {
 			isa = PBXGroup;
 			children = (
+				0DFF150A194147C100294943 /* MWMacros.h */,
+				0D113DB519426B430056E5D3 /* MWAppDelegate.h */,
+				0D113DB619426B430056E5D3 /* MWAppDelegate.m */,
 				0DFF15071941420000294943 /* MWDrawerController.h */,
 				0DFF15081941420000294943 /* MWDrawerController.m */,
 				0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */,
@@ -239,9 +256,7 @@
 				34DB44EE155705F200C955A5 /* Global Settings */,
 				0DFF14FD19412B6E00294943 /* Chat View */,
 				34AEB770150CFDCD005F2B96 /* User List */,
-				0DFF150A194147C100294943 /* MWMacros.h */,
-				0D113DB519426B430056E5D3 /* MWAppDelegate.h */,
-				0D113DB619426B430056E5D3 /* MWAppDelegate.m */,
+				0D640C7C19475D910069F108 /* Table View Cells */,
 				0D12846615BA54C700CB6522 /* TestFlightTokens.h */,
 			);
 			path = "Mobile Wired";
@@ -338,7 +353,6 @@
 				3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */,
 				0D113DBA19426D160056E5D3 /* README.md in Resources */,
 				0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */,
-				0DD4C0DE15BCDAAB0030069F /* SettingsView.xib in Resources */,
 				0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */,
 				0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */,
 				0D0B50E5180CDF8200198D07 /* MobileWired.storyboard in Resources */,
@@ -403,14 +417,16 @@
 				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
 				34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */,
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
-				3439EC5F14F31D0A00362097 /* NSString+Base64.m in Sources */,
-				3439EC6014F31D0A00362097 /* NSString+Hashes.m in Sources */,
+				0D640C89194769120069F108 /* NSString+Base64.m in Sources */,
+				0D640C82194767CA0069F108 /* UITableView+Subviews.m in Sources */,
+				0D640C7F19475D910069F108 /* MWTextFieldCell.m in Sources */,
 				34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */,
-				34D464D615561BB600856E46 /* SettingsViewController.m in Sources */,
 				0D113DB4194265360056E5D3 /* MWBookmarksViewController.m in Sources */,
+				0D640C7B194758DB0069F108 /* MWSettingsViewController.m in Sources */,
 				0D113DB719426B430056E5D3 /* MWAppDelegate.m in Sources */,
-				0D7F6C2118D14E8F000E94EA /* UIImage+MWKit.m in Sources */,
+				0D640C8A194769120069F108 /* NSString+Hashes.m in Sources */,
 				0D113DB11942651C0056E5D3 /* MWBookmarkSettingsController.m in Sources */,
+				0D640C8B194769120069F108 /* UIImage+MWKit.m in Sources */,
 				0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,14 +449,6 @@
 				0DD4C0DA15BCDA9E0030069F /* en */,
 			);
 			name = UserInfoView.xib;
-			sourceTree = "<group>";
-		};
-		0DD4C0DC15BCDAAB0030069F /* SettingsView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0DD4C0DD15BCDAAB0030069F /* en */,
-			);
-			name = SettingsView.xib;
 			sourceTree = "<group>";
 		};
 		34EBE3FC135951A700A24C01 /* InfoPlist.strings */ = {

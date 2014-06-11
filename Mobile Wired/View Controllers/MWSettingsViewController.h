@@ -1,5 +1,5 @@
 //
-//  MWMacros.h
+//  MWSettingsViewController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,23 +23,8 @@
 //  THE SOFTWARE.
 //
 
-// Storyboard Views
-#define kMWMainStoryboard               @"MobileWired"
-#define kMWLeftNavigationController     @"MMLeftNavigationController"
-#define kMWBookmarksViewController      @"MWBookmarksViewController"
-#define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
-#define kMWSettingsViewController       @"MWSettingsViewController"
+#import <UIKit/UIKit.h>
 
-// Storyboard Seques
-#define kMWBookmarkSettingsSeque        @"MWBookmarkSettingsSeque"
-#define kMWSettingsSeque                @"MWSettingsSeque"
+@interface MWSettingsViewController : UITableViewController <UITextFieldDelegate>
 
-//#define kMWDrawerController             @"MWDrawerController"
-//#define kMWUserListViewController       @"UserListViewController"
-//#define kMWChatViewController           @"ChatViewController"
-
-// If we're not debugging, swap all NSLogs over to TestFlight.
-#ifndef DEBUG
-    #define NSLog TFLog
-#endif
-
+@end

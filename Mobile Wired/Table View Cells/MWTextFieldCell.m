@@ -1,5 +1,5 @@
 //
-//  MWMacros.h
+//  MWTextFieldCell.m
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,23 +23,25 @@
 //  THE SOFTWARE.
 //
 
-// Storyboard Views
-#define kMWMainStoryboard               @"MobileWired"
-#define kMWLeftNavigationController     @"MMLeftNavigationController"
-#define kMWBookmarksViewController      @"MWBookmarksViewController"
-#define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
-#define kMWSettingsViewController       @"MWSettingsViewController"
+#import "MWTextFieldCell.h"
 
-// Storyboard Seques
-#define kMWBookmarkSettingsSeque        @"MWBookmarkSettingsSeque"
-#define kMWSettingsSeque                @"MWSettingsSeque"
+@implementation MWTextFieldCell
 
-//#define kMWDrawerController             @"MWDrawerController"
-//#define kMWUserListViewController       @"UserListViewController"
-//#define kMWChatViewController           @"ChatViewController"
+- (void)awakeFromNib
+{
+    // Initialization code
+}
 
-// If we're not debugging, swap all NSLogs over to TestFlight.
-#ifndef DEBUG
-    #define NSLog TFLog
-#endif
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+}
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end
