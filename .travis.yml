@@ -1,3 +1,4 @@
-language     : objective-c
+language: objective-c
 before_script: cp 'Mobile Wired/TestFlightTokens-Sample.h' 'Mobile Wired/TestFlightTokens.h'
-xcode_sdk    : iphonesimulator
+xcode_workspace: Mobile Wired.xcworkspace
+xcode_sdk: iphonesimulator7.1
