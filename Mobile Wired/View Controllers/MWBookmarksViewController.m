@@ -39,8 +39,6 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 
 @implementation MWBookmarksViewController
 
-@synthesize serverBookmarks, selectedIndex;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -74,12 +72,6 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 {
     switch (section) {
         case kBookmarksSection:
-            // If we're editing or don't have any bookmarks, display an "Add Bookmark" button.
-            serverBookmarks = [[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"];
-            if (self.tableView.editing || [serverBookmarks count] == 0) {
-                return [serverBookmarks count]+1;
-            }
-
             return [serverBookmarks count];
             break;
 
@@ -100,12 +92,6 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
     switch ([indexPath section]) {
         case kBookmarksSection:
         {
-            // If we're editing, or don't have any bookmarks, display an "Add Bookmark" button.
-            if ([indexPath row] >= [serverBookmarks count]) {
-                cell.textLabel.text = @"Add Bookmark";
-                break;
-            }
-
             // Everything else is a bookmark.
             NSDictionary *bookmark = serverBookmarks[[indexPath row]];
 
@@ -137,8 +123,29 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == kBookmarksSection && [serverBookmarks count] == 0) {
+        return @"Welcome!";
+    }
+
+    return @"";
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if (section == kBookmarksSection && [serverBookmarks count] == 0) {
+        return @"You currently don't have any bookmarks. To add some, use the + button above.";
+    }
+
+    return @"";
+}
+
+#pragma mark - TableView Styles
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO: Return NO for bookmarks that are connected?
     switch ([indexPath section]) {
         case kBookmarksSection:
             return YES;
@@ -158,12 +165,6 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 {
     switch ([indexPath section]) {
         case kBookmarksSection:
-            // If we're editing, or don't have any bookmarks, this is an "Add Bookmark" button.
-            if ([indexPath row] >= [serverBookmarks count]) {
-                return UITableViewCellEditingStyleInsert;
-            }
-
-            // Everything else is a bookmark.
             return UITableViewCellEditingStyleDelete;
             break;
 
@@ -187,124 +188,58 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 
         [TestFlight passCheckpoint:@"Deleted Bookmark"];
     }
-
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Add a row to the data source.
-        [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
-        [TestFlight passCheckpoint:@"Added Bookmark"];
-    }
 }
 
 #pragma mark - TableView Actions
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animate
-{
-    [super setEditing:editing animated:animate];
-
-    if (self.tableView.editing) {
-        // Insert the "Add Bookmark" button, but only if other bookmarks exist.
-        if ([serverBookmarks count] > 0) {
-            NSArray *paths = @[[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
-            [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
-        }
-    } else {
-        // Remove the "Add Bookmark" button. It only exists if there are other bookmarks.
-        if ([serverBookmarks count] > 0) {
-            NSArray *paths = @[[NSIndexPath indexPathForRow:[serverBookmarks count] inSection:0]];
-            [self.tableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationTop];
-        }
-    }
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Boolean shouldPan = true;
 
     // Set the selectedIndex so that we know what row to save changes to.
-    selectedIndex = [indexPath row];
+    NSUInteger selectedIndex = [indexPath row];
     NSString *indexString = [NSString stringWithFormat:@"%lu",(unsigned long)selectedIndex];
 
     if ([indexPath section] == kBookmarksSection) {
-        // If we're editing, or don't have any bookmarks, this is an "Add Bookmark" button.
-        if (selectedIndex >= [serverBookmarks count]) {
-//            self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
-//            BookmarkViewController *bookmarkView = (BookmarkViewController *)self.viewDeckController.centerController;
-//            bookmarkView.serverList = self;
+        // Check on the connection status.
+        Boolean isConnected = false;
+        if (currentConnections[indexString]) {
+            ChatViewController *object = currentConnections[indexString];
+            isConnected = object.isConnected;
         }
 
-        // Else, this is a bookmark.
+        // If we're editing, we need to display the Bookmark view.
+        if (self.tableView.editing && !isConnected) {
+            [self performSegueWithIdentifier:kMWBookmarkSettingsSegue sender:self];
+        }
+
+        // If we're not editing, we need to open up the bookmark in the ChatView.
         else {
-            // Check on the connection status.
-            Boolean isConnected = false;
-            if (currentConnections[indexString]) {
-                ChatViewController *object = currentConnections[indexString];
-                isConnected = object.isConnected;
+            // Check for an existing saved controller.
+            if (!isConnected) {
+                // Get info about the current bookmark.
+                NSMutableDictionary *currentBookmark = [serverBookmarks[selectedIndex] mutableCopy];
+
+                // Bookmark is complete and we don't have a saved controller.
+//                ChatViewController *controller = [ChatViewController new];
+//                controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+//                [controller new:selectedIndex];
+//
+                // Save the controller for later and then open it.
+//                currentConnections[indexString] = controller;
+//                self.viewDeckController.centerController = currentConnections[indexString];
             }
 
-            // If we're editing, we need to display the Bookmark view.
-            if (self.tableView.editing) {
-                // Make sure that were aren't currently connected.
-                if (!isConnected) {
-//                    self.viewDeckController.centerController = [[BookmarkViewController alloc] initWithNibName:@"BookmarkView" bundle:nil];
-//                    BookmarkViewController *bookmarkView = (BookmarkViewController *)self.viewDeckController.centerController;
-//                    bookmarkView.serverList = self;
-                } else {
-                    shouldPan = false;
-
-                    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Server Currently Connected"
-                                                                   message:@"Please disconnect from this server before attempting to edit it."];
-
-                    [alert setCancelButtonWithTitle:@"OK" block:nil];
-                    [alert show];
-                }
-            }
-
-            // If we're not editing, we need to open up the bookmark in the ChatView.
+            // Open the saved ChatViewController object.
             else {
-                // Check for an existing saved controller.
-                if (!isConnected) {
-                    // Get info about the current bookmark.
-                    NSMutableDictionary *currentBookmark = [serverBookmarks[selectedIndex] mutableCopy];
-
-                    // Check to make sure the bookmark is complete.
-                    if (![currentBookmark[@"ServerHost"] isEqualToString:@""]) {
-                        // Bookmark is complete and we don't have a saved controller.
-                        ChatViewController *controller = [ChatViewController new];
-                        controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
-                        [controller new:selectedIndex];
-
-                        // Save the controller for later and then open it.
-                        currentConnections[indexString] = controller;
-//                        self.viewDeckController.centerController = currentConnections[indexString];
-                    }
-
-                    // Display an alert if there's no server address.
-                    else {
-                        shouldPan = false;
-
-                        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Missing Server Host"
-                                                                       message:@"You need to enter a host for this server before connecting."];
-
-                        [alert setCancelButtonWithTitle:@"OK" block:nil];
-                        [alert show];
-                    }
-                }
-
-                // Open the saved ChatViewController object.
-                else {
 //                    self.viewDeckController.centerController = currentConnections[indexString];
-                }
             }
         }
     }
 
     else if ([indexPath section] == kSettingsSection) {
-        [self performSegueWithIdentifier:kMWSettingsSeque sender:self];
+        [self performSegueWithIdentifier:kMWSettingsSegue sender:self];
     }
-
-    // Clear selection after pressing.
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 
     // Re-enable panning and open the center view.
     if (shouldPan) {
@@ -318,6 +253,31 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 //            self tableView].frame = frame;
 //            self.viewDeckController.leftSize = 44.0;
 //        }];
+    }
+}
+
+- (IBAction)saveButtonPressed:(UIStoryboardSegue *)seque
+{
+    serverBookmarks = [MWDataStore bookmarks];
+    [self.tableView reloadData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UINavigationController *destination = segue.destinationViewController;
+
+    if ([[segue identifier] isEqualToString:kMWBookmarkSettingsSegue]) {
+        MWBookmarkSettingsController *bookmarkSettings = [[destination viewControllers] objectAtIndex:0];
+
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        if (indexPath == nil) {
+            // New Bookmark
+            bookmarkSettings.bookmarkIndex = -1;
+        } else {
+            // Existing Bookmark
+            bookmarkSettings.bookmarkIndex = [indexPath row];
+            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        }
     }
 }
 

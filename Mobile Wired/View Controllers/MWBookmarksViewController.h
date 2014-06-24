@@ -28,10 +28,6 @@
 @interface MWBookmarksViewController : UITableViewController {
     NSMutableArray *serverBookmarks;
     NSMutableDictionary *currentConnections;
-    NSUInteger selectedIndex;
 }
-
-@property (strong, nonatomic) NSMutableArray *serverBookmarks;
-@property (nonatomic) NSUInteger selectedIndex;
 
 @end

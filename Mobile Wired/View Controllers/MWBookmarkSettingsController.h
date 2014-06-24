@@ -26,34 +26,8 @@
 #import <UIKit/UIKit.h>
 #import "MWBookmarksViewController.h"
 
-@interface MWBookmarkSettingsController : UIViewController <UITableViewDelegate, UITextFieldDelegate, UITableViewDataSource> {
-    IBOutlet UINavigationBar *navigationBar;
-    IBOutlet UITableView *mainTableView;
-    
-    MWBookmarksViewController *serverList;
+@interface MWBookmarkSettingsController : UITableViewController
 
-    UITextField *serverNameField;
-    NSString *oldServerName;
-    UITextField *serverHostField;
-    NSString *oldServerHost;
-    UITextField *serverPortField;
-    NSString *oldServerPort;
-        
-    UITextField *userLoginField;
-    NSString *oldUserLogin;
-    UITextField *userPassField;
-    NSString *oldUserPass;
-    
-    UITextField *userNickField;
-    NSString *oldUserNick;
-    UITextField *userStatusField;
-    NSString *oldUserStatus;
-    UISwitch *pushSettingSwitch;
-    Boolean oldPushSetting;
-}
-
-@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
-
-@property (strong, nonatomic) MWBookmarksViewController *serverList;
+@property (assign) NSInteger bookmarkIndex;
 
 @end

@@ -30,9 +30,10 @@
 #define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
 #define kMWSettingsViewController       @"MWSettingsViewController"
 
-// Storyboard Seques
-#define kMWBookmarkSettingsSeque        @"MWBookmarkSettingsSeque"
-#define kMWSettingsSeque                @"MWSettingsSeque"
+// Bookmark Segues
+#define kMWBookmarkSettingsSegue        @"MWBookmarkSettingsSegue"
+#define kMWBookmarkSaveSegue            @"MWBookmarkSaveSegue"
+#define kMWSettingsSegue                @"MWSettingsSegue"
 
 //#define kMWDrawerController             @"MWDrawerController"
 //#define kMWUserListViewController       @"UserListViewController"
