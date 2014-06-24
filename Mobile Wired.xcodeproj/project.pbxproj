@@ -13,6 +13,7 @@
 		0D113DB719426B430056E5D3 /* MWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB619426B430056E5D3 /* MWAppDelegate.m */; };
 		0D113DBA19426D160056E5D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D113DB919426D160056E5D3 /* README.md */; };
 		0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1838A1180DC8E000FD6AC1 /* Images.xcassets */; };
+		0D63D57F19562AF600756EAF /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D63D57E19562AF600756EAF /* CHANGELOG.md */; };
 		0D640C7B194758DB0069F108 /* MWSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7A194758DB0069F108 /* MWSettingsViewController.m */; };
 		0D640C7F19475D910069F108 /* MWTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7E19475D910069F108 /* MWTextFieldCell.m */; };
 		0D640C82194767CA0069F108 /* UITableView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C81194767CA0069F108 /* UITableView+Subviews.m */; };
@@ -55,6 +56,7 @@
 		0D113DB919426D160056E5D3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0D1838A1180DC8E000FD6AC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
+		0D63D57E19562AF600756EAF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		0D640C79194758DB0069F108 /* MWSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWSettingsViewController.h; path = "View Controllers/MWSettingsViewController.h"; sourceTree = "<group>"; };
 		0D640C7A194758DB0069F108 /* MWSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWSettingsViewController.m; path = "View Controllers/MWSettingsViewController.m"; sourceTree = "<group>"; };
 		0D640C7D19475D910069F108 /* MWTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTextFieldCell.h; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				0D113DB919426D160056E5D3 /* README.md */,
 				3431FF5F136C93ED00EDB8D8 /* ROADMAP.md */,
+				0D63D57E19562AF600756EAF /* CHANGELOG.md */,
 				34EBE3CA13594F7B00A24C01 /* Mobile Wired */,
 				0D113DB819426CBB0056E5D3 /* WiredConnection */,
 				3440CD061366188E0046955F /* Categories */,
@@ -357,6 +360,7 @@
 				3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */,
 				3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */,
 				0D113DBA19426D160056E5D3 /* README.md in Resources */,
+				0D63D57F19562AF600756EAF /* CHANGELOG.md in Resources */,
 				0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */,
 				0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */,
 				0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */,

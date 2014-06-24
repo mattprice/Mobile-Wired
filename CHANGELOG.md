@@ -1,4 +1,16 @@
 # Changelog
+
+## Version 1.0
+In-Progress
+
+* Mobile Wired now sports an interface designed for iOS 7.
+* You can now receive push notifications when your nickname is mentioned.
+* Added support for Retina 4" iPhones.
+* Added the ability to dismiss the keyboard by swiping downward.
+* Added the ability to set nickname and status per-server. #13
+* Nickname and status changes now take effect immediately, instead of on next connection. #11
+* Fixed a crash that occurred if settings changed while connected to a server. #16
+
 ## Version 0.9 (231)
 May 22, 2013
 
@@ -23,21 +35,20 @@ July 25, 2012
 ## Version 0.8 (168)
 July 21, 2012
 
-* Roughly a half a billion changes.
-* The first fully functioning public beta of Mobile Wired.
+* Mobile Wired's first fully-functioning public beta.
 
 ## Version 0.6 (70)
 February 26, 2012
 
-* Mobile Wired UI was rewritten from the ground up to support a new interface inspired by Path 2.0 and Facebook.
+* The Mobile Wired interface was rewritten from the ground up.
 
 ## Version 0.5.1
 August 12, 2011
 
-* Fixed crashing on pre-iOS 5 devices due to a bug in Beta 5 of the iOS 5 SDK.
+* Fixed crashing on pre-iOS 5 devices.
 * New application icon and loading screen.
 
 ## Version 0.5
 August 11, 2011
 
-* Intial beta release.
+* Initial alpha release.
