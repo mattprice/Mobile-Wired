@@ -25,10 +25,6 @@
 
 #import "MWAppDelegate.h"
 
-#import "MMDrawerController.h"
-#import "ChatViewController.h"
-#import "UserListViewController.h"
-#import "MWBookmarksViewController.h"
 #import "TestFlightTokens.h"
 
 @implementation MWAppDelegate
@@ -42,20 +38,8 @@
         [TestFlight takeOff:TF_APP_TOKEN];
     #endif
 #endif
-    
-    // Set up user defaults if they haven't run the app before.
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedBefore"])
-    {
-        NSLog(@"Setting up user defaults for the first time.");
 
-        NSString *defaultStatus = [NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]];
-
-        [[NSUserDefaults standardUserDefaults] setObject:@"Mobile Wired User" forKey:@"UserNick"];
-        [[NSUserDefaults standardUserDefaults] setObject:defaultStatus forKey:@"UserStatus"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedBefore"];
-        [[NSUserDefaults standardUserDefaults] setObject:@[] forKey:@"Bookmarks"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    [MWDataStore new];
     
 #if !TARGET_IPHONE_SIMULATOR
     // Register for remote notifications, but only if we're not in the Simulator.

@@ -55,7 +55,7 @@
 
 - (id)init;
 
-#pragma mark User Commands
+#pragma mark - User Commands
 - (void)connectToServer:(NSString *)server onPort:(NSInteger)port;
 - (void)disconnect;
 - (void)sendLogin:(NSString *)user withPassword:(NSString *)password;
@@ -64,12 +64,12 @@
 - (void)setIcon:(NSData *)icon;
 - (void)setIdle;
 
-#pragma mark Connection Information
+#pragma mark - Connection Information
 - (NSDictionary *)getMyUserInfo;
 - (NSDictionary *)getMyPermissions;
 - (void)getInfoForUser:(NSString *)userID;
 
-#pragma mark Channel Commands
+#pragma mark - Channel Commands
 - (void)joinChannel:(NSString *)channel;
 - (void)leaveChannel:(NSString *)channel;
 - (void)sendChatMessage:(NSString *)message toChannel:(NSString *)channel;
@@ -80,7 +80,7 @@
 - (void)kickUserID:(NSString *)userID fromChannel:(NSString *)channel message:(NSString *)message;
 - (void)banUserID:(NSString *)userID message:(NSString *)message expiration:(NSDate *)expiration;
 
-#pragma mark Connection Helpers
+#pragma mark - Connection Helpers
 - (void)sendCompatibilityCheck;
 - (void)sendClientInformation;
 - (void)sendAcknowledgement;
@@ -90,7 +90,7 @@
 - (void)readData;
 - (void)attemptReconnection;
 
-#pragma mark GCDAsyncSocket Wrappers
+#pragma mark - GCDAsyncSocket Wrappers
 - (void)secureSocket;
 - (void)sendTransaction:(NSString *)transaction withParameters:(NSDictionary *)parameters;
 - (void)sendTransaction:(NSString *)transaction;
@@ -98,6 +98,7 @@
 
 @end
 
+#pragma mark - Delegate Methods
 @protocol WiredConnectionDelegate <NSObject>
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo;
 - (void)didReceiveUserInfo:(NSDictionary *)info;

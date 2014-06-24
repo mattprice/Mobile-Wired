@@ -51,7 +51,7 @@
     return self;
 }
 
-#pragma mark User Commands
+#pragma mark - User Commands
 /*
  * Connects to the given server and port specified.
  *
@@ -161,7 +161,7 @@
     [self readData];
 }
 
-#pragma mark Connection Info
+#pragma mark - Connection Info
 
 - (NSDictionary *)getMyUserInfo
 {
@@ -182,7 +182,7 @@
     [self readData];
 }
 
-#pragma mark Channel Commands
+#pragma mark - Channel Commands
 
 /*
  * Attempts to join a channel on the Wired server.
@@ -366,7 +366,7 @@
     [self readData];
 }
 
-#pragma mark Connection Helpers
+#pragma mark - Connection Helpers
 
 /*
  * Sends a compatibility check to the server.
@@ -489,7 +489,7 @@
     [self connectToServer:serverHost onPort:serverPort];
 }
 
-#pragma mark GCDAsyncSocket Wrappers
+#pragma mark - GCDAsyncSocket Wrappers
 /*
  * Runs anything that needs to be done post-connection.
  *

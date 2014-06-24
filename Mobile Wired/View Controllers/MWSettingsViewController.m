@@ -39,8 +39,8 @@
 {
     [super viewDidLoad];
 
-    _nicknameTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserNick"];
-    _statusTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserStatus"];
+    _nicknameTextField.text = [MWDataStore optionForKey:kMWUserNick];
+    _statusTextField.text = [MWDataStore optionForKey:kMWUserStatus];
 
     [TestFlight passCheckpoint:@"Viewed Settings"];
 }
@@ -54,9 +54,9 @@
 
 - (IBAction)saveButtonPressed:(id)sender
 {
-    [[NSUserDefaults standardUserDefaults] setObject:_nicknameTextField.text forKey:@"UserNick"];
-    [[NSUserDefaults standardUserDefaults] setObject:_statusTextField.text forKey:@"UserStatus"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [MWDataStore setOption:_nicknameTextField.text forKey:kMWUserNick];
+    [MWDataStore setOption:_statusTextField.text forKey:kMWUserStatus];
+    [MWDataStore save];
 
     [TestFlight passCheckpoint:@"Modified Settings"];
 

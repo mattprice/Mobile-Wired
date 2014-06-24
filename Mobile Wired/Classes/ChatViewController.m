@@ -37,8 +37,7 @@
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
+    if ((self = [super init])) {
         self.message = @"";
         self.userID = @"";
     }
@@ -50,24 +49,26 @@
 
 @implementation ChatViewController
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
 
 - (void)loadConnectionSettings {
+    // TODO: Need to update all this stuff. Do we still have observers for NSDefaults?
+    //       We need to use MWDataStore delegates instead?
+    
     // NSUserDefaultsDidChangeNotification doesn't let us know what changed so we tell the server
     // about anything that could have possibly updated.
     
-    NSString *nick = bookmark[@"UserNick"];
+    NSString *nick = bookmark[kMWUserNick];
     if ([nick isEqualToString:@""]) {
-        nick = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNick"];
+        nick = [MWDataStore optionForKey:kMWUserNick];
     }
     
-    NSString *status = bookmark[@"UserStatus"];
+    NSString *status = bookmark[kMWUserStatus];
     if ([status isEqualToString:@""]) {
-        status = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserStatus"];
+        status = [MWDataStore optionForKey:kMWUserStatus];
     }
     
     [self.connection setNick:nick];
@@ -115,7 +116,7 @@
     chatMessages = [NSMutableArray new];
     
     // Connect to the bookmark.
-    bookmark = [[NSUserDefaults standardUserDefaults] valueForKey:@"Bookmarks"][indexRow];
+    bookmark = [MWDataStore bookmarkAtIndex:indexRow];
     [self connect];
 }
 
@@ -139,7 +140,7 @@
     // Create a new WiredConnection.
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
-    [self.connection connectToServer:bookmark[@"ServerHost"] onPort:[bookmark[@"ServerPort"] integerValue]];
+    [self.connection connectToServer:bookmark[kMWServerHost] onPort:[bookmark[kMWServerPort] integerValue]];
     self.userListView.connection = self.connection;
 }
 
@@ -391,7 +392,7 @@
     progressHUD.labelText = @"Logging In";
     
     [self loadConnectionSettings];
-    [self.connection sendLogin:bookmark[@"UserLogin"] withPassword:bookmark[@"UserPass"]];
+    [self.connection sendLogin:bookmark[kMWUserLogin] withPassword:bookmark[kMWUserPass]];
 }
 
 /*

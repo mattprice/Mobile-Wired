@@ -58,9 +58,9 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 
     // Create an array to eventually store connections in.
     currentConnections = [NSMutableDictionary dictionary];
+    serverBookmarks = [MWDataStore bookmarks];
 
     [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
-
 }
 
 #pragma mark - TableView Data Sources
@@ -110,10 +110,10 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
             NSDictionary *bookmark = serverBookmarks[[indexPath row]];
 
             // If there's no Server Name, try using the Server Host.
-            if ([bookmark[@"ServerName"] isEqualToString:@""]) {
-                cell.textLabel.text = bookmark[@"ServerHost"];
+            if ([bookmark[kMWServerName] isEqualToString:@""]) {
+                cell.textLabel.text = bookmark[kMWServerHost];
             } else {
-                cell.textLabel.text = bookmark[@"ServerName"];
+                cell.textLabel.text = bookmark[kMWServerName];
             }
 
             // Set the status image.
@@ -180,12 +180,9 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        NSMutableArray *savedBookmarks = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Bookmarks"] mutableCopy];
-        [savedBookmarks removeObjectAtIndex:[indexPath row]];
-        [[NSUserDefaults standardUserDefaults] setObject:savedBookmarks forKey:@"Bookmarks"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-
+        // Delete the bookmark and update the table.
+        [MWDataStore removeBookmarkAtIndex:[indexPath row]];
+        serverBookmarks = [MWDataStore bookmarks];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
         [TestFlight passCheckpoint:@"Deleted Bookmark"];

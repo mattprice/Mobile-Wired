@@ -16,5 +16,6 @@
     #import "TestFlight.h"
 
     #import "MWMacros.h"
+    #import "MWDataStore.h"
     #import "MWDrawerController.h"
 #endif

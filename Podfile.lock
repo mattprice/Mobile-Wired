@@ -16,6 +16,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.6):
     - MMDrawerController/Core
+  - SSKeychain (1.2.2)
   - TBXML (1.5)
   - TestFlightSDK (3.0.2)
 
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - CocoaAsyncSocket (~> 7.3)
   - MBProgressHUD (~> 0.8)
   - MMDrawerController (~> 0.5)
+  - SSKeychain (~> 1.2)
   - TBXML (~> 1.5)
   - TestFlightSDK (~> 3.0)
 
@@ -32,6 +34,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 45bdbbc1c0a5ed0640ff4c42af325ba43a2f099a
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
   MMDrawerController: 4bae84535ca7a5f4cb55a66a001e6035c3571677
+  SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
   TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
   TestFlightSDK: 0c24c533748d0d84bfe7a3cb6036fa79124d84ee
 

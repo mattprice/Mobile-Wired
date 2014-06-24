@@ -21,6 +21,7 @@
 		0D640C8B194769120069F108 /* UIImage+MWKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C88194769120069F108 /* UIImage+MWKit.m */; };
 		0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */; };
 		0DA8B04C17277CFE008297ED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA8B04B17277CFE008297ED /* QuartzCore.framework */; };
+		0DCF83E8194CBEB100511AD8 /* MWDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCF83E7194CBEB100511AD8 /* MWDataStore.m */; };
 		0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D515BCD8960030069F /* UserInfoViewController.m */; };
 		0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */; };
 		0DFF15091941420000294943 /* MWDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF15081941420000294943 /* MWDrawerController.m */; };
@@ -68,6 +69,8 @@
 		0D640C88194769120069F108 /* UIImage+MWKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MWKit.m"; path = "Categories/UIImage+MWKit.m"; sourceTree = "<group>"; };
 		0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = WiredSpec_2.0b53.xml; path = Resources/WiredSpec_2.0b53.xml; sourceTree = "<group>"; };
 		0DA8B04B17277CFE008297ED /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0DCF83E6194CBEB100511AD8 /* MWDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWDataStore.h; sourceTree = "<group>"; };
+		0DCF83E7194CBEB100511AD8 /* MWDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWDataStore.m; sourceTree = "<group>"; };
 		0DD4C0D415BCD8960030069F /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = Classes/UserInfoViewController.h; sourceTree = "<group>"; };
 		0DD4C0D515BCD8960030069F /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = Classes/UserInfoViewController.m; sourceTree = "<group>"; };
 		0DD4C0DA15BCDA9E0030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/UserInfoView.xib; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 				0DFF150A194147C100294943 /* MWMacros.h */,
 				0D113DB519426B430056E5D3 /* MWAppDelegate.h */,
 				0D113DB619426B430056E5D3 /* MWAppDelegate.m */,
+				0DCF83E6194CBEB100511AD8 /* MWDataStore.h */,
+				0DCF83E7194CBEB100511AD8 /* MWDataStore.m */,
 				0DFF15071941420000294943 /* MWDrawerController.h */,
 				0DFF15081941420000294943 /* MWDrawerController.m */,
 				0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */,
@@ -316,7 +321,7 @@
 			attributes = {
 				CLASSPREFIX = MW;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Ember Code";
+				ORGANIZATIONNAME = "Matthew Price";
 				TargetAttributes = {
 					34EBE3BD13594F7A00A24C01 = {
 						DevelopmentTeam = DL2J7C6ZBQ;
@@ -416,6 +421,7 @@
 				0DFF15091941420000294943 /* MWDrawerController.m in Sources */,
 				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
 				34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */,
+				0DCF83E8194CBEB100511AD8 /* MWDataStore.m in Sources */,
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
 				0D640C89194769120069F108 /* NSString+Base64.m in Sources */,
 				0D640C82194767CA0069F108 /* UITableView+Subviews.m in Sources */,
