@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		0D340FBC1965941F00C6AE88 /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 0D340FBF1965941F00C6AE88 /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				0D340FC01965943F00C6AE88 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		0D0B50E5180CDF8200198D07 /* MobileWired.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */; };
 		0D113DB11942651C0056E5D3 /* MWBookmarkSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB01942651C0056E5D3 /* MWBookmarkSettingsController.m */; };
@@ -347,6 +361,7 @@
 			projectRoot = "";
 			targets = (
 				34EBE3BD13594F7A00A24C01 /* Mobile Wired */,
+				0D340FBC1965941F00C6AE88 /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -375,6 +390,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D340FC01965943F00C6AE88 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "hash oclint &> /dev/null\nif [ $? -eq 1 ]; then\n    echo >&2 \"oclint not found, analyzing stopped\"\n    exit 1\nfi\n\ncd \"${TARGET_TEMP_DIR}\"\n\nif [ ! -f compile_commands.json ]; then\n    echo \"[*] Could not find compile_commands.json\"\n    echo \"[*] Starting xcodebuild to rebuild the project..\"\n\n    # Clean previous output\n    if [ -f xcodebuild.log ]; then\n        rm xcodebuild.log\n    fi\n\n    cd \"${SRCROOT}\"\n\n    xcodebuild clean\n\n    # Build xcodebuild.log\n    xcodebuild -workspace \"Mobile Wired.xcworkspace\" -scheme \"Mobile Wired\" | tee \"${TARGET_TEMP_DIR}\"/xcodebuild.log\n\n    # Transform it into compile_commands.json\n    echo \"[*] Transforming xcodebuild.log into compile_commands.json...\"\n    cd \"${TARGET_TEMP_DIR}\"\n    oclint-xcodebuild\n\n    echo \"[*] Copy compile_commands.json to the project root...\"\n    cp \"${TARGET_TEMP_DIR}\"/compile_commands.json \"${SRCROOT}\"/compile_commands.json\nfi\n\necho \"[*] Starting analyzing\"\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
+		};
 		34202D7E1364F357002F1B3B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -503,6 +531,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0D340FBD1965941F00C6AE88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0D340FBE1965941F00C6AE88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		34EBE3E213594F7B00A24C01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -639,6 +681,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0D340FBF1965941F00C6AE88 /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D340FBD1965941F00C6AE88 /* Debug */,
+				0D340FBE1965941F00C6AE88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		34EBE3B813594F7A00A24C01 /* Build configuration list for PBXProject "Mobile Wired" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

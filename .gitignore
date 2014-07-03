@@ -17,6 +17,9 @@ DerivedData
 # OSX
 .DS_Store
 
+# OCLint
+compile_commands.json
+
 # CocoaPods
 Pods/
 
