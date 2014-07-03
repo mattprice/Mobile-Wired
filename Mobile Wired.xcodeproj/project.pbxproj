@@ -13,6 +13,7 @@
 		0D113DB719426B430056E5D3 /* MWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB619426B430056E5D3 /* MWAppDelegate.m */; };
 		0D113DBA19426D160056E5D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D113DB919426D160056E5D3 /* README.md */; };
 		0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1838A1180DC8E000FD6AC1 /* Images.xcassets */; };
+		0D2DA4DF1964FA6500DD91A7 /* Mobile Wired.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0D2DA4DE1964FA6500DD91A7 /* Mobile Wired.xcconfig */; };
 		0D63D57F19562AF600756EAF /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D63D57E19562AF600756EAF /* CHANGELOG.md */; };
 		0D640C7B194758DB0069F108 /* MWSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7A194758DB0069F108 /* MWSettingsViewController.m */; };
 		0D640C7F19475D910069F108 /* MWTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7E19475D910069F108 /* MWTextFieldCell.m */; };
@@ -56,6 +57,7 @@
 		0D113DB919426D160056E5D3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0D1838A1180DC8E000FD6AC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
+		0D2DA4DE1964FA6500DD91A7 /* Mobile Wired.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Mobile Wired.xcconfig"; path = "Mobile Wired.xcodeproj/Mobile Wired.xcconfig"; sourceTree = "<group>"; };
 		0D63D57E19562AF600756EAF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		0D640C79194758DB0069F108 /* MWSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWSettingsViewController.h; path = "View Controllers/MWSettingsViewController.h"; sourceTree = "<group>"; };
 		0D640C7A194758DB0069F108 /* MWSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWSettingsViewController.m; path = "View Controllers/MWSettingsViewController.m"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				34EBE3C113594F7B00A24C01 /* Frameworks */,
 				34EBE3BF13594F7B00A24C01 /* Products */,
 				3C0413468ACF4A42A3A1EFD9 /* Pods.xcconfig */,
+				0D2DA4DE1964FA6500DD91A7 /* Mobile Wired.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -356,6 +359,7 @@
 				34EBE402135951A700A24C01 /* InfoPlist.strings in Resources */,
 				34EBE403135951A700A24C01 /* MainWindow.xib in Resources */,
 				34EBE4211359565100A24C01 /* ChatView.xib in Resources */,
+				0D2DA4DF1964FA6500DD91A7 /* Mobile Wired.xcconfig in Resources */,
 				34EBE4231359565100A24C01 /* UserListView.xib in Resources */,
 				3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */,
 				3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */,
@@ -502,37 +506,36 @@
 		34EBE3E213594F7B00A24C01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
-				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = "";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
-				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
-				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -540,41 +543,38 @@
 		34EBE3E313594F7B00A24C01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
-				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
-				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = "";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
-				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = "";
-				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		34EBE3E513594F7B00A24C01 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C0413468ACF4A42A3A1EFD9 /* Pods.xcconfig */;
+			baseConfigurationReference = 0D2DA4DE1964FA6500DD91A7 /* Mobile Wired.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -606,7 +606,7 @@
 		};
 		34EBE3E613594F7B00A24C01 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C0413468ACF4A42A3A1EFD9 /* Pods.xcconfig */;
+			baseConfigurationReference = 0D2DA4DE1964FA6500DD91A7 /* Mobile Wired.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
