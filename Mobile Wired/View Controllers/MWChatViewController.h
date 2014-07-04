@@ -43,12 +43,7 @@ typedef NS_ENUM(NSInteger, MWChatMessageTypes) {
 
 @end
 
-@interface MWChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate, WiredConnectionDelegate, UIGestureRecognizerDelegate> {
-    NSDictionary *bookmark;
-    MBProgressHUD *progressHUD;
-    NSString *serverTopic;
-    
-    NSMutableArray *chatMessages;}
+@interface MWChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate, WiredConnectionDelegate>
 
 @property (strong, nonatomic) WiredConnection *connection;
 @property (strong, nonatomic) UserListViewController *userListView;

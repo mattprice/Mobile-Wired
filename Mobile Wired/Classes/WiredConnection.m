@@ -68,7 +68,7 @@
     
     // Attempt a socket connection to the server.
     NSLog(@"Beginning socket connection...");
-    if (![socket connectToHost:serverHost onPort:serverPort withTimeout:15 error:&error]) {
+    if (![socket connectToHost:serverHost onPort:(uint16_t)serverPort withTimeout:15 error:&error]) {
         // Connection failed.
         NSLog(@"Connection error: %@",error);
         [delegate didFailConnectionWithReason:error];
@@ -1016,7 +1016,8 @@
     else if ([rootName isEqualToString:@"wired.chat.topic"]) {
         NSLog(@"Received channel topic.");
         NSString *topic = @"", *nick = @"Unknown", *channel = @"1";
-        
+        NSDate *date;
+
         do {
             childName = [TBXML valueOfAttributeNamed:@"name" forElement:childElement];
             
@@ -1031,6 +1032,11 @@
             else if ([childName isEqualToString:@"wired.chat.topic.topic"]) {
                 topic = [TBXML textForElement:childElement];
             }
+
+            else if ([childName isEqualToString:@"wired.chat.topic.time"]) {
+                double timeDouble = [[TBXML textForElement:childElement] doubleValue];
+                date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)timeDouble];
+            }
         } while ((childElement = childElement->nextSibling));
         
         // The channel topic needs to be XML decoded before notifying the delegate.
@@ -1040,7 +1046,7 @@
                      stringByReplacingOccurrencesOfString: @"&gt;" withString: @">"]
                     stringByReplacingOccurrencesOfString: @"&lt;" withString: @"<"];
         
-        [delegate didReceiveTopic:topic fromNick:nick forChannel:channel];
+        [delegate didReceiveTopic:topic fromNick:nick forChannel:channel onDate:date];
     }
     
 #pragma mark Chat Message

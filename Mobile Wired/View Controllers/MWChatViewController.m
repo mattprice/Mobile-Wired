@@ -58,6 +58,11 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarConstraint;
 
+@property (copy, nonatomic) NSDictionary *bookmark;
+@property (strong, nonatomic) MBProgressHUD *progressHUD;
+@property (strong, nonatomic) NSMutableArray *chatMessages;
+@property (copy, nonatomic) NSString *serverTopic;
+
 @end
 
 @implementation MWChatViewController
@@ -76,12 +81,12 @@
     // NSUserDefaultsDidChangeNotification doesn't let us know what changed so we tell the server
     // about anything that could have possibly updated.
     
-    NSString *nick = bookmark[kMWUserNick];
+    NSString *nick = self.bookmark[kMWUserNick];
     if ([nick isEqualToString:@""]) {
         nick = [MWDataStore optionForKey:kMWUserNick];
     }
     
-    NSString *status = bookmark[kMWUserStatus];
+    NSString *status = self.bookmark[kMWUserStatus];
     if ([status isEqualToString:@""]) {
         status = [MWDataStore optionForKey:kMWUserStatus];
     }
@@ -111,17 +116,17 @@
 - (void)loadBookmark:(NSUInteger)indexRow
 {
     // Create a progress HUD.
-    if (!progressHUD) {
-        progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-        progressHUD.delegate = self;
-        [self.view addSubview:progressHUD];
+    if (!self.progressHUD) {
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        self.progressHUD.delegate = self;
+        [self.view addSubview:self.progressHUD];
     }
     
     // Initialize the message list.
-    chatMessages = [NSMutableArray new];
+    self.chatMessages = [NSMutableArray new];
     
     // Connect to the bookmark.
-    bookmark = [MWDataStore bookmarkAtIndex:indexRow];
+    self.bookmark = [MWDataStore bookmarkAtIndex:indexRow];
     [self connect];
 }
 
@@ -137,15 +142,15 @@
 - (void)connect
 {
     // Update the progress HUD.
-    progressHUD.mode = MBProgressHUDModeIndeterminate;
-    progressHUD.animationType = MBProgressHUDAnimationZoom;
-    progressHUD.labelText = @"Connecting";
-    [progressHUD show:YES];
+    self.progressHUD.mode = MBProgressHUDModeIndeterminate;
+    self.progressHUD.animationType = MBProgressHUDAnimationZoom;
+    self.progressHUD.labelText = @"Connecting";
+    [self.progressHUD show:YES];
     
     // Create a new WiredConnection.
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
-    [self.connection connectToServer:bookmark[kMWServerHost] onPort:[bookmark[kMWServerPort] integerValue]];
+    [self.connection connectToServer:self.bookmark[kMWServerHost] onPort:[self.bookmark[kMWServerPort] integerValue]];
     self.userListView.connection = self.connection;
 }
 
@@ -204,7 +209,7 @@
         [alert addButtonWithTitle:@"Set Topic" block:^{
             BlockTextPromptAlertView *prompt = [BlockTextPromptAlertView promptWithTitle:@"Set Topic"
                                                                                  message:@""
-                                                                             defaultText:self->serverTopic];
+                                                                             defaultText:self.serverTopic];
             
             // Set Topic: Cancel
             [prompt setCancelButtonWithTitle:@"Cancel" block:nil];
@@ -261,11 +266,11 @@
     [dateFormatter setDateFormat:@"h:mm a"];
     newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
     
-    [chatMessages addObject:newMessage];
+    [self.chatMessages addObject:newMessage];
     [self.tableView reloadData];
     
     // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[chatMessages count]-1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self.chatMessages count]-1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath
                           atScrollPosition:UITableViewScrollPositionBottom
                                   animated:YES];
@@ -282,11 +287,38 @@
     [dateFormatter setDateFormat:@"h:mm a"];
     newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
     
-    [chatMessages addObject:newMessage];
+    [self.chatMessages addObject:newMessage];
     [self.tableView reloadData];
     
     // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[chatMessages count]-1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self.chatMessages count]-1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
+}
+
+- (void)addSystemMessageToView:(NSString *)message withDate:(NSDate *)date
+{
+    ChatMessage *newMessage = [ChatMessage new];
+    newMessage.message = message;
+    newMessage.type = MWStatusMessage;
+
+    // If a date is given, display it. Otherwise, display the current time.
+    if (date == nil) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"h:mm a"];
+        newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
+    } else {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"MMM d"];
+        newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
+    }
+
+    [self.chatMessages addObject:newMessage];
+    [self.tableView reloadData];
+
+    // Scroll to the new message.
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self.chatMessages count]-1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath
                           atScrollPosition:UITableViewScrollPositionBottom
                                   animated:YES];
@@ -294,22 +326,7 @@
 
 - (void)addSystemMessageToView:(NSString *)message
 {
-    ChatMessage *newMessage = [ChatMessage new];
-    newMessage.message = message;
-    newMessage.type = MWStatusMessage;
-
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"h:mm a"];
-    newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
-    
-    [chatMessages addObject:newMessage];
-    [self.tableView reloadData];
-    
-    // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[chatMessages count]-1 inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath
-                          atScrollPosition:UITableViewScrollPositionBottom
-                                  animated:YES];
+    [self addSystemMessageToView:message withDate:nil];
 }
 
 #pragma mark - UITableView Data Source
@@ -326,7 +343,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (NSInteger)[chatMessages count];
+    return (NSInteger)[self.chatMessages count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -334,7 +351,7 @@
     MWChatMessageCell *cell;
 
     NSUInteger row = (NSUInteger)[indexPath row];
-    ChatMessage *message = chatMessages[row];
+    ChatMessage *message = self.chatMessages[row];
 
     switch (message.type) {
         case MWChatMessage:
@@ -394,7 +411,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger row = (NSUInteger)[indexPath row];
-    ChatMessage *message = chatMessages[row];
+    ChatMessage *message = self.chatMessages[row];
 
     NSDictionary *attributes;
     CGFloat top = 15.0, bottom = 15.0;
@@ -509,7 +526,7 @@
         self.toolbarConstraint.constant = keyboardHeight;
 
         // Scroll to bottom of chatTableView.
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self->chatMessages count]-1 inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self.chatMessages count]-1 inSection:0];
         [self.tableView scrollToRowAtIndexPath:indexPath
                               atScrollPosition:UITableViewScrollPositionBottom
                                       animated:YES];
@@ -534,7 +551,7 @@
         self.toolbarConstraint.constant = 0.0;
 
         // Scroll to bottom of chatTableView.
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self->chatMessages count]-1 inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self.chatMessages count]-1 inSection:0];
         [self.tableView scrollToRowAtIndexPath:indexPath
                               atScrollPosition:UITableViewScrollPositionBottom
                                       animated:YES];
@@ -565,10 +582,10 @@
                                                                                action:@selector(openOptionsMenu)];
 
     // Update the progress HUD.
-    progressHUD.labelText = @"Logging In";
+    self.progressHUD.labelText = @"Logging In";
 
     [self loadConnectionSettings];
-    [self.connection sendLogin:bookmark[kMWUserLogin] withPassword:bookmark[kMWUserPass]];
+    [self.connection sendLogin:self.bookmark[kMWUserLogin] withPassword:self.bookmark[kMWUserPass]];
 }
 
 /*
@@ -579,16 +596,16 @@
  */
 - (void)didReceiveUserInfo:(NSDictionary *)info
 {
-    //    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView"
-    //                                                                                      bundle:nil
-    //                                                                                    userInfo:info];
+//    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView"
+//                                                                                      bundle:nil
+//                                                                                    userInfo:info];
 
-    // Nested ViewDeckControllers!
-    // This controller already exists (AppDelegate.m) but we need to set up its right-most view.
-    //    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
-    //    rightView.rightController = infoController;
-    //    rightView.rightSize = 66;
-    //    [rightView openRightViewAnimated:YES];
+// Nested ViewDeckControllers!
+// This controller already exists (AppDelegate.m) but we need to set up its right-most view.
+//    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
+//    rightView.rightController = infoController;
+//    rightView.rightSize = 66;
+//    [rightView openRightViewAnimated:YES];
 }
 
 /*
@@ -600,7 +617,7 @@
  */
 - (void)didLoginSuccessfully
 {
-    progressHUD.labelText = @"Joining Channel";
+    self.progressHUD.labelText = @"Joining Channel";
 
     [self.connection joinChannel:@"1"];
 }
@@ -615,10 +632,10 @@
 - (void)didFailLoginWithReason:(NSString *)reason
 {
     // Update the progress HUD.
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Login Failed";
-    progressHUD.detailsLabelText = reason;
+    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    self.progressHUD.mode = MBProgressHUDModeCustomView;
+    self.progressHUD.labelText = @"Login Failed";
+    self.progressHUD.detailsLabelText = reason;
 }
 
 /*
@@ -630,13 +647,13 @@
 - (void)didConnectAndLoginSuccessfully
 {
     // Update the progress HUD.
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Connected";
-    [progressHUD hide:YES afterDelay:2];
+    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
+    self.progressHUD.mode = MBProgressHUDModeCustomView;
+    self.progressHUD.labelText = @"Connected";
+    [self.progressHUD hide:YES afterDelay:2];
 
     // Report the connection to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Connected to %@ >>>\n",
+    NSString *message = [NSString stringWithFormat:@"Connected to %@.",
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
 
@@ -654,9 +671,9 @@
 - (void)didFailConnectionWithReason:(NSError *)error
 {
     // Update the progress HUD.
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Connection Failed";
+    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    self.progressHUD.mode = MBProgressHUDModeCustomView;
+    self.progressHUD.labelText = @"Connection Failed";
 }
 
 /*
@@ -669,13 +686,13 @@
 - (void)didDisconnect
 {
     // Update the progress HUD.
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Disconnected";
-    [progressHUD show:YES];
+    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    self.progressHUD.mode = MBProgressHUDModeCustomView;
+    self.progressHUD.labelText = @"Disconnected";
+    [self.progressHUD show:YES];
 
     // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@ >>>\n",
+    NSString *message = [NSString stringWithFormat:@"Disconnected from %@.",
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
 }
@@ -690,12 +707,12 @@
 - (void)willReconnect
 {
     // Update the Progress HUD
-    progressHUD.mode = MBProgressHUDModeIndeterminate;
-    progressHUD.labelText = @"Reconnecting";
-    [progressHUD show:YES];
+    self.progressHUD.mode = MBProgressHUDModeIndeterminate;
+    self.progressHUD.labelText = @"Reconnecting";
+    [self.progressHUD show:YES];
 
     // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@ >>>\n",
+    NSString *message = [NSString stringWithFormat:@"Disconnected from %@.",
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
 }
@@ -711,8 +728,7 @@
 - (void)willReconnectDelayed:(NSString *)delay
 {
     // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Reconnecting to %@ in %@ seconds >>>\n",
-                         self.connection.serverInfo[@"wired.info.name"], delay];
+    NSString *message = [NSString stringWithFormat:@"Reconnecting in %@ seconds.", delay];
     [self addSystemMessageToView:message];
 }
 
@@ -727,7 +743,7 @@
 - (void)willReconnectDelayed:(NSString *)delay withError:(NSError *)error
 {
     // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@:%@ >>>\n",
+    NSString *message = [NSString stringWithFormat:@"Disconnected from %@:%@.",
                          self.connection.serverInfo[@"wired.info.name"], error.description];
     [self addSystemMessageToView:message];
 
@@ -743,13 +759,13 @@
 - (void)didReconnect
 {
     // Update the Progress HUD
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Reconnected";
-    [progressHUD hide:YES afterDelay:2];
+    self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
+    self.progressHUD.mode = MBProgressHUDModeCustomView;
+    self.progressHUD.labelText = @"Reconnected";
+    [self.progressHUD hide:YES afterDelay:2];
 
     // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Reconnected to %@ >>>\n",
+    NSString *message = [NSString stringWithFormat:@"Reconnected to %@.",
                          self.connection.serverInfo [@"wired.info.name"]];
     [self addSystemMessageToView:message];
 
@@ -763,26 +779,35 @@
  * Only the subsequent changes should notify the user that the topic has changed.
  *
  */
-- (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
+- (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel onDate:(NSDate *)date
 {
+    // No topic.
+    if ([topic isEqualToString:@""]) {
+        self.serverTopic = topic;
+        return;
+    }
+
     // Initial connection.
-    if (serverTopic == nil || [topic isEqualToString:@""]) {
+    if (self.serverTopic == nil) {
 #ifdef DEBUG
         NSLog(@"Channel #%@ topic: %@ (set by %@)", channel, topic, nick);
 #endif
+
+        NSString *message = [NSString stringWithFormat:@"%@ — %@.", topic, nick];
+        [self addSystemMessageToView:message withDate:date];
     }
 
-    // Subsequent topic changes, so we should notify the user.
+    // Someone changed the topic.
     else {
 #ifdef DEBUG
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>", channel, nick, topic);
 #endif
 
-        NSString *message = [NSString stringWithFormat:@"<<< %@ changed topic to %@ >>>\n", nick, topic];
+        NSString *message = [NSString stringWithFormat:@"%@ changed topic to %@.", nick, topic];
         [self addSystemMessageToView:message];
     }
 
-    serverTopic = topic;
+    self.serverTopic = topic;
 }
 
 /*
@@ -869,7 +894,7 @@
     NSLog(@"<<< %@ has joined >>>", nick);
 #endif
 
-    NSString *message = [NSString stringWithFormat:@"<<< %@ has joined >>>\n", nick];
+    NSString *message = [NSString stringWithFormat:@"%@ has joined.", nick];
     [self addSystemMessageToView:message];
 }
 
@@ -885,7 +910,7 @@
     NSLog(@"<<< %@ is now known as %@ >>>", oldNick, newNick);
 #endif
 
-    NSString *message = [NSString stringWithFormat:@"<<< %@ is now known as %@ >>>\n", oldNick, newNick];
+    NSString *message = [NSString stringWithFormat:@"%@ is now known as %@.", oldNick, newNick];
     [self addSystemMessageToView:message];
 }
 
@@ -901,7 +926,7 @@
     NSLog(@"<<< %@ has left >>>", nick);
 #endif
 
-    NSString *message = [NSString stringWithFormat:@"<<< %@ has left >>>\n", nick];
+    NSString *message = [NSString stringWithFormat:@"%@ has left.", nick];
     [self addSystemMessageToView:message];
 }
 
@@ -923,9 +948,9 @@
 
     NSString *message;
     if ([reason isEqualToString:@""]) {
-        message = [NSString stringWithFormat:@"<<< %@ was kicked by %@ >>>\n", nick, kicker];
+        message = [NSString stringWithFormat:@"%@ was kicked by %@.", nick, kicker];
     } else {
-        message = [NSString stringWithFormat:@"<<< %@ was kicked by %@ (%@) >>>\n", nick, kicker, reason];
+        message = [NSString stringWithFormat:@"%@ was kicked by %@ (%@).", nick, kicker, reason];
     }
 
     [self addSystemMessageToView:message];
