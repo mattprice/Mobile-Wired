@@ -102,17 +102,17 @@
     
     // Fade information about idle users
     if ( [currentUser[@"wired.user.idle"] isEqualToString:@"1"] ) {
-        cell.textLabel.alpha = 0.3;
-        cell.detailTextLabel.alpha = 0.4;
-        cell.imageView.alpha = 0.5;
+        cell.textLabel.alpha = 0.3f;
+        cell.detailTextLabel.alpha = 0.4f;
+        cell.imageView.alpha = 0.5f;
     } else {
-        cell.textLabel.alpha = 1;
-        cell.detailTextLabel.alpha = 1;
-        cell.imageView.alpha = 1;
+        cell.textLabel.alpha = 1.0f;
+        cell.detailTextLabel.alpha = 1.0f;
+        cell.imageView.alpha = 1.0f;
     }
     
     // Resize the user image and make it circular.
-    CGFloat size = 32.0;
+    CGFloat size = 32.0f;
     UIImage *image = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
     image = [image scaleToSize:CGSizeMake(size, size)];
 //    image = [image withCornerRadius:size/2];
@@ -122,7 +122,7 @@
 //    UIColor *borderColor = [UIColor colorWithWhite:0.0 alpha:0.525];
 //    cell.imageView.layer.borderColor = borderColor.CGColor;
 //    cell.imageView.layer.borderWidth = 0.5;
-    cell.imageView.layer.cornerRadius = size/2;
+    cell.imageView.layer.cornerRadius = size/2.0f;
     
     // Display a disclosure indicator if the user has permission to view user info.
     if ( [[self.connection getMyPermissions][@"wired.account.user.get_info"] boolValue] ) {

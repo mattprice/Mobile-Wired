@@ -829,7 +829,7 @@
                 }
                         
                 else if ([childValue isEqualToString:@"wired.account.color.green"]) {
-                    userColor = [UIColor colorWithRed:0.0 green:0.8 blue:0.0 alpha:1.0];
+                    userColor = [UIColor colorWithRed:0.0f green:0.8f blue:0.0f alpha:1.0f];
                 }
                         
                 else if ([childValue isEqualToString:@"wired.account.color.blue"]) {
@@ -841,7 +841,7 @@
                 }
                 
                 else {
-                    userColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:1.0];
+                    userColor = [UIColor colorWithHue:0.0f saturation:0.0f brightness:0.0f alpha:1.0f];
                 }
                 
                 [tempInfo setValue:userColor forKey:@"wired.account.color"];

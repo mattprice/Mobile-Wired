@@ -120,7 +120,7 @@
     // Create a progress HUD.
     if (!self.progressHUD) {
         self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-        self.progressHUD.color = [UIColor colorWithWhite:0.0 alpha:0.65];
+        self.progressHUD.color = [UIColor colorWithWhite:0.0f alpha:0.65f];
         self.progressHUD.delegate = self;
         [self.view addSubview:self.progressHUD];
     }
@@ -415,30 +415,30 @@
     ChatMessage *message = self.chatMessages[(NSUInteger)[indexPath row]];
 
     NSDictionary *attributes;
-    CGFloat top = 15.0, bottom = 15.0;
-    CGFloat left = 0.0, right = 0.0, nameHeight = 0.0;
+    CGFloat top = 15.0f, bottom = 15.0f;
+    CGFloat left = 0.0f, right = 0.0f, nameHeight = 0.0f;
 
     switch (message.type) {
         case MWChatMessage:
-            left = 50.0;
-            right = 10.0;
-            nameHeight = 20.0;
+            left = 50.0f;
+            right = 10.0f;
+            nameHeight = 20.0f;
 
-            attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:14.0] };
+            attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:14.0f] };
             break;
 
         case MWEmoteMessage:
-            left = 50.0;
-            right = 88.0;
+            left = 50.0f;
+            right = 88.0f;
 
-            attributes = @{ NSFontAttributeName: [UIFont italicSystemFontOfSize:14.0] };
+            attributes = @{ NSFontAttributeName: [UIFont italicSystemFontOfSize:14.0f] };
             break;
 
         case MWStatusMessage:
-            left = 13.0;
-            right = 90.0;
+            left = 13.0f;
+            right = 90.0f;
 
-            attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:12.0] };
+            attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:12.0f] };
             break;
     }
 
@@ -449,8 +449,8 @@
                                                  context:nil];
 
     // The minimum height is the user image size + the top and bottom padding.
-    CGFloat totalHeight = ceil(CGRectGetHeight(frame)) + top + bottom + nameHeight;
-    CGFloat userImage = (message.type == MWStatusMessage) ? 0.0 : 32.0;
+    CGFloat totalHeight = (CGFloat)ceil(CGRectGetHeight(frame)) + top + bottom + nameHeight;
+    CGFloat userImage = (message.type == MWStatusMessage) ? 0.0f : 32.0f;
     CGFloat minimumHeight = userImage + top + bottom;
     
     return (totalHeight > minimumHeight) ? totalHeight : minimumHeight;

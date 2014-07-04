@@ -85,13 +85,13 @@
         
         // Fade information about idle users
         if ( [userInfo[@"wired.user.idle"] isEqualToString:@"1"] ) {
-            cell.textLabel.alpha = 0.3;
-            cell.detailTextLabel.alpha = 0.4;
-            cell.imageView.alpha = 0.5;
+            cell.textLabel.alpha = 0.3f;
+            cell.detailTextLabel.alpha = 0.4f;
+            cell.imageView.alpha = 0.5f;
         } else {
-            cell.textLabel.alpha = 1;
-            cell.detailTextLabel.alpha = 1;
-            cell.imageView.alpha = 1;
+            cell.textLabel.alpha = 1.0f;
+            cell.detailTextLabel.alpha = 1.0f;
+            cell.imageView.alpha = 1.0f;
         }
         
         cell.imageView.image = [UIImage imageWithData:userInfo[@"wired.user.icon"]];

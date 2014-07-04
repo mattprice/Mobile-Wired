@@ -65,7 +65,7 @@ static BOOL isNewBookmark;
         _userPassField.text     = bookmark[kMWUserPass];
         _userNicknameField.text = bookmark[kMWUserNick];
         _userStatusField.text   = bookmark[kMWUserStatus];
-        _notificationSwitch.on  = bookmark[kMWNotifications][kMWOnMention];
+        _notificationSwitch.on  = (BOOL)bookmark[kMWNotifications][kMWOnMention];
     }
 
     // Set the nickname and status placeholders to their global defaults.
@@ -140,7 +140,7 @@ static BOOL isNewBookmark;
     for (id obj in [textField.superview subviews]) {
         if ([obj isMemberOfClass:[UILabel class]]) {
             UILabel *label = (UILabel *)obj;
-            label.textColor = [UIColor colorWithRed:0 green:0.569 blue:1 alpha:1];
+            label.textColor = [UIColor colorWithRed:0.0f green:0.569f blue:1.0f alpha:1.0f];
         }
     }
 
