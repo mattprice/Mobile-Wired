@@ -23,16 +23,14 @@
 //  THE SOFTWARE.
 //
 
-// Storyboard Views
-#define kMWMainStoryboard               @"MobileWired"
-#define kMWLeftNavigationController     @"MMLeftNavigationController"
+// Left Drawer Storyboard
+#define kMWLeftDrawer                   @"LeftDrawer"
+#define kMWLeftNavigationController     @"MWLeftNavigationController"
 #define kMWBookmarksViewController      @"MWBookmarksViewController"
 #define kMWBookmarkSettingsController   @"MWBookmarkSettingsController"
-#define kMWSettingsViewController       @"MWSettingsViewController"
-
-// Bookmark Segues
 #define kMWBookmarkSettingsSegue        @"MWBookmarkSettingsSegue"
 #define kMWBookmarkSaveSegue            @"MWBookmarkSaveSegue"
+#define kMWSettingsViewController       @"MWSettingsViewController"
 #define kMWSettingsSegue                @"MWSettingsSegue"
 
 //#define kMWDrawerController             @"MWDrawerController"

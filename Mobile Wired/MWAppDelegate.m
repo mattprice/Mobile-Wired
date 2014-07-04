@@ -34,7 +34,7 @@
     // Add the TestFlight SDK.
 #ifndef DEBUG
     #ifdef TF_APP_TOKEN
-        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueItdentifier]];
+//        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] identifierForVendor]];
         [TestFlight takeOff:TF_APP_TOKEN];
     #endif
 #endif
@@ -50,8 +50,7 @@
     return YES;
 }
 
-#pragma mark -
-#pragma mark Push Notifications
+#pragma mark - Push Notifications
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken
 {
     NSString *hexToken = [[[[devToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""]
@@ -78,8 +77,7 @@
     NSLog(@"*** Received a push notification: %@", [userInfo description]);
 }
 
-#pragma mark -
-#pragma mark Backgrounding Notifications
+#pragma mark - Backgrounding Notifications
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*

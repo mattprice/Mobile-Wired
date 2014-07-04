@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		0D0B50E5180CDF8200198D07 /* MobileWired.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */; };
+		0D0B50E5180CDF8200198D07 /* LeftDrawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D0B50E3180CDF8200198D07 /* LeftDrawer.storyboard */; };
 		0D113DB11942651C0056E5D3 /* MWBookmarkSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB01942651C0056E5D3 /* MWBookmarkSettingsController.m */; };
 		0D113DB4194265360056E5D3 /* MWBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB3194265360056E5D3 /* MWBookmarksViewController.m */; };
 		0D113DB719426B430056E5D3 /* MWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D113DB619426B430056E5D3 /* MWAppDelegate.m */; };
@@ -61,7 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D0B50E4180CDF8200198D07 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = MobileWired.storyboard; sourceTree = "<group>"; };
+		0D0B50E4180CDF8200198D07 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = LeftDrawer.storyboard; sourceTree = "<group>"; };
 		0D113DAF1942651C0056E5D3 /* MWBookmarkSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWBookmarkSettingsController.h; path = "View Controllers/MWBookmarkSettingsController.h"; sourceTree = "<group>"; };
 		0D113DB01942651C0056E5D3 /* MWBookmarkSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWBookmarkSettingsController.m; path = "View Controllers/MWBookmarkSettingsController.m"; sourceTree = "<group>"; };
 		0D113DB2194265360056E5D3 /* MWBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWBookmarksViewController.h; path = "View Controllers/MWBookmarksViewController.h"; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 				0DCF83E7194CBEB100511AD8 /* MWDataStore.m */,
 				0DFF15071941420000294943 /* MWDrawerController.h */,
 				0DFF15081941420000294943 /* MWDrawerController.m */,
-				0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */,
+				0D0B50E3180CDF8200198D07 /* LeftDrawer.storyboard */,
 				34AEB772150CFDE1005F2B96 /* Bookmarks List */,
 				3482C1B6155C7E1B00415794 /* Bookmark Settings */,
 				34DB44EE155705F200C955A5 /* Global Settings */,
@@ -383,7 +383,7 @@
 				0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */,
 				0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */,
 				0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */,
-				0D0B50E5180CDF8200198D07 /* MobileWired.storyboard in Resources */,
+				0D0B50E5180CDF8200198D07 /* LeftDrawer.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,12 +476,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0D0B50E3180CDF8200198D07 /* MobileWired.storyboard */ = {
+		0D0B50E3180CDF8200198D07 /* LeftDrawer.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0D0B50E4180CDF8200198D07 /* en */,
 			);
-			name = MobileWired.storyboard;
+			name = LeftDrawer.storyboard;
 			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};

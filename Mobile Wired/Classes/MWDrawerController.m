@@ -45,7 +45,7 @@
     self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeNone;
 
     // Create and set up the view controllers.
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMWMainStoryboard bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMWLeftDrawer bundle:nil];
     UINavigationController *bookmarksView = [storyboard instantiateViewControllerWithIdentifier:kMWLeftNavigationController];
     MWBookmarkSettingsController *bookmarkSettings = [storyboard instantiateViewControllerWithIdentifier:kMWBookmarkSettingsController];
 

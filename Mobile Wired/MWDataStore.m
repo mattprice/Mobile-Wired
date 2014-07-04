@@ -52,7 +52,7 @@ static NSMutableArray *bookmarks;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentDirectory = [paths objectAtIndex:0];
+        NSString *documentDirectory = paths[0];
         dataPath = [documentDirectory stringByAppendingPathComponent:@"data.plist"];
     });
 
@@ -190,8 +190,6 @@ static NSMutableArray *bookmarks;
 
 + (NSMutableArray *)bookmarks
 {
-    NSLog(@"Passwords: %@", [[SSKeychain allAccounts] description]);
-
     NSMutableArray *_bookmarks = [NSMutableArray new];
     for (int i = 0; i < [bookmarks count]; i++) {
         _bookmarks[i] = [self bookmarkAtIndex:i];
