@@ -51,17 +51,19 @@
 
 @interface MWChatViewController ()
 
+// IBOutlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarConstraint;
 
+// Connection information.
 @property (copy, nonatomic) NSDictionary *bookmark;
-@property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong, nonatomic) NSMutableArray *chatMessages;
 @property (copy, nonatomic) NSString *serverTopic;
+
+@property (strong, nonatomic) MBProgressHUD *progressHUD;
 
 @end
 
@@ -118,6 +120,7 @@
     // Create a progress HUD.
     if (!self.progressHUD) {
         self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        self.progressHUD.color = [UIColor colorWithWhite:0.0 alpha:0.65];
         self.progressHUD.delegate = self;
         [self.view addSubview:self.progressHUD];
     }
@@ -650,7 +653,7 @@
     self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     self.progressHUD.labelText = @"Connected";
-    [self.progressHUD hide:YES afterDelay:2];
+    [self.progressHUD hide:YES afterDelay:0.5];
 
     // Report the connection to chat.
     NSString *message = [NSString stringWithFormat:@"Connected to %@.",
@@ -762,7 +765,7 @@
     self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     self.progressHUD.labelText = @"Reconnected";
-    [self.progressHUD hide:YES afterDelay:2];
+    [self.progressHUD hide:YES afterDelay:0.5];
 
     // Report the disconnect to chat.
     NSString *message = [NSString stringWithFormat:@"Reconnected to %@.",
