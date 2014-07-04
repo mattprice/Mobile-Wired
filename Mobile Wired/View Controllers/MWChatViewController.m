@@ -312,7 +312,7 @@
                                   animated:YES];
 }
 
-#pragma mark - UITableView Data Sources
+#pragma mark - UITableView Data Source
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -438,412 +438,7 @@
     return (totalHeight > minimumHeight) ? totalHeight : minimumHeight;
 }
 
-#pragma mark - Wired Connection Delegates
-
-/*
- * Connection to server was successful.
- *
- * The server requires a login, nick, status, or icon after sending us its life story.
- * The specs suggest sending the nick/status/icon before sending the login info, but
- * any order we want would technically work.
- *
- */
-- (void)didReceiveServerInfo:(NSDictionary *)serverInfo
-{
-    // Customize the bar title and buttons.
-    [self navigationItem].title = self.connection.serverInfo[@"wired.info.name"];
-    [self navigationItem].rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cog.png"]
-                                                                                style:UIBarButtonItemStyleBordered
-                                                                               target:self
-                                                                               action:@selector(openOptionsMenu)];
-    
-    // Update the progress HUD.
-    progressHUD.labelText = @"Logging In";
-    
-    [self loadConnectionSettings];
-    [self.connection sendLogin:bookmark[kMWUserLogin] withPassword:bookmark[kMWUserPass]];
-}
-
-/*
- * Received information about a user.
- *
- * This method is called when we receive specifically requested information about a user.
- *
- */
-- (void)didReceiveUserInfo:(NSDictionary *)info
-{
-//    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView"
-//                                                                                      bundle:nil
-//                                                                                    userInfo:info];
-
-    // Nested ViewDeckControllers!
-    // This controller already exists (AppDelegate.m) but we need to set up its right-most view.
-//    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
-//    rightView.rightController = infoController;
-//    rightView.rightSize = 66;
-//    [rightView openRightViewAnimated:YES];
-}
-
-/*
- * Login to the server was successful.
- *
- * The server doesn't actually require us to send anything next, so we can really do
- * anything that we want. Download a file, join a channel, play with ourselves...
- *
- */
-- (void)didLoginSuccessfully
-{
-    progressHUD.labelText = @"Joining Channel";
-    
-    [self.connection joinChannel:@"1"];
-}
-
-/*
- * Login to the server failed.
- *
- * This method is called if the user is banned or their username and password combination
- * is incorrect. The reason returned is not a complete sentence.
- *
- */
-- (void)didFailLoginWithReason:(NSString *)reason
-{
-    // Update the progress HUD.
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Login Failed";
-    progressHUD.detailsLabelText = reason;
-}
-
-/*
- * Connection and login was successful.
- *
- * Called on first connection to the Wired server once the user is finally able to perform actions.
- *
- */
-- (void)didConnectAndLoginSuccessfully
-{
-    // Update the progress HUD.
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Connected";
-    [progressHUD hide:YES afterDelay:2];
-    
-    // Report the connection to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Connected to %@ >>>\n",
-                         self.connection.serverInfo[@"wired.info.name"]];
-    [self addSystemMessageToView:message];
-    
-    [TestFlight passCheckpoint:@"Connected to Server"];
-}
-
-/*
- * Connection to the server failed.
- *
- * This method is called if the socket connection is not successful. The NSError sent is the
- * same NSError returned by GCDAsyncSocket. We do not yet attempt to parse the NSError.
- * Assume that the host/port is incorrect, or that the Wired server is currently offline.
- *
- */
-- (void)didFailConnectionWithReason:(NSError *)error
-{
-    // Update the progress HUD.
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Connection Failed";
-}
-
-/*
- * Disconnected from the Wired server.
- *
- * This method is called when the user disconnects from the Wired server and we do not expect
- * to reconnect.
- *
- */
-- (void)didDisconnect
-{
-    // Update the progress HUD.
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Disconnected";
-    [progressHUD show:YES];
-    
-    // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@ >>>\n",
-                         self.connection.serverInfo[@"wired.info.name"]];
-    [self addSystemMessageToView:message];
-}
-
-/*
- * Reconnecting to the Wired server.
- *
- * This method is called when a user unexpectedly disconnects from the server and we are in the
- * process of reconnecting. This will most likely occur if the user is kicked.
- *
- */
-- (void)willReconnect
-{
-    // Update the Progress HUD
-    progressHUD.mode = MBProgressHUDModeIndeterminate;
-    progressHUD.labelText = @"Reconnecting";
-    [progressHUD show:YES];
-    
-    // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@ >>>\n",
-                         self.connection.serverInfo[@"wired.info.name"]];
-    [self addSystemMessageToView:message];
-}
-
-/*
- * Reconnecting to the Wired server.
- *
- * This method is called when a user expectedly disconnects from the server and we are in the
- * process of reconnecting. This will most likely occur if the server crashed and we're waiting
- * a few seconds for it to restart.
- *
- */
-- (void)willReconnectDelayed:(NSString *)delay
-{
-    // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Reconnecting to %@ in %@ seconds >>>\n",
-                         self.connection.serverInfo[@"wired.info.name"], delay];
-    [self addSystemMessageToView:message];
-}
-
-/*
- * Reconnecting to the Wired server.
- *
- * This method is called when a user expectedly disconnects from the server and we are in the
- * process of reconnecting. This will most likely occur if the server crashed and we're waiting
- * a few seconds for it to restart. An error is sent when this is not our first reconnection try.
- *
- */
-- (void)willReconnectDelayed:(NSString *)delay withError:(NSError *)error
-{
-    // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@:%@ >>>\n",
-                         self.connection.serverInfo[@"wired.info.name"], error.description];
-    [self addSystemMessageToView:message];
-    
-    [self willReconnectDelayed:delay];
-}
-
-/*
- * Reconnected to the Wired server.
- *
- * This method is called once the server reconnects from a willReconnect scenario.
- *
- */
-- (void)didReconnect
-{
-    // Update the Progress HUD
-    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
-    progressHUD.mode = MBProgressHUDModeCustomView;
-    progressHUD.labelText = @"Reconnected";
-    [progressHUD hide:YES afterDelay:2];
-    
-    // Report the disconnect to chat.
-    NSString *message = [NSString stringWithFormat:@"<<< Reconnected to %@ >>>\n",
-                         self.connection.serverInfo [@"wired.info.name"]];
-    [self addSystemMessageToView:message];
-    
-    [TestFlight passCheckpoint:@"Reconnected to Server"];
-}
-
-/*
- * Received channel topic from server.
- *
- * Occurs on first joining the channel and on each time the topic is changed thereafter.
- * Only the subsequent changes should notify the user that the topic has changed.
- *
- */
-- (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
-{
-    // Initial connection.
-    if (serverTopic == nil || [topic isEqualToString:@""]) {
-#ifdef DEBUG
-        NSLog(@"Channel #%@ topic: %@ (set by %@)", channel, topic, nick);
-#endif
-    }
-    
-    // Subsequent topic changes, so we should notify the user.
-    else {
-#ifdef DEBUG
-        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>", channel, nick, topic);
-#endif
-        
-        NSString *message = [NSString stringWithFormat:@"<<< %@ changed topic to %@ >>>\n", nick, topic];
-        [self addSystemMessageToView:message];
-    }
-    
-    serverTopic = topic;
-}
-
-/*
- * Received chat message for a channel.
- *
- * Message could be from anyone, including yourself.
- *
- */
-- (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
-{
-#ifdef DEBUG
-    NSLog(@"%@ | %@ (%@) : %@", channel, nick, userID, message);
-#endif
-    
-    [self addMessageToView:message fromID:userID];
-}
-
-/*
- * Received a private message from some user.
- *
- * Message could be from anyone, including yourself. Be sure not to send a push notification
- * if the message was from yourself.
- *
- */
-- (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
-{
-#ifdef DEBUG
-    NSLog(@"%@ (%@) : %@",nick,userID,message);
-#endif
-    
-    // Don't send notification if message is from yourself.
-    if (userID == [self.connection myUserID])
-        return;
-    
-    NSString *tMessage = [NSString stringWithFormat:@"%@: %@", nick, message];
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Message Recevied" message:tMessage];
-    [alert setCancelButtonWithTitle:@"Close" block:^{}];
-    [alert show];
-}
-
-/*
- * Received a broadcast from someone.
- *
- * Broadcast could be from anyone, including yourself.
- *
- */
-- (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
-{
-#ifdef DEBUG
-    NSLog(@"%@ (%@) : %@", nick, userID, message);
-#endif
-    
-    NSString *tMessage = [NSString stringWithFormat:@"%@: %@", nick, message];
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Broadcast Received" message:tMessage];
-    [alert setCancelButtonWithTitle:@"Close" block:^{}];
-    [alert show];
-}
-
-/*
- * Received an emote for a channel.
- *
- * Emote could be from anyone, including yourself.
- *
- */
-- (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
-{
-#ifdef DEBUG
-    NSLog(@"%@ | %@ (%@) %@", channel, nick, userID, message);
-#endif
-    
-    
-    [self addEmoteToView:message fromID:userID];
-}
-
-/*
- * User joined a channel.
- *
- * Join notifications will only be about other users.
- *
- */
-- (void)userJoined:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
-{
-#ifdef DEBUG
-    NSLog(@"<<< %@ has joined >>>", nick);
-#endif
-    
-    NSString *message = [NSString stringWithFormat:@"<<< %@ has joined >>>\n", nick];
-    [self addSystemMessageToView:message];
-}
-
-/*
- * User changed their nick.
- *
- * Notification could be about anyone, including yourself.
- *
- */
-- (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick forChannel:(NSString *)channel
-{
-#ifdef DEBUG
-    NSLog(@"<<< %@ is now known as %@ >>>", oldNick, newNick);
-#endif
-    
-    NSString *message = [NSString stringWithFormat:@"<<< %@ is now known as %@ >>>\n", oldNick, newNick];
-    [self addSystemMessageToView:message];
-}
-
-/*
- * User left a channel.
- *
- * Leave notifications will only be about other users.
- *
- */
-- (void)userLeft:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
-{
-#ifdef DEBUG
-    NSLog(@"<<< %@ has left >>>", nick);
-#endif
-    
-    NSString *message = [NSString stringWithFormat:@"<<< %@ has left >>>\n", nick];
-    [self addSystemMessageToView:message];
-}
-
-/*
- * User was kicked from a channel.
- *
- * Kick notification could be for anyone, including yourself. If you're the user kicked, and you
- * want to rejoin the channel, then you should do so in this method. WiredConnection will not
- * rejoin for you. Also, the reason may be blank. Be sure to handle that.
- *
- * NOTE: Right now we assume that the user wants to rejoin the channel.
- *
- */
-- (void)userWasKicked:(NSString *)nick withID:(NSString *)userID byUser:(NSString *)kicker forReason:(NSString *)reason forChannel:(NSString *)channel
-{
-#ifdef DEBUG
-    NSLog(@"<<< %@ was kicked by %@ (%@) >>>", nick, kicker, reason);
-#endif
-    
-    NSString *message;
-    if ([reason isEqualToString:@""]) {
-        message = [NSString stringWithFormat:@"<<< %@ was kicked by %@ >>>\n", nick, kicker];
-    } else {
-        message = [NSString stringWithFormat:@"<<< %@ was kicked by %@ (%@) >>>\n", nick, kicker, reason];
-    }
-    
-    [self addSystemMessageToView:message];
-    
-    // Rejoin the channel if we were the one kicked.
-    if ([userID isEqualToString:self.connection.myUserID]) {
-        [self willReconnect];
-        [self.connection joinChannel:@"1"];
-    }
-}
-
-/*
- * Received an updated user list.
- *
- * This method is called each time we receive an updated user list. Individual event notifications
- * should be handled elsewhere.
- *
- */
-- (void)setUserList:(NSDictionary *)userList forChannel:(NSString *)channel
-{
-    [self.userListView setUserList:userList];
-    [self.userListView.mainTableView setNeedsDisplay];
-}
-
-#pragma mark - Sliding Keyboard
+#pragma mark - UITextField Delegates
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -874,23 +469,20 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
-    // Remove any NSNotificationCenter observers, otherwise the app
-    // will crash if we receive a notification after dealloc'ing, or
-    // when swapping to another view.
+
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    // Disable panning view while typing.
-//    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+    // Disable opening left/right drawers while typing.
+    [self mm_drawerController].openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    // Re-enable panning of view.
-//    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    // Enable opening left/right drawers again.
+    [self mm_drawerController].openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -950,6 +542,412 @@
         [self.toolbar updateConstraintsIfNeeded];
         [[self view] layoutIfNeeded];
     } completion:nil];
+}
+
+
+#pragma mark - Wired Connection Delegates
+
+/*
+ * Connection to server was successful.
+ *
+ * The server requires a login, nick, status, or icon after sending us its life story.
+ * The specs suggest sending the nick/status/icon before sending the login info, but
+ * any order we want would technically work.
+ *
+ */
+- (void)didReceiveServerInfo:(NSDictionary *)serverInfo
+{
+    // Customize the bar title and buttons.
+    [self navigationItem].title = self.connection.serverInfo[@"wired.info.name"];
+    [self navigationItem].rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cog.png"]
+                                                                                style:UIBarButtonItemStyleBordered
+                                                                               target:self
+                                                                               action:@selector(openOptionsMenu)];
+
+    // Update the progress HUD.
+    progressHUD.labelText = @"Logging In";
+
+    [self loadConnectionSettings];
+    [self.connection sendLogin:bookmark[kMWUserLogin] withPassword:bookmark[kMWUserPass]];
+}
+
+/*
+ * Received information about a user.
+ *
+ * This method is called when we receive specifically requested information about a user.
+ *
+ */
+- (void)didReceiveUserInfo:(NSDictionary *)info
+{
+    //    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView"
+    //                                                                                      bundle:nil
+    //                                                                                    userInfo:info];
+
+    // Nested ViewDeckControllers!
+    // This controller already exists (AppDelegate.m) but we need to set up its right-most view.
+    //    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
+    //    rightView.rightController = infoController;
+    //    rightView.rightSize = 66;
+    //    [rightView openRightViewAnimated:YES];
+}
+
+/*
+ * Login to the server was successful.
+ *
+ * The server doesn't actually require us to send anything next, so we can really do
+ * anything that we want. Download a file, join a channel, play with ourselves...
+ *
+ */
+- (void)didLoginSuccessfully
+{
+    progressHUD.labelText = @"Joining Channel";
+
+    [self.connection joinChannel:@"1"];
+}
+
+/*
+ * Login to the server failed.
+ *
+ * This method is called if the user is banned or their username and password combination
+ * is incorrect. The reason returned is not a complete sentence.
+ *
+ */
+- (void)didFailLoginWithReason:(NSString *)reason
+{
+    // Update the progress HUD.
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Login Failed";
+    progressHUD.detailsLabelText = reason;
+}
+
+/*
+ * Connection and login was successful.
+ *
+ * Called on first connection to the Wired server once the user is finally able to perform actions.
+ *
+ */
+- (void)didConnectAndLoginSuccessfully
+{
+    // Update the progress HUD.
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Connected";
+    [progressHUD hide:YES afterDelay:2];
+
+    // Report the connection to chat.
+    NSString *message = [NSString stringWithFormat:@"<<< Connected to %@ >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"]];
+    [self addSystemMessageToView:message];
+
+    [TestFlight passCheckpoint:@"Connected to Server"];
+}
+
+/*
+ * Connection to the server failed.
+ *
+ * This method is called if the socket connection is not successful. The NSError sent is the
+ * same NSError returned by GCDAsyncSocket. We do not yet attempt to parse the NSError.
+ * Assume that the host/port is incorrect, or that the Wired server is currently offline.
+ *
+ */
+- (void)didFailConnectionWithReason:(NSError *)error
+{
+    // Update the progress HUD.
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Connection Failed";
+}
+
+/*
+ * Disconnected from the Wired server.
+ *
+ * This method is called when the user disconnects from the Wired server and we do not expect
+ * to reconnect.
+ *
+ */
+- (void)didDisconnect
+{
+    // Update the progress HUD.
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Disconnected";
+    [progressHUD show:YES];
+
+    // Report the disconnect to chat.
+    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@ >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"]];
+    [self addSystemMessageToView:message];
+}
+
+/*
+ * Reconnecting to the Wired server.
+ *
+ * This method is called when a user unexpectedly disconnects from the server and we are in the
+ * process of reconnecting. This will most likely occur if the user is kicked.
+ *
+ */
+- (void)willReconnect
+{
+    // Update the Progress HUD
+    progressHUD.mode = MBProgressHUDModeIndeterminate;
+    progressHUD.labelText = @"Reconnecting";
+    [progressHUD show:YES];
+
+    // Report the disconnect to chat.
+    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@ >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"]];
+    [self addSystemMessageToView:message];
+}
+
+/*
+ * Reconnecting to the Wired server.
+ *
+ * This method is called when a user expectedly disconnects from the server and we are in the
+ * process of reconnecting. This will most likely occur if the server crashed and we're waiting
+ * a few seconds for it to restart.
+ *
+ */
+- (void)willReconnectDelayed:(NSString *)delay
+{
+    // Report the disconnect to chat.
+    NSString *message = [NSString stringWithFormat:@"<<< Reconnecting to %@ in %@ seconds >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"], delay];
+    [self addSystemMessageToView:message];
+}
+
+/*
+ * Reconnecting to the Wired server.
+ *
+ * This method is called when a user expectedly disconnects from the server and we are in the
+ * process of reconnecting. This will most likely occur if the server crashed and we're waiting
+ * a few seconds for it to restart. An error is sent when this is not our first reconnection try.
+ *
+ */
+- (void)willReconnectDelayed:(NSString *)delay withError:(NSError *)error
+{
+    // Report the disconnect to chat.
+    NSString *message = [NSString stringWithFormat:@"<<< Disconnected from %@:%@ >>>\n",
+                         self.connection.serverInfo[@"wired.info.name"], error.description];
+    [self addSystemMessageToView:message];
+
+    [self willReconnectDelayed:delay];
+}
+
+/*
+ * Reconnected to the Wired server.
+ *
+ * This method is called once the server reconnects from a willReconnect scenario.
+ *
+ */
+- (void)didReconnect
+{
+    // Update the Progress HUD
+    progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
+    progressHUD.mode = MBProgressHUDModeCustomView;
+    progressHUD.labelText = @"Reconnected";
+    [progressHUD hide:YES afterDelay:2];
+
+    // Report the disconnect to chat.
+    NSString *message = [NSString stringWithFormat:@"<<< Reconnected to %@ >>>\n",
+                         self.connection.serverInfo [@"wired.info.name"]];
+    [self addSystemMessageToView:message];
+
+    [TestFlight passCheckpoint:@"Reconnected to Server"];
+}
+
+/*
+ * Received channel topic from server.
+ *
+ * Occurs on first joining the channel and on each time the topic is changed thereafter.
+ * Only the subsequent changes should notify the user that the topic has changed.
+ *
+ */
+- (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel
+{
+    // Initial connection.
+    if (serverTopic == nil || [topic isEqualToString:@""]) {
+#ifdef DEBUG
+        NSLog(@"Channel #%@ topic: %@ (set by %@)", channel, topic, nick);
+#endif
+    }
+
+    // Subsequent topic changes, so we should notify the user.
+    else {
+#ifdef DEBUG
+        NSLog(@"%@ | <<< %@ changed topic to '%@' >>>", channel, nick, topic);
+#endif
+
+        NSString *message = [NSString stringWithFormat:@"<<< %@ changed topic to %@ >>>\n", nick, topic];
+        [self addSystemMessageToView:message];
+    }
+
+    serverTopic = topic;
+}
+
+/*
+ * Received chat message for a channel.
+ *
+ * Message could be from anyone, including yourself.
+ *
+ */
+- (void)didReceiveChatMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+{
+#ifdef DEBUG
+    NSLog(@"%@ | %@ (%@) : %@", channel, nick, userID, message);
+#endif
+
+    [self addMessageToView:message fromID:userID];
+}
+
+/*
+ * Received a private message from some user.
+ *
+ * Message could be from anyone, including yourself. Be sure not to send a push notification
+ * if the message was from yourself.
+ *
+ */
+- (void)didReceiveMessage:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
+{
+#ifdef DEBUG
+    NSLog(@"%@ (%@) : %@",nick,userID,message);
+#endif
+
+    // Don't send notification if message is from yourself.
+    if (userID == [self.connection myUserID])
+        return;
+
+    NSString *tMessage = [NSString stringWithFormat:@"%@: %@", nick, message];
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Message Recevied" message:tMessage];
+    [alert setCancelButtonWithTitle:@"Close" block:^{}];
+    [alert show];
+}
+
+/*
+ * Received a broadcast from someone.
+ *
+ * Broadcast could be from anyone, including yourself.
+ *
+ */
+- (void)didReceiveBroadcast:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID
+{
+#ifdef DEBUG
+    NSLog(@"%@ (%@) : %@", nick, userID, message);
+#endif
+
+    NSString *tMessage = [NSString stringWithFormat:@"%@: %@", nick, message];
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Broadcast Received" message:tMessage];
+    [alert setCancelButtonWithTitle:@"Close" block:^{}];
+    [alert show];
+}
+
+/*
+ * Received an emote for a channel.
+ *
+ * Emote could be from anyone, including yourself.
+ *
+ */
+- (void)didReceiveEmote:(NSString *)message fromNick:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+{
+#ifdef DEBUG
+    NSLog(@"%@ | %@ (%@) %@", channel, nick, userID, message);
+#endif
+
+
+    [self addEmoteToView:message fromID:userID];
+}
+
+/*
+ * User joined a channel.
+ *
+ * Join notifications will only be about other users.
+ *
+ */
+- (void)userJoined:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+{
+#ifdef DEBUG
+    NSLog(@"<<< %@ has joined >>>", nick);
+#endif
+
+    NSString *message = [NSString stringWithFormat:@"<<< %@ has joined >>>\n", nick];
+    [self addSystemMessageToView:message];
+}
+
+/*
+ * User changed their nick.
+ *
+ * Notification could be about anyone, including yourself.
+ *
+ */
+- (void)userChangedNick:(NSString *)oldNick toNick:(NSString *)newNick forChannel:(NSString *)channel
+{
+#ifdef DEBUG
+    NSLog(@"<<< %@ is now known as %@ >>>", oldNick, newNick);
+#endif
+
+    NSString *message = [NSString stringWithFormat:@"<<< %@ is now known as %@ >>>\n", oldNick, newNick];
+    [self addSystemMessageToView:message];
+}
+
+/*
+ * User left a channel.
+ *
+ * Leave notifications will only be about other users.
+ *
+ */
+- (void)userLeft:(NSString *)nick withID:(NSString *)userID forChannel:(NSString *)channel
+{
+#ifdef DEBUG
+    NSLog(@"<<< %@ has left >>>", nick);
+#endif
+
+    NSString *message = [NSString stringWithFormat:@"<<< %@ has left >>>\n", nick];
+    [self addSystemMessageToView:message];
+}
+
+/*
+ * User was kicked from a channel.
+ *
+ * Kick notification could be for anyone, including yourself. If you're the user kicked, and you
+ * want to rejoin the channel, then you should do so in this method. WiredConnection will not
+ * rejoin for you. Also, the reason may be blank. Be sure to handle that.
+ *
+ * NOTE: Right now we assume that the user wants to rejoin the channel.
+ *
+ */
+- (void)userWasKicked:(NSString *)nick withID:(NSString *)userID byUser:(NSString *)kicker forReason:(NSString *)reason forChannel:(NSString *)channel
+{
+#ifdef DEBUG
+    NSLog(@"<<< %@ was kicked by %@ (%@) >>>", nick, kicker, reason);
+#endif
+
+    NSString *message;
+    if ([reason isEqualToString:@""]) {
+        message = [NSString stringWithFormat:@"<<< %@ was kicked by %@ >>>\n", nick, kicker];
+    } else {
+        message = [NSString stringWithFormat:@"<<< %@ was kicked by %@ (%@) >>>\n", nick, kicker, reason];
+    }
+
+    [self addSystemMessageToView:message];
+
+    // Rejoin the channel if we were the one kicked.
+    if ([userID isEqualToString:self.connection.myUserID]) {
+        [self willReconnect];
+        [self.connection joinChannel:@"1"];
+    }
+}
+
+/*
+ * Received an updated user list.
+ *
+ * This method is called each time we receive an updated user list. Individual event notifications
+ * should be handled elsewhere.
+ *
+ */
+- (void)setUserList:(NSDictionary *)userList forChannel:(NSString *)channel
+{
+    [self.userListView setUserList:userList];
+    [self.userListView.mainTableView setNeedsDisplay];
 }
 
 @end
