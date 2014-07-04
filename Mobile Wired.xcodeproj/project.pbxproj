@@ -34,7 +34,6 @@
 		0D640C7B194758DB0069F108 /* MWSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7A194758DB0069F108 /* MWSettingsViewController.m */; };
 		0D640C7F19475D910069F108 /* MWTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7E19475D910069F108 /* MWTextFieldCell.m */; };
 		0D640C82194767CA0069F108 /* UITableView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C81194767CA0069F108 /* UITableView+Subviews.m */; };
-		0D640C89194769120069F108 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C84194769120069F108 /* NSString+Base64.m */; };
 		0D640C8A194769120069F108 /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C86194769120069F108 /* NSString+Hashes.m */; };
 		0D640C8B194769120069F108 /* UIImage+MWKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C88194769120069F108 /* UIImage+MWKit.m */; };
 		0D6B66261606475E002F5710 /* WiredSpec_2.0b53.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0D6B66251606475E002F5710 /* WiredSpec_2.0b53.xml */; };
@@ -84,8 +83,6 @@
 		0D640C7E19475D910069F108 /* MWTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWTextFieldCell.m; sourceTree = "<group>"; };
 		0D640C80194767CA0069F108 /* UITableView+Subviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+Subviews.h"; path = "Categories/UITableView+Subviews.h"; sourceTree = "<group>"; };
 		0D640C81194767CA0069F108 /* UITableView+Subviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Subviews.m"; path = "Categories/UITableView+Subviews.m"; sourceTree = "<group>"; };
-		0D640C83194769120069F108 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Categories/NSString+Base64.h"; sourceTree = "<group>"; };
-		0D640C84194769120069F108 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Categories/NSString+Base64.m"; sourceTree = "<group>"; };
 		0D640C85194769120069F108 /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Hashes.h"; path = "Categories/NSString+Hashes.h"; sourceTree = "<group>"; };
 		0D640C86194769120069F108 /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Hashes.m"; path = "Categories/NSString+Hashes.m"; sourceTree = "<group>"; };
 		0D640C87194769120069F108 /* UIImage+MWKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+MWKit.h"; path = "Categories/UIImage+MWKit.h"; sourceTree = "<group>"; };
@@ -177,8 +174,6 @@
 		3440CD061366188E0046955F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				0D640C83194769120069F108 /* NSString+Base64.h */,
-				0D640C84194769120069F108 /* NSString+Base64.m */,
 				0D640C85194769120069F108 /* NSString+Hashes.h */,
 				0D640C86194769120069F108 /* NSString+Hashes.m */,
 				0D640C87194769120069F108 /* UIImage+MWKit.h */,
@@ -464,7 +459,6 @@
 				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
 				0DCF83E8194CBEB100511AD8 /* MWDataStore.m in Sources */,
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
-				0D640C89194769120069F108 /* NSString+Base64.m in Sources */,
 				0D640C82194767CA0069F108 /* UITableView+Subviews.m in Sources */,
 				0D2FC191195B8C23005D5FE0 /* MWChatViewController.m in Sources */,
 				0D640C7F19475D910069F108 /* MWTextFieldCell.m in Sources */,

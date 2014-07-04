@@ -353,8 +353,7 @@
 {
     MWChatMessageCell *cell;
 
-    NSUInteger row = (NSUInteger)[indexPath row];
-    ChatMessage *message = self.chatMessages[row];
+    ChatMessage *message = self.chatMessages[(NSUInteger)[indexPath row]];
 
     switch (message.type) {
         case MWChatMessage:
@@ -413,8 +412,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger row = (NSUInteger)[indexPath row];
-    ChatMessage *message = self.chatMessages[row];
+    ChatMessage *message = self.chatMessages[(NSUInteger)[indexPath row]];
 
     NSDictionary *attributes;
     CGFloat top = 15.0, bottom = 15.0;

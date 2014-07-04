@@ -61,16 +61,13 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
 {
     switch (section) {
         case kBookmarksSection:
-            return [serverBookmarks count];
-            break;
+            return (NSInteger)[serverBookmarks count];
 
         case kSettingsSection:
             return 1;
-            break;
 
         default:
             return 0;
-            break;
     }
 }
 
@@ -82,7 +79,7 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
         case kBookmarksSection:
         {
             // Everything else is a bookmark.
-            NSDictionary *bookmark = serverBookmarks[[indexPath row]];
+            NSDictionary *bookmark = serverBookmarks[(NSUInteger)[indexPath row]];
 
             // If there's no Server Name, try using the Server Host.
             if ([bookmark[kMWServerName] isEqualToString:@""]) {
@@ -138,15 +135,12 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
     switch ([indexPath section]) {
         case kBookmarksSection:
             return YES;
-            break;
 
         case kSettingsSection:
             return NO;
-            break;
 
         default:
             return NO;
-            break;
     }
 }
 
@@ -155,15 +149,12 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
     switch ([indexPath section]) {
         case kBookmarksSection:
             return UITableViewCellEditingStyleDelete;
-            break;
 
         case kSettingsSection:
             return UITableViewCellEditingStyleNone;
-            break;
 
         default:
             return UITableViewCellEditingStyleNone;
-            break;
     }
 }
 
@@ -171,7 +162,7 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the bookmark and update the table.
-        [MWDataStore removeBookmarkAtIndex:[indexPath row]];
+        [MWDataStore removeBookmarkAtIndex:(NSUInteger)[indexPath row]];
         serverBookmarks = [MWDataStore bookmarks];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
@@ -184,7 +175,7 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Set the selectedIndex so that we know what row to save changes to.
-    NSUInteger selectedIndex = [indexPath row];
+    NSUInteger selectedIndex = (NSUInteger)[indexPath row];
     NSString *indexString = [NSString stringWithFormat:@"%lu",(unsigned long)selectedIndex];
 
     if ([indexPath section] == kBookmarksSection) {

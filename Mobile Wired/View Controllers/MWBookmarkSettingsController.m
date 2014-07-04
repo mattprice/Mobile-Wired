@@ -56,7 +56,7 @@ static BOOL isNewBookmark;
     } else {
         [self navigationItem].title = @"Edit Bookmark";
 
-        NSDictionary *bookmark = [MWDataStore bookmarkAtIndex:self.bookmarkIndex];
+        NSDictionary *bookmark = [MWDataStore bookmarkAtIndex:(NSUInteger)self.bookmarkIndex];
 
         _serverNameField.text   = bookmark[kMWServerName];
         _serverHostField.text   = bookmark[kMWServerHost];
@@ -126,7 +126,7 @@ static BOOL isNewBookmark;
     if (isNewBookmark) {
         [MWDataStore addBookmark:bookmark];
     } else {
-        [MWDataStore setBookmark:bookmark forIndex:self.bookmarkIndex];
+        [MWDataStore setBookmark:bookmark forIndex:(NSUInteger)self.bookmarkIndex];
     }
 
     return YES;

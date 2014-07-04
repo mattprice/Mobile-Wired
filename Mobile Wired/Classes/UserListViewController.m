@@ -81,7 +81,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of Users in the list.
-    return [self.userListArray count];
+    return (NSInteger)[self.userListArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,7 +94,7 @@
     }
     
     // Get info about the current row's user
-    NSDictionary *currentUser = self.userListArray[[indexPath row]];
+    NSDictionary *currentUser = self.userListArray[(NSUInteger)[indexPath row]];
     
     cell.textLabel.text = currentUser[@"wired.user.nick"];
     cell.textLabel.textColor = currentUser[@"wired.account.color"];
@@ -139,7 +139,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *currentUser = self.userListArray[[indexPath row]];
+    NSDictionary *currentUser = self.userListArray[(NSUInteger)[indexPath row]];
     
     [self.connection getInfoForUser:currentUser[@"wired.user.id"]];
     

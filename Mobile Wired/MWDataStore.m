@@ -31,7 +31,7 @@
 
 static MWDataStore *sharedInstance;
 
-static NSUInteger version;
+static NSInteger version;
 static NSMutableDictionary *settings;
 static NSMutableArray *bookmarks;
 
@@ -191,8 +191,8 @@ static NSMutableArray *bookmarks;
 + (NSMutableArray *)bookmarks
 {
     NSMutableArray *_bookmarks = [NSMutableArray new];
-    for (int i = 0; i < [bookmarks count]; i++) {
-        _bookmarks[i] = [self bookmarkAtIndex:i];
+    for (int i = 0; i < (int)[bookmarks count]; i++) {
+        _bookmarks[i] = [self bookmarkAtIndex:(NSUInteger)i];
     }
 
     return _bookmarks;

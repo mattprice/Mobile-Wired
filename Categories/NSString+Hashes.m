@@ -33,7 +33,7 @@
     NSString *string = self;
     const char *cString = [string UTF8String];
     unsigned char result[CC_SHA1_DIGEST_LENGTH];
-    CC_SHA1(cString, strlen(cString), result);
+    CC_SHA1(cString, (CC_LONG)strlen(cString), result);
     NSString *newString = [NSString  stringWithFormat:
                            @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
                            result[0], result[1], result[2], result[3], result[4],
