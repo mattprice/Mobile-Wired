@@ -23,6 +23,9 @@
 //  THE SOFTWARE.
 //
 
+// Global UI Constants
+#define kMWLedgeSize                    [[UIScreen mainScreen] bounds].size.width - 40
+
 // Left Drawer Storyboard
 #define kMWLeftDrawer                   @"LeftDrawer"
 #define kMWLeftNavigationController     @"MWLeftNavigationController"
@@ -33,9 +36,12 @@
 #define kMWSettingsViewController       @"MWSettingsViewController"
 #define kMWSettingsSegue                @"MWSettingsSegue"
 
+// Center Drawer Storyboard
+#define kMWCenterDrawer                 @"CenterDrawer"
+#define kMWChatViewController           @"MWChatViewController"
+
 //#define kMWDrawerController             @"MWDrawerController"
 //#define kMWUserListViewController       @"UserListViewController"
-//#define kMWChatViewController           @"ChatViewController"
 
 // If we're not debugging, swap all NSLogs over to TestFlight.
 #ifndef DEBUG

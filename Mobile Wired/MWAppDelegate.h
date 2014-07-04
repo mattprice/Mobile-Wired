@@ -25,10 +25,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class ChatViewController;
-@class UserListViewController;
-@class MWBookmarksViewController;
-
 @interface MWAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

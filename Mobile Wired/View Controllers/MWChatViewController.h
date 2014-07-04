@@ -1,5 +1,5 @@
 //
-//  MWDrawerController.h
+//  MWChatViewController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,8 +23,39 @@
 //  THE SOFTWARE.
 //
 
-#import "MMDrawerController+Subclass.h"
+#import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
+#import "WiredConnection.h"
 
-@interface MWDrawerController : MMDrawerController
+typedef NS_ENUM(NSInteger, MWChatMessageTypes) {
+    MWChatMessage = 0,
+    MWEmoteMessage,
+    MWStatusMessage
+};
+
+@class UserListViewController;
+
+@interface ChatMessage : NSObject;
+@property (strong, nonatomic) NSString *userID;
+@property (strong, nonatomic) NSString *message;
+@property (strong, nonatomic) NSString *time;
+@property (nonatomic) NSInteger type;
+
+@end
+
+@interface MWChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate, WiredConnectionDelegate, UIGestureRecognizerDelegate> {
+    NSDictionary *bookmark;
+    MBProgressHUD *progressHUD;
+    NSString *serverTopic;
+    
+    NSMutableArray *chatMessages;}
+
+@property (strong, nonatomic) WiredConnection *connection;
+@property (strong, nonatomic) UserListViewController *userListView;
+
+- (void)loadBookmark:(NSUInteger)indexRow;
+- (Boolean)isConnected;
+- (IBAction)sendButtonPressed:(id)sender;
+- (void)getInfoForUser:(NSString *)userID;
 
 @end

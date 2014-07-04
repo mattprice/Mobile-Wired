@@ -1,9 +1,8 @@
 //
-//  ChatViewController.m
+//  MWChatViewController.m
 //  Mobile Wired
 //
-//  Copyright (c) 2012 Matthew Price, http://mattprice.me/
-//  Copyright (c) 2012 Ember Code, http://embercode.com/
+//  Copyright (c) 2014 Matthew Price, http://mattprice.me/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +23,9 @@
 //  THE SOFTWARE.
 //
 
-#import "ChatViewController.h"
+#import "MWChatViewController.h"
 
+#import "MWChatMessageCell.h"
 #import "UserInfoViewController.h"
 #import "UserListViewController.h"
 #import "UIImage+MWKit.h"
@@ -33,6 +33,7 @@
 #import "BlockAlertView.h"
 #import "BlockTextPromptAlertView.h"
 
+// TODO: Move this to its own file. This isn't kosher.
 @implementation ChatMessage
 
 - (id)init
@@ -40,6 +41,7 @@
     if ((self = [super init])) {
         self.message = @"";
         self.userID = @"";
+        self.type = MWChatMessage;
     }
     
     return self;
@@ -47,11 +49,24 @@
 
 @end
 
-@implementation ChatViewController
+@interface MWChatViewController ()
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarConstraint;
+
+@end
+
+@implementation MWChatViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.tableView.estimatedRowHeight = 70.0;
 }
 
 - (void)loadConnectionSettings {
@@ -76,13 +91,6 @@
     [self.connection setIcon:nil];
 }
 
-- (void)dealloc
-{
-    // Remove any NSNotificationCenter observers, otherwise the app
-    // will crash if we receive a notification after dealloc'ing.
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - Drawer Controller
 
 //- (IIViewDeckController *)userListViewController
@@ -100,11 +108,8 @@
 
 #pragma mark - Wired Connection
 
-- (void)new:(NSInteger)indexRow
+- (void)loadBookmark:(NSUInteger)indexRow
 {
-    // Create the navigation bar.
-    navigationBar.items = @[[[UINavigationItem alloc] init]];
-    
     // Create a progress HUD.
     if (!progressHUD) {
         progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -157,8 +162,8 @@
 - (IBAction)sendButtonPressed:(id)sender
 {
     // Send the message.
-    [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
-    chatTextField.text = @"";
+    [self.connection sendChatMessage:self.textField.text toChannel:@"1"];
+    self.textField.text = @"";
     
     [TestFlight passCheckpoint:@"Sent Chat Message (Button)"];
 }
@@ -166,8 +171,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     // Send the message.
-    [self.connection sendChatMessage:chatTextField.text toChannel:@"1"];
-    chatTextField.text = @"";
+    [self.connection sendChatMessage:self.textField.text toChannel:@"1"];
+    self.textField.text = @"";
     
     [TestFlight passCheckpoint:@"Sent Chat Message (Keyboard)"];
     
@@ -250,15 +255,20 @@
     ChatMessage *newMessage = [ChatMessage new];
     newMessage.message = message;
     newMessage.userID = userID;
+    newMessage.type = MWChatMessage;
+
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
     
     [chatMessages addObject:newMessage];
-    [chatTableView reloadData];
+    [self.tableView reloadData];
     
     // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chatMessages count]-1 inSection:0];
-    [chatTableView scrollToRowAtIndexPath:indexPath
-                         atScrollPosition:UITableViewScrollPositionBottom
-                                 animated:YES];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[chatMessages count]-1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 - (void)addEmoteToView:(NSString *)emote fromID:(NSString *)userID
@@ -266,30 +276,40 @@
     ChatMessage *newMessage = [ChatMessage new];
     newMessage.message = emote;
     newMessage.userID = userID;
+    newMessage.type = MWEmoteMessage;
+
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
     
     [chatMessages addObject:newMessage];
-    [chatTableView reloadData];
+    [self.tableView reloadData];
     
     // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chatMessages count]-1 inSection:0];
-    [chatTableView scrollToRowAtIndexPath:indexPath
-                         atScrollPosition:UITableViewScrollPositionBottom
-                                 animated:YES];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[chatMessages count]-1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 - (void)addSystemMessageToView:(NSString *)message
 {
     ChatMessage *newMessage = [ChatMessage new];
     newMessage.message = message;
+    newMessage.type = MWStatusMessage;
+
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
     
     [chatMessages addObject:newMessage];
-    [chatTableView reloadData];
+    [self.tableView reloadData];
     
     // Scroll to the new message.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[chatMessages count]-1 inSection:0];
-    [chatTableView scrollToRowAtIndexPath:indexPath
-                         atScrollPosition:UITableViewScrollPositionBottom
-                                 animated:YES];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[chatMessages count]-1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 #pragma mark - UITableView Data Sources
@@ -306,67 +326,116 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [chatMessages count];
+    return (NSInteger)[chatMessages count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    MWChatMessageCell *cell;
+
+    NSUInteger row = (NSUInteger)[indexPath row];
+    ChatMessage *message = chatMessages[row];
+
+    switch (message.type) {
+        case MWChatMessage:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"MWChatMessageCell"];
+
+            NSDictionary *user = [self.connection userList][@"1"][message.userID];
+
+            cell.timestamp.text = message.time;
+            cell.nickname.text = user[@"wired.user.nick"];
+            cell.message.text = message.message;
+            cell.avatar.image = [UIImage imageWithData:user[@"wired.user.icon"]];
+
+            break;
+        }
+
+        case MWEmoteMessage:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"MWEmoteMessageCell"];
+
+            NSDictionary *user = [self.connection userList][@"1"][message.userID];
+
+            cell.timestamp.text = message.time;
+            cell.message.text = [NSString stringWithFormat:@"%@ %@", user[@"wired.user.nick"], message.message];
+            cell.avatar.image = [UIImage imageWithData:user[@"wired.user.icon"]];
+
+            break;
+        }
+
+        case MWStatusMessage:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"MWStatusMessageCell"];
+            
+            cell.timestamp.text = message.time;
+            cell.message.text = message.message;
+
+            break;
+
+        default:
+            break;
     }
-    
-    // Setting the numberOfLines to 0 means the UILabel will use as many lines as necessary.
-    cell.detailTextLabel.numberOfLines = 0;
-    
-    ChatMessage *message = chatMessages[[indexPath row]];
-    NSDictionary *currentUser = [self.connection userList][@"1"][message.userID];
-    UIImage *userImage = [UIImage imageWithData:currentUser[@"wired.user.icon"]];
-    NSString *username = currentUser[@"wired.user.nick"];
-    
+
     // Resize the user image and make it circular.
-    CGFloat size = 32.0;
-    userImage = [userImage scaleToSize:CGSizeMake(size, size)];
+//    CGFloat size = 32.0;
+//    userImage = [userImage scaleToSize:CGSizeMake(size, size)];
 //    userImage = [userImage withCornerRadius:size/2];
-    cell.imageView.image = userImage;
+//    cell.imageView.image = userImage;
 
     // Set a border around the user image.
 //    UIColor *borderColor = [UIColor colorWithWhite:0.0 alpha:0.525];
 //    cell.imageView.layer.borderColor = borderColor.CGColor;
 //    cell.imageView.layer.borderWidth = 0.5;
-    cell.imageView.layer.cornerRadius = size/2;
-    
-    // Set the font sizes.
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:13.0];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:14.0];
-    
-    cell.textLabel.text = username;
-    cell.detailTextLabel.text = message.message;
-    
+//    cell.imageView.layer.cornerRadius = size/2;
+
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ChatMessage *message = chatMessages[[indexPath row]];
+    NSUInteger row = (NSUInteger)[indexPath row];
+    ChatMessage *message = chatMessages[row];
 
-    // Calculate the message height.
-    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          [UIFont systemFontOfSize:14.0], NSFontAttributeName, nil];
-    CGRect frame = [message.message boundingRectWithSize:CGSizeMake(tableView.frame.size.width, 20000.0)
-                                                    options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-                                                 attributes:attributesDictionary
-                                                    context:nil];
+    NSDictionary *attributes;
+    CGFloat top = 15.0, bottom = 15.0;
+    CGFloat left = 0.0, right = 0.0, nameHeight = 0.0;
+
+    switch (message.type) {
+        case MWChatMessage:
+            left = 50.0;
+            right = 10.0;
+            nameHeight = 20.0;
+
+            attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:14.0] };
+            break;
+
+        case MWEmoteMessage:
+            left = 50.0;
+            right = 88.0;
+
+            attributes = @{ NSFontAttributeName: [UIFont italicSystemFontOfSize:14.0] };
+            break;
+
+        case MWStatusMessage:
+            left = 13.0;
+            right = 90.0;
+
+            attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:12.0] };
+            break;
+    }
+
+    CGFloat width = CGRectGetWidth(tableView.bounds);
+    CGRect frame = [message.message boundingRectWithSize:CGSizeMake(width - (left + right), CGFLOAT_MAX)
+                                                 options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                              attributes:attributes
+                                                 context:nil];
+
+    // The minimum height is the user image size + the top and bottom padding.
+    CGFloat totalHeight = ceil(CGRectGetHeight(frame)) + top + bottom + nameHeight;
+    CGFloat userImage = (message.type == MWStatusMessage) ? 0.0 : 32.0;
+    CGFloat minimumHeight = userImage + top + bottom;
     
-    // Animate the height of the UITableViewCell.
-//    [tableView beginUpdates];
-//    [tableView endUpdates];
-    
-    // User icons are 32px. With 10px of top and bottom padding, the minimum cell height should be 52.
-    CGFloat height = frame.size.height;
-    return (height > 52) ? height : 52;
+    return (totalHeight > minimumHeight) ? totalHeight : minimumHeight;
 }
 
 #pragma mark - Wired Connection Delegates
@@ -382,8 +451,8 @@
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
     // Customize the bar title and buttons.
-    [[navigationBar topItem] setTitle:self.connection.serverInfo[@"wired.info.name"]];
-    navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cog.png"]
+    [self navigationItem].title = self.connection.serverInfo[@"wired.info.name"];
+    [self navigationItem].rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cog.png"]
                                                                                 style:UIBarButtonItemStyleBordered
                                                                                target:self
                                                                                action:@selector(openOptionsMenu)];
@@ -403,10 +472,10 @@
  */
 - (void)didReceiveUserInfo:(NSDictionary *)info
 {
-    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView"
-                                                                                      bundle:nil
-                                                                                    userInfo:info];
-    
+//    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView"
+//                                                                                      bundle:nil
+//                                                                                    userInfo:info];
+
     // Nested ViewDeckControllers!
     // This controller already exists (AppDelegate.m) but we need to set up its right-most view.
 //    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
@@ -826,65 +895,61 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    // Move the textField out of the keyboard's way.
-    // TODO: This animation doesn't match the keyboard's animation perfectly.
-    [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-                          delay:0
-                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] integerValue]
-                     animations:^{
-                         CGRect keyboardFrame = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
-                         
-                         self->accessoryView.frame = CGRectMake(0.0,
-                                                                keyboardFrame.origin.y - 44,
-                                                                self->accessoryView.frame.size.width,
-                                                                self->accessoryView.frame.size.height);
-                         
-                         self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
-                                                                self->chatTableView.frame.origin.y,
-                                                                self->chatTableView.frame.size.width,
-                                                                self->accessoryView.frame.origin.y - 45);
-                         
-                         // Scroll to bottom of chatTableView.
-                         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
-                         [self->chatTableView scrollToRowAtIndexPath:indexPath
-                                                    atScrollPosition:UITableViewScrollPositionBottom
-                                                            animated:YES];
-                     }
-     
-                     completion:^(BOOL finished){
-                         // Do nothing.
-                     }];
+    NSTimeInterval animDuration = [[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve animCurve = [[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    UIViewAnimationOptions animOption = (UIViewAnimationOptions)animCurve << 16;
+
+    CGRect keyboardFrameEnd = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = 0.0;
+
+    if (UIInterfaceOrientationIsPortrait([self interfaceOrientation])) {
+        keyboardHeight = CGRectGetHeight(keyboardFrameEnd);
+    } else if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
+        keyboardHeight = CGRectGetWidth(keyboardFrameEnd);
+    }
+
+    [UIView animateWithDuration:animDuration delay:0.0 options:animOption animations:^{
+        self.tableView.contentInset = UIEdgeInsetsMake([self.tableView contentInset].top,
+                                                       [self.tableView contentInset].left,
+                                                       keyboardHeight + [self.toolbar bounds].size.height,
+                                                       [self.tableView contentInset].right);
+        self.tableView.scrollIndicatorInsets = [self.tableView contentInset];
+        self.toolbarConstraint.constant = keyboardHeight;
+
+        // Scroll to bottom of chatTableView.
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self->chatMessages count]-1 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionBottom
+                                      animated:YES];
+
+        [self.toolbar updateConstraintsIfNeeded];
+        [[self view] layoutIfNeeded];
+    } completion:nil];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    // Adjust the accessory view.
-    [UIView animateWithDuration:[[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-                          delay:0
-                        options:[[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] integerValue]
-                     animations:^{
-                         // Pan the accessory view down.
-                         self->accessoryView.frame = CGRectMake(0.0,
-                                                                [[UIScreen mainScreen] bounds].size.height - 44,
-                                                                self->accessoryView.frame.size.width,
-                                                                self->accessoryView.frame.size.height);
-                         
-                         // Resize the chat view.
-                         self->chatTableView.frame = CGRectMake(self->chatTableView.frame.origin.x,
-                                                                self->chatTableView.frame.origin.y,
-                                                                self->chatTableView.frame.size.width,
-                                                                self->accessoryView.frame.origin.y - 45);
-                         
-                         // Scroll to bottom of chatTableView.
-                         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->chatMessages count]-1 inSection:0];
-                         [self->chatTableView scrollToRowAtIndexPath:indexPath
-                                                    atScrollPosition:UITableViewScrollPositionBottom
-                                                            animated:YES];
-                     }
-     
-                     completion:^(BOOL finished){
-                         // Do nothing.
-                     }];
+    NSTimeInterval animDuration = [[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve animCurve = [[notification userInfo][UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    UIViewAnimationOptions animOption = (UIViewAnimationOptions)animCurve;
+
+    [UIView animateWithDuration:animDuration delay:0.0 options:animOption animations:^{
+        self.tableView.contentInset = UIEdgeInsetsMake([self.tableView contentInset].top,
+                                                       [self.tableView contentInset].left,
+                                                       [self.toolbar bounds].size.height,
+                                                       [self.tableView contentInset].right);
+        self.tableView.scrollIndicatorInsets = [self.tableView contentInset];
+        self.toolbarConstraint.constant = 0.0;
+
+        // Scroll to bottom of chatTableView.
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self->chatMessages count]-1 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionBottom
+                                      animated:YES];
+
+        [self.toolbar updateConstraintsIfNeeded];
+        [[self view] layoutIfNeeded];
+    } completion:nil];
 }
 
 @end

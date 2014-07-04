@@ -24,9 +24,9 @@
 //
 
 #import "MWDrawerController.h"
-
 #import "MWBookmarksViewController.h"
 #import "MWBookmarkSettingsController.h"
+#import "UIViewController+MMDrawerController.h"
 
 @implementation MWDrawerController
 
@@ -34,15 +34,13 @@
 {
     [super viewDidLoad];
 
-    // MMDrawerController Settings.
-    // Mobile Wired initially displays the Bookmarks view in fullscreen (no center view) so most
-    // of these settings get changed when the user selects something for the first time.
+    // Mobile Wired initially displays the Bookmarks view in fullscreen (no center view).
     self.showsShadow = NO;
-    self.shouldStretchDrawer = NO;
+    self.shouldStretchDrawer = YES;
     self.maximumLeftDrawerWidth = [[UIScreen mainScreen] bounds].size.width;
-    self.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionModeNone;
-    self.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+    self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
     self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeNone;
+    self.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionModeNone;
 
     // Create and set up the view controllers.
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMWLeftDrawer bundle:nil];

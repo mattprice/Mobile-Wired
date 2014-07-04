@@ -26,7 +26,7 @@
 
 #import "UserListViewController.h"
 
-#import "ChatViewController.h"
+#import "MWChatViewController.h"
 #import "UIImage+MWKit.h"
 
 @implementation UserListViewController

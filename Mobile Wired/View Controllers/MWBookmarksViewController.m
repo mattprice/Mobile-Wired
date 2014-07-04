@@ -25,13 +25,13 @@
 
 #import "MWBookmarksViewController.h"
 #import "MWBookmarkSettingsController.h"
-#import "ChatViewController.h"
+#import "MWChatViewController.h"
 #import "MWSettingsViewController.h"
 #import "UserListViewController.h"
 
 #import "BlockAlertView.h"
 
-NS_ENUM(NSInteger, MWDrawerTableSections) {
+typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
     kBookmarksSection = 0,
     kSettingsSection,
     kNumberOfSections
@@ -42,17 +42,6 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Start out by opening the left view.
-    // TODO: Use a global #define to set this.
-//    self.viewDeckController.leftSize = -5.0 * 2.0;
-//    [self.viewDeckController openLeftViewAnimated:NO];
-//    self.viewDeckController.panningMode = IIViewDeckNoPanning;
-
-    // Resize the server list to fill the whole screen.
-//    CGRect frame = self tableView].frame;
-//    frame.size.width = self.view.frame.size.width;
-//    self tableView].frame = frame;
 
     // Create an array to eventually store connections in.
     currentConnections = [NSMutableDictionary dictionary];
@@ -194,8 +183,6 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Boolean shouldPan = true;
-
     // Set the selectedIndex so that we know what row to save changes to.
     NSUInteger selectedIndex = [indexPath row];
     NSString *indexString = [NSString stringWithFormat:@"%lu",(unsigned long)selectedIndex];
@@ -204,55 +191,45 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
         // Check on the connection status.
         Boolean isConnected = false;
         if (currentConnections[indexString]) {
-            ChatViewController *object = currentConnections[indexString];
+            UINavigationController *controller = currentConnections[indexString];
+            MWChatViewController *object = controller.viewControllers[0];
             isConnected = object.isConnected;
         }
 
-        // If we're editing, we need to display the Bookmark view.
+        // If we're editing, we need to display the Bookmark Settings view.
         if (self.tableView.editing && !isConnected) {
             [self performSegueWithIdentifier:kMWBookmarkSettingsSegue sender:self];
+            return;
         }
 
-        // If we're not editing, we need to open up the bookmark in the ChatView.
-        else {
-            // Check for an existing saved controller.
-            if (!isConnected) {
-                // Get info about the current bookmark.
-                NSMutableDictionary *currentBookmark = [serverBookmarks[selectedIndex] mutableCopy];
+        // If we're not editing, we need to open up the bookmark in the Chat view.
+        if (!isConnected) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMWCenterDrawer bundle:nil];
+            UINavigationController *controller = [storyboard instantiateViewControllerWithIdentifier:kMWChatViewController];
 
-                // Bookmark is complete and we don't have a saved controller.
-//                ChatViewController *controller = [ChatViewController new];
-//                controller.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
-//                [controller new:selectedIndex];
-//
-                // Save the controller for later and then open it.
-//                currentConnections[indexString] = controller;
-//                self.viewDeckController.centerController = currentConnections[indexString];
-            }
+            MWChatViewController *chatView = controller.viewControllers[0];
+            [chatView loadBookmark:selectedIndex];
+//            chatView.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
 
-            // Open the saved ChatViewController object.
-            else {
-//                    self.viewDeckController.centerController = currentConnections[indexString];
-            }
+            currentConnections[indexString] = controller;
         }
+
+        MMDrawerController *drawerController = [self mm_drawerController];
+        drawerController.centerViewController = currentConnections[indexString];
+        drawerController.showsShadow = YES;
+        [drawerController closeDrawerAnimated:YES completion:^void(BOOL finished) {
+            // We need to change some settings if this is the first centerViewController
+            // we've opened since the app launched.
+            drawerController.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
+            drawerController.maximumLeftDrawerWidth = kMWLedgeSize;
+        }];
+        
+        return;
     }
 
     else if ([indexPath section] == kSettingsSection) {
         [self performSegueWithIdentifier:kMWSettingsSegue sender:self];
-    }
-
-    // Re-enable panning and open the center view.
-    if (shouldPan) {
-//        self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
-//        [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL completed) {
-//            // If this is the first item we've opened after launch then we need to resize
-//            // the server list window and change the left ledge size.
-//            // TODO: Use a global #define to set this.
-//            CGRect frame = self tableView].frame;
-//            frame.size.width = [[UIScreen mainScreen] bounds].size.width - 44.0;
-//            self tableView].frame = frame;
-//            self.viewDeckController.leftSize = 44.0;
-//        }];
+        return;
     }
 }
 
@@ -267,7 +244,7 @@ NS_ENUM(NSInteger, MWDrawerTableSections) {
     UINavigationController *destination = segue.destinationViewController;
 
     if ([[segue identifier] isEqualToString:kMWBookmarkSettingsSegue]) {
-        MWBookmarkSettingsController *bookmarkSettings = [[destination viewControllers] objectAtIndex:0];
+        MWBookmarkSettingsController *bookmarkSettings = [destination viewControllers][0];
 
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         if (indexPath == nil) {

@@ -28,6 +28,8 @@
 		0D113DBA19426D160056E5D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D113DB919426D160056E5D3 /* README.md */; };
 		0D1838A2180DC8E000FD6AC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D1838A1180DC8E000FD6AC1 /* Images.xcassets */; };
 		0D2DA4DF1964FA6500DD91A7 /* Mobile Wired.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0D2DA4DE1964FA6500DD91A7 /* Mobile Wired.xcconfig */; };
+		0D2FC191195B8C23005D5FE0 /* MWChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2FC190195B8C23005D5FE0 /* MWChatViewController.m */; };
+		0D3C907E19638262008F3867 /* MWChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C907D19638262008F3867 /* MWChatMessageCell.m */; };
 		0D63D57F19562AF600756EAF /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 0D63D57E19562AF600756EAF /* CHANGELOG.md */; };
 		0D640C7B194758DB0069F108 /* MWSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7A194758DB0069F108 /* MWSettingsViewController.m */; };
 		0D640C7F19475D910069F108 /* MWTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D640C7E19475D910069F108 /* MWTextFieldCell.m */; };
@@ -40,6 +42,7 @@
 		0DCF83E8194CBEB100511AD8 /* MWDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCF83E7194CBEB100511AD8 /* MWDataStore.m */; };
 		0DD4C0D715BCD8960030069F /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D515BCD8960030069F /* UserInfoViewController.m */; };
 		0DD4C0DB15BCDA9E0030069F /* UserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4C0D915BCDA9E0030069F /* UserInfoView.xib */; };
+		0DF798AE195D009000B67140 /* CenterDrawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF798AC195D009000B67140 /* CenterDrawer.storyboard */; };
 		0DFF15091941420000294943 /* MWDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF15081941420000294943 /* MWDrawerController.m */; };
 		3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FA155F603F005C5662 /* WiredSpec_2.0b51.xml */; };
 		3451A4FD155F603F005C5662 /* WiredSpec_2.0b55.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3451A4FB155F603F005C5662 /* WiredSpec_2.0b55.xml */; };
@@ -53,9 +56,7 @@
 		34EBE3D213594F7B00A24C01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE3D113594F7B00A24C01 /* main.m */; };
 		34EBE402135951A700A24C01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3FC135951A700A24C01 /* InfoPlist.strings */; };
 		34EBE403135951A700A24C01 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE3FE135951A700A24C01 /* MainWindow.xib */; };
-		34EBE4211359565100A24C01 /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41B1359565100A24C01 /* ChatView.xib */; };
 		34EBE4231359565100A24C01 /* UserListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBE41F1359565100A24C01 /* UserListView.xib */; };
-		34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EBE4271359569B00A24C01 /* ChatViewController.m */; };
 		34FC5C8D135BB3430049C737 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FC5C8C135BB3430049C737 /* libz.dylib */; };
 		78AA702D4B884034AE657FBD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F702BD2F4204C49977D2E93 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,10 @@
 		0D12846615BA54C700CB6522 /* TestFlightTokens.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlightTokens.h; sourceTree = "<group>"; };
 		0D1838A1180DC8E000FD6AC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
 		0D2DA4DE1964FA6500DD91A7 /* Mobile Wired.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Mobile Wired.xcconfig"; path = "Mobile Wired.xcodeproj/Mobile Wired.xcconfig"; sourceTree = "<group>"; };
+		0D2FC18F195B8C23005D5FE0 /* MWChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWChatViewController.h; path = "View Controllers/MWChatViewController.h"; sourceTree = "<group>"; };
+		0D2FC190195B8C23005D5FE0 /* MWChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWChatViewController.m; path = "View Controllers/MWChatViewController.m"; sourceTree = "<group>"; };
+		0D3C907D19638262008F3867 /* MWChatMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWChatMessageCell.m; sourceTree = "<group>"; };
+		0D3C907F19638269008F3867 /* MWChatMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWChatMessageCell.h; sourceTree = "<group>"; };
 		0D63D57E19562AF600756EAF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		0D640C79194758DB0069F108 /* MWSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWSettingsViewController.h; path = "View Controllers/MWSettingsViewController.h"; sourceTree = "<group>"; };
 		0D640C7A194758DB0069F108 /* MWSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWSettingsViewController.m; path = "View Controllers/MWSettingsViewController.m"; sourceTree = "<group>"; };
@@ -92,6 +97,7 @@
 		0DD4C0D415BCD8960030069F /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = Classes/UserInfoViewController.h; sourceTree = "<group>"; };
 		0DD4C0D515BCD8960030069F /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = Classes/UserInfoViewController.m; sourceTree = "<group>"; };
 		0DD4C0DA15BCDA9E0030069F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/UserInfoView.xib; sourceTree = "<group>"; };
+		0DF798AD195D009000B67140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = Resources/en.lproj/CenterDrawer.storyboard; sourceTree = "<group>"; };
 		0DFF15071941420000294943 /* MWDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWDrawerController.h; path = Classes/MWDrawerController.h; sourceTree = "<group>"; };
 		0DFF15081941420000294943 /* MWDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWDrawerController.m; path = Classes/MWDrawerController.m; sourceTree = "<group>"; };
 		0DFF150A194147C100294943 /* MWMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWMacros.h; sourceTree = "<group>"; };
@@ -112,10 +118,7 @@
 		34EBE3F61359515F00A24C01 /* MobileWired-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MobileWired-Info.plist"; sourceTree = "<group>"; };
 		34EBE3F71359515F00A24C01 /* MobileWired-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MobileWired-Prefix.pch"; sourceTree = "<group>"; };
 		34EBE3FD135951A700A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
-		34EBE41C1359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ChatView.xib; sourceTree = "<group>"; };
 		34EBE4201359565100A24C01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = UserListView.xib; sourceTree = "<group>"; };
-		34EBE4261359569B00A24C01 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = Classes/ChatViewController.h; sourceTree = "<group>"; };
-		34EBE4271359569B00A24C01 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = Classes/ChatViewController.m; sourceTree = "<group>"; };
 		34EBE43C1359690000A24C01 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		34FC5C8C135BB3430049C737 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3C0413468ACF4A42A3A1EFD9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 		0D640C7C19475D910069F108 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0D3C907F19638269008F3867 /* MWChatMessageCell.h */,
+				0D3C907D19638262008F3867 /* MWChatMessageCell.m */,
 				0D640C7D19475D910069F108 /* MWTextFieldCell.h */,
 				0D640C7E19475D910069F108 /* MWTextFieldCell.m */,
 			);
@@ -163,9 +168,8 @@
 		0DFF14FD19412B6E00294943 /* Chat View */ = {
 			isa = PBXGroup;
 			children = (
-				34EBE4261359569B00A24C01 /* ChatViewController.h */,
-				34EBE4271359569B00A24C01 /* ChatViewController.m */,
-				34EBE41B1359565100A24C01 /* ChatView.xib */,
+				0D2FC18F195B8C23005D5FE0 /* MWChatViewController.h */,
+				0D2FC190195B8C23005D5FE0 /* MWChatViewController.m */,
 			);
 			name = "Chat View";
 			sourceTree = "<group>";
@@ -276,6 +280,7 @@
 				0DFF15071941420000294943 /* MWDrawerController.h */,
 				0DFF15081941420000294943 /* MWDrawerController.m */,
 				0D0B50E3180CDF8200198D07 /* LeftDrawer.storyboard */,
+				0DF798AC195D009000B67140 /* CenterDrawer.storyboard */,
 				34AEB772150CFDE1005F2B96 /* Bookmarks List */,
 				3482C1B6155C7E1B00415794 /* Bookmark Settings */,
 				34DB44EE155705F200C955A5 /* Global Settings */,
@@ -371,9 +376,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DF798AE195D009000B67140 /* CenterDrawer.storyboard in Resources */,
 				34EBE402135951A700A24C01 /* InfoPlist.strings in Resources */,
 				34EBE403135951A700A24C01 /* MainWindow.xib in Resources */,
-				34EBE4211359565100A24C01 /* ChatView.xib in Resources */,
 				0D2DA4DF1964FA6500DD91A7 /* Mobile Wired.xcconfig in Resources */,
 				34EBE4231359565100A24C01 /* UserListView.xib in Resources */,
 				3451A4FC155F603F005C5662 /* WiredSpec_2.0b51.xml in Resources */,
@@ -455,12 +460,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DFF15091941420000294943 /* MWDrawerController.m in Sources */,
+				0D3C907E19638262008F3867 /* MWChatMessageCell.m in Sources */,
 				34EBE3D213594F7B00A24C01 /* main.m in Sources */,
-				34EBE42B1359569B00A24C01 /* ChatViewController.m in Sources */,
 				0DCF83E8194CBEB100511AD8 /* MWDataStore.m in Sources */,
 				3477029F135A026200F91A8B /* WiredConnection.m in Sources */,
 				0D640C89194769120069F108 /* NSString+Base64.m in Sources */,
 				0D640C82194767CA0069F108 /* UITableView+Subviews.m in Sources */,
+				0D2FC191195B8C23005D5FE0 /* MWChatViewController.m in Sources */,
 				0D640C7F19475D910069F108 /* MWTextFieldCell.m in Sources */,
 				34838FAA14F32BA80064B619 /* UserListViewController.m in Sources */,
 				0D113DB4194265360056E5D3 /* MWBookmarksViewController.m in Sources */,
@@ -493,6 +499,14 @@
 			name = UserInfoView.xib;
 			sourceTree = "<group>";
 		};
+		0DF798AC195D009000B67140 /* CenterDrawer.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DF798AD195D009000B67140 /* en */,
+			);
+			name = CenterDrawer.storyboard;
+			sourceTree = "<group>";
+		};
 		34EBE3FC135951A700A24C01 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -508,15 +522,6 @@
 			);
 			name = MainWindow.xib;
 			path = /Resources/en.lproj;
-			sourceTree = "<group>";
-		};
-		34EBE41B1359565100A24C01 /* ChatView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				34EBE41C1359565100A24C01 /* en */,
-			);
-			name = ChatView.xib;
-			path = Resources/en.lproj;
 			sourceTree = "<group>";
 		};
 		34EBE41F1359565100A24C01 /* UserListView.xib */ = {

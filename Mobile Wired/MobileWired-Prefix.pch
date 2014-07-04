@@ -17,5 +17,5 @@
 
     #import "MWMacros.h"
     #import "MWDataStore.h"
-    #import "MWDrawerController.h"
+    #import "UIViewController+MMDrawerController.h"
 #endif

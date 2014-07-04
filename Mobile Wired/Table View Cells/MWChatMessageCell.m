@@ -1,5 +1,5 @@
 //
-//  MWDrawerController.h
+//  MWChatMessageCell.m
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,8 +23,25 @@
 //  THE SOFTWARE.
 //
 
-#import "MMDrawerController+Subclass.h"
+#import "MWChatMessageCell.h"
 
-@interface MWDrawerController : MMDrawerController
+@implementation MWChatMessageCell
+
+- (void)awakeFromNib
+{
+    // Initialization code
+}
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
 
 @end

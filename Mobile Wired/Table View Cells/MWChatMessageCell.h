@@ -1,5 +1,5 @@
 //
-//  MWDrawerController.h
+//  MWChatMessageCell.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,8 +23,13 @@
 //  THE SOFTWARE.
 //
 
-#import "MMDrawerController+Subclass.h"
+#import <UIKit/UIKit.h>
 
-@interface MWDrawerController : MMDrawerController
+@interface MWChatMessageCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UILabel *nickname;
+@property (strong, nonatomic) IBOutlet UILabel *message;
+@property (strong, nonatomic) IBOutlet UILabel *timestamp;
+@property (strong, nonatomic) IBOutlet UIImageView *avatar;
 
 @end
