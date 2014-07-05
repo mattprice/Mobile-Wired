@@ -26,7 +26,7 @@
 #import "MWChatViewController.h"
 
 #import "MWChatMessageCell.h"
-#import "UserInfoViewController.h"
+#import "MWUserInfoViewController.h"
 #import "MWUserListViewController.h"
 #import "UIImage+MWKit.h"
 
@@ -139,7 +139,6 @@
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
     [self.connection connectToServer:self.bookmark[kMWServerHost] onPort:[self.bookmark[kMWServerPort] integerValue]];
-    self.userListView.connection = self.connection;
 }
 
 - (void)disconnect
@@ -319,11 +318,6 @@
 
 #pragma mark - UITableView Data Source
 
-- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return NO;
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -374,9 +368,6 @@
             cell.timestamp.text = message.time;
             cell.message.text = message.message;
 
-            break;
-
-        default:
             break;
     }
 
@@ -447,6 +438,7 @@
 {
     [super viewWillAppear:animated];
 
+    self.userListView.connection = self.connection;
     [self mm_drawerController].rightDrawerViewController = self.userListView;
 
     // Register to listen for NSUserDefaults changes.
@@ -566,16 +558,7 @@
  */
 - (void)didReceiveUserInfo:(NSDictionary *)info
 {
-//    UserInfoViewController *infoController = [[UserInfoViewController alloc] initWithNibName:@"UserInfoView"
-//                                                                                      bundle:nil
-//                                                                                    userInfo:info];
-
-// Nested ViewDeckControllers!
-// This controller already exists (AppDelegate.m) but we need to set up its right-most view.
-//    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
-//    rightView.rightController = infoController;
-//    rightView.rightSize = 66;
-//    [rightView openRightViewAnimated:YES];
+    [self.userListView didReceiveUserInfo:info];
 }
 
 /*

@@ -42,6 +42,8 @@
 // Right Drawer Storyboard
 #define kMWRightDrawer                  @"RightDrawer"
 #define kMWUserListViewController       @"MWUserListViewController"
+#define kMWUserInfoSeque                @"MWUserInfoSeque"
+#define kMWUserInfoViewController       @"MWUserInfoViewController"
 
 // If we're not debugging, swap all NSLogs over to TestFlight.
 #ifndef DEBUG

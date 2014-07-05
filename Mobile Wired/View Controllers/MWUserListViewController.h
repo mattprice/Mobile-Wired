@@ -26,10 +26,11 @@
 #import <UIKit/UIKit.h>
 #import "WiredConnection.h"
 
-@interface MWUserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>;
+@interface MWUserListViewController : UITableViewController;
 
 @property (strong, nonatomic) WiredConnection *connection;
 
 - (void)setUserList:(NSDictionary *)userList;
+- (void)didReceiveUserInfo:(NSDictionary *)info;
 
 @end

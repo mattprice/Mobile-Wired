@@ -31,7 +31,7 @@
 
 #import "BlockAlertView.h"
 
-typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
+typedef NS_ENUM(NSInteger, MWServerListTableSections) {
     kBookmarksSection = 0,
     kSettingsSection,
     kNumberOfSections
@@ -197,10 +197,11 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
         if (!isConnected) {
             UIStoryboard *centerDrawer = [UIStoryboard storyboardWithName:kMWCenterDrawer bundle:nil];
             UINavigationController *chatController = [centerDrawer instantiateViewControllerWithIdentifier:kMWChatViewController];
+            MWChatViewController *chatView = chatController.viewControllers[0];
+
             UIStoryboard *rightDrawer = [UIStoryboard storyboardWithName:kMWRightDrawer bundle:nil];
             MWUserListViewController *userListView = [rightDrawer instantiateViewControllerWithIdentifier:kMWUserListViewController];
 
-            MWChatViewController *chatView = chatController.viewControllers[0];
             [chatView loadBookmark:selectedIndex];
             chatView.userListView = userListView;
 

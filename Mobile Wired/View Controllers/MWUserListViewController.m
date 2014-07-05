@@ -25,7 +25,8 @@
 
 #import "MWUserListViewController.h"
 
-#import "MWChatViewController.h"
+//#import "MWChatViewController.h"
+#import "MWUserInfoViewController.h"
 #import "UIImage+MWKit.h"
 
 @interface MWUserListViewController ()
@@ -45,6 +46,7 @@
 {
     [super viewDidAppear:animated];
 
+    // Add a top inset equal to the height of the status bar.
     CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
     CGFloat height = MIN(statusBarSize.width, statusBarSize.height);
 
@@ -55,10 +57,11 @@
     [TestFlight passCheckpoint:@"Viewed User List"];
 }
 
+#pragma mark - Connection Methods
 
 - (void)setUserList:(NSDictionary *)userList
 {
-    // User lists are organized into channels; save only channel 1.
+    // User lists are organized into channels. We only want channel 1.
     self.userArray = [[userList[@"1"] allValues] mutableCopy];
     
     // Sort the user list by status and then by username.
@@ -67,11 +70,17 @@
     [self.userArray sortUsingDescriptors:@[idleSortDescriptor, nickSortDescriptor]];
     
     [self.tableView reloadData];
-//    [self.tableView setNeedsDisplay];
 }
 
-#pragma mark -
-#pragma mark UITableView Data Sources
+- (void)didReceiveUserInfo:(NSDictionary *)info
+{
+    UINavigationController *controller = (UINavigationController *)self.presentedViewController;
+    MWUserInfoViewController *userInfoView = [controller viewControllers][0];
+    userInfoView.userInfo = info;
+    [userInfoView.view reloadInputViews];
+}
+
+#pragma mark - UITableView Data Sources
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -122,23 +131,24 @@
     // Display a disclosure indicator if the user has permission to view user info.
     if ( [[self.connection getMyPermissions][@"wired.account.user.get_info"] boolValue] ) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    // If the user doesn't have permission, don't let them select the UITableViewCells.
-    else {
-        cell.userInteractionEnabled = NO;
+        cell.userInteractionEnabled = YES;
     }
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return;
+#pragma mark - Segue Methods
 
-//    NSDictionary *currentUser = self.userArray[(NSUInteger)[indexPath row]];
-//    [self.connection getInfoForUser:currentUser[@"wired.user.id"]];
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+//    MWUserInfoViewController *destination = segue.destinationViewController;
+//    destination.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSDictionary *currentUser = self.userArray[(NSUInteger)[indexPath row]];
+    [self.connection getInfoForUser:currentUser[@"wired.user.id"]];
+
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end
