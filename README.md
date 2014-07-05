@@ -1,5 +1,7 @@
 # Mobile Wired
 
+[![Build Status](https://travis-ci.org/mattprice/Mobile-Wired.svg?branch=master)](https://travis-ci.org/mattprice/Mobile-Wired)
+
 Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
 
 ## Download Instructions
@@ -22,21 +24,23 @@ pod install
 open Mobile\ Wired.xcworkspace
 ```
 
-## External Resources
+## External Libraries
 
 |          Name          |                   Description                   |
 | :--------------------- | :---------------------------------------------- |
 | [BlockAlerts][]        | UIAlertView and UIActionSheet replacements      |
 | [GCDAsyncSocket][]     | Asynchronous socket networking library          |
-| [MMDrawerController][] | A lightweight drawer navigation controller      |
 | [MBProgressHUD][]      | Translucent HUD with an indicator and/or labels |
+| [MMDrawerController][] | A lightweight drawer navigation controller      |
+| [SSKeychain][]         | Keychain wrapper that works on Mac and iOS      |
 | [TBXML][]              | Super-fast, lightweight, easy to use XML parser |
 | [TestFlight][]         | Remote crash logging and in-app updates         |
 
 [BlockAlerts]:        https://github.com/gpambrozio/BlockAlertsAnd-ActionSheets
 [GCDAsyncSocket]:     https://github.com/robbiehanson/CocoaAsyncSocket
-[MMDrawerController]: https://github.com/mutualmobile/MMDrawerController
 [MBProgressHUD]:      https://github.com/jdg/MBProgressHUD
+[MMDrawerController]: https://github.com/mutualmobile/MMDrawerController
+[SSKeychain]:         https://github.com/soffes/sskeychain
 [TBXML]:              https://github.com/71squared/TBXML
 [TestFlight]:         https://testflightapp.com/sdk/
 
