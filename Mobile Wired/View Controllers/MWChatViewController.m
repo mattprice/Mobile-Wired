@@ -98,21 +98,6 @@
     [self.connection setIcon:nil];
 }
 
-#pragma mark - Drawer Controller
-
-//- (IIViewDeckController *)userListViewController
-//{
-//    return (IIViewDeckController *)self.viewDeckController.rightController;
-//}
-//
-//- (void)viewDeckController:(IIViewDeckController *)viewDeckController didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
-//{
-//    // Close the UserInfoView whenever the User List is closed.
-//    if ( viewDeckSide == IIViewDeckRightSide ) {
-//        [self.userListViewController closeRightView];
-//    }
-//}
-
 #pragma mark - Wired Connection
 
 - (void)loadBookmark:(NSUInteger)indexRow
@@ -461,17 +446,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
+    [self mm_drawerController].rightDrawerViewController = self.userListView;
+
     // Register to listen for NSUserDefaults changes.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadConnectionSettings)
                                                  name:NSUserDefaultsDidChangeNotification
                                                object:nil];
-    
-    // Enable sliding to see the user list.
-//    IIViewDeckController *rightView = (IIViewDeckController *)self.viewDeckController.rightController;
-//    rightView.centerController = self.userListView;
-    
+
     // Register an event for when a keyboard pops up.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -973,7 +956,6 @@
 - (void)setUserList:(NSDictionary *)userList forChannel:(NSString *)channel
 {
     [self.userListView setUserList:userList];
-    [self.userListView.mainTableView setNeedsDisplay];
 }
 
 @end

@@ -29,8 +29,6 @@
 @interface MWUserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>;
 
 @property (strong, nonatomic) WiredConnection *connection;
-@property (strong, nonatomic) NSMutableArray *userListArray;
-@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 
 - (void)setUserList:(NSDictionary *)userList;
 

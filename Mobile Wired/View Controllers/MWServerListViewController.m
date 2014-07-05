@@ -195,14 +195,16 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
 
         // If we're not editing, we need to open up the bookmark in the Chat view.
         if (!isConnected) {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMWCenterDrawer bundle:nil];
-            UINavigationController *controller = [storyboard instantiateViewControllerWithIdentifier:kMWChatViewController];
+            UIStoryboard *centerDrawer = [UIStoryboard storyboardWithName:kMWCenterDrawer bundle:nil];
+            UINavigationController *chatController = [centerDrawer instantiateViewControllerWithIdentifier:kMWChatViewController];
+            UIStoryboard *rightDrawer = [UIStoryboard storyboardWithName:kMWRightDrawer bundle:nil];
+            MWUserListViewController *userListView = [rightDrawer instantiateViewControllerWithIdentifier:kMWUserListViewController];
 
-            MWChatViewController *chatView = controller.viewControllers[0];
+            MWChatViewController *chatView = chatController.viewControllers[0];
             [chatView loadBookmark:selectedIndex];
-//            chatView.userListView = [[UserListViewController alloc] initWithNibName:@"UserListView" bundle:nil];
+            chatView.userListView = userListView;
 
-            currentConnections[indexString] = controller;
+            currentConnections[indexString] = chatController;
         }
 
         MMDrawerController *drawerController = [self mm_drawerController];

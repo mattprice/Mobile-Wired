@@ -28,49 +28,50 @@
 #import "MWChatViewController.h"
 #import "UIImage+MWKit.h"
 
-@implementation MWUserListViewController
+@interface MWUserListViewController ()
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initializations
-    }
-    return self;
-}
+@property (strong, nonatomic) NSMutableArray *userArray;
+
+@end
+
+@implementation MWUserListViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.mainTableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.mainTableView reloadData];
-    
+
+    CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
+    CGFloat height = MIN(statusBarSize.width, statusBarSize.height);
+
+    UIEdgeInsets contentInset = self.tableView.contentInset;
+    contentInset.top = height;
+    [self.tableView setContentInset:contentInset];
+
     [TestFlight passCheckpoint:@"Viewed User List"];
 }
 
-#pragma mark -
-#pragma mark TableView Actions
 
 - (void)setUserList:(NSDictionary *)userList
 {
     // User lists are organized into channels; save only channel 1.
-    self.userListArray = [[userList[@"1"] allValues] mutableCopy];
+    self.userArray = [[userList[@"1"] allValues] mutableCopy];
     
     // Sort the user list by status and then by username.
     NSSortDescriptor *idleSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"wired.user.idle" ascending:YES];
     NSSortDescriptor *nickSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"wired.user.nick" ascending:YES];
-    [self.userListArray sortUsingDescriptors:@[idleSortDescriptor, nickSortDescriptor]];
+    [self.userArray sortUsingDescriptors:@[idleSortDescriptor, nickSortDescriptor]];
     
-    [self.mainTableView reloadData];
+    [self.tableView reloadData];
+//    [self.tableView setNeedsDisplay];
 }
 
 #pragma mark -
-#pragma mark TableView Data Sources
+#pragma mark UITableView Data Sources
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -80,20 +81,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of Users in the list.
-    return (NSInteger)[self.userListArray count];
+    return (NSInteger)[self.userArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MWUserListCell"];
     
     // Get info about the current row's user
-    NSDictionary *currentUser = self.userListArray[(NSUInteger)[indexPath row]];
+    NSDictionary *currentUser = self.userArray[(NSUInteger)[indexPath row]];
     
     cell.textLabel.text = currentUser[@"wired.user.nick"];
     cell.textLabel.textColor = currentUser[@"wired.account.color"];
@@ -121,8 +117,8 @@
 //    UIColor *borderColor = [UIColor colorWithWhite:0.0 alpha:0.525];
 //    cell.imageView.layer.borderColor = borderColor.CGColor;
 //    cell.imageView.layer.borderWidth = 0.5;
-    cell.imageView.layer.cornerRadius = size/2.0f;
-    
+//    cell.imageView.layer.cornerRadius = size/2.0f;
+
     // Display a disclosure indicator if the user has permission to view user info.
     if ( [[self.connection getMyPermissions][@"wired.account.user.get_info"] boolValue] ) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -138,11 +134,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *currentUser = self.userListArray[(NSUInteger)[indexPath row]];
-    
-    [self.connection getInfoForUser:currentUser[@"wired.user.id"]];
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    return;
+
+//    NSDictionary *currentUser = self.userArray[(NSUInteger)[indexPath row]];
+//    [self.connection getInfoForUser:currentUser[@"wired.user.id"]];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

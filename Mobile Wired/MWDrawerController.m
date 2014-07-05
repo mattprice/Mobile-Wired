@@ -26,6 +26,8 @@
 #import "MWDrawerController.h"
 #import "MWServerListViewController.h"
 #import "MWBookmarkViewController.h"
+
+#import "MMDrawerVisualState.h"
 #import "UIViewController+MMDrawerController.h"
 
 @implementation MWDrawerController
@@ -41,6 +43,7 @@
     self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
     self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeNone;
     self.centerHiddenInteractionMode = MMDrawerOpenCenterInteractionModeNone;
+    [self setDrawerVisualStateBlock:[MMDrawerVisualState parallaxVisualStateBlockWithParallaxFactor:2.0f]];
 
     // Create and set up the view controllers.
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMWLeftDrawer bundle:nil];
