@@ -314,7 +314,7 @@
     } else {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
         [dateFormatter setDateFormat:@"MMM d"];
-        newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
+        newMessage.time = [dateFormatter stringFromDate:date];
     }
 
     [self.chatMessages addObject:newMessage];
