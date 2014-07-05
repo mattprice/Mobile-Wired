@@ -502,21 +502,14 @@
     }
 
     [UIView animateWithDuration:animDuration delay:0.0 options:animOption animations:^{
-        self.tableView.contentInset = UIEdgeInsetsMake([self.tableView contentInset].top,
-                                                       [self.tableView contentInset].left,
-                                                       keyboardHeight + [self.toolbar bounds].size.height,
-                                                       [self.tableView contentInset].right);
-        self.tableView.scrollIndicatorInsets = [self.tableView contentInset];
         self.toolbarConstraint.constant = keyboardHeight;
+        [self.toolbar updateConstraintsIfNeeded];
+        [[self view] layoutIfNeeded];
 
-        // Scroll to bottom of chatTableView.
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self.chatMessages count]-1 inSection:0];
         [self.tableView scrollToRowAtIndexPath:indexPath
                               atScrollPosition:UITableViewScrollPositionBottom
                                       animated:YES];
-
-        [self.toolbar updateConstraintsIfNeeded];
-        [[self view] layoutIfNeeded];
     } completion:nil];
 }
 
@@ -527,21 +520,14 @@
     UIViewAnimationOptions animOption = (UIViewAnimationOptions)animCurve;
 
     [UIView animateWithDuration:animDuration delay:0.0 options:animOption animations:^{
-        self.tableView.contentInset = UIEdgeInsetsMake([self.tableView contentInset].top,
-                                                       [self.tableView contentInset].left,
-                                                       [self.toolbar bounds].size.height,
-                                                       [self.tableView contentInset].right);
-        self.tableView.scrollIndicatorInsets = [self.tableView contentInset];
         self.toolbarConstraint.constant = 0.0;
+        [self.toolbar updateConstraintsIfNeeded];
+        [[self view] layoutIfNeeded];
 
-        // Scroll to bottom of chatTableView.
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)[self.chatMessages count]-1 inSection:0];
         [self.tableView scrollToRowAtIndexPath:indexPath
                               atScrollPosition:UITableViewScrollPositionBottom
                                       animated:YES];
-
-        [self.toolbar updateConstraintsIfNeeded];
-        [[self view] layoutIfNeeded];
     } completion:nil];
 }
 
