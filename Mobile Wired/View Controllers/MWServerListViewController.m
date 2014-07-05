@@ -23,11 +23,11 @@
 //  THE SOFTWARE.
 //
 
-#import "MWBookmarksViewController.h"
-#import "MWBookmarkSettingsController.h"
+#import "MWServerListViewController.h"
+#import "MWBookmarkViewController.h"
 #import "MWChatViewController.h"
 #import "MWSettingsViewController.h"
-#import "UserListViewController.h"
+#import "MWUserListViewController.h"
 
 #import "BlockAlertView.h"
 
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
     kNumberOfSections
 };
 
-@implementation MWBookmarksViewController
+@implementation MWServerListViewController
 
 - (void)viewDidLoad
 {
@@ -189,7 +189,7 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
 
         // If we're editing, we need to display the Bookmark Settings view.
         if (self.tableView.editing && !isConnected) {
-            [self performSegueWithIdentifier:kMWBookmarkSettingsSegue sender:self];
+            [self performSegueWithIdentifier:kMWBookmarkSegue sender:self];
             return;
         }
 
@@ -234,8 +234,8 @@ typedef NS_ENUM(NSInteger, MWDrawerTableSections) {
 {
     UINavigationController *destination = segue.destinationViewController;
 
-    if ([[segue identifier] isEqualToString:kMWBookmarkSettingsSegue]) {
-        MWBookmarkSettingsController *bookmarkSettings = [destination viewControllers][0];
+    if ([[segue identifier] isEqualToString:kMWBookmarkSegue]) {
+        MWBookmarkViewController *bookmarkSettings = [destination viewControllers][0];
 
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         if (indexPath == nil) {

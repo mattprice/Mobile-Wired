@@ -7,7 +7,7 @@
         <!--Bookmarks-->
         <scene sceneID="3Ml-dI-oBo">
             <objects>
-                <viewController storyboardIdentifier="MWBookmarksViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KBB-b1-OvA" userLabel="Bookmarks" customClass="MWBookmarksViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MWServerListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KBB-b1-OvA" userLabel="Bookmarks" customClass="MWServerListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="o3U-dG-yA4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,7 +40,7 @@
                     <navigationItem key="navigationItem" title="Bookmarks" id="dzx-B5-gzW">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="St8-Ug-CpL">
                             <connections>
-                                <segue destination="n5W-ww-mHn" kind="modal" identifier="MWBookmarkSettingsSegue" id="qWb-5I-CWo"/>
+                                <segue destination="n5W-ww-mHn" kind="modal" identifier="MWBookmarkSegue" id="qWb-5I-CWo"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -221,7 +221,7 @@
         <!--Edit Bookmark-->
         <scene sceneID="IEd-mU-IEf">
             <objects>
-                <tableViewController storyboardIdentifier="MWBookmarkSettingsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5lU-Ay-CjJ" userLabel="Edit Bookmark" customClass="MWBookmarkSettingsController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MWBookmarkViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5lU-Ay-CjJ" userLabel="Edit Bookmark" customClass="MWBookmarkViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="her-rH-g8I">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,5 +1,5 @@
 //
-//  MWBookmarksViewController.h
+//  MWUserListViewController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -24,10 +24,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WiredConnection.h"
 
-@interface MWBookmarksViewController : UITableViewController {
-    NSMutableArray *serverBookmarks;
-    NSMutableDictionary *currentConnections;
-}
+@interface MWUserListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>;
+
+@property (strong, nonatomic) WiredConnection *connection;
+@property (strong, nonatomic) NSMutableArray *userListArray;
+@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
+
+- (void)setUserList:(NSDictionary *)userList;
 
 @end

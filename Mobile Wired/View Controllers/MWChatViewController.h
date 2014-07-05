@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, MWChatMessageTypes) {
     MWStatusMessage
 };
 
-@class UserListViewController;
+@class MWUserListViewController;
 
 @interface ChatMessage : NSObject;
 @property (strong, nonatomic) NSString *userID;
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, MWChatMessageTypes) {
 @interface MWChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate, WiredConnectionDelegate>
 
 @property (strong, nonatomic) WiredConnection *connection;
-@property (strong, nonatomic) UserListViewController *userListView;
+@property (strong, nonatomic) MWUserListViewController *userListView;
 
 - (void)loadBookmark:(NSUInteger)indexRow;
 - (Boolean)isConnected;

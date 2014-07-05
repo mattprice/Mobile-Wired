@@ -24,8 +24,8 @@
 //
 
 #import "MWDrawerController.h"
-#import "MWBookmarksViewController.h"
-#import "MWBookmarkSettingsController.h"
+#import "MWServerListViewController.h"
+#import "MWBookmarkViewController.h"
 #import "UIViewController+MMDrawerController.h"
 
 @implementation MWDrawerController
@@ -45,7 +45,7 @@
     // Create and set up the view controllers.
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMWLeftDrawer bundle:nil];
     UINavigationController *bookmarksView = [storyboard instantiateViewControllerWithIdentifier:kMWLeftNavigationController];
-    MWBookmarkSettingsController *bookmarkSettings = [storyboard instantiateViewControllerWithIdentifier:kMWBookmarkSettingsController];
+    MWBookmarkViewController *bookmarkSettings = [storyboard instantiateViewControllerWithIdentifier:kMWBookmarkViewController];
 
     // Assign the view controllers to their respective sides.
     [self setLeftDrawerViewController:bookmarksView];

@@ -1,5 +1,5 @@
 //
-//  MWMacros.h
+//  MWBookmarksViewController.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,28 +23,11 @@
 //  THE SOFTWARE.
 //
 
-// Global UI Constants
-#define kMWLedgeSize                    [[UIScreen mainScreen] bounds].size.width - 40
+#import <UIKit/UIKit.h>
 
-// Left Drawer Storyboard
-#define kMWLeftDrawer                   @"LeftDrawer"
-#define kMWLeftNavigationController     @"MWLeftNavigationController"
-#define kMWServerListViewController     @"MWServerListViewController"
-#define kMWBookmarkSegue                @"MWBookmarkSegue"
-#define kMWBookmarkViewController       @"MWBookmarkViewController"
-#define kMWSettingsSegue                @"MWSettingsSegue"
-#define kMWSettingsViewController       @"MWSettingsViewController"
+@interface MWServerListViewController : UITableViewController {
+    NSMutableArray *serverBookmarks;
+    NSMutableDictionary *currentConnections;
+}
 
-// Center Drawer Storyboard
-#define kMWCenterDrawer                 @"CenterDrawer"
-#define kMWChatViewController           @"MWChatViewController"
-
-// Right Drawer Storyboard
-#define kMWRightDrawer                  @"RightDrawer"
-#define kMWUserListController           @"MWUserListController"
-
-// If we're not debugging, swap all NSLogs over to TestFlight.
-#ifndef DEBUG
-    #define NSLog TFLog
-#endif
-
+@end

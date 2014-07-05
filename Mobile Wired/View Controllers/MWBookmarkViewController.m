@@ -23,10 +23,10 @@
 //  THE SOFTWARE.
 //
 
-#import "MWBookmarkSettingsController.h"
+#import "MWBookmarkViewController.h"
 #import "NSString+Hashes.h"
 
-@interface MWBookmarkSettingsController ()
+@interface MWBookmarkViewController ()
 
 @property (nonatomic) IBOutlet UITextField *serverNameField;
 @property (nonatomic) IBOutlet UITextField *serverHostField;
@@ -41,7 +41,7 @@
 
 @end
 
-@implementation MWBookmarkSettingsController
+@implementation MWBookmarkViewController
 
 static BOOL isNewBookmark;
 

@@ -24,9 +24,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MWBookmarksViewController.h"
+#import "MWServerListViewController.h"
 
-@interface MWBookmarkSettingsController : UITableViewController
+@interface MWBookmarkViewController : UITableViewController
 
 @property (assign) NSInteger bookmarkIndex;
 
