@@ -77,7 +77,7 @@
     UINavigationController *controller = (UINavigationController *)self.presentedViewController;
     MWUserInfoViewController *userInfoView = [controller viewControllers][0];
     userInfoView.userInfo = info;
-    [userInfoView.view reloadInputViews];
+    [userInfoView.tableView reloadData];
 }
 
 #pragma mark - UITableView Data Sources
@@ -141,9 +141,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    MWUserInfoViewController *destination = segue.destinationViewController;
-//    destination.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     NSDictionary *currentUser = self.userArray[(NSUInteger)[indexPath row]];
     [self.connection getInfoForUser:currentUser[@"wired.user.id"]];

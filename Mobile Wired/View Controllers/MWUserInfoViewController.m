@@ -54,21 +54,27 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return kNumberOfSections;
+    // Return only 1 section whlie we're waiting on user data.
+    if (![self.userInfo count]) {
+        return 1;
+    } else {
+        return kNumberOfSections;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // Return 0 while we're waiting on user data.
+    if (![self.userInfo count]) {
+        return 0;
+    }
+
     switch (section) {
         case kGeneralSection:
             return 1;
 
         case kDetailSection:
-            if ([self.userInfo count]) {
-                return 6;
-            } else {
-                return 0;
-            }
+            return 6;
 
         default:
             return 0;
@@ -77,16 +83,16 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if (![self.userInfo count]) {
+        return @"Loading details...";
+    }
+
     switch (section) {
         case kGeneralSection:
-            return @"User";
+            return @"General";
 
         case kDetailSection:
-            if ([self.userInfo count]) {
-                return @"User Details";
-            } else {
-                return @"Loading...";
-            }
+            return @"Details";
 
         default:
             return @"";
