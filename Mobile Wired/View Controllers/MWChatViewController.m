@@ -130,7 +130,6 @@
 
 - (void)connect
 {
-    // Update the progress HUD.
     self.progressHUD.mode = MBProgressHUDModeIndeterminate;
     self.progressHUD.animationType = MBProgressHUDAnimationZoom;
     self.progressHUD.labelText = @"Connecting";
@@ -144,7 +143,6 @@
 
 - (void)disconnect
 {
-    // Disconnect from the server.
     // This will invoke the didDisconnect delegate method.
     [self.connection disconnect];
 }
@@ -154,7 +152,6 @@
 
 - (IBAction)sendButtonPressed:(id)sender
 {
-    // Send the message.
     [self.connection sendChatMessage:self.textField.text toChannel:@"1"];
     self.textField.text = @"";
     
@@ -163,7 +160,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    // Send the message.
     [self.connection sendChatMessage:self.textField.text toChannel:@"1"];
     self.textField.text = @"";
     
@@ -536,14 +532,12 @@
  */
 - (void)didReceiveServerInfo:(NSDictionary *)serverInfo
 {
-    // Customize the bar title and buttons.
     [self navigationItem].title = self.connection.serverInfo[@"wired.info.name"];
     [self navigationItem].rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cog.png"]
                                                                                 style:UIBarButtonItemStyleBordered
                                                                                target:self
                                                                                action:@selector(openOptionsMenu)];
 
-    // Update the progress HUD.
     self.progressHUD.labelText = @"Logging In";
 
     [self loadConnectionSettings];
@@ -584,7 +578,6 @@
  */
 - (void)didFailLoginWithReason:(NSString *)reason
 {
-    // Update the progress HUD.
     self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     self.progressHUD.labelText = @"Login Failed";
@@ -599,13 +592,11 @@
  */
 - (void)didConnectAndLoginSuccessfully
 {
-    // Update the progress HUD.
     self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     self.progressHUD.labelText = @"Connected";
     [self.progressHUD hide:YES afterDelay:0.5];
 
-    // Report the connection to chat.
     NSString *message = [NSString stringWithFormat:@"Connected to %@.",
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
@@ -623,7 +614,6 @@
  */
 - (void)didFailConnectionWithReason:(NSError *)error
 {
-    // Update the progress HUD.
     self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     self.progressHUD.labelText = @"Connection Failed";
@@ -638,13 +628,14 @@
  */
 - (void)didDisconnect
 {
-    // Update the progress HUD.
+    // Clear the user list for continuity.
+    [self.userListView setUserList:[NSDictionary new]];
+
     self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Error.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     self.progressHUD.labelText = @"Disconnected";
     [self.progressHUD show:YES];
 
-    // Report the disconnect to chat.
     NSString *message = [NSString stringWithFormat:@"Disconnected from %@.",
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
@@ -664,7 +655,6 @@
     self.progressHUD.labelText = @"Reconnecting";
     [self.progressHUD show:YES];
 
-    // Report the disconnect to chat.
     NSString *message = [NSString stringWithFormat:@"Disconnected from %@.",
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
@@ -680,7 +670,6 @@
  */
 - (void)willReconnectDelayed:(NSString *)delay
 {
-    // Report the disconnect to chat.
     NSString *message = [NSString stringWithFormat:@"Reconnecting in %@ seconds.", delay];
     [self addSystemMessageToView:message];
 }
@@ -695,7 +684,6 @@
  */
 - (void)willReconnectDelayed:(NSString *)delay withError:(NSError *)error
 {
-    // Report the disconnect to chat.
     NSString *message = [NSString stringWithFormat:@"Disconnected from %@:%@.",
                          self.connection.serverInfo[@"wired.info.name"], error.description];
     [self addSystemMessageToView:message];
@@ -737,13 +725,13 @@
  */
 - (void)didReceiveTopic:(NSString *)topic fromNick:(NSString *)nick forChannel:(NSString *)channel onDate:(NSDate *)date
 {
-    // No topic.
+    // Don't report empty topics (no topic is set, or the topic was removed).
     if ([topic isEqualToString:@""]) {
         self.serverTopic = topic;
         return;
     }
 
-    // Someone changed the topic.
+    // Someone just changed the topic.
     if (self.serverTopic) {
 #ifdef DEBUG
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>", channel, nick, topic);
