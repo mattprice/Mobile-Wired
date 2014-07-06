@@ -28,7 +28,8 @@
 #import "MWChatMessageCell.h"
 #import "MWUserInfoViewController.h"
 #import "MWUserListViewController.h"
-#import "UIImage+MWKit.h"
+#import "UIImage+Scale.h"
+#import "UIImage+Radius.h"
 
 #import "BlockAlertView.h"
 #import "BlockTextPromptAlertView.h"

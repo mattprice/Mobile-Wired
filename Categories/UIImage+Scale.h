@@ -1,5 +1,5 @@
 //
-//  UIImage+MWKit.m
+//  UIImage+Scale.h
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,36 +23,10 @@
 //  THE SOFTWARE.
 //
 
-#import "UIImage+MWKit.h"
+#import <UIKit/UIKit.h>
 
-@implementation UIImage (MWKit)
+@interface UIImage (Scale)
 
-- (UIImage *)scaleToSize:(CGSize)newSize
-{
-    UIImage *image = self;
-    
-    UIGraphicsBeginImageContextWithOptions(newSize, 1.0f, 0.0f);
-    [image drawInRect:CGRectMake(0.0f, 0.0f, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
-
-- (UIImage *)withCornerRadius:(CGFloat)radius
-{
-    UIImage *image = self;
-    CGSize size = image.size;
-    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
-
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0f);
-    [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius] addClip];
-    [image drawInRect:rect];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
+- (UIImage *)scaleToSize:(CGSize)newSize;
 
 @end

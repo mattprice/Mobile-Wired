@@ -1,5 +1,5 @@
 //
-//  UIImage+MWKit.h
+//  UIImage+Radius.m
 //  Mobile Wired
 //
 //  Copyright (c) 2014 Matthew Price, http://mattprice.me/
@@ -23,11 +23,24 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "UIImage+Radius.h"
 
-@interface UIImage (MWKit)
+@implementation UIImage (Radius)
 
-- (UIImage *)scaleToSize:(CGSize)newSize;
-- (UIImage *)withCornerRadius:(CGFloat)radius;
+- (UIImage *)withCornerRadius:(CGFloat)radius
+{
+    UIImage *image = self;
+
+    CGSize size = image.size;
+    CGRect newRect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0f);
+    [[UIBezierPath bezierPathWithRoundedRect:newRect cornerRadius:radius] addClip];
+    [image drawInRect:newRect];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
 
 @end
