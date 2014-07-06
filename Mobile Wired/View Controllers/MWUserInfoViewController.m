@@ -25,6 +25,9 @@
 
 #import "MWUserInfoViewController.h"
 
+#import "UIImage+Scale.h"
+#import "UIImage+Radius.h"
+
 typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
     MWGeneralSection = 0,
     MWDetailSection,
@@ -104,7 +107,7 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
     UITableViewCell *cell;
 
     switch ([indexPath section]) {
-        case MWGeneralSection:
+        case MWGeneralSection: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MWUserInfoCell"];
 
             cell.textLabel.text = self.userInfo[@"wired.user.nick"];
@@ -122,9 +125,15 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
                 cell.imageView.alpha = 1.0f;
             }
 
-            cell.imageView.image = [UIImage imageWithData:self.userInfo[@"wired.user.icon"]];
+            // Resize the user image and make it circular.
+            CGFloat size = 32.0f;
+            UIImage *image = [UIImage imageWithData:self.userInfo[@"wired.user.icon"]];
+            image = [image scaleToSize:CGSizeMake(size, size)];
+//            image = [image withCornerRadius:size/2];
+            cell.imageView.image = image;
 
             break;
+        }
 
         case MWDetailSection: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MWUserInfoCell"];
