@@ -25,9 +25,9 @@
 
 #import "MWUserListViewController.h"
 
-//#import "MWChatViewController.h"
 #import "MWUserInfoViewController.h"
 #import "UIImage+MWKit.h"
+#import "WiredConnection.h"
 
 @interface MWUserListViewController ()
 

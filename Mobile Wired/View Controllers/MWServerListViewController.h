@@ -25,9 +25,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MWServerListViewController : UITableViewController {
-    NSMutableArray *serverBookmarks;
-    NSMutableDictionary *currentConnections;
-}
+@interface MWServerListViewController : UITableViewController
 
 @end

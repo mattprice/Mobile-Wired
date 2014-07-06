@@ -24,12 +24,13 @@
 //
 
 #import "MWSettingsViewController.h"
+
 #import "UITableView+Subviews.h"
 
 @interface MWSettingsViewController ()
 
-@property (nonatomic) IBOutlet UITextField *nicknameTextField;
-@property (nonatomic) IBOutlet UITextField *statusTextField;
+@property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *statusTextField;
 
 @end
 
@@ -39,13 +40,13 @@
 {
     [super viewDidLoad];
 
-    _nicknameTextField.text = [MWDataStore optionForKey:kMWUserNick];
-    _statusTextField.text = [MWDataStore optionForKey:kMWUserStatus];
+    self.nicknameTextField.text = [MWDataStore optionForKey:kMWUserNick];
+    self.statusTextField.text = [MWDataStore optionForKey:kMWUserStatus];
 
     [TestFlight passCheckpoint:@"Viewed Settings"];
 }
 
-#pragma mark - View Actions
+#pragma mark - IBActions
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
@@ -54,8 +55,8 @@
 
 - (IBAction)saveButtonPressed:(id)sender
 {
-    [MWDataStore setOption:_nicknameTextField.text forKey:kMWUserNick];
-    [MWDataStore setOption:_statusTextField.text forKey:kMWUserStatus];
+    [MWDataStore setOption:self.nicknameTextField.text forKey:kMWUserNick];
+    [MWDataStore setOption:self.statusTextField.text forKey:kMWUserStatus];
     [MWDataStore save];
 
     [TestFlight passCheckpoint:@"Modified Settings"];
@@ -63,7 +64,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Text Field Delegates
+#pragma mark - TextField Delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -75,10 +76,10 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == _nicknameTextField) {
-        [_statusTextField becomeFirstResponder];
-    } else if (textField == _statusTextField) {
-        [_statusTextField resignFirstResponder];
+    if (textField == self.nicknameTextField) {
+        [self.statusTextField becomeFirstResponder];
+    } else if (textField == self.statusTextField) {
+        [self.statusTextField resignFirstResponder];
     }
 
     return YES;

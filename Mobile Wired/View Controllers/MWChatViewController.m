@@ -36,9 +36,10 @@
 // TODO: Move this to its own file. This isn't kosher.
 @implementation ChatMessage
 
-- (id)init
+- (instancetype)init
 {
-    if ((self = [super init])) {
+    self = [super init];
+    if (self) {
         self.message = @"";
         self.userID = @"";
         self.type = MWChatMessage;
@@ -149,7 +150,7 @@
 }
 
 
-#pragma mark - UI Actions
+#pragma mark - IBActions
 
 - (IBAction)sendButtonPressed:(id)sender
 {
@@ -291,14 +292,14 @@
     newMessage.type = MWStatusMessage;
 
     // If a date is given, display it. Otherwise, display the current time.
-    if (date == nil) {
-        NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        [dateFormatter setDateFormat:@"h:mm a"];
-        newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
-    } else {
+    if (date) {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
         [dateFormatter setDateFormat:@"MMM d"];
         newMessage.time = [dateFormatter stringFromDate:date];
+    } else {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"h:mm a"];
+        newMessage.time = [dateFormatter stringFromDate:[NSDate new]];
     }
 
     [self.chatMessages addObject:newMessage];
@@ -335,8 +336,7 @@
     ChatMessage *message = self.chatMessages[(NSUInteger)[indexPath row]];
 
     switch (message.type) {
-        case MWChatMessage:
-        {
+        case MWChatMessage: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MWChatMessageCell"];
 
             NSDictionary *user = [self.connection userList][@"1"][message.userID];
@@ -349,8 +349,7 @@
             break;
         }
 
-        case MWEmoteMessage:
-        {
+        case MWEmoteMessage: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MWEmoteMessageCell"];
 
             NSDictionary *user = [self.connection userList][@"1"][message.userID];
@@ -741,23 +740,23 @@
     }
 
     // Initial connection.
-    if (self.serverTopic == nil) {
-#ifdef DEBUG
-        NSLog(@"Channel #%@ topic: %@ (set by %@)", channel, topic, nick);
-#endif
-
-        NSString *message = [NSString stringWithFormat:@"%@ — %@.", topic, nick];
-        [self addSystemMessageToView:message withDate:date];
-    }
-
-    // Someone changed the topic.
-    else {
+    if (self.serverTopic) {
 #ifdef DEBUG
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>", channel, nick, topic);
 #endif
 
         NSString *message = [NSString stringWithFormat:@"%@ changed topic to %@.", nick, topic];
         [self addSystemMessageToView:message];
+    }
+
+    // Someone changed the topic.
+    else {
+#ifdef DEBUG
+        NSLog(@"Channel #%@ topic: %@ (set by %@)", channel, topic, nick);
+#endif
+
+        NSString *message = [NSString stringWithFormat:@"%@ — %@.", topic, nick];
+        [self addSystemMessageToView:message withDate:date];
     }
 
     self.serverTopic = topic;

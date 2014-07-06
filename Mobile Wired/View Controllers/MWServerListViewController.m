@@ -24,6 +24,7 @@
 //
 
 #import "MWServerListViewController.h"
+
 #import "MWBookmarkViewController.h"
 #import "MWChatViewController.h"
 #import "MWSettingsViewController.h"
@@ -32,10 +33,17 @@
 #import "BlockAlertView.h"
 
 typedef NS_ENUM(NSInteger, MWServerListTableSections) {
-    kBookmarksSection = 0,
-    kSettingsSection,
-    kNumberOfSections
+    MWBookmarksSection = 0,
+    MWSettingsSection,
+    MWNumberOfSections
 };
+
+@interface MWServerListViewController ()
+
+@property (strong, nonatomic) NSMutableArray *serverBookmarks;
+@property (strong, nonatomic) NSMutableDictionary *currentConnections;
+
+@end
 
 @implementation MWServerListViewController
 
@@ -44,26 +52,26 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
     [super viewDidLoad];
 
     // Create an array to eventually store connections in.
-    currentConnections = [NSMutableDictionary dictionary];
-    serverBookmarks = [MWDataStore bookmarks];
+    self.currentConnections = [NSMutableDictionary dictionary];
+    self.serverBookmarks = [MWDataStore bookmarks];
 
     [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
 }
 
-#pragma mark - TableView Data Sources
+#pragma mark - UITableView Data Sources
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return kNumberOfSections;
+    return MWNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     switch (section) {
-        case kBookmarksSection:
-            return (NSInteger)[serverBookmarks count];
+        case MWBookmarksSection:
+            return (NSInteger)[self.serverBookmarks count];
 
-        case kSettingsSection:
+        case MWSettingsSection:
             return 1;
 
         default:
@@ -76,10 +84,9 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MWBookmarkCell"];
 
     switch ([indexPath section]) {
-        case kBookmarksSection:
-        {
+        case MWBookmarksSection: {
             // Everything else is a bookmark.
-            NSDictionary *bookmark = serverBookmarks[(NSUInteger)[indexPath row]];
+            NSDictionary *bookmark = self.serverBookmarks[(NSUInteger)[indexPath row]];
 
             // If there's no Server Name, try using the Server Host.
             if ([bookmark[kMWServerName] isEqualToString:@""]) {
@@ -98,7 +105,7 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
         }
             break;
 
-        case kSettingsSection:
+        case MWSettingsSection:
             cell.textLabel.text = @"Settings";
             break;
 
@@ -111,7 +118,7 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == kBookmarksSection && [serverBookmarks count] == 0) {
+    if (section == MWBookmarksSection && [self.serverBookmarks count] == 0) {
         return @"Welcome!";
     }
 
@@ -120,23 +127,23 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    if (section == kBookmarksSection && [serverBookmarks count] == 0) {
+    if (section == MWBookmarksSection && [self.serverBookmarks count] == 0) {
         return @"You currently don't have any bookmarks. To add some, use the + button above.";
     }
 
     return @"";
 }
 
-#pragma mark - TableView Styles
+#pragma mark - UITableView Delegates
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO: Return NO for bookmarks that are connected?
     switch ([indexPath section]) {
-        case kBookmarksSection:
+        case MWBookmarksSection:
             return YES;
 
-        case kSettingsSection:
+        case MWSettingsSection:
             return NO;
 
         default:
@@ -147,10 +154,10 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch ([indexPath section]) {
-        case kBookmarksSection:
+        case MWBookmarksSection:
             return UITableViewCellEditingStyleDelete;
 
-        case kSettingsSection:
+        case MWSettingsSection:
             return UITableViewCellEditingStyleNone;
 
         default:
@@ -163,14 +170,14 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the bookmark and update the table.
         [MWDataStore removeBookmarkAtIndex:(NSUInteger)[indexPath row]];
-        serverBookmarks = [MWDataStore bookmarks];
+        self.serverBookmarks = [MWDataStore bookmarks];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
         [TestFlight passCheckpoint:@"Deleted Bookmark"];
     }
 }
 
-#pragma mark - TableView Actions
+#pragma mark - IBActions
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -178,11 +185,11 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
     NSUInteger selectedIndex = (NSUInteger)[indexPath row];
     NSString *indexString = [NSString stringWithFormat:@"%lu",(unsigned long)selectedIndex];
 
-    if ([indexPath section] == kBookmarksSection) {
+    if ([indexPath section] == MWBookmarksSection) {
         // Check on the connection status.
-        Boolean isConnected = false;
-        if (currentConnections[indexString]) {
-            UINavigationController *controller = currentConnections[indexString];
+        Boolean isConnected = NO;
+        if (self.currentConnections[indexString]) {
+            UINavigationController *controller = self.currentConnections[indexString];
             MWChatViewController *object = controller.viewControllers[0];
             isConnected = object.isConnected;
         }
@@ -205,11 +212,11 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
             [chatView loadBookmark:selectedIndex];
             chatView.userListView = userListView;
 
-            currentConnections[indexString] = chatController;
+            self.currentConnections[indexString] = chatController;
         }
 
         MMDrawerController *drawerController = [self mm_drawerController];
-        drawerController.centerViewController = currentConnections[indexString];
+        drawerController.centerViewController = self.currentConnections[indexString];
         drawerController.showsShadow = YES;
         [drawerController closeDrawerAnimated:YES completion:^void(BOOL finished) {
             // We need to change some settings if this is the first centerViewController
@@ -221,7 +228,7 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
         return;
     }
 
-    else if ([indexPath section] == kSettingsSection) {
+    else if ([indexPath section] == MWSettingsSection) {
         [self performSegueWithIdentifier:kMWSettingsSegue sender:self];
         return;
     }
@@ -229,7 +236,7 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
 
 - (IBAction)saveButtonPressed:(UIStoryboardSegue *)seque
 {
-    serverBookmarks = [MWDataStore bookmarks];
+    self.serverBookmarks = [MWDataStore bookmarks];
     [self.tableView reloadData];
 }
 
@@ -241,13 +248,13 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
         MWBookmarkViewController *bookmarkSettings = [destination viewControllers][0];
 
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        if (indexPath == nil) {
-            // New Bookmark
-            bookmarkSettings.bookmarkIndex = -1;
-        } else {
+        if (indexPath) {
             // Existing Bookmark
             bookmarkSettings.bookmarkIndex = [indexPath row];
             [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        } else {
+            // New Bookmark
+            bookmarkSettings.bookmarkIndex = -1;
         }
     }
 }

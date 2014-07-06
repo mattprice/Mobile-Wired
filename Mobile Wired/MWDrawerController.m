@@ -24,11 +24,11 @@
 //
 
 #import "MWDrawerController.h"
-#import "MWServerListViewController.h"
-#import "MWBookmarkViewController.h"
 
-#import "MMDrawerVisualState.h"
+#import "MWServerListViewController.h"
+
 #import "UIViewController+MMDrawerController.h"
+#import "MMDrawerVisualState.h"
 
 @implementation MWDrawerController
 
@@ -90,6 +90,5 @@
 {
     return UIStatusBarStyleDefault;
 }
-
 
 @end

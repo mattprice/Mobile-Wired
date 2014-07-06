@@ -24,6 +24,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "MBProgressHUD.h"
 #import "WiredConnection.h"
 
@@ -36,9 +37,10 @@ typedef NS_ENUM(NSInteger, MWChatMessageTypes) {
 @class MWUserListViewController;
 
 @interface ChatMessage : NSObject;
-@property (strong, nonatomic) NSString *userID;
-@property (strong, nonatomic) NSString *message;
-@property (strong, nonatomic) NSString *time;
+
+@property (copy, nonatomic) NSString *userID;
+@property (copy, nonatomic) NSString *message;
+@property (copy, nonatomic) NSString *time;
 @property (nonatomic) NSInteger type;
 
 @end

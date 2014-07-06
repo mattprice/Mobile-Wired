@@ -24,7 +24,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WiredConnection.h"
+
+@class WiredConnection;
 
 @interface MWUserListViewController : UITableViewController;
 

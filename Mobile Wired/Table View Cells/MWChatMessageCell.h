@@ -27,9 +27,9 @@
 
 @interface MWChatMessageCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *nickname;
-@property (strong, nonatomic) IBOutlet UILabel *message;
-@property (strong, nonatomic) IBOutlet UILabel *timestamp;
-@property (strong, nonatomic) IBOutlet UIImageView *avatar;
+@property (weak, nonatomic) IBOutlet UILabel *nickname;
+@property (weak, nonatomic) IBOutlet UILabel *message;
+@property (weak, nonatomic) IBOutlet UILabel *timestamp;
+@property (weak, nonatomic) IBOutlet UIImageView *avatar;
 
 @end

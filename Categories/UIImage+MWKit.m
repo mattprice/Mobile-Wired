@@ -32,7 +32,7 @@
     UIImage *image = self;
     
     UIGraphicsBeginImageContextWithOptions(newSize, 1.0f, 0.0f);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    [image drawInRect:CGRectMake(0.0f, 0.0f, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -40,13 +40,15 @@
 }
 
 
-- (UIImage *)withCornerRadius:(float)radius
+- (UIImage *)withCornerRadius:(CGFloat)radius
 {
     UIImage *image = self;
-    
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
-    [[UIBezierPath bezierPathWithRoundedRect:(CGRect){CGPointZero, image.size} cornerRadius:radius] addClip];
-    [image drawInRect:(CGRect){CGPointZero, image.size}];
+    CGSize size = image.size;
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0f);
+    [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius] addClip];
+    [image drawInRect:rect];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

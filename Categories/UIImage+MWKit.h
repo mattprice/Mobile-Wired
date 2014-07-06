@@ -28,6 +28,6 @@
 @interface UIImage (MWKit)
 
 - (UIImage *)scaleToSize:(CGSize)newSize;
-- (UIImage *)withCornerRadius:(float)radius;
+- (UIImage *)withCornerRadius:(CGFloat)radius;
 
 @end

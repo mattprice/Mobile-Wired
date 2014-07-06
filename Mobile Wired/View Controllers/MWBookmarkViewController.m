@@ -24,20 +24,21 @@
 //
 
 #import "MWBookmarkViewController.h"
+
 #import "NSString+Hashes.h"
 
 @interface MWBookmarkViewController ()
 
-@property (nonatomic) IBOutlet UITextField *serverNameField;
-@property (nonatomic) IBOutlet UITextField *serverHostField;
-@property (nonatomic) IBOutlet UITextField *serverPortField;
+@property (weak, nonatomic) IBOutlet UITextField *serverNameField;
+@property (weak, nonatomic) IBOutlet UITextField *serverHostField;
+@property (weak, nonatomic) IBOutlet UITextField *serverPortField;
 
-@property (nonatomic) IBOutlet UITextField *userLoginField;
-@property (nonatomic) IBOutlet UITextField *userPassField;
+@property (weak, nonatomic) IBOutlet UITextField *userLoginField;
+@property (weak, nonatomic) IBOutlet UITextField *userPassField;
 
-@property (nonatomic) IBOutlet UITextField *userNicknameField;
-@property (nonatomic) IBOutlet UITextField *userStatusField;
-@property (nonatomic) IBOutlet UISwitch *notificationSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *userNicknameField;
+@property (weak, nonatomic) IBOutlet UITextField *userStatusField;
+@property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
 
 @end
 
@@ -58,22 +59,22 @@ static BOOL isNewBookmark;
 
         NSDictionary *bookmark = [MWDataStore bookmarkAtIndex:(NSUInteger)self.bookmarkIndex];
 
-        _serverNameField.text   = bookmark[kMWServerName];
-        _serverHostField.text   = bookmark[kMWServerHost];
-        _serverPortField.text   = bookmark[kMWServerPort];
-        _userLoginField.text    = bookmark[kMWUserLogin];
-        _userPassField.text     = bookmark[kMWUserPass];
-        _userNicknameField.text = bookmark[kMWUserNick];
-        _userStatusField.text   = bookmark[kMWUserStatus];
-        _notificationSwitch.on  = (BOOL)bookmark[kMWNotifications][kMWOnMention];
+        self.serverNameField.text   = bookmark[kMWServerName];
+        self.serverHostField.text   = bookmark[kMWServerHost];
+        self.serverPortField.text   = bookmark[kMWServerPort];
+        self.userLoginField.text    = bookmark[kMWUserLogin];
+        self.userPassField.text     = bookmark[kMWUserPass];
+        self.userNicknameField.text = bookmark[kMWUserNick];
+        self.userStatusField.text   = bookmark[kMWUserStatus];
+        self.notificationSwitch.on  = (BOOL)bookmark[kMWNotifications][kMWOnMention];
     }
 
     // Set the nickname and status placeholders to their global defaults.
-    _userNicknameField.placeholder = [MWDataStore optionForKey:kMWUserNick];
-    _userStatusField.placeholder = [MWDataStore optionForKey:kMWUserStatus];
+    self.userNicknameField.placeholder = [MWDataStore optionForKey:kMWUserNick];
+    self.userStatusField.placeholder = [MWDataStore optionForKey:kMWUserStatus];
 }
 
-#pragma mark - View Actions
+#pragma mark - Segue Actions
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
@@ -87,8 +88,8 @@ static BOOL isNewBookmark;
     NSMutableDictionary *bookmark = [NSMutableDictionary dictionary];
 
     // Turn the "Host" label red if no host is given.
-    if ([_serverHostField.text isEqualToString:@""]) {
-        for (id obj in [_serverHostField.superview subviews]) {
+    if ([self.serverHostField.text isEqualToString:@""]) {
+        for (id obj in [self.serverHostField.superview subviews]) {
             if ([obj isMemberOfClass:[UILabel class]]) {
                 UILabel *label = (UILabel *)obj;
                 label.textColor = [UIColor redColor];
@@ -99,8 +100,8 @@ static BOOL isNewBookmark;
     }
 
     // Turn the "Login" field red if there is a password but no username.
-    if ([_userLoginField.text isEqualToString:@""] && ![_userPassField.text isEqualToString:@""]) {
-        for (id obj in [_userLoginField.superview subviews]) {
+    if ([self.userLoginField.text isEqualToString:@""] && ![self.userPassField.text isEqualToString:@""]) {
+        for (id obj in [self.userLoginField.superview subviews]) {
             if ([obj isMemberOfClass:[UILabel class]]) {
                 UILabel *label = (UILabel *)obj;
                 label.textColor = [UIColor redColor];
@@ -114,14 +115,14 @@ static BOOL isNewBookmark;
         return NO;
     }
 
-    bookmark[kMWServerName]    = _serverNameField.text;
-    bookmark[kMWServerHost]    = _serverHostField.text;
-    bookmark[kMWServerPort]    = _serverPortField.text;
-    bookmark[kMWUserLogin]     = _userLoginField.text;
-    bookmark[kMWUserPass]      = _userPassField.text;
-    bookmark[kMWUserNick]      = _userNicknameField.text;
-    bookmark[kMWUserStatus]    = _userStatusField.text;
-    bookmark[kMWNotifications] = @{ kMWOnMention: @(_notificationSwitch.on) };
+    bookmark[kMWServerName]    = self.serverNameField.text;
+    bookmark[kMWServerHost]    = self.serverHostField.text;
+    bookmark[kMWServerPort]    = self.serverPortField.text;
+    bookmark[kMWUserLogin]     = self.userLoginField.text;
+    bookmark[kMWUserPass]      = self.userPassField.text;
+    bookmark[kMWUserNick]      = self.userNicknameField.text;
+    bookmark[kMWUserStatus]    = self.userStatusField.text;
+    bookmark[kMWNotifications] = @{ kMWOnMention: @(self.notificationSwitch.on) };
 
     if (isNewBookmark) {
         [MWDataStore addBookmark:bookmark];
@@ -132,7 +133,7 @@ static BOOL isNewBookmark;
     return YES;
 }
 
-#pragma mark - Text Field Delegates
+#pragma mark - UITextField Delegates
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -145,32 +146,32 @@ static BOOL isNewBookmark;
     }
 
     // Set placeholder text for the server name field on each change.
-    if (textField == _serverHostField) {
-        _serverNameField.placeholder = _serverHostField.text;
+    if (textField == self.serverHostField) {
+        self.serverNameField.placeholder = self.serverHostField.text;
     }
 
     // If the previous field was the password field, generate a SHA1 hash of the password.
-    else if (textField == _userPassField && ![_userPassField.text isEqualToString:@""]) {
-        _userPassField.text = [_userPassField.text SHA1Value];
+    else if (textField == self.userPassField && ![self.userPassField.text isEqualToString:@""]) {
+        self.userPassField.text = [self.userPassField.text SHA1Value];
     }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == _serverNameField) {
-        [_serverHostField becomeFirstResponder];
-    } else if (textField == _serverHostField) {
-        [_serverPortField becomeFirstResponder];
-    } else if (textField == _serverPortField) {
-        [_userLoginField becomeFirstResponder];
-    } else if (textField == _userLoginField) {
-        [_userPassField becomeFirstResponder];
-    } else if (textField == _userPassField) {
-        [_userNicknameField becomeFirstResponder];
-    } else if (textField == _userNicknameField) {
-        [_userStatusField becomeFirstResponder];
-    } else if (textField == _userStatusField) {
-        [_userStatusField resignFirstResponder];
+    if (textField == self.serverNameField) {
+        [self.serverHostField becomeFirstResponder];
+    } else if (textField == self.serverHostField) {
+        [self.serverPortField becomeFirstResponder];
+    } else if (textField == self.serverPortField) {
+        [self.userLoginField becomeFirstResponder];
+    } else if (textField == self.userLoginField) {
+        [self.userPassField becomeFirstResponder];
+    } else if (textField == self.userPassField) {
+        [self.userNicknameField becomeFirstResponder];
+    } else if (textField == self.userNicknameField) {
+        [self.userStatusField becomeFirstResponder];
+    } else if (textField == self.userStatusField) {
+        [self.userStatusField resignFirstResponder];
     }
 
     return YES;

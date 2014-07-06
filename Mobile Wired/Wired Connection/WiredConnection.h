@@ -2,8 +2,7 @@
 //  WiredConnection.h
 //  Mobile Wired
 //
-//  Copyright (c) 2012 Matthew Price, http://mattprice.me/
-//  Copyright (c) 2012 Ember Code, http://embercode.com/
+//  Copyright (c) 2014 Matthew Price, http://mattprice.me/
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -52,8 +51,6 @@
 @property (strong, nonatomic) NSString *myUserID;
 
 @property Boolean isConnected;
-
-- (id)init;
 
 #pragma mark - User Commands
 - (void)connectToServer:(NSString *)server onPort:(NSInteger)port;

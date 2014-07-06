@@ -51,6 +51,7 @@
 }
 
 #pragma mark - Push Notifications
+
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken
 {
     NSString *hexToken = [[[[devToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""]
@@ -78,6 +79,7 @@
 }
 
 #pragma mark - Backgrounding Notifications
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*
@@ -118,6 +120,5 @@
      See also applicationDidEnterBackground:.
      */
 }
-
 
 @end

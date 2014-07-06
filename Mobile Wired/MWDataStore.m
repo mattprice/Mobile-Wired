@@ -65,14 +65,14 @@ static NSMutableArray *bookmarks;
 
 #pragma mark - NSCoding Protocol
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
-    version = (coder) ? [coder decodeIntegerForKey:@"version"] : 0;
+    version = (coder) ? [coder decodeIntegerForKey:@"version"] : 0.0f;
 
     // New User
-    if (version == 0) {
+    if (version == 0.0f) {
         NSLog(@"Creating MWDataStore for the first time.");
-        version = 1;
+        version = 1.0f;
 
         settings = [NSMutableDictionary new];
         settings[kMWUserNick] = @"Mobile Wired User";
@@ -84,9 +84,9 @@ static NSMutableArray *bookmarks;
     }
 
     // Future upgrade routines...
-//    if (version < 2) {
+//    if (version < 2.0f) {
 //        NSLog(@"Updating MWDataStore from version %ld to 2.", (long)version);
-//        version = 2;
+//        version = 2.0f;
 //        return self;
 //    }
 

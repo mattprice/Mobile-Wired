@@ -24,10 +24,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MWServerListViewController.h"
 
 @interface MWBookmarkViewController : UITableViewController
 
-@property (assign) NSInteger bookmarkIndex;
+@property (nonatomic) NSInteger bookmarkIndex;
 
 @end

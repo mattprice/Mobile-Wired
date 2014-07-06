@@ -26,9 +26,9 @@
 #import "MWUserInfoViewController.h"
 
 typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
-    kGeneralSection = 0,
-    kDetailSection,
-    kNumberOfSections
+    MWGeneralSection = 0,
+    MWDetailSection,
+    MWNumberOfSections
 };
 
 @implementation MWUserInfoViewController
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - TableView Data Sources
+#pragma mark - UITableView Data Sources
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
     if (![self.userInfo count]) {
         return 1;
     } else {
-        return kNumberOfSections;
+        return MWNumberOfSections;
     }
 }
 
@@ -70,10 +70,10 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
     }
 
     switch (section) {
-        case kGeneralSection:
+        case MWGeneralSection:
             return 1;
 
-        case kDetailSection:
+        case MWDetailSection:
             return 6;
 
         default:
@@ -88,10 +88,10 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
     }
 
     switch (section) {
-        case kGeneralSection:
+        case MWGeneralSection:
             return @"General";
 
-        case kDetailSection:
+        case MWDetailSection:
             return @"Details";
 
         default:
@@ -104,8 +104,7 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
     UITableViewCell *cell;
 
     switch ([indexPath section]) {
-        case kGeneralSection:
-        {
+        case MWGeneralSection:
             cell = [tableView dequeueReusableCellWithIdentifier:@"MWUserInfoCell"];
 
             cell.textLabel.text = self.userInfo[@"wired.user.nick"];
@@ -126,10 +125,8 @@ typedef NS_ENUM(NSInteger, MWUserInfoTableSections) {
             cell.imageView.image = [UIImage imageWithData:self.userInfo[@"wired.user.icon"]];
 
             break;
-        }
 
-        case kDetailSection:
-        {
+        case MWDetailSection: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"MWUserInfoCell"];
 
             NSString *version = [NSString stringWithFormat:@"%@ %@ (%@) on %@ %@ (%@)",
