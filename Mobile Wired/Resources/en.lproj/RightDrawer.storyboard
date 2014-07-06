@@ -14,7 +14,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MWUserListCell" textLabel="nct-Sg-aac" detailTextLabel="LkD-hB-RKu" imageView="cJX-4n-4I2" style="IBUITableViewCellStyleSubtitle" id="y9p-v7-f5B">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MWUserListCell" textLabel="nct-Sg-aac" detailTextLabel="LkD-hB-RKu" imageView="cJX-4n-4I2" style="IBUITableViewCellStyleSubtitle" id="y9p-v7-f5B">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y9p-v7-f5B" id="kfS-4o-TP0">

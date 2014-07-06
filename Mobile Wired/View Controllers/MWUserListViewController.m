@@ -93,6 +93,16 @@
     return (NSInteger)[self.userArray count];
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Only highlight cells if the user has permission to view user info.
+    if ( [[self.connection getMyPermissions][@"wired.account.user.get_info"] boolValue] ) {
+        return YES;
+    }
+
+    return NO;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MWUserListCell"];

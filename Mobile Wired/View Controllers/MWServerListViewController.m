@@ -242,21 +242,22 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     UINavigationController *destination = segue.destinationViewController;
 
     if ([[segue identifier] isEqualToString:kMWBookmarkSegue]) {
         MWBookmarkViewController *bookmarkSettings = [destination viewControllers][0];
 
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         if (indexPath) {
             // Existing Bookmark
             bookmarkSettings.bookmarkIndex = [indexPath row];
-            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
         } else {
             // New Bookmark
             bookmarkSettings.bookmarkIndex = -1;
         }
     }
+
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
