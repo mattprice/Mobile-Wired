@@ -292,6 +292,7 @@
     newMessage.type = MWStatusMessage;
 
     // If a date is given, display it. Otherwise, display the current time.
+    // TODO: Calculate time difference to decide if we should show date or time.
     if (date) {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
         [dateFormatter setDateFormat:@"MMM d"];
@@ -721,6 +722,9 @@
                          self.connection.serverInfo [@"wired.info.name"]];
     [self addSystemMessageToView:message];
 
+    // Reset the server topic.
+    self.serverTopic = nil;
+
     [TestFlight passCheckpoint:@"Reconnected to Server"];
 }
 
@@ -739,17 +743,17 @@
         return;
     }
 
-    // Initial connection.
+    // Someone changed the topic.
     if (self.serverTopic) {
 #ifdef DEBUG
         NSLog(@"%@ | <<< %@ changed topic to '%@' >>>", channel, nick, topic);
 #endif
 
-        NSString *message = [NSString stringWithFormat:@"%@ changed topic to %@.", nick, topic];
+        NSString *message = [NSString stringWithFormat:@"%@ changed topic to \"%@\".", nick, topic];
         [self addSystemMessageToView:message];
     }
 
-    // Someone changed the topic.
+    // Initial connection.
     else {
 #ifdef DEBUG
         NSLog(@"Channel #%@ topic: %@ (set by %@)", channel, topic, nick);
@@ -898,17 +902,25 @@
     NSLog(@"<<< %@ was kicked by %@ (%@) >>>", nick, kicker, reason);
 #endif
 
+    BOOL iWasKicked = [userID isEqualToString:self.connection.myUserID];
+
+    // Change the wording if we were the one kicked.
+    NSString *verb = @"was";
+    if (iWasKicked) {
+        nick = @"You";
+        verb = @"were";
+    }
+
     NSString *message;
     if ([reason isEqualToString:@""]) {
-        message = [NSString stringWithFormat:@"%@ was kicked by %@.", nick, kicker];
+        message = [NSString stringWithFormat:@"%@ %@ kicked by %@.", nick, verb, kicker];
     } else {
-        message = [NSString stringWithFormat:@"%@ was kicked by %@ (%@).", nick, kicker, reason];
+        message = [NSString stringWithFormat:@"%@ %@ kicked by %@ (%@).", nick, verb, kicker, reason];
     }
 
     [self addSystemMessageToView:message];
 
-    // Rejoin the channel if we were the one kicked.
-    if ([userID isEqualToString:self.connection.myUserID]) {
+    if (iWasKicked) {
         [self willReconnect];
         [self.connection joinChannel:@"1"];
     }
