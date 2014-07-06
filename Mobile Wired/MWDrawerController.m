@@ -48,11 +48,10 @@
     // Create and set up the view controllers.
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMWLeftDrawer bundle:nil];
     UINavigationController *bookmarksView = [storyboard instantiateViewControllerWithIdentifier:kMWLeftNavigationController];
-    MWBookmarkViewController *bookmarkSettings = [storyboard instantiateViewControllerWithIdentifier:kMWBookmarkViewController];
 
     // Assign the view controllers to their respective sides.
     [self setLeftDrawerViewController:bookmarksView];
-    [self setCenterViewController:bookmarkSettings];
+    [self setCenterViewController:[UIViewController new]];
     [self openDrawerSide:MMDrawerSideLeft animated:NO completion:nil];
 }
 

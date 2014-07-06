@@ -37,7 +37,11 @@ static NSMutableArray *bookmarks;
 
 + (void)load
 {
-    sharedInstance = [NSKeyedUnarchiver unarchiveObjectWithFile:[MWDataStore dataPath]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[MWDataStore dataPath]]) {
+        sharedInstance = [NSKeyedUnarchiver unarchiveObjectWithFile:[MWDataStore dataPath]];
+    } else {
+        sharedInstance = [[MWDataStore alloc] initWithCoder:nil];
+    }
 }
 
 + (BOOL)save
