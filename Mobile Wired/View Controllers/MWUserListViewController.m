@@ -131,13 +131,22 @@
     // Display a disclosure indicator if the user has permission to view user info.
     if ( [[self.connection getMyPermissions][@"wired.account.user.get_info"] boolValue] ) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.userInteractionEnabled = YES;
     }
     
     return cell;
 }
 
 #pragma mark - Segue Methods
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    // Only segue if the user has permission to view user info.
+    if ( [[self.connection getMyPermissions][@"wired.account.user.get_info"] boolValue] ) {
+        return YES;
+    }
+
+    return NO;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
