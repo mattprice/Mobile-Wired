@@ -90,7 +90,9 @@
     [socket setDelegate:nil];
     [socket disconnectAfterWriting];
     socket = nil;
-    userList = nil, serverHost = nil, serverPort = 0;
+
+//    userList = nil;
+    serverHost = nil, serverPort = 0;
 }
 
 /*
