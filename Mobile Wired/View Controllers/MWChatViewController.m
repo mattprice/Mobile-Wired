@@ -77,29 +77,16 @@
     self.tableView.estimatedRowHeight = 70.0;
 }
 
-- (void)loadConnectionSettings {
-    // TODO: Need to update all this stuff. Do we still have observers for NSDefaults?
-    //       We need to use MWDataStore delegates instead?
-    
-    // NSUserDefaultsDidChangeNotification doesn't let us know what changed so we tell the server
-    // about anything that could have possibly updated.
-    
-    NSString *nick = self.bookmark[kMWUserNick];
-    if ([nick isEqualToString:@""]) {
-        nick = [MWDataStore optionForKey:kMWUserNick];
-    }
-    
-    NSString *status = self.bookmark[kMWUserStatus];
-    if ([status isEqualToString:@""]) {
-        status = [MWDataStore optionForKey:kMWUserStatus];
-    }
-    
-    [self.connection setNick:nick];
-    [self.connection setStatus:status];
-    [self.connection setIcon:nil];
-}
-
 #pragma mark - Wired Connection
+
+- (Boolean)isConnected
+{
+    if (self.connection) {
+        return self.connection.isConnected;
+    } else {
+        return 0;
+    }
+}
 
 - (void)loadBookmark:(NSUInteger)indexRow
 {
@@ -117,15 +104,6 @@
     // Connect to the bookmark.
     self.bookmark = [MWDataStore bookmarkAtIndex:indexRow];
     [self connect];
-}
-
-- (Boolean)isConnected
-{
-    if (self.connection) {
-        return self.connection.isConnected;
-    } else {
-        return 0;
-    }
 }
 
 - (void)connect
@@ -147,6 +125,23 @@
     [self.connection disconnect];
 }
 
+- (void)sendUserInformation {
+    // We don't know what changed so tell the server about anything that could have possibly updated.
+    // Wired Server
+    NSString *nick = self.bookmark[kMWUserNick];
+    if ([nick isEqualToString:@""]) {
+        nick = [MWDataStore optionForKey:kMWUserNick];
+    }
+
+    NSString *status = self.bookmark[kMWUserStatus];
+    if ([status isEqualToString:@""]) {
+        status = [MWDataStore optionForKey:kMWUserStatus];
+    }
+
+    [self.connection setNick:nick];
+    [self.connection setStatus:status];
+    [self.connection setIcon:nil];
+}
 
 #pragma mark - IBActions
 
@@ -437,12 +432,6 @@
     self.userListView.connection = self.connection;
     [self mm_drawerController].rightDrawerViewController = self.userListView;
 
-    // Register to listen for NSUserDefaults changes.
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loadConnectionSettings)
-                                                 name:NSUserDefaultsDidChangeNotification
-                                               object:nil];
-
     // Register an event for when a keyboard pops up.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -540,7 +529,7 @@
 
     self.progressHUD.labelText = @"Logging In";
 
-    [self loadConnectionSettings];
+    [self sendUserInformation];
     [self.connection sendLogin:self.bookmark[kMWUserLogin] withPassword:self.bookmark[kMWUserPass]];
 }
 

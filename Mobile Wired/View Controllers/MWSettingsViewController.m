@@ -53,7 +53,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)saveButtonPressed:(id)sender
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     [MWDataStore setOption:self.nicknameTextField.text forKey:kMWUserNick];
     [MWDataStore setOption:self.statusTextField.text forKey:kMWUserStatus];
@@ -61,7 +61,7 @@
 
     [TestFlight passCheckpoint:@"Modified Settings"];
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    return YES;
 }
 
 #pragma mark - TextField Delegates

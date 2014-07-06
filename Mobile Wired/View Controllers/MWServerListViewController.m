@@ -234,10 +234,20 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
     }
 }
 
-- (IBAction)saveButtonPressed:(UIStoryboardSegue *)seque
+- (IBAction)bookmarkSaveButtonPressed:(UIStoryboardSegue *)seque
 {
     self.serverBookmarks = [MWDataStore bookmarks];
     [self.tableView reloadData];
+}
+
+- (IBAction)settingsSaveButtonPressed:(UIStoryboardSegue *)seque
+{
+    // Notify the connections that they should update their settings.
+    [self.currentConnections enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop){
+        UINavigationController *controller = (UINavigationController *)obj;
+        MWChatViewController *chatView = controller.viewControllers[0];
+        [chatView sendUserInformation];
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

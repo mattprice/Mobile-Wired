@@ -190,7 +190,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="bQP-bO-qme">
                             <connections>
-                                <action selector="saveButtonPressed:" destination="pgP-5g-1Jy" id="sIt-gg-dgO"/>
+                                <segue destination="z0d-rd-1AZ" kind="unwind" unwindAction="settingsSaveButtonPressed:" id="bzJ-v4-N4a"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -200,6 +200,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RtF-Mj-7Ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="z0d-rd-1AZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1101" y="-330"/>
         </scene>
@@ -534,7 +535,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="gao-TD-lnI">
                             <connections>
-                                <segue destination="Uql-2y-5NI" kind="unwind" identifier="MWBookmarkSaveSegue" unwindAction="saveButtonPressed:" id="fFt-FJ-7Ge"/>
+                                <segue destination="Uql-2y-5NI" kind="unwind" unwindAction="bookmarkSaveButtonPressed:" id="N2n-0W-49P"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
