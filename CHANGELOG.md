@@ -4,12 +4,13 @@
 In-Progress
 
 * Mobile Wired now sports an interface designed for iOS 7.
-* You can now receive push notifications when your nickname is mentioned.
+<!-- * You now receive push notifications if your nickname is mentioned. -->
 * Added support for Retina 4" iPhones.
-* Added the ability to dismiss the keyboard by swiping downward.
+* Added the ability to dismiss the keyboard by swiping down.
 * Added the ability to set nickname and status per-server. #13
 * Nickname and status changes now take effect immediately, instead of on next connection. #11
 * Fixed a crash that occurred if settings changed while connected to a server. #16
+* Fixed a bug where kicked users were never removed from the user list.
 
 ## Version 0.9 (231)
 May 22, 2013
@@ -22,7 +23,7 @@ May 22, 2013
 * Added the ability to view broadcasts.
 * Added the ability to view PMs. A complete PM interface is coming soon.
 * Fixed a crash that occurred when adding a new bookmark.
-* Fixed a bug where your username/password may not be sent correctly.
+* Fixed a bug where usernames/passwords may not be sent correctly.
 * Other minor bug fixes and improvements.
 
 ## Version 0.8.1 (174)

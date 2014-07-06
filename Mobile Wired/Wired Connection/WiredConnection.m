@@ -950,9 +950,8 @@
         
         // Remove the user from the user list.
         [(NSMutableDictionary *)userList[channel] removeObjectForKey:userID];
-        
-        [delegate userLeft:nick withID:userID forChannel:channel];
         [delegate setUserList:userList forChannel:channel];
+        [delegate userLeft:nick withID:userID forChannel:channel];
     }
     
 #pragma mark User Kicked
@@ -983,7 +982,10 @@
         
         nick = userList[channel][userID][@"wired.user.nick"];
         kicker = userList[channel][kickerUserID][@"wired.user.nick"];
-        
+
+        // Remove the user from the user list.
+        [(NSMutableDictionary *)userList[channel] removeObjectForKey:userID];
+        [delegate setUserList:userList forChannel:channel];
         [delegate userWasKicked:nick withID:userID byUser:kicker forReason:reason forChannel:channel];
     }
     
