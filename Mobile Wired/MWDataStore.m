@@ -77,6 +77,7 @@ static NSMutableArray *bookmarks;
         settings = [NSMutableDictionary new];
         settings[kMWUserNick] = @"Mobile Wired User";
         settings[kMWUserStatus] = [NSString stringWithFormat:@"On my %@", [[UIDevice currentDevice] model]];
+        settings[kMWUserIcon] = [UIImage imageNamed:@"DefaultUserIcon"];
 
         bookmarks = [NSMutableArray new];
 

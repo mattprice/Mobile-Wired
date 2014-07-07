@@ -32,6 +32,7 @@
 #define kMWUserPass             @"UserPass"
 #define kMWUserNick             @"UserNick"
 #define kMWUserStatus           @"UserStatus"
+#define kMWUserIcon             @"UserIcon"
 
 #define kMWNotifications        @"Notifications"
 #define kMWOnMention            @"OnMention"

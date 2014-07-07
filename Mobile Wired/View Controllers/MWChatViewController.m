@@ -139,9 +139,14 @@
         status = [MWDataStore optionForKey:kMWUserStatus];
     }
 
+    UIImage *icon = self.bookmark[kMWUserIcon];
+    if (!icon) {
+        icon = [MWDataStore optionForKey:kMWUserIcon];
+    }
+
     [self.connection setNick:nick];
     [self.connection setStatus:status];
-    [self.connection setIcon:nil];
+    [self.connection setIcon:UIImagePNGRepresentation(icon)];
 }
 
 #pragma mark - IBActions

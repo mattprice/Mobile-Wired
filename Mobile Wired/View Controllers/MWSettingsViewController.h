@@ -25,6 +25,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MWSettingsViewController : UITableViewController <UITextFieldDelegate>
+@interface MWSettingsViewController : UITableViewController <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end

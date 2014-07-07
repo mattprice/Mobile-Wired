@@ -25,12 +25,14 @@
 
 #import "MWSettingsViewController.h"
 
+#import "UIImage+Scale.h"
 #import "UITableView+Subviews.h"
 
 @interface MWSettingsViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *statusTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *userIconView;
 
 @end
 
@@ -42,6 +44,7 @@
 
     self.nicknameTextField.text = [MWDataStore optionForKey:kMWUserNick];
     self.statusTextField.text = [MWDataStore optionForKey:kMWUserStatus];
+    self.userIconView.image = [MWDataStore optionForKey:kMWUserIcon];
 
     [TestFlight passCheckpoint:@"Viewed Settings"];
 }
@@ -53,10 +56,31 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)openImagePicker:(id)sender
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.allowsEditing = YES;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    // The maximum size Wired for Mac allows is 64x64.
+    UIImage *userIcon = info[UIImagePickerControllerEditedImage];
+    userIcon = [userIcon scaleToSize:CGSizeMake(64.0f, 64.0f)];
+    self.userIconView.image = userIcon;
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     [MWDataStore setOption:self.nicknameTextField.text forKey:kMWUserNick];
     [MWDataStore setOption:self.statusTextField.text forKey:kMWUserStatus];
+    [MWDataStore setOption:self.userIconView.image forKey:kMWUserIcon];
     [MWDataStore save];
 
     [TestFlight passCheckpoint:@"Modified Settings"];

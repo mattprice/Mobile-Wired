@@ -6,8 +6,9 @@ In-Progress
 * Mobile Wired now sports an interface designed for iOS 7.
 <!-- * You now receive push notifications if your nickname is mentioned. -->
 * Added support for Retina 4" iPhones.
-* Added the ability to dismiss the keyboard by swiping down.
+* Added the ability to set a custom user icon. #12
 * Added the ability to set nickname and status per-server. #13
+* Added the ability to dismiss the keyboard by swiping down.
 * Nickname and status changes now take effect immediately, instead of on next connection. #11
 * Fixed a crash that occurred if settings changed while connected to a server. #16
 * Fixed a bug where kicked users were never removed from the user list.
