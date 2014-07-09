@@ -25,7 +25,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MWBookmarkViewController : UITableViewController
+@interface MWBookmarkViewController : UITableViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic) NSInteger bookmarkIndex;
 

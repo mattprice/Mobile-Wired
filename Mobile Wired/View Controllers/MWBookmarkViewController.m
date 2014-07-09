@@ -26,18 +26,23 @@
 #import "MWBookmarkViewController.h"
 
 #import "NSString+Hashes.h"
+#import "UIImage+Scale.h"
 
 @interface MWBookmarkViewController ()
 
+// Server Info
 @property (weak, nonatomic) IBOutlet UITextField *serverNameField;
 @property (weak, nonatomic) IBOutlet UITextField *serverHostField;
 @property (weak, nonatomic) IBOutlet UITextField *serverPortField;
 
+// Login Info
 @property (weak, nonatomic) IBOutlet UITextField *userLoginField;
 @property (weak, nonatomic) IBOutlet UITextField *userPassField;
 
+// Settings
 @property (weak, nonatomic) IBOutlet UITextField *userNicknameField;
 @property (weak, nonatomic) IBOutlet UITextField *userStatusField;
+@property (weak, nonatomic) IBOutlet UIImageView *userIconView;
 @property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
 
 @end
@@ -62,22 +67,50 @@ static BOOL isNewBookmark;
         self.serverNameField.text   = bookmark[kMWServerName];
         self.serverHostField.text   = bookmark[kMWServerHost];
         self.serverPortField.text   = bookmark[kMWServerPort];
+
         self.userLoginField.text    = bookmark[kMWUserLogin];
         self.userPassField.text     = bookmark[kMWUserPass];
+
         self.userNicknameField.text = bookmark[kMWUserNick];
         self.userStatusField.text   = bookmark[kMWUserStatus];
+        self.userIconView.image     = bookmark[kMWUserIcon];
         self.notificationSwitch.on  = (BOOL)bookmark[kMWNotifications][kMWOnMention];
     }
 
-    // Set the nickname and status placeholders to their global defaults.
+    // Set the nickname, status, and icon placeholders to their global defaults.
     self.userNicknameField.placeholder = [MWDataStore optionForKey:kMWUserNick];
     self.userStatusField.placeholder = [MWDataStore optionForKey:kMWUserStatus];
+    if (!self.userIconView.image) {
+        self.userIconView.image = [MWDataStore optionForKey:kMWUserIcon];
+        self.userIconView.alpha = 0.5f;
+    }
 }
 
-#pragma mark - Segue Actions
+#pragma mark - IBActions
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)openImagePicker:(id)sender
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.allowsEditing = YES;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    // The maximum size Wired for Mac allows is 64x64.
+    UIImage *userIcon = info[UIImagePickerControllerEditedImage];
+    userIcon = [userIcon scaleToSize:CGSizeMake(64.0f, 64.0f)];
+    self.userIconView.image = userIcon;
+    self.userIconView.alpha = 1.0f;
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -118,11 +151,17 @@ static BOOL isNewBookmark;
     bookmark[kMWServerName]    = self.serverNameField.text;
     bookmark[kMWServerHost]    = self.serverHostField.text;
     bookmark[kMWServerPort]    = self.serverPortField.text;
+
     bookmark[kMWUserLogin]     = self.userLoginField.text;
     bookmark[kMWUserPass]      = self.userPassField.text;
+
     bookmark[kMWUserNick]      = self.userNicknameField.text;
     bookmark[kMWUserStatus]    = self.userStatusField.text;
-    bookmark[kMWNotifications] = @{ kMWOnMention: @(self.notificationSwitch.on) };
+    if (self.userIconView.alpha == 1.0f) {
+        // If the imageView isn't opaque, we were only showing the default image as a placeholder.
+        bookmark[kMWUserIcon]  = self.userIconView.image;
+    }
+    bookmark[kMWNotifications] = @{ kMWOnMention: @(self.notificationSwitch.isOn) };
 
     if (isNewBookmark) {
         [MWDataStore addBookmark:bookmark];
