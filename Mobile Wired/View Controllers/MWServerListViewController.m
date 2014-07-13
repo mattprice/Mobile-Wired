@@ -51,11 +51,28 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
 {
     [super viewDidLoad];
 
-    // Create an array to eventually store connections in.
     self.currentConnections = [NSMutableDictionary dictionary];
     self.serverBookmarks = [MWDataStore bookmarks];
 
     [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
+
+    // Update the connection status image whenever we're notified.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateBookmarks)
+                                                 name:MWConnectionChangedNotification
+                                               object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - NSNotificationCenter
+
+- (void)updateBookmarks
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableView Data Sources
@@ -96,12 +113,19 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
             }
 
             // Set the status image.
-//            NSString *indexString = [NSString stringWithFormat:@"%d", [indexPath row]];
-//            if (currentConnections[indexString]) {
-//                cell.imageView.image = [UIImage imageNamed:@"GreenDot.png"];
-//            } else {
-//                cell.imageView.image = [UIImage imageNamed:@"GrayDot.png"];
-//            }
+            NSString *indexString = [NSString stringWithFormat:@"%lu", (unsigned long)[indexPath row]];
+            if (self.currentConnections[indexString]) {
+                UINavigationController *controller = self.currentConnections[indexString];
+                MWChatViewController *chatView = controller.viewControllers[0];
+
+                if (chatView.isConnected) {
+                    cell.imageView.image = [UIImage imageNamed:@"GreenDot.png"];
+                } else {
+                    cell.imageView.image = [UIImage imageNamed:@"GrayDot.png"];
+                }
+            } else {
+                cell.imageView.image = [UIImage imageNamed:@"GrayDot.png"];
+            }
         }
             break;
 

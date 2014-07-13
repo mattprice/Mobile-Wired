@@ -4,11 +4,11 @@
 In-Progress
 
 <!-- Experimental: Sends a notification when your nickname is mentioned. -->
-<!-- Adds a connection indicator next to servers in the bookmark list. -->
 
 Mobile Wired now sports a new interface designed for iOS 7!
 
 * Adds support for the iPhone 5+.
+* Adds connection indicators to the bookmark list. #14
 * Adds the ability to set a custom user icon. #12
 * Adds the ability to set nickname, status, and user icon per server. #13
 * Changes to your global nickname/status now take effect immediately. #11

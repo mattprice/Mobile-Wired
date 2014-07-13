@@ -596,6 +596,8 @@
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
 
+    [[NSNotificationCenter defaultCenter] postNotificationName:MWConnectionChangedNotification object:nil];
+
     [TestFlight passCheckpoint:@"Connected to Server"];
 }
 
@@ -634,6 +636,8 @@
     NSString *message = [NSString stringWithFormat:@"Disconnected from %@.",
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MWConnectionChangedNotification object:nil];
 }
 
 /*
@@ -645,7 +649,6 @@
  */
 - (void)willReconnect
 {
-    // Update the Progress HUD
     self.progressHUD.mode = MBProgressHUDModeIndeterminate;
     self.progressHUD.labelText = @"Reconnecting";
     [self.progressHUD show:YES];
@@ -653,6 +656,8 @@
     NSString *message = [NSString stringWithFormat:@"Disconnected from %@.",
                          self.connection.serverInfo[@"wired.info.name"]];
     [self addSystemMessageToView:message];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MWConnectionChangedNotification object:nil];
 }
 
 /*
@@ -694,18 +699,18 @@
  */
 - (void)didReconnect
 {
-    // Update the Progress HUD
     self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark.png"]];
     self.progressHUD.mode = MBProgressHUDModeCustomView;
     self.progressHUD.labelText = @"Reconnected";
     [self.progressHUD hide:YES afterDelay:0.5];
 
-    // Report the disconnect to chat.
     NSString *message = [NSString stringWithFormat:@"Reconnected to %@.",
                          self.connection.serverInfo [@"wired.info.name"]];
     [self addSystemMessageToView:message];
 
-    // Reset the server topic.
+    [[NSNotificationCenter defaultCenter] postNotificationName:MWConnectionChangedNotification object:nil];
+
+    // If we don't reset the server topic, it won't be shown on reconnect.
     self.serverTopic = nil;
 
     [TestFlight passCheckpoint:@"Reconnected to Server"];

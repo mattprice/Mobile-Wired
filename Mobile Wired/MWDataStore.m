@@ -197,7 +197,7 @@ static NSMutableArray *bookmarks;
 {
     NSMutableArray *_bookmarks = [NSMutableArray new];
     for (int i = 0; i < (int)[bookmarks count]; i++) {
-        _bookmarks[i] = [self bookmarkAtIndex:(NSUInteger)i];
+        _bookmarks[i] = [bookmarks[(NSUInteger)i] mutableCopy];
     }
 
     return _bookmarks;

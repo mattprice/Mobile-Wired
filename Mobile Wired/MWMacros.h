@@ -26,6 +26,9 @@
 // Global UI Constants
 #define kMWLedgeSize                    [[UIScreen mainScreen] bounds].size.width - 40
 
+// NSNotificationCenter
+#define MWConnectionChangedNotification @"MWConnectionChangedNotification"
+
 // Left Drawer Storyboard
 #define kMWLeftDrawer                   @"LeftDrawer"
 #define kMWLeftNavigationController     @"MWLeftNavigationController"
