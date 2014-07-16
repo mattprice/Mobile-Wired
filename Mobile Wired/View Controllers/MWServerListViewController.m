@@ -29,6 +29,7 @@
 #import "MWChatViewController.h"
 #import "MWSettingsViewController.h"
 #import "MWUserListViewController.h"
+#import "UIImage+Radius.h"
 
 #import "BlockAlertView.h"
 
@@ -113,18 +114,40 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
             }
 
             // Set the status image.
+            static UIImage *statusCircle = nil;
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                CGFloat width = 7.0f;
+                CGFloat height = 7.0f;
+
+                UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 1.0f);
+                CGContextRef context = UIGraphicsGetCurrentContext();
+
+                CGContextSetFillColorWithColor(context, [UIColor grayColor].CGColor);
+                CGContextFillEllipseInRect(context, CGRectMake(0, 0, width, height));
+
+                statusCircle = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+
+                statusCircle = [statusCircle imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            });
+
+            cell.imageView.image = statusCircle;
+
             NSString *indexString = [NSString stringWithFormat:@"%lu", (unsigned long)[indexPath row]];
             if (self.currentConnections[indexString]) {
                 UINavigationController *controller = self.currentConnections[indexString];
                 MWChatViewController *chatView = controller.viewControllers[0];
 
                 if (chatView.isConnected) {
-                    cell.imageView.image = [UIImage imageNamed:@"GreenDot.png"];
+                    cell.imageView.tintColor = [UIColor greenColor];
+                } else if (chatView.isConnecting) {
+                    cell.imageView.tintColor = [UIColor orangeColor];
                 } else {
-                    cell.imageView.image = [UIImage imageNamed:@"GrayDot.png"];
+                    cell.imageView.tintColor = [UIColor colorWithWhite:0.875f alpha:1.0f];
                 }
             } else {
-                cell.imageView.image = [UIImage imageNamed:@"GrayDot.png"];
+                cell.imageView.tintColor = [UIColor colorWithWhite:0.875f alpha:1.0f];
             }
         }
             break;

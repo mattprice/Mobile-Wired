@@ -32,7 +32,7 @@
 
 @synthesize socket, delegate;
 @synthesize userList, myUserID;
-@synthesize serverInfo, isConnected;
+@synthesize serverInfo;
 
 /*
  * Initiates a socket connection object.
@@ -58,15 +58,16 @@
 - (void)connectToServer:(NSString *)server onPort:(NSInteger)port
 {
     NSError *error = nil;
-    isConnected = NO;
+
     userList = [[NSMutableDictionary alloc] init];
     serverInfo = [[NSMutableDictionary alloc] init];
     
     serverHost = server;
     serverPort = (port) ? port : 4871;
-    
+
     // Attempt a socket connection to the server.
     NSLog(@"Beginning socket connection...");
+    self.connectionStatus = WCConnecting;
     if (![socket connectToHost:serverHost onPort:(uint16_t)serverPort withTimeout:15 error:&error]) {
         // Connection failed.
         NSLog(@"Connection error: %@",error);
@@ -86,7 +87,7 @@
     [delegate didDisconnect];
     
     // Disconnect the socket and then release.
-    isConnected = NO;
+    self.connectionStatus = WCDisconnected;
     [socket setDelegate:nil];
     [socket disconnectAfterWriting];
     socket = nil;
@@ -539,9 +540,9 @@
 {
     NSLog(@"Server disconnected unexpectedly. <Error: %@>", error);
     
-    // If we're already connected then we must have unexpected disconnected.
-    // TODO: Change isConnected to something else when we're in the process of connecting.
-    if (isConnected && !failCount) {
+    // If we were connected then we must have just unexpectedly disconnected.
+    if (self.connectionStatus == WCConnected && !failCount) {
+        self.connectionStatus = WCConnecting;
         failCount = 1;
         
         [delegate willReconnect];
@@ -557,6 +558,7 @@
     
     // Anything else must be an utter connection failure. Sorry guys!
     else {
+        self.connectionStatus = WCDisconnected;
         [delegate didFailConnectionWithReason:error];
     }
 }
@@ -1001,11 +1003,11 @@
         [delegate setUserList:userList forChannel:channel];
         
         // If we're already connected then we must be rejoining the channel.
-        if (isConnected) {
+        if (self.connectionStatus == WCConnected) {
             [delegate didReconnect];
         } else {
             [delegate didConnectAndLoginSuccessfully];
-            isConnected = YES;
+            self.connectionStatus = WCConnected;
         }
     }
     

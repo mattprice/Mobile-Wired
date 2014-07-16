@@ -30,6 +30,7 @@
 #import "MWUserListViewController.h"
 #import "UIImage+Scale.h"
 #import "UIImage+Radius.h"
+#import "WiredConnection.h"
 
 #import "BlockAlertView.h"
 #import "BlockTextPromptAlertView.h"
@@ -82,11 +83,28 @@
 
 - (Boolean)isConnected
 {
-    if (self.connection) {
-        return self.connection.isConnected;
-    } else {
-        return 0;
+    if (!self.connection) {
+        return NO;
     }
+
+    if (self.connection.connectionStatus == WCConnected) {
+        return YES;
+    }
+
+    return NO;
+}
+
+- (Boolean)isConnecting
+{
+    if (!self.connection) {
+        return NO;
+    }
+
+    if (self.connection.connectionStatus == WCConnecting) {
+        return YES;
+    }
+
+    return NO;
 }
 
 - (void)loadBookmark:(NSUInteger)indexRow
@@ -118,6 +136,8 @@
     self.connection = [[WiredConnection alloc] init];
     self.connection.delegate = self;
     [self.connection connectToServer:self.bookmark[kMWServerHost] onPort:[self.bookmark[kMWServerPort] integerValue]];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MWConnectionChangedNotification object:nil];
 }
 
 - (void)disconnect

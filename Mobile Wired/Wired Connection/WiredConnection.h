@@ -26,11 +26,14 @@
 #import <Foundation/Foundation.h>
 #import "GCDAsyncSocket.h"
 
+typedef NS_ENUM(NSInteger, WCConnectionStatus) {
+    WCDisconnected = 0,
+    WCConnecting,
+    WCConnected
+};
+
 @protocol WiredConnectionDelegate;
 @interface WiredConnection : NSObject {
-    GCDAsyncSocket *socket;
-    id <WiredConnectionDelegate> delegate;
-    
     NSString *serverHost;
     NSInteger serverPort;
     
@@ -38,8 +41,7 @@
     NSMutableDictionary *serverInfo;
     NSMutableDictionary *myPermissions;
     NSString *myUserID;
-    
-    Boolean isConnected;
+
     NSInteger failCount;
 }
 
@@ -50,7 +52,7 @@
 @property (strong) NSMutableDictionary *serverInfo;
 @property (strong, nonatomic) NSString *myUserID;
 
-@property Boolean isConnected;
+@property NSInteger connectionStatus;
 
 #pragma mark - User Commands
 - (void)connectToServer:(NSString *)server onPort:(NSInteger)port;

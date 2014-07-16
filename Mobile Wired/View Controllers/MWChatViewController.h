@@ -51,6 +51,7 @@ typedef NS_ENUM(NSInteger, MWChatMessageTypes) {
 @property (strong, nonatomic) MWUserListViewController *userListView;
 
 - (Boolean)isConnected;
+- (Boolean)isConnecting;
 - (void)loadBookmark:(NSUInteger)indexRow;
 - (void)sendUserInformation;
 
