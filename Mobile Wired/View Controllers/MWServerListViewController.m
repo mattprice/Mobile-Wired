@@ -200,6 +200,10 @@ typedef NS_ENUM(NSInteger, MWServerListTableSections) {
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (!self.tableView.editing) {
+        return UITableViewCellEditingStyleNone;
+    }
+
     switch ([indexPath section]) {
         case MWBookmarksSection:
             return UITableViewCellEditingStyleDelete;
