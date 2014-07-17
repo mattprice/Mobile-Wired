@@ -7,6 +7,9 @@
 * Sort the server list by connection status then manually/name (default).
     * This should probably be another global option.
 * Have the UITextField expand for long chat messages.
+* Add the ability to edit bookmarks while connected
+    - Display a warning that some changes won't take affect until next connection.
+* UserInfoView cells should dynamically grow if necessary (like the chat messages).
 
 ## Version 1.2
 
@@ -15,6 +18,7 @@
     * Connect / Disconnects
     * Private messages
     * Keyword mentions
+* Add ability to kick/ban users.
 
 ## Version 2.x
 

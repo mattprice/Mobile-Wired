@@ -293,7 +293,23 @@ RECEIVED:
 <?xml version="1.0" encoding="UTF-8"?>
 <p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.user_kick">
     <p7:field name="wired.chat.id">1</p7:field>
-    <p7:field name="wired.user.id">651</p7:field>              // Did the kicking
-    <p7:field name="wired.user.disconnected_id">654</p7:field> // Person kicked
+    <p7:field name="wired.user.id">651</p7:field>              <!-- Did the kicking -->
+    <p7:field name="wired.user.disconnected_id">654</p7:field> <!-- Person kicked -->
     <p7:field name="wired.user.disconnect_message">Test</p7:field>
+</p7:message>
+
+RECEIVED:
+<!-- Immediately when the user is banned. -->
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.chat.user_ban">
+  <p7:field name="wired.chat.id">1</p7:field>
+  <p7:field name="wired.user.disconnected_id">7</p7:field>
+  <p7:field name="wired.user.disconnect_message"/>
+</p7:message>
+
+RECEIVED:
+<!-- On connection. -->
+<?xml version="1.0" encoding="UTF-8"?>
+<p7:message xmlns:p7="http://www.zankasoftware.com/P7/Message" name="wired.banned">
+  <p7:field name="wired.banlist.expiration_date">1405565970.000000</p7:field>
 </p7:message>
