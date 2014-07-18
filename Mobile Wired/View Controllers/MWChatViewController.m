@@ -374,7 +374,6 @@
 
             cell.timestamp.text = message.time;
             cell.message.text = [NSString stringWithFormat:@"%@ %@", user[@"wired.user.nick"], message.message];
-            cell.avatar.image = [UIImage imageWithData:user[@"wired.user.icon"]];
 
             break;
         }
@@ -443,7 +442,7 @@
 
     // The minimum height is the user image size + the top and bottom padding.
     CGFloat totalHeight = (CGFloat)ceil(CGRectGetHeight(frame)) + top + bottom + nameHeight;
-    CGFloat userImage = (message.type == MWStatusMessage) ? 0.0f : 32.0f;
+    CGFloat userImage = (message.type == MWChatMessage) ? 32.0f : 0.0f;
     CGFloat minimumHeight = userImage + top + bottom;
     
     return (totalHeight > minimumHeight) ? totalHeight : minimumHeight;

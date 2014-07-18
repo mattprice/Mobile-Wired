@@ -1,6 +1,7 @@
 # Mobile Wired
 
-[![Build Status](https://travis-ci.org/mattprice/Mobile-Wired.svg?branch=master)](https://travis-ci.org/mattprice/Mobile-Wired)
+[![Current Version](http://img.shields.io/github/release/mattprice/Mobile-Wired.svg?style=flat)](https://github.com/mattprice/Mobile-Wired/releases)
+[![Build Status](http://img.shields.io/travis/mattprice/Mobile-Wired/master.svg?style=flat)](https://travis-ci.org/mattprice/Mobile-Wired)
 
 Mobile Wired is an iPhone app for connecting to [Wired](http://www.read-write.fr/wired/) servers. It is currently a major work-in-progress and is not ready for general consumption.
 
